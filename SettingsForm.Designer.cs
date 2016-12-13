@@ -70,7 +70,7 @@
             // 
             // ServiceName
             // 
-            this.ServiceName.Location = new System.Drawing.Point(49, 48);
+            this.ServiceName.Location = new System.Drawing.Point(49, 52);
             this.ServiceName.Name = "ServiceName";
             this.ServiceName.Size = new System.Drawing.Size(206, 20);
             this.ServiceName.TabIndex = 7;
@@ -78,7 +78,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 51);
+            this.label3.Location = new System.Drawing.Point(14, 55);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 6;
@@ -120,7 +120,7 @@
             // UseWindowsUserAsServiceName
             // 
             this.UseWindowsUserAsServiceName.AutoSize = true;
-            this.UseWindowsUserAsServiceName.Location = new System.Drawing.Point(17, 25);
+            this.UseWindowsUserAsServiceName.Location = new System.Drawing.Point(17, 29);
             this.UseWindowsUserAsServiceName.Name = "UseWindowsUserAsServiceName";
             this.UseWindowsUserAsServiceName.Size = new System.Drawing.Size(238, 17);
             this.UseWindowsUserAsServiceName.TabIndex = 14;

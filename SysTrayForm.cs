@@ -18,11 +18,13 @@ using System.Windows.Forms;
 
 namespace Cliver
 {
-    public partial class SysTray : Form //BaseForm//
+    public partial class SysTray : BaseForm//Form //
     {
         SysTray()
         {
-            InitializeComponent();            
+            InitializeComponent();
+
+            BonjourService.Start();        
         }
 
         public static readonly SysTray This = new SysTray();

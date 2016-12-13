@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Cliver
 {
-    public partial class SettingsForm : Form //BaseForm//
+    public partial class SettingsForm : BaseForm//Form //
     {
         SettingsForm()
         {
@@ -33,7 +33,11 @@ namespace Cliver
             try
             {
                 Properties.Settings.Default.ServicePort = int.Parse(ServicePort.Text);
-                Properties.Settings.Default.ServiceName = ServiceName.Text;
+                Properties.Settings.Default.UseWindowsUserAsServiceName = UseWindowsUserAsServiceName.Checked;
+                if (string.IsNullOrWhiteSpace(ServiceName.Text))
+                    throw new Exception("Service Name cannot be empty.");
+                if(!UseWindowsUserAsServiceName.Checked)
+                    Properties.Settings.Default.ServiceName = ServiceName.Text;
             }
             catch (Exception ex)
             {
@@ -75,7 +79,7 @@ namespace Cliver
         {
             ServiceName.Enabled = UseWindowsUserAsServiceName.Checked;
             if (UseWindowsUserAsServiceName.Checked)
-                ServiceName.Text = "TBD";
+                ServiceName.Text = Environment.UserName;
             else
                 ServiceName.Text = Properties.Settings.Default.ServiceName;
         }
