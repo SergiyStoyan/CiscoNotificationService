@@ -22,7 +22,7 @@ namespace Cliver
         static HttpService()
         {
         }
-        
+
         static public void Start()
         {
             if (t != null)
@@ -82,20 +82,17 @@ namespace Cliver
             t = null;
         }
 
-        static private void request_handler(object state)
+        static private void request_handler(object _context)
         {
-            var context = (HttpListenerContext)state;
+            HttpListenerContext context = (HttpListenerContext)_context;
             HttpListenerResponse response = context.Response;
             try
             {
-                HttpListenerRequest request = context.Request;
                 response.StatusCode = 200;
-                string responseString = "OK";
-                byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                string data = CiscoHttp.ProcessRequest(context.Request);
+                byte[] buffer = response.ContentEncoding.GetBytes(data);
                 response.ContentLength64 = buffer.Length;
-                System.IO.Stream output = response.OutputStream;
-                output.Write(buffer, 0, buffer.Length);
-                output.Close();
+                response.OutputStream.Write(buffer, 0, buffer.Length);
             }
             catch (Exception)
             {

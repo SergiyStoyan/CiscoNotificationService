@@ -81,6 +81,7 @@
     <Compile Include="AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CiscoHttp.cs" />
     <Compile Include="HttpService.cs" />
     <Compile Include="UserNameListener.cs" />
     <Compile Include="BonjourService.cs" />
