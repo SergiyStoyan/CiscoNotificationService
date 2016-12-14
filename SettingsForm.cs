@@ -16,10 +16,11 @@ namespace Cliver
         {
             InitializeComponent();
 
-            //UseWindowsUserAsServiceName_CheckedChanged(null, null);
             this.StartPosition = FormStartPosition.CenterScreen;
+            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Right - this.Width, Screen.PrimaryScreen.WorkingArea.Bottom - this.Height);
+            //UseWindowsUserAsServiceName_CheckedChanged(null, null);
         }
-        
+
         static public void Open()
         {
             if (sf == null)
@@ -63,7 +64,6 @@ namespace Cliver
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            //this.Location = new Point(Screen.PrimaryScreen.WorkingArea.Right - this.Width, Screen.PrimaryScreen.WorkingArea.Bottom - this.Height);
             ServicePort.Text = Properties.Settings.Default.ServicePort.ToString();
             ServiceName.Text = Properties.Settings.Default.ServiceName;
             UseWindowsUserAsServiceName.Checked = Properties.Settings.Default.UseWindowsUserAsServiceName;
@@ -71,6 +71,8 @@ namespace Cliver
 
         private void bReset_Click(object sender, EventArgs e)
         {
+            if (!Message.YesNo("The settings will be reset to the initial state. Proceed?", this))
+                return;
             Properties.Settings.Default.Reset();
             SettingsForm_Load(null, null);
         }

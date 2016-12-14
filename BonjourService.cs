@@ -18,7 +18,7 @@ using Bonjour;
 
 namespace Cliver
 {
-    static class BonjourService
+    class BonjourService
     {
         static BonjourService()
         {
@@ -66,8 +66,9 @@ namespace Cliver
         {
             try
             {
+                if(!Properties.Settings.Default.Run)
+                    return;
                 Stop();
-                //UserNameListener.Start();
                 string service_name = Properties.Settings.Default.UseWindowsUserAsServiceName ? Environment.UserName : Properties.Settings.Default.ServiceName;
                 if (string.IsNullOrWhiteSpace(service_name))
                     service_name = "-UNKNOWN-";
@@ -93,7 +94,6 @@ namespace Cliver
 
         static public void Stop()
         {
-            //UserNameListener.Stop();
             service?.Stop();
             service = null;
         }
