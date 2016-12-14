@@ -96,7 +96,7 @@ namespace Cliver
         static readonly DNSSDEventManager eventManager = null;
 
         static public void Stop()
-        {
+        {//when the app existing, Bonjour service seems to be destroyed automatically
             service?.Stop();
             service = null;
         }
