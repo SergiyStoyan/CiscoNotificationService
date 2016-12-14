@@ -22,6 +22,8 @@ namespace Cliver
     {
         static BonjourService()
         {
+            Microsoft.Win32.SystemEvents.SessionSwitch += SystemEvents_SessionSwitch;
+
             eventManager = new DNSSDEventManager();
             eventManager.ServiceRegistered += EventManager_ServiceRegistered;
             eventManager.ServiceFound += EventManager_ServiceFound;
@@ -58,31 +60,43 @@ namespace Cliver
 
         private static void EventManager_ServiceRegistered(DNSSDService service, DNSSDFlags flags, string name, string regtype, string domain)
         {
-            throw new NotImplementedException();
         }
 
         static public void Start()
         {
             try
             {
-                service.Stop();
-                UserNameListener.Start();
+                Stop();
+                //UserNameListener.Start();
                 string service_name = Properties.Settings.Default.UseWindowsUserAsServiceName ? Environment.UserName : Properties.Settings.Default.ServiceName;
-                service.Register(0, 0, service_name, "cisterarb._tcp.local", null, null, (ushort)Properties.Settings.Default.ServicePort, null, eventManager);
+                if (string.IsNullOrWhiteSpace(service_name))
+                    service_name = "-UNKNOWN-";
+                service = new DNSSDService();
+                //_rfb._tcp
+                //._tcp.local
+                if (null == service.Register(0, 0, service_name, "_cisterarb._tcp", null, null, (ushort)Properties.Settings.Default.ServicePort, null, eventManager))
+                    throw new Exception("Register returned NULL.");
             }
-            catch
+            catch(Exception e)
             {
-                Message.Error("Bonjour Service is not available.");
+                Message.Error("Bonjour Service is not available:\r\n" + e.Message);
                 Application.Exit();
             }
         }
-        static readonly DNSSDService service = new DNSSDService();
+
+        private static void SystemEvents_SessionSwitch(object sender, Microsoft.Win32.SessionSwitchEventArgs e)
+        {
+            Start();
+        }
+        
+        static DNSSDService service = null;
         static readonly DNSSDEventManager eventManager = null;
 
         static public void Stop()
         {
             //UserNameListener.Stop();
-            service.Stop();
+            service?.Stop();
+            service = null;
         }
     }
 }

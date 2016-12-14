@@ -18,16 +18,25 @@ namespace Cliver
 {
     static class Program
     {
-        [STAThread] 
+        static Program()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            AppDomain.CurrentDomain.UnhandledException += delegate (object sender, UnhandledExceptionEventArgs args)
+            {
+                Exception e = (Exception)args.ExceptionObject;
+                Message.Error(e);
+                Application.Exit();
+            };
+        }
+
+        [STAThread]
         public static void Main(string[] args)
         {
             try
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-
-                SysTray f = SysTray.This;
-                Application.Run(f);
+                Application.Run(SysTray.This);
             }
             catch (Exception e)
             {
@@ -37,9 +46,6 @@ namespace Cliver
             {
                 Exit();
             }
-
-            //Processor p = new Processor();          
-            //Application.Run(new Form());
         }
 
         static public void Exit()

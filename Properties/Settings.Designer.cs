@@ -25,7 +25,7 @@ namespace Cliver.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("45038")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5353")]
         public int ServicePort {
             get {
                 return ((int)(this["ServicePort"]));
@@ -56,6 +56,18 @@ namespace Cliver.Properties {
             }
             set {
                 this["UseWindowsUserAsServiceName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool Run {
+            get {
+                return ((bool)(this["Run"]));
+            }
+            set {
+                this["Run"] = value;
             }
         }
     }

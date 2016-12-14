@@ -3,12 +3,15 @@
   <Profiles />
   <Settings>
     <Setting Name="ServicePort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">45038</Value>
+      <Value Profile="(Default)">5353</Value>
     </Setting>
     <Setting Name="ServiceName" Type="System.String" Scope="User">
       <Value Profile="(Default)">cliversoft</Value>
     </Setting>
     <Setting Name="UseWindowsUserAsServiceName" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Run" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>

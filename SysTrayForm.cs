@@ -24,7 +24,7 @@ namespace Cliver
         {
             InitializeComponent();
 
-            BonjourService.Start();        
+            StartStop.Checked = Properties.Settings.Default.Run;
         }
 
         public static readonly SysTray This = new SysTray();
@@ -56,6 +56,16 @@ namespace Cliver
 
         private void notifyIcon1_MouseMove(object sender, MouseEventArgs e)
         {
+        }
+
+        private void StartStop_CheckedChanged(object sender, EventArgs e)
+        {
+            if(StartStop.Checked)
+                BonjourService.Start();
+            else
+                BonjourService.Stop();
+            Properties.Settings.Default.Run = StartStop.Checked;
+            Properties.Settings.Default.Save();
         }
     }
 }
