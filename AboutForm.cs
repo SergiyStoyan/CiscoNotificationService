@@ -13,6 +13,9 @@ namespace Cliver
         AboutForm()
         {
             InitializeComponent();
+
+            this.StartPosition = FormStartPosition.CenterParent;
+
             this.Text = String.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Version {0}", AssemblyVersion);
