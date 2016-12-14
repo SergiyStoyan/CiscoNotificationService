@@ -60,10 +60,16 @@ namespace Cliver
 
         private void StartStop_CheckedChanged(object sender, EventArgs e)
         {
-            if(StartStop.Checked)
+            if (StartStop.Checked)
+            {
+                HttpService.Start();
                 BonjourService.Start();
+            }
             else
+            {
+                HttpService.Stop();
                 BonjourService.Stop();
+            }
             Properties.Settings.Default.Run = StartStop.Checked;
             Properties.Settings.Default.Save();
         }

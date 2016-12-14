@@ -78,6 +78,7 @@
     <Compile Include="AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="HttpService.cs" />
     <Compile Include="UserNameListener.cs" />
     <Compile Include="BonjourService.cs" />
     <Compile Include="Program.cs" />

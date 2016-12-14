@@ -73,13 +73,12 @@ namespace Cliver
                     service_name = "-UNKNOWN-";
                 service = new DNSSDService();
                 //_rfb._tcp
-                //._tcp.local
                 if (null == service.Register(0, 0, service_name, "_cisterarb._tcp", null, null, (ushort)Properties.Settings.Default.ServicePort, null, eventManager))
                     throw new Exception("Register returned NULL.");
             }
             catch(Exception e)
             {
-                Message.Error("Bonjour Service is not available:\r\n" + e.Message);
+                Message.Error("Bonjour Service is not available: " + e.Message);
                 Application.Exit();
             }
         }
