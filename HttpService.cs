@@ -22,9 +22,7 @@ namespace Cliver
         static HttpService()
         {
         }
-
-        static string[] prefixes = new string[] { "http://localhost:", "http://127.0.0.1:" };
-
+        
         static public void Start()
         {
             t = ThreadRoutines.StartTry(() => { run(Properties.Settings.Default.ServicePort); });
@@ -41,15 +39,15 @@ namespace Cliver
                     listener.Close();
                 }
                 listener = new HttpListener();
-                foreach (string s in prefixes)
-                    listener.Prefixes.Add(s + port + "/");
+                listener.Prefixes.Add("http://*:" + port + "/");
                 listener.Start();
                 while (true)
                 {
                     HttpListenerContext context = listener.GetContext();
-                    ThreadPool.QueueUserWorkItem(o => request_handler(context));
+                    ThreadPool.QueueUserWorkItem((o) => { request_handler(context); });
                 }
             }
+            catch (ThreadAbortException) { }
             catch (Exception e)
             {
                 Message.Error("Http Service broken: " + e.Message);

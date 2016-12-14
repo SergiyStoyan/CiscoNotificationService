@@ -44,7 +44,7 @@
             // 
             this.notifyIcon.ContextMenuStrip = this.RightClickMenu;
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "Asterisk Monitor";
+            this.notifyIcon.Text = "Cistera Notification Service";
             this.notifyIcon.Visible = true;
             this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon1_DoubleClick);
             this.notifyIcon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseMove);
