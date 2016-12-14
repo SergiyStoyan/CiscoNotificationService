@@ -25,6 +25,8 @@ namespace Cliver
         
         static public void Start()
         {
+            if (t != null)
+                return;
             t = ThreadRoutines.StartTry(() => { run(Properties.Settings.Default.ServicePort); });
         }
         static Thread t = null;
@@ -41,13 +43,14 @@ namespace Cliver
                 listener = new HttpListener();
                 listener.Prefixes.Add("http://*:" + port + "/");
                 listener.Start();
-                while (true)
+                while (listener.IsListening)
                 {
                     HttpListenerContext context = listener.GetContext();
                     ThreadPool.QueueUserWorkItem((o) => { request_handler(context); });
                 }
             }
-            catch (ThreadAbortException) { }
+            catch (ThreadAbortException)
+            { }
             catch (Exception e)
             {
                 Message.Error("Http Service broken: " + e.Message);
@@ -55,15 +58,24 @@ namespace Cliver
             }
             finally
             {
-                listener.Stop();
-                listener.Close();
-                listener = null;
+                if (listener != null)
+                {
+                    listener.Stop();
+                    listener.Close();
+                    listener = null;
+                }
             }
         }
         static HttpListener listener = null;
 
         static public void Stop()
         {
+            if (listener != null)
+            {
+                listener.Stop();
+                listener.Close();
+                listener = null;
+            }
             if (t != null && t.IsAlive)
                 t.Abort();
             t = null;
