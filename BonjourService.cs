@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Runtime.InteropServices;
+using System.Net;
 using Bonjour;
 
 namespace Cliver
@@ -73,8 +74,10 @@ namespace Cliver
                 if (string.IsNullOrWhiteSpace(service_name))
                     service_name = "-UNKNOWN-";
                 service = new DNSSDService();
-                //_rfb._tcp
-                if (null == service.Register(0, 0, service_name, "_cisterarb._tcp", null, null, (ushort)Properties.Settings.Default.ServicePort, null, eventManager))
+                var bs = BitConverter.GetBytes(Properties.Settings.Default.ServicePort);
+                Array.Reverse(bs);
+                ushort port = BitConverter.ToUInt16(bs, 0);
+                if (null == service.Register(0, 0, service_name, "_cisterarb._tcp", null, null, port, null, eventManager))
                     throw new Exception("Register returned NULL.");
             }
             catch(Exception e)

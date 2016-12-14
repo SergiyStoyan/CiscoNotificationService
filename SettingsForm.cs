@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; 
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,7 +39,7 @@ namespace Cliver
         {
             try
             {
-                Properties.Settings.Default.ServicePort = int.Parse(ServicePort.Text);
+                Properties.Settings.Default.ServicePort = ushort.Parse(ServicePort.Text);
                 Properties.Settings.Default.UseWindowsUserAsServiceName = UseWindowsUserAsServiceName.Checked;
                 if (string.IsNullOrWhiteSpace(ServiceName.Text))
                     throw new Exception("Service Name cannot be empty.");
@@ -79,7 +79,7 @@ namespace Cliver
 
         private void UseWindowsUserAsServiceName_CheckedChanged(object sender, EventArgs e)
         {
-            ServiceName.Enabled = UseWindowsUserAsServiceName.Checked;
+            ServiceName.Enabled = !UseWindowsUserAsServiceName.Checked;
             if (UseWindowsUserAsServiceName.Checked)
                 ServiceName.Text = Environment.UserName;
             else

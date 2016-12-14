@@ -25,10 +25,10 @@ namespace Cliver.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5353")]
-        public int ServicePort {
+        [global::System.Configuration.DefaultSettingValueAttribute("2222")]
+        public ushort ServicePort {
             get {
-                return ((int)(this["ServicePort"]));
+                return ((ushort)(this["ServicePort"]));
             }
             set {
                 this["ServicePort"] = value;

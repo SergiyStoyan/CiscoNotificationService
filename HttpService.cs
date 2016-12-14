@@ -1,5 +1,5 @@
 ﻿//********************************************************************************************
-//Author: Sergey Stoyan
+//Author: Sergey Stoyan 
 //        sergey.stoyan@gmail.com
 //        sergey_stoyan@yahoo.com
 //        http://www.cliversoft.com
@@ -41,6 +41,7 @@ namespace Cliver
                     listener.Close();
                 }
                 listener = new HttpListener();
+                //listener.Prefixes.Add("http://localhost:" + port + "/");
                 listener.Prefixes.Add("http://*:" + port + "/");
                 listener.Start();
                 while (listener.IsListening)
