@@ -89,18 +89,20 @@ namespace Cliver
             HttpListenerResponse response = context.Response;
             try
             {
-                if (!Regex.IsMatch(context.Request.ContentType, @"application/x-www-form-urlencoded", RegexOptions.IgnoreCase | RegexOptions.Singleline))
+                HttpListenerRequest request = context.Request;
+                if (!Regex.IsMatch(request.ContentType, @"application/x-www-form-urlencoded", RegexOptions.IgnoreCase | RegexOptions.Singleline))
                 {
                     response.StatusCode = (int)HttpStatusCode.UnsupportedMediaType;
                     return;
                 }
-                response.StatusCode = 200;
+                response.StatusCode = (int)HttpStatusCode.OK;
+                response.ContentEncoding = request.ContentEncoding;
                 string data = CiscoHttp.ProcessRequest(context.Request);
                 byte[] buffer = response.ContentEncoding.GetBytes(data);
                 response.ContentLength64 = buffer.Length;
                 response.OutputStream.Write(buffer, 0, buffer.Length);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;
             }

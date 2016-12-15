@@ -54,7 +54,7 @@ namespace Cliver
 
             Properties.Settings.Default.Save();
             this.Close();
-
+            Program.UpdateService();
         }
 
         private void Cancel_Click(object sender, EventArgs e)

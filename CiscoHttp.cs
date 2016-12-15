@@ -77,6 +77,9 @@ namespace Cliver
         //? - not clear if it is suitable for any request
         static string get_CiscoIPPhoneResponse(params ResponseItem[] ris)
         {
+            //XmlDocument xd = new XmlDocument();
+            //XmlNode xn = xd.CreateNode()
+            //xd.AppendChild()
             StringBuilder sb = new StringBuilder();
             sb.Append("<CiscoIPPhoneResponse>");
             foreach (ResponseItem ri in ris)
@@ -94,7 +97,7 @@ namespace Cliver
         //? - not clear if it is suitable for any request
         static string get_CiscoIPPhoneError(Error error, string message = "")
         {
-            return @"<CiscoIPPhoneError Number=""" + error + @"""/>" + SecurityElement.Escape(message) + @"<CiscoIPPhoneError>";
+            return @"<CiscoIPPhoneError Number=""" + error + @""">" + SecurityElement.Escape(message) + @"</CiscoIPPhoneError>";
         }
         public enum Error : int
         {
