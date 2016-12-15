@@ -46,26 +46,26 @@ namespace Cliver
             {
                 case "CiscoIPPhoneText":
                     {
-                        XmlNode xn = xd.DocumentElement.SelectSingleNode("*//Title");
-                        string title = xn?.Value;
-                        xn = xd.DocumentElement.SelectSingleNode("*//Prompt");
-                        string prompt = xn?.Value;
-                        xn = xd.DocumentElement.SelectSingleNode("*//Text");
-                        string text = xn?.Value;
+                        XmlNode xn = xd.DocumentElement.SelectSingleNode("Title");
+                        string title = xn?.InnerText;
+                        xn = xd.DocumentElement.SelectSingleNode("Prompt");
+                        string prompt = xn?.InnerText;
+                        xn = xd.DocumentElement.SelectSingleNode("Text");
+                        string text = xn?.InnerText;
                     }
                     break;
                 case "CiscoIPPhoneImageFile":
                     {
-                        XmlNode xn = xd.DocumentElement.SelectSingleNode("*//Title");
-                        string title = xn?.Value;
-                        xn = xd.DocumentElement.SelectSingleNode("*//Prompt");
-                        string prompt = xn?.Value;
-                        xn = xd.DocumentElement.SelectSingleNode("*//LocationX");
-                        string locationX = xn?.Value;
-                        xn = xd.DocumentElement.SelectSingleNode("*//LocationY");
-                        string locationY = xn?.Value;
-                        xn = xd.DocumentElement.SelectSingleNode("*//URL");
-                        string url = xn?.Value;
+                        XmlNode xn = xd.DocumentElement.SelectSingleNode("Title");
+                        string title = xn?.InnerText;
+                        xn = xd.DocumentElement.SelectSingleNode("Prompt");
+                        string prompt = xn?.InnerText;
+                        xn = xd.DocumentElement.SelectSingleNode("LocationX");
+                        string locationX = xn?.InnerText;
+                        xn = xd.DocumentElement.SelectSingleNode("LocationY");
+                        string locationY = xn?.InnerText;
+                        xn = xd.DocumentElement.SelectSingleNode("URL");
+                        string url = xn?.InnerText;
                     }
                     break;
                 default:
