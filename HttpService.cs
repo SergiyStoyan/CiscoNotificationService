@@ -43,7 +43,8 @@ namespace Cliver
                 }
                 listener = new HttpListener();
                 //listener.Prefixes.Add("http://localhost:" + port + "/");
-                listener.Prefixes.Add("http://*:" + port + "/");
+                listener.Prefixes.Add("http://127.0.0.1:" + port + "/");
+                //listener.Prefixes.Add("http://*:" + port + "/");
                 listener.Start();
                 while (listener.IsListening)
                 {

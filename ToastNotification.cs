@@ -15,10 +15,12 @@ using System.IO;
 using System.Threading;
 using System.Net;
 using System.Web;
-using System.Xml;
+//using System.Xml;
 using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
+using Windows.UI.Notifications;
+using Windows.Data.Xml.Dom;
 
 namespace Cliver
 {
@@ -26,6 +28,7 @@ namespace Cliver
     {
         static ToastNotification()
         {
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText04);
         }
 
         static public void Display()
