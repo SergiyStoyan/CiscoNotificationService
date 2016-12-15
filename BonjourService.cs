@@ -63,20 +63,19 @@ namespace Cliver
         {
         }
 
-        static public void Start()
+        static public void Start(string service_name, ushort port)
         {
             try
             {
                 if(!Properties.Settings.Default.Run)
                     return;
                 Stop();
-                string service_name = Properties.Settings.Default.UseWindowsUserAsServiceName ? Environment.UserName : Properties.Settings.Default.ServiceName;
                 if (string.IsNullOrWhiteSpace(service_name))
                     service_name = "-UNKNOWN-";
                 service = new DNSSDService();
-                var bs = BitConverter.GetBytes(Properties.Settings.Default.ServicePort);
+                var bs = BitConverter.GetBytes(port);
                 Array.Reverse(bs);
-                ushort port = BitConverter.ToUInt16(bs, 0);
+                port = BitConverter.ToUInt16(bs, 0);
                 if (null == service.Register(0, 0, service_name, "_cisterarb._tcp", null, null, port, null, eventManager))
                     throw new Exception("Register returned NULL.");
             }
@@ -89,7 +88,7 @@ namespace Cliver
 
         private static void SystemEvents_SessionSwitch(object sender, Microsoft.Win32.SessionSwitchEventArgs e)
         {
-            Start();
+            Program.UpdateService();
         }
         
         static DNSSDService service = null;

@@ -53,5 +53,22 @@ namespace Cliver
             Application.Exit();
             Environment.Exit(0);
         }
+
+        internal static void UpdateService()
+        {
+            if (Properties.Settings.Default.Run)
+            {
+                HttpService.Start(Properties.Settings.Default.ServicePort);
+                BonjourService.Start(
+                    Properties.Settings.Default.UseWindowsUserAsServiceName ? Environment.UserName : Properties.Settings.Default.ServiceName, 
+                    Properties.Settings.Default.ServicePort
+                    );
+            }
+            else
+            {
+                HttpService.Stop();
+                BonjourService.Stop();
+            }
+        }
     }
 }

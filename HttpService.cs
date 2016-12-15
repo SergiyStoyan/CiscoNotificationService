@@ -24,15 +24,15 @@ namespace Cliver
         {
         }
 
-        static public void Start()
+        static public void Start(ushort port)
         {
-            if (t != null)
-                return;
-            t = ThreadRoutines.StartTry(() => { run(Properties.Settings.Default.ServicePort); });
+            Stop();
+            t?.Join();
+            t = ThreadRoutines.StartTry(() => { run(port); });
         }
         static Thread t = null;
 
-        static void run(int port)
+        static void run(ushort port)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace Cliver
             HttpListenerResponse response = context.Response;
             try
             {
-                if (!Regex.IsMatch(context.Request.ContentType, @"", RegexOptions.IgnoreCase | RegexOptions.Singleline))
+                if (!Regex.IsMatch(context.Request.ContentType, @"application/x-www-form-urlencoded", RegexOptions.IgnoreCase | RegexOptions.Singleline))
                 {
                     response.StatusCode = (int)HttpStatusCode.UnsupportedMediaType;
                     return;

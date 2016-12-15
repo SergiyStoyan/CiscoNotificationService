@@ -53,8 +53,8 @@ namespace Cliver
             }
 
             Properties.Settings.Default.Save();
-            Message.Inform("Monitor has to be reconnected to use the new settings!");
             this.Close();
+
         }
 
         private void Cancel_Click(object sender, EventArgs e)
