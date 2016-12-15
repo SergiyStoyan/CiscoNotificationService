@@ -66,8 +66,8 @@ namespace Cliver
             }
             else
             {
-                HttpService.Stop();
                 BonjourService.Stop();
+                HttpService.Stop();
             }
         }
     }

@@ -82,10 +82,11 @@ namespace Cliver
             //xd.AppendChild()
             StringBuilder sb = new StringBuilder();
             sb.Append("<CiscoIPPhoneResponse>");
+            sb.Append("<test>" + HttpService.Name + ":" + HttpService.Port + "</test>");          
             foreach (ResponseItem ri in ris)
                 sb.Append("<ResponseItem Status=\"" + ri.Status + "\" Data=\"" + SecurityElement.Escape(ri.Data) + "\" URL=\"" + SecurityElement.Escape(ri.Url) + "\"/>");
             sb.Append("</CiscoIPPhoneResponse>");
-            return sb.ToString() + HttpService.Name + HttpService.Port;
+            return sb.ToString();
         }
         public class ResponseItem
         {
