@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace Cliver
 {
@@ -88,6 +89,11 @@ namespace Cliver
             HttpListenerResponse response = context.Response;
             try
             {
+                if (!Regex.IsMatch(context.Request.ContentType, @"", RegexOptions.IgnoreCase | RegexOptions.Singleline))
+                {
+                    response.StatusCode = (int)HttpStatusCode.UnsupportedMediaType;
+                    return;
+                }
                 response.StatusCode = 200;
                 string data = CiscoHttp.ProcessRequest(context.Request);
                 byte[] buffer = response.ContentEncoding.GetBytes(data);

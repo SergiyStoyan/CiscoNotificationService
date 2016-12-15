@@ -17,6 +17,7 @@ using System.Net;
 using System.Web;
 using System.Xml;
 using System.Security;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Cliver
@@ -36,29 +37,65 @@ namespace Cliver
             {
                 data = reader.ReadToEnd();
             }
-            Match m = Regex.Match(data, @"(^|&)xml\s*=\s*(?'Xml'.*)(&|$)", RegexOptions.Singleline | RegexOptions.IgnoreCase);
+            Match m = Regex.Match(data, @"(^|&)XML\s*=\s*(?'Xml'.*)(&|$)", RegexOptions.Singleline);
             if (!m.Success)
                 return get_CiscoIPPhoneError(Error.Parsing, "No Xml in request.");
             XmlDocument xd = new XmlDocument();
             xd.LoadXml(HttpUtility.UrlDecode(m.Groups["Xml"].Value));
-
-            return get_CiscoIPPhoneResponse("test");
+            switch(xd.DocumentElement.Name)
+            {
+                case "CiscoIPPhoneText":
+                    {
+                        XmlNode xn = xd.DocumentElement.SelectSingleNode("*//Title");
+                        string title = xn?.Value;
+                        xn = xd.DocumentElement.SelectSingleNode("*//Prompt");
+                        string prompt = xn?.Value;
+                        xn = xd.DocumentElement.SelectSingleNode("*//Text");
+                        string text = xn?.Value;
+                    }
+                    break;
+                case "CiscoIPPhoneImageFile":
+                    {
+                        XmlNode xn = xd.DocumentElement.SelectSingleNode("*//Title");
+                        string title = xn?.Value;
+                        xn = xd.DocumentElement.SelectSingleNode("*//Prompt");
+                        string prompt = xn?.Value;
+                        xn = xd.DocumentElement.SelectSingleNode("*//LocationX");
+                        string locationX = xn?.Value;
+                        xn = xd.DocumentElement.SelectSingleNode("*//LocationY");
+                        string locationY = xn?.Value;
+                        xn = xd.DocumentElement.SelectSingleNode("*//URL");
+                        string url = xn?.Value;
+                    }
+                    break;
+                default:
+                    return get_CiscoIPPhoneError(Error.Internal, "This object is not supported: " + xd.DocumentElement.Name);
+            }
+            return get_CiscoIPPhoneResponse();//? - not clear if it is expected after any request
         }
 
-        static string get_CiscoIPPhoneResponse(string url, int status = 0, string data = "Success")
+        //? - not clear if it is suitable for any request
+        static string get_CiscoIPPhoneResponse(params ResponseItem[] ris)
         {
-            return @"<CiscoIPPhoneResponse>
-<ResponseItem Status=""" + status + @"""
-Data=""" + SecurityElement.Escape(data) + @"""
-URL=""" + SecurityElement.Escape(url) + @"""/>
-</CiscoIPPhoneResponse>";
+            StringBuilder sb = new StringBuilder();
+            sb.Append("<CiscoIPPhoneResponse>");
+            foreach (ResponseItem ri in ris)
+                sb.Append("<ResponseItem Status=\"" + ri.Status + "\" Data=\"" + SecurityElement.Escape(ri.Data) + "\" URL=\"" + SecurityElement.Escape(ri.Url) + "\"/>");
+            sb.Append("</CiscoIPPhoneResponse>");
+            return sb.ToString();
+        }
+        public class ResponseItem
+        {
+            public string Url;
+            public int Status = 0;
+            public string Data = "Success";
         }
 
+        //? - not clear if it is suitable for any request
         static string get_CiscoIPPhoneError(Error error, string message = "")
         {
             return @"<CiscoIPPhoneError Number=""" + error + @"""/>" + SecurityElement.Escape(message) + @"<CiscoIPPhoneError>";
         }
-
         public enum Error : int
         {
             Parsing = 1,
