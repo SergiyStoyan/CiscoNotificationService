@@ -85,7 +85,7 @@ namespace Cliver
             foreach (ResponseItem ri in ris)
                 sb.Append("<ResponseItem Status=\"" + ri.Status + "\" Data=\"" + SecurityElement.Escape(ri.Data) + "\" URL=\"" + SecurityElement.Escape(ri.Url) + "\"/>");
             sb.Append("</CiscoIPPhoneResponse>");
-            return sb.ToString();
+            return sb.ToString() + HttpService.Name + HttpService.Port;
         }
         public class ResponseItem
         {

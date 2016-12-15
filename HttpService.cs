@@ -29,7 +29,19 @@ namespace Cliver
         {
             Stop();
             t?.Join();
+
+#if DEBUG
+            //Name = "*";//works in LAN
+            //Name = "192.168.2.13";//the actual ip works in LAN
+            //Name = "localhost";//not work in LAN
+            //Name = "127.0.0.1";//not work in LAN
+            //Name = "localhos";//some string not work in LAN
+            //Name = "192.168.2.*";//does not start
+            Name = "127.0.0.1";//not work in LAN
+#else
             Name = service_name;
+            Name = "*";
+#endif
             Port = port;
             t = ThreadRoutines.StartTry(() => { run(); });
         }
@@ -55,14 +67,7 @@ namespace Cliver
                     listener.Close();
                 }
                 listener = new HttpListener();
-                string http_prefix;
-#if DEBUG
-                http_prefix = "http://localhost:" + Port + "/";
-                //http_prefix = "http://127.0.0.1:" + Port + "/";
-#else
-                http_prefix = "http://" + Name + ":" + Port + "/";
-#endif
-                listener.Prefixes.Add(http_prefix);
+                listener.Prefixes.Add("http://" + Name + ":" + Port + "/");
                 listener.Start();
                 while (listener.IsListening)
                 {
