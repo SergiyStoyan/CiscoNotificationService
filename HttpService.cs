@@ -57,8 +57,8 @@ namespace Cliver
                 listener = new HttpListener();
                 string http_prefix;
 #if DEBUG
-                //http_prefix = "http://localhost:" + BonjourService.Port + "/";
-                http_prefix = "http://127.0.0.1:" + Port + "/";
+                http_prefix = "http://localhost:" + Port + "/";
+                //http_prefix = "http://127.0.0.1:" + Port + "/";
 #else
                 http_prefix = "http://" + Name + ":" + Port + "/";
 #endif
