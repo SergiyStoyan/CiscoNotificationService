@@ -15,6 +15,7 @@ using System.IO;
 using System.Threading;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Cliver
 {
@@ -24,15 +25,27 @@ namespace Cliver
         {
         }
 
-        static public void Start(ushort port)
+        static public void Start(string service_name, ushort port)
         {
             Stop();
             t?.Join();
-            t = ThreadRoutines.StartTry(() => { run(port); });
+            Name = service_name;
+            Port = port;
+            t = ThreadRoutines.StartTry(() => { run(); });
         }
         static Thread t = null;
 
-        static void run(ushort port)
+        public static string Name
+        {
+            get; private set;
+        }
+
+        public static ushort Port
+        {
+            get; private set;
+        }
+
+        static void run()
         {
             try
             {
@@ -42,9 +55,14 @@ namespace Cliver
                     listener.Close();
                 }
                 listener = new HttpListener();
-                //listener.Prefixes.Add("http://localhost:" + port + "/");
-                listener.Prefixes.Add("http://127.0.0.1:" + port + "/");
-                //listener.Prefixes.Add("http://*:" + port + "/");
+                string http_prefix;
+#if DEBUG
+                //http_prefix = "http://localhost:" + BonjourService.Port + "/";
+                http_prefix = "http://127.0.0.1:" + Port + "/";
+#else
+                http_prefix = "http://" + Name + ":" + Port + "/";
+#endif
+                listener.Prefixes.Add(http_prefix);
                 listener.Start();
                 while (listener.IsListening)
                 {
@@ -56,6 +74,20 @@ namespace Cliver
             { }
             catch (Exception e)
             {
+                if (e is System.Net.HttpListenerException && ((System.Net.HttpListenerException)e).NativeErrorCode == 5)
+                {
+                    if(!Message.YesNo("Http Service requires the application to run with Administartor's privileges.\r\nRestart?"))
+                        Environment.Exit(0);
+
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.UseShellExecute = true;
+                    psi.WorkingDirectory = Environment.CurrentDirectory;
+                    psi.FileName = Application.ExecutablePath;
+                    psi.Verb = "runas";
+                    Process.Start(psi);
+                    Environment.Exit(0);
+                }
+
                 Message.Error("Http Service broken: " + e.Message);
                 Application.Exit();
             }

@@ -71,7 +71,9 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Windows.Data" />
+    <Reference Include="Windows.Foundation" />
     <Reference Include="Windows.UI" />
+    <Reference Include="System.Runtime" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutForm.cs">
@@ -80,6 +82,7 @@
     <Compile Include="AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShellHelpers.cs" />
     <Compile Include="ToastNotification.cs" />
     <Compile Include="CiscoHttp.cs" />
     <Compile Include="HttpService.cs" />
