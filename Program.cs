@@ -36,7 +36,6 @@ namespace Cliver
         {
             try
             {
-                ToastNotification.Display("title", "content", "image1.png");
                 Application.Run(SysTray.This);
             }
             catch (Exception e)

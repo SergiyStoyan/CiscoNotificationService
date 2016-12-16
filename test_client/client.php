@@ -26,7 +26,7 @@ $(document).ready(function() {
   <Prompt>Prompt text goes here</Prompt>
   <LocationX>100</LocationX>
   <LocationY>200</LocationY>
-  <URL>d:\\temp\\test.jpg</URL>
+  <URL>image1.png</URL>
 </CiscoIPPhoneImageFile>
 </TEXTAREA>
          <input type=submit value=POST>

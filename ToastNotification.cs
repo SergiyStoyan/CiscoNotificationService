@@ -31,7 +31,7 @@ namespace Cliver
     {
         static ToastNotification()
         {
-            CreateShortcut();            
+            CreateShortcut();
         }
         static readonly String APP_ID = "CliverSoft." + Log.EntryAssemblyName;
 
@@ -72,27 +72,44 @@ namespace Cliver
             ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
         }
 
-        static public void Display(string title, string prompt, string imageUrl = null)
+        static public void Text(string title, string prompt, string text)
         {
-            XmlDocument toastXml;
-            if (imageUrl != null)
-                toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText02);
-            else
-                toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText04);
 
             XmlNodeList texts = toastXml.GetElementsByTagName("text");
-            texts[0].AppendChild(toastXml.CreateTextNode("title"));
-            texts[1].AppendChild(toastXml.CreateTextNode("prompt"));
+            texts[0].AppendChild(toastXml.CreateTextNode(title));
+            texts[1].AppendChild(toastXml.CreateTextNode(prompt));
+            texts[2].AppendChild(toastXml.CreateTextNode(text));
 
-            if (imageUrl != null)
-            {
-                XmlNodeList images = toastXml.GetElementsByTagName("image");
-                //desktop apps can use only local images; web images are not supported
-                if (!imageUrl.Contains(":"))
-                    imageUrl = Cliver.ProgramRoutines.GetAppDirectory() + "\\" + imageUrl;
-                ((XmlElement)images[0]).SetAttribute("src", "file:///" + imageUrl);
-                ((XmlElement)images[0]).SetAttribute("alt", "[ ]");
-            }
+            IXmlNode toast = toastXml.SelectSingleNode("/toast");
+            //((XmlElement)toast).SetAttribute("duration", "long");                        
+            XmlElement audio = toastXml.CreateElement("audio");
+            audio.SetAttribute("src", "ms-winsoundevent:Notification.IM");
+            //audio.SetAttribute("silent", "true");
+            toast.AppendChild(audio);
+
+            Windows.UI.Notifications.ToastNotification tn = new Windows.UI.Notifications.ToastNotification(toastXml);
+            tn.Activated += ToastActivated;
+            tn.Dismissed += ToastDismissed;
+            tn.Failed += ToastFailed;
+
+            ToastNotificationManager.CreateToastNotifier(APP_ID).Show(tn);
+        }
+
+        static public void TextImage(string title, string prompt, string imageUrl)
+        {
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText04);
+
+            XmlNodeList texts = toastXml.GetElementsByTagName("text");
+            texts[0].AppendChild(toastXml.CreateTextNode(title));
+            texts[1].AppendChild(toastXml.CreateTextNode(prompt));
+
+            XmlNodeList images = toastXml.GetElementsByTagName("image");
+            //desktop apps can use only local images; web images are not supported
+            if (!imageUrl.Contains(":"))
+                imageUrl = Cliver.ProgramRoutines.GetAppDirectory() + "\\" + imageUrl;
+            ((XmlElement)images[0]).SetAttribute("src", "file:///" + Path.GetFullPath(imageUrl));
+            ((XmlElement)images[0]).SetAttribute("alt", "[ ]");
 
             IXmlNode toast = toastXml.SelectSingleNode("/toast");
             //((XmlElement)toast).SetAttribute("duration", "long");                        
