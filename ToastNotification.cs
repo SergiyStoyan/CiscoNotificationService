@@ -88,6 +88,12 @@ namespace Cliver
             //audio.SetAttribute("silent", "true");
             toast.AppendChild(audio);
 
+            //XmlElement commands = toastXml.CreateElement("commands");
+            //toast.AppendChild(commands);
+            //XmlElement command = toastXml.CreateElement("command");
+            //command.SetAttribute("id", "test");
+            //commands.AppendChild(command);
+
             Windows.UI.Notifications.ToastNotification tn = new Windows.UI.Notifications.ToastNotification(toastXml);
             tn.Activated += ToastActivated;
             tn.Dismissed += ToastDismissed;
