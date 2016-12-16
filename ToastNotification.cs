@@ -21,6 +21,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Windows.UI.Notifications;
 using Windows.Data.Xml.Dom;
+using Cliver.ShellHelpers;
+using MS.WindowsAPICodePack.Internal;
+using Microsoft.WindowsAPICodePack.Shell.PropertySystem;
 
 namespace Cliver
 {
@@ -28,9 +31,9 @@ namespace Cliver
     {
         static ToastNotification()
         {
-            CreateShortcut();
+            CreateShortcut();            
         }
-        private const String APP_ID = "Microsoft.Samples.DesktopToastsSample";
+        static readonly String APP_ID = "CliverSoft." + Log.EntryAssemblyName;
 
         // In order to display toasts, a desktop application must have a shortcut on the Start menu.
         // Also, an AppUserModelID must be set on that shortcut.
@@ -42,61 +45,73 @@ namespace Cliver
         // to make an installer that creates the necessary shortcut. One or the other should be used.
         static private void CreateShortcut()
         {
-            //String shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Windows\\Start Menu\\Programs\\Desktop Toasts Sample CS.lnk";
-            //if (File.Exists(shortcutPath))
-            //    return;
+            String shortcutPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Microsoft\\Windows\\Start Menu\\Programs\\" + Log.EntryAssemblyName + ".lnk";
+            if (File.Exists(shortcutPath))
+                return;
 
-            //// Find the path to the current executable
-            //String exePath = Process.GetCurrentProcess().MainModule.FileName;
-            //IShellLinkW newShortcut = (IShellLinkW)new CShellLink();
+            // Find the path to the current executable
+            String exePath = Process.GetCurrentProcess().MainModule.FileName;
+            IShellLinkW newShortcut = (IShellLinkW)new CShellLink();
 
-            //// Create a shortcut to the exe
-            //ShellHelpers.ErrorHelper.VerifySucceeded(newShortcut.SetPath(exePath));
-            //ShellHelpers.ErrorHelper.VerifySucceeded(newShortcut.SetArguments(""));
+            // Create a shortcut to the exe
+            ShellHelpers.ErrorHelper.VerifySucceeded(newShortcut.SetPath(exePath));
+            ShellHelpers.ErrorHelper.VerifySucceeded(newShortcut.SetArguments(""));
 
-            //// Open the shortcut property store, set the AppUserModelId property
-            //IPropertyStore newShortcutProperties = (IPropertyStore)newShortcut;
+            // Open the shortcut property store, set the AppUserModelId property
+            IPropertyStore newShortcutProperties = (IPropertyStore)newShortcut;
 
-            //using (PropVariant appId = new PropVariant(APP_ID))
-            //{
-            //    ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutProperties.SetValue(SystemProperties.System.AppUserModel.ID, appId));
-            //    ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutProperties.Commit());
-            //}
-
-            //// Commit the shortcut to disk
-            //IPersistFile newShortcutSave = (IPersistFile)newShortcut;
-
-            //ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
-        }
-
-        static public void Display()
-        {
-            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText04);
-
-            // Fill in the text elements
-            XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
-            for (int i = 0; i < stringElements.Length; i++)
+            using (PropVariant appId = new PropVariant(APP_ID))
             {
-                stringElements[i].AppendChild(toastXml.CreateTextNode("Line " + i));
+                ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutProperties.SetValue(SystemProperties.System.AppUserModel.ID, appId));
+                ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutProperties.Commit());
             }
 
-            // Specify the absolute path to an image
-            String imagePath = "file:///" + Path.GetFullPath("toastImageAndText.png");
-            XmlNodeList imageElements = toastXml.GetElementsByTagName("image");
-            imageElements[0].Attributes.GetNamedItem("src").NodeValue = imagePath;
+            // Commit the shortcut to disk
+            IPersistFile newShortcutSave = (IPersistFile)newShortcut;
 
-            // Create the toast and attach event listeners
-            Windows.UI.Notifications.ToastNotification toast = new Windows.UI.Notifications.ToastNotification(toastXml);
-            toast.Activated += ToastActivated;
-            toast.Dismissed += ToastDismissed;
-            toast.Failed += ToastFailed;
-
-            // Show the toast. Be sure to specify the AppUserModelId on your application's shortcut!
-            ToastNotificationManager.CreateToastNotifier(APP_ID).Show(toast);
+            ShellHelpers.ErrorHelper.VerifySucceeded(newShortcutSave.Save(shortcutPath, true));
         }
 
-       static private void ToastActivated(Windows.UI.Notifications.ToastNotification sender, object e)
+        static public void Display(string title, string prompt, string imageUrl = null)
         {
+            XmlDocument toastXml;
+            if (imageUrl != null)
+                toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText02);
+            else
+                toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+
+            XmlNodeList texts = toastXml.GetElementsByTagName("text");
+            texts[0].AppendChild(toastXml.CreateTextNode("title"));
+            texts[1].AppendChild(toastXml.CreateTextNode("prompt"));
+
+            if (imageUrl != null)
+            {
+                XmlNodeList images = toastXml.GetElementsByTagName("image");
+                //desktop apps can use only local images; web images are not supported
+                if (!imageUrl.Contains(":"))
+                    imageUrl = Cliver.ProgramRoutines.GetAppDirectory() + "\\" + imageUrl;
+                ((XmlElement)images[0]).SetAttribute("src", "file:///" + imageUrl);
+                ((XmlElement)images[0]).SetAttribute("alt", "[ ]");
+            }
+
+            IXmlNode toast = toastXml.SelectSingleNode("/toast");
+            //((XmlElement)toast).SetAttribute("duration", "long");                        
+            XmlElement audio = toastXml.CreateElement("audio");
+            audio.SetAttribute("src", "ms-winsoundevent:Notification.IM");
+            //audio.SetAttribute("silent", "true");
+            toast.AppendChild(audio);
+
+            Windows.UI.Notifications.ToastNotification tn = new Windows.UI.Notifications.ToastNotification(toastXml);
+            tn.Activated += ToastActivated;
+            tn.Dismissed += ToastDismissed;
+            tn.Failed += ToastFailed;
+
+            ToastNotificationManager.CreateToastNotifier(APP_ID).Show(tn);
+        }
+
+        static private void ToastActivated(Windows.UI.Notifications.ToastNotification sender, object e)
+        {
+            Message.Inform("Activated");
         }
 
         static private void ToastDismissed(Windows.UI.Notifications.ToastNotification sender, ToastDismissedEventArgs e)
@@ -114,10 +129,12 @@ namespace Cliver
                     outputText = "The toast has timed out";
                     break;
             }
+            Message.Inform(outputText);
         }
 
         static private void ToastFailed(Windows.UI.Notifications.ToastNotification sender, ToastFailedEventArgs e)
         {
+            Message.Inform("failed");
         }
     }
 }
