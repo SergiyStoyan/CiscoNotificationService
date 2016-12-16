@@ -135,6 +135,9 @@ namespace Cliver
                 }
                 response.StatusCode = (int)HttpStatusCode.OK;
                 response.ContentEncoding = request.ContentEncoding;
+#if DEBUG 
+                response.AddHeader("Access-Control-Allow-Origin", "*");//prevents errors if testing by ajax
+#endif
                 string data = CiscoHttp.ProcessRequest(context.Request);
                 byte[] buffer = response.ContentEncoding.GetBytes(data);
                 response.ContentLength64 = buffer.Length;
