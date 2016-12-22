@@ -70,13 +70,13 @@ namespace Cliver
                 if(!Properties.Settings.Default.Run)
                     return;
                 Stop();
-                if (string.IsNullOrWhiteSpace(service_name))
-                    service_name = "-UNKNOWN-";
+                Name = service_name;
+                Port = port;
                 service = new DNSSDService();
                 var bs = BitConverter.GetBytes(port);
                 Array.Reverse(bs);
                 port = BitConverter.ToUInt16(bs, 0);
-                if (null == service.Register(0, 0, service_name, "_cisterarb._tcp", null, null, port, null, eventManager))
+                if (null == service.Register(0, 0, Name, "_cisterarb._tcp", null, null, Port, null, eventManager))
                     throw new Exception("Register returned NULL.");
             }
             catch(Exception e)
@@ -84,6 +84,16 @@ namespace Cliver
                 Message.Error("Bonjour Service is not available: " + e.Message);
                 Application.Exit();
             }
+        }
+
+        public static string Name
+        {
+            get; private set;
+        }
+
+        public static ushort Port
+        {
+            get; private set;
         }
 
         private static void SystemEvents_SessionSwitch(object sender, Microsoft.Win32.SessionSwitchEventArgs e)

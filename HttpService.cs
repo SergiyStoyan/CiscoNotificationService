@@ -15,6 +15,7 @@ using System.IO;
 using System.Threading;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Cliver
 {
@@ -24,15 +25,39 @@ namespace Cliver
         {
         }
 
-        static public void Start(ushort port)
+        static public void Start(string service_name, ushort port)
         {
             Stop();
             t?.Join();
-            t = ThreadRoutines.StartTry(() => { run(port); });
+
+#if DEBUG
+            //Name = "*";//works in LAN
+            //Name = "192.168.2.13";//the actual ip works in LAN
+            //Name = "localhost";//not work in LAN
+            //Name = "127.0.0.1";//not work in LAN
+            //Name = "localhos";//some string not work in LAN
+            //Name = "192.168.2.*";//does not start
+            Name = "127.0.0.1";//not work in LAN
+#else
+            Name = service_name;
+            Name = "*";
+#endif
+            Port = port;
+            t = ThreadRoutines.StartTry(() => { run(); });
         }
         static Thread t = null;
 
-        static void run(ushort port)
+        public static string Name
+        {
+            get; private set;
+        }
+
+        public static ushort Port
+        {
+            get; private set;
+        }
+
+        static void run()
         {
             try
             {
@@ -42,8 +67,7 @@ namespace Cliver
                     listener.Close();
                 }
                 listener = new HttpListener();
-                //listener.Prefixes.Add("http://localhost:" + port + "/");
-                listener.Prefixes.Add("http://*:" + port + "/");
+                listener.Prefixes.Add("http://" + Name + ":" + Port + "/");
                 listener.Start();
                 while (listener.IsListening)
                 {
@@ -55,6 +79,20 @@ namespace Cliver
             { }
             catch (Exception e)
             {
+                if (e is System.Net.HttpListenerException && ((System.Net.HttpListenerException)e).NativeErrorCode == 5)
+                {
+                    if(!Message.YesNo("Http Service requires the application to run with Administartor's privileges.\r\nRestart?"))
+                        Environment.Exit(0);
+
+                    ProcessStartInfo psi = new ProcessStartInfo();
+                    psi.UseShellExecute = true;
+                    psi.WorkingDirectory = Environment.CurrentDirectory;
+                    psi.FileName = Application.ExecutablePath;
+                    psi.Verb = "runas";
+                    Process.Start(psi);
+                    Environment.Exit(0);
+                }
+
                 Message.Error("Http Service broken: " + e.Message);
                 Application.Exit();
             }
@@ -97,6 +135,9 @@ namespace Cliver
                 }
                 response.StatusCode = (int)HttpStatusCode.OK;
                 response.ContentEncoding = request.ContentEncoding;
+#if DEBUG 
+                response.AddHeader("Access-Control-Allow-Origin", "*");//prevents errors if testing by ajax
+#endif
                 string data = CiscoHttp.ProcessRequest(context.Request);
                 byte[] buffer = response.ContentEncoding.GetBytes(data);
                 response.ContentLength64 = buffer.Length;

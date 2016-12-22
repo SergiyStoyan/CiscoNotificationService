@@ -7,10 +7,26 @@
 <script type="text/javascript">
 $(document).ready(function() {   
 	$("form").on('submit', function(event) {     // alert($(this));
-		//event.preventDefault();
+		event.preventDefault();
 		var p = $("#phone").val();
 		var url = 'http://' + p;
-		$(this).attr('action', url); 
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: $(this).serialize(),
+			success: function(data, textStatus, jqXHR){
+				console.log(textStatus);
+				console.log(data);
+				//alert(data);
+				},
+			error: function(jqXHR, textStatus, errorThrown){
+				console.log(textStatus);
+				console.log(errorThrown);
+				console.log(jqXHR);
+				//alert(textStatus + " | " + errorThrown);
+				},
+  			//dataType: 'jsonp',
+		});
     });
 });
 </script>

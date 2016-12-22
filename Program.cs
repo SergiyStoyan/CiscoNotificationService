@@ -58,16 +58,16 @@ namespace Cliver
         {
             if (Properties.Settings.Default.Run)
             {
-                HttpService.Start(Properties.Settings.Default.ServicePort);
-                BonjourService.Start(
-                    Properties.Settings.Default.UseWindowsUserAsServiceName ? Environment.UserName : Properties.Settings.Default.ServiceName, 
-                    Properties.Settings.Default.ServicePort
-                    );
+                string service_name = Properties.Settings.Default.UseWindowsUserAsServiceName ? Environment.UserName : Properties.Settings.Default.ServiceName;
+                if (string.IsNullOrWhiteSpace(service_name))
+                    service_name = "-UNKNOWN-";
+                HttpService.Start(service_name, Properties.Settings.Default.ServicePort);
+                BonjourService.Start(HttpService.Name, HttpService.Port);             
             }
             else
             {
-                HttpService.Stop();
                 BonjourService.Stop();
+                HttpService.Stop();
             }
         }
     }
