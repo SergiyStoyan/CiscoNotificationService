@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationControl));
             this.image = new System.Windows.Forms.PictureBox();
             this.text = new System.Windows.Forms.Label();
             this.title = new System.Windows.Forms.Label();
@@ -39,9 +40,9 @@
             // 
             // image
             // 
-            this.image.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.image.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
             this.image.Location = new System.Drawing.Point(9, 8);
             this.image.Name = "image";
             this.image.Size = new System.Drawing.Size(53, 53);
@@ -101,9 +102,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.image);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.action);
-            this.Controls.Add(this.image);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "NotificationControl";
             this.Size = new System.Drawing.Size(305, 93);
