@@ -69,7 +69,7 @@ namespace Cliver
                         xn = xd.DocumentElement.SelectSingleNode("URL");
                         string url = xn?.InnerText;
 
-                        ToastNotification.TextImage(title, prompt, url);
+                        ToastNotification.TextImage(title, prompt, url, int.Parse(locationX), int.Parse(locationY));
                     }
                     break;
                 default:

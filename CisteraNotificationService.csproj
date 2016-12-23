@@ -82,6 +82,24 @@
     <Compile Include="AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="BrowserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BrowserForm.Designer.cs">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NotificationControl.Designer.cs">
+      <DependentUpon>NotificationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NotificationForm.Designer.cs">
+      <DependentUpon>NotificationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ToastNotification.cs" />
     <Compile Include="CiscoHttp.cs" />
     <Compile Include="HttpService.cs" />
@@ -109,6 +127,15 @@
     </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BrowserForm.resx">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotificationControl.resx">
+      <DependentUpon>NotificationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NotificationForm.resx">
+      <DependentUpon>NotificationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -36,6 +36,19 @@ namespace Cliver
         {
             try
             {
+                //NotificationForm nf = new NotificationForm();
+                //nf.Show();
+                //for (int i = 0; i < 4; i++)
+                //{
+                //    var c = new NotificationControl("t"+i, "text "+i, "action " + i, ()=> { Message.Inform("clicked"); });
+                //    c.Dock = DockStyle.Top;
+                //    nf.Controls.Add(c);
+                //    c.BringToFront();
+                //}
+
+                BrowserForm bf = new BrowserForm();
+                bf.Show();
+
                 Application.Run(SysTray.This);
             }
             catch (Exception e)

@@ -32,7 +32,7 @@ namespace Cliver
         {
         }
 
-        static public void TextImage(string title, string prompt, string imageUrl)
+        static public void TextImage(string title, string prompt, string imageUrl, int x, int y)
         {
         }
     }
