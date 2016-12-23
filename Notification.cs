@@ -22,9 +22,9 @@ using System.Text.RegularExpressions;
 
 namespace Cliver
 {
-    class ToastNotification
+    class Notification
     {
-        static ToastNotification()
+        static Notification()
         {
         }
 

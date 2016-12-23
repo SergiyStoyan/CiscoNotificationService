@@ -100,7 +100,7 @@
     <Compile Include="NotificationForm.Designer.cs">
       <DependentUpon>NotificationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ToastNotification.cs" />
+    <Compile Include="Notification.cs" />
     <Compile Include="CiscoHttp.cs" />
     <Compile Include="HttpService.cs" />
     <Compile Include="UserNameListener.cs" />

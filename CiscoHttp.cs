@@ -53,7 +53,7 @@ namespace Cliver
                         xn = xd.DocumentElement.SelectSingleNode("Text");
                         string text = xn?.InnerText;
 
-                        ToastNotification.Text(title, prompt, text);
+                        Notification.Text(title, prompt, text);
                     }
                     break;
                 case "CiscoIPPhoneImageFile":
@@ -69,7 +69,7 @@ namespace Cliver
                         xn = xd.DocumentElement.SelectSingleNode("URL");
                         string url = xn?.InnerText;
 
-                        ToastNotification.TextImage(title, prompt, url, int.Parse(locationX), int.Parse(locationY));
+                        Notification.TextImage(title, prompt, url, int.Parse(locationX), int.Parse(locationY));
                     }
                     break;
                 default:

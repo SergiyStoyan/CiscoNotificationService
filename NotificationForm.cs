@@ -34,7 +34,8 @@ namespace Cliver
             {
                 int h = b - This.ClientRectangle.Bottom;
                 This.Height += h;
-                This.Top -= h;
+                //This.Top -= h;
+                ControlRoutines.SlideVertically(This, 300, This.Top - h);
             }
         }
 
@@ -53,11 +54,15 @@ namespace Cliver
             {
                 int h = This.ClientRectangle.Bottom - b;
                 This.Height -= h;
-                This.Top += h;
+                //This.Top += h;
+                ControlRoutines.SlideVertically(This, 300, This.Top + h);
             }
 
             if (This.Controls.Count <= 1)
-                This.Visible = false;
+                ControlRoutines.Condense(This, 300, 0, () =>
+                {
+                    This.Visible = false;
+                });
         }
 
         void display()
@@ -71,51 +76,51 @@ namespace Cliver
             this.TopMost = true;
             ControlRoutines.Invoke(this, () => { Opacity = 0.3; });
             Show();
-            slide_up(700, wa.Bottom - Height);
-            condense(1000);
+            ControlRoutines.SlideVertically(This, 700, wa.Bottom - Height);
+            ControlRoutines.Condense(This, 1000, 1);
         }
 
-        void slide_up(uint mss, int p2)
-        {
-            if (st != null && st.IsAlive)
-                return;
+        //void slide_vertically(uint mss, int p2)
+        //{
+        //    if (st != null && st.IsAlive)
+        //        return;
 
-            int delta = -1;
-            int sleep = (int)((double)mss / ((p2 - Top) / delta));
-            st = ThreadRoutines.Start(() =>
-            {
-                while (
-                    !(bool)ControlRoutines.Invoke(this, () =>
-                    {
-                        Top = Top + delta;
-                        return Top <= p2;
-                    })
-                )
-                    System.Threading.Thread.Sleep(sleep);
-            });
-        }
-        System.Threading.Thread st = null;
+        //    int delta = Top > p2?- 1:1;
+        //    int sleep = (int)((double)mss / ((p2-Top) / delta));
+        //    st = ThreadRoutines.Start(() =>
+        //    {
+        //        while (
+        //            !(bool)ControlRoutines.Invoke(this, () =>
+        //            {
+        //                Top = Top + delta;
+        //                return delta<0? Top <= p2: Top >= p2;
+        //            })
+        //        )
+        //            System.Threading.Thread.Sleep(sleep);
+        //    });
+        //}
+        //System.Threading.Thread st = null;
 
-        void condense(uint mss)
-        {
-            if (ct != null && ct.IsAlive)
-                return;
+        //void condense(uint mss, double o2)
+        //{
+        //    if (ct != null && ct.IsAlive)
+        //        return;
 
-            double delta = 0.01;
-            int sleep = (int)((double)mss / ((1.0 - Opacity) / delta));
-            ct = ThreadRoutines.Start(() =>
-            {
-                while (
-                    !(bool)ControlRoutines.Invoke(this, () =>
-                    {
-                        Opacity = Opacity + delta;
-                        return Opacity >= 1;
-                    })
-                )
-                    System.Threading.Thread.Sleep(sleep);
-            });
-        }
-        System.Threading.Thread ct = null;
+        //    double delta = Opacity < o2 ? 0.01:-0.01;
+        //    int sleep = (int)((double)mss / ((1.0 - Opacity) / delta));
+        //    ct = ThreadRoutines.Start(() =>
+        //    {
+        //        while (
+        //            !(bool)ControlRoutines.Invoke(this, () =>
+        //            {
+        //                Opacity = Opacity + delta;
+        //                return delta>0? Opacity >= o2 : Opacity <= o2;
+        //            })
+        //        )
+        //            System.Threading.Thread.Sleep(sleep);
+        //    });
+        //}
+        //System.Threading.Thread ct = null;
 
         const int right_screen_span = 50;
 
