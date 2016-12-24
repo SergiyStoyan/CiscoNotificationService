@@ -36,10 +36,14 @@ namespace Cliver
         {
             try
             {
+                //NotificationForm nf = NotificationForm.This;
+                //NotificationForm.AddNotification("title", "message", "test.png", "action", null);
+                //NotificationForm.Clear();
                 for (int i = 0; i < 4; i++)
-                    NotificationForm.AddNotification("title" + i, "message", "https://www.google.com/logos/doodles/2016/holidays-2016-day-1-5727116688621568.2-res.png", "action", () => {  });
-                    //NotificationForm.AddNotification("title" + i, "message", "test.png", "action", () => { Message.Inform("clicked"); });
+                    NotificationForm.AddNotification("title" + i, "message", "https://www.google.com/logos/doodles/2016/holidays-2016-day-1-5727116688621568.2-res.png", "action", () => { });
+                //NotificationForm.AddNotification("title" + i, "message", "test.png", "action", () => { Message.Inform("clicked"); });
 
+                //AlertForm.AddAlert("dsgfsdg", "sdgfsdgsgfdsgdf", "test.png", "action", () => { Message.Inform("clicked"); });
                 //BrowserForm bf = new BrowserForm();
                 //bf.Show();
 

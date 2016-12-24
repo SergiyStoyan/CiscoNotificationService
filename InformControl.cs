@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Cliver
 {
-    public partial class NotificationControl : UserControl
+    public partial class InformControl : UserControl
     {
-        public NotificationControl(string title, string text, string image_url, string action_name, Action action)
+        public InformControl(string title, string text, string image_url, string action_name, Action action)
         {
             InitializeComponent();
 
@@ -28,12 +28,20 @@ namespace Cliver
             //        image.Image = Bitmap.FromStream(stream);
             //    }
             //}, request);
-            if (!image_url.Contains(":"))
-                image_url = Log.AppDir + image_url;
-            image.ImageLocation = image_url;
+            if (image_url != null)
+            {
+                image.SizeMode = PictureBoxSizeMode.Zoom;
+                if (!image_url.Contains(":"))
+                    image_url = Log.AppDir + image_url;
+                image.ImageLocation = image_url;
+            }
+            else
+                image.Image = null;
             //image.Invalidate();
-            this.action.Text = action_name;
-            this.action.Click += (object sender, EventArgs e) => {
+            if (action_name != null)
+                this.action.Text = action_name;
+            this.action.Click += (object sender, EventArgs e) =>
+            {
                 action?.Invoke();
                 NotificationForm.RemoveNotification(this);
             };

@@ -79,7 +79,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "NotificationForm";
-            this.TopMost = true;
             this.header.ResumeLayout(false);
             this.header.PerformLayout();
             this.ResumeLayout(false);

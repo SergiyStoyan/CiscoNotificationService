@@ -22,109 +22,94 @@ namespace Cliver
 
         public static void AddNotification(string title, string text, string image_url, string action_name, Action action)
         {
-            This.display();
-            var c = new NotificationControl(title, text, image_url, action_name, action);
-            c.Dock = DockStyle.Top;
-            //c.Width = This.notifications.ClientRectangle.Width;
-            This.Controls.Add(c);
-            c.BringToFront();
-
-            int b = This.Controls[0].Bottom;
-            if (This.ClientRectangle.Bottom < b && This.Height < This.max_height)
+            if (!This.IsHandleCreated)
+                This.CreateHandle();
+            ControlRoutines.Invoke(This, () =>
             {
-                int h = b - This.ClientRectangle.Bottom;
-                This.Height += h;
-                //This.Top -= h;
-                ControlRoutines.SlideVertically(This, 300, This.Top - h);
-            }
+                var c = new InformControl(title, text, image_url, action_name, action);
+                c.Dock = DockStyle.Top;
+                //c.Width = This.notifications.ClientRectangle.Width;
+                This.Controls.Add(c);
+                This.header.SendToBack();
+
+                This.display();
+            });
         }
 
         public static void Clear()
         {
-            while (This.Controls.Count > 1)
-                RemoveNotification((NotificationControl)This.Controls[0]);
+            ControlRoutines.Invoke(This, () =>
+            {
+                while (This.Controls.Count > 1)
+                    RemoveNotification((InformControl)This.Controls[0]);
+            });
         }
 
-        public static void RemoveNotification(NotificationControl nc)
+        //static bool remove_oldeset_one()
+        //{
+        //    if (This.Controls.Count > 1)
+        //    {
+        //        RemoveNotification((NotificationControl)This.Controls[0]);
+        //        return true;
+        //    }
+        //    return false;
+        //}
+
+        public static void RemoveNotification(InformControl nc)
         {
-            This.Controls.Remove(nc);
-
-            int b = This.Controls[0].Bottom;
-            if (This.ClientRectangle.Bottom > b)
+            ControlRoutines.Invoke(This, () =>
             {
-                int h = This.ClientRectangle.Bottom - b;
-                This.Height -= h;
-                //This.Top += h;
-                ControlRoutines.SlideVertically(This, 300, This.Top + h);
-            }
+                This.Controls.Remove(nc);
 
-            if (This.Controls.Count <= 1)
-                ControlRoutines.Condense(This, 300, 0, () =>
+                int b = This.Controls[0].Bottom;
+                if (This.ClientRectangle.Bottom > b)
                 {
-                    This.Visible = false;
-                });
+                    int h = This.ClientRectangle.Bottom - b;
+                    This.Height -= h;
+                    //This.Top += h;
+                    ControlRoutines.SlideVertically(This, 0.3, This.Top + h);
+                }
+
+                if (This.Controls.Count <= 1)
+                    ControlRoutines.Condense(This, 0.1, 0, () =>
+                    {
+                        This.Visible = false;
+                    });
+            });
         }
 
         void display()
         {
+            MethodInvoker tune_height = () =>
+            {
+                int b = Controls[0].Bottom;
+                if (ClientRectangle.Bottom < b && Height < max_height)
+                {
+                    int h = b - ClientRectangle.Bottom;
+                    Height += h;
+                    //This.Top -= h;
+                    ControlRoutines.SlideVertically(this, 0.3, Top - h);
+                }
+            };
             if (Visible)
+            {
+                Activate();
+                tune_height();
                 return;
-            
+            }
             Rectangle wa = Screen.GetWorkingArea(this);
-            this.DesktopLocation = new Point(wa.Right - Width - right_screen_span, wa.Bottom);
+            DesktopLocation = new Point(wa.Right - Width - right_screen_span, wa.Bottom);
 
-            this.TopMost = true;
+            TopMost = false;
             ControlRoutines.Invoke(this, () => { Opacity = 0.3; });
             Show();
-            ControlRoutines.SlideVertically(This, 700, wa.Bottom - Height);
-            ControlRoutines.Condense(This, 1000, 1);
+            ControlRoutines.SlideVertically(This, 0.3, wa.Bottom - Height, tune_height);
+            ControlRoutines.Condense(This, 0.1, 1);
         }
-
-        //void slide_vertically(uint mss, int p2)
-        //{
-        //    if (st != null && st.IsAlive)
-        //        return;
-
-        //    int delta = Top > p2?- 1:1;
-        //    int sleep = (int)((double)mss / ((p2-Top) / delta));
-        //    st = ThreadRoutines.Start(() =>
-        //    {
-        //        while (
-        //            !(bool)ControlRoutines.Invoke(this, () =>
-        //            {
-        //                Top = Top + delta;
-        //                return delta<0? Top <= p2: Top >= p2;
-        //            })
-        //        )
-        //            System.Threading.Thread.Sleep(sleep);
-        //    });
-        //}
-        //System.Threading.Thread st = null;
-
-        //void condense(uint mss, double o2)
-        //{
-        //    if (ct != null && ct.IsAlive)
-        //        return;
-
-        //    double delta = Opacity < o2 ? 0.01:-0.01;
-        //    int sleep = (int)((double)mss / ((1.0 - Opacity) / delta));
-        //    ct = ThreadRoutines.Start(() =>
-        //    {
-        //        while (
-        //            !(bool)ControlRoutines.Invoke(this, () =>
-        //            {
-        //                Opacity = Opacity + delta;
-        //                return delta>0? Opacity >= o2 : Opacity <= o2;
-        //            })
-        //        )
-        //            System.Threading.Thread.Sleep(sleep);
-        //    });
-        //}
-        //System.Threading.Thread ct = null;
 
         const int right_screen_span = 50;
 
-        static NotificationForm This = new NotificationForm();
+        public static NotificationForm This = new NotificationForm();
 
         private void bClear_Click(object sender, EventArgs e)
         {

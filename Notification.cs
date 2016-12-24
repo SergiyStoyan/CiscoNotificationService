@@ -28,12 +28,19 @@ namespace Cliver
         {
         }
 
-        static public void Text(string title, string prompt, string text)
+        //static public void Inform(string title, string text, string prompt = null)
+        //{
+        //    //EMERGENCY, LOCKDOWN, ALERT, WARNING, #URGENT
+        //}
+
+        static public void Inform(string title, string text, string image_url = null, string action_name = null, Action action = null)
         {
+            NotificationForm.AddNotification(title, text, image_url, action_name, action);
         }
 
-        static public void TextImage(string title, string prompt, string imageUrl, int x, int y)
+        static public void Alert(string title, string text, string image_url = null, string action_name = null, Action action = null)
         {
+            AlertForm.AddAlert(title, text, image_url, action_name, action);
         }
     }
 }

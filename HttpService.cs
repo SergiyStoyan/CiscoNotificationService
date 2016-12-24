@@ -38,6 +38,7 @@ namespace Cliver
             //Name = "localhos";//some string not work in LAN
             //Name = "192.168.2.*";//does not start
             Name = "127.0.0.1";//not work in LAN
+            Name = "localhost";//not work in LAN
 #else
             Name = service_name;
             Name = "*";
@@ -136,7 +137,7 @@ namespace Cliver
                 response.StatusCode = (int)HttpStatusCode.OK;
                 response.ContentEncoding = request.ContentEncoding;
 #if DEBUG 
-                response.AddHeader("Access-Control-Allow-Origin", "*");//prevents errors if testing by ajax
+                response.AddHeader("Access-Control-Allow-Origin", "*");//prevents errors when testing by ajax
 #endif
                 string data = CiscoHttp.ProcessRequest(context.Request);
                 byte[] buffer = response.ContentEncoding.GetBytes(data);
@@ -146,6 +147,12 @@ namespace Cliver
             catch (Exception e)
             {
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                string m;
+                string d;
+                Log.GetExceptionMessage(e, out m, out d);
+                byte[] buffer = response.ContentEncoding.GetBytes(m + "\r\n<br>\r\n<br>" + d);
+                response.ContentLength64 = buffer.Length;
+                response.OutputStream.Write(buffer, 0, buffer.Length);
             }
             finally
             {

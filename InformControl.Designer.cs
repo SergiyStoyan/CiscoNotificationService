@@ -1,6 +1,6 @@
 ﻿namespace Cliver
 {
-    partial class NotificationControl
+    partial class InformControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InformControl));
             this.image = new System.Windows.Forms.PictureBox();
             this.text = new System.Windows.Forms.Label();
             this.title = new System.Windows.Forms.Label();
@@ -81,7 +81,7 @@
             this.action.Name = "action";
             this.action.Size = new System.Drawing.Size(305, 23);
             this.action.TabIndex = 3;
-            this.action.Text = "action";
+            this.action.Text = "OK";
             this.action.UseVisualStyleBackColor = false;
             // 
             // panel1
@@ -98,7 +98,7 @@
             this.panel1.Size = new System.Drawing.Size(234, 69);
             this.panel1.TabIndex = 4;
             // 
-            // NotificationControl
+            // InformControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -106,7 +106,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.action);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "NotificationControl";
+            this.Name = "InformControl";
             this.Size = new System.Drawing.Size(305, 93);
             ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             this.panel1.ResumeLayout(false);

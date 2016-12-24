@@ -88,11 +88,17 @@
     <Compile Include="BrowserForm.Designer.cs">
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NotificationControl.cs">
+    <Compile Include="InformControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NotificationControl.Designer.cs">
-      <DependentUpon>NotificationControl.cs</DependentUpon>
+    <Compile Include="InformControl.Designer.cs">
+      <DependentUpon>InformControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AlertForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AlertForm.Designer.cs">
+      <DependentUpon>AlertForm.cs</DependentUpon>
     </Compile>
     <Compile Include="NotificationForm.cs">
       <SubType>Form</SubType>
@@ -131,8 +137,11 @@
     <EmbeddedResource Include="BrowserForm.resx">
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NotificationControl.resx">
-      <DependentUpon>NotificationControl.cs</DependentUpon>
+    <EmbeddedResource Include="InformControl.resx">
+      <DependentUpon>InformControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AlertForm.resx">
+      <DependentUpon>AlertForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NotificationForm.resx">
       <DependentUpon>NotificationForm.cs</DependentUpon>

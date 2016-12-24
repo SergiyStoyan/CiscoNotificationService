@@ -19,6 +19,7 @@ using System.Xml;
 using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace Cliver
 {
@@ -53,7 +54,18 @@ namespace Cliver
                         xn = xd.DocumentElement.SelectSingleNode("Text");
                         string text = xn?.InnerText;
 
-                        Notification.Text(title, prompt, text);
+                        xn = xd.DocumentElement.SelectSingleNode("SoftKeyItem");
+                        if (xn != null)
+                        {
+                            string name = xn.SelectSingleNode("Name")?.InnerText;
+                            string url = xn.SelectSingleNode("URL")?.InnerText;
+                            string position = xn.SelectSingleNode("Position")?.InnerText;
+                            Notification.Alert(title, text, null, name, () => { Process.Start(url); });
+                        }
+                        else
+                        {
+                            Notification.Inform(title, text, null, prompt);
+                        }
                     }
                     break;
                 case "CiscoIPPhoneImageFile":
@@ -67,9 +79,33 @@ namespace Cliver
                         xn = xd.DocumentElement.SelectSingleNode("LocationY");
                         string locationY = xn?.InnerText;
                         xn = xd.DocumentElement.SelectSingleNode("URL");
-                        string url = xn?.InnerText;
-
-                        Notification.TextImage(title, prompt, url, int.Parse(locationX), int.Parse(locationY));
+                        string image_url = xn?.InnerText;
+                        
+                        xn = xd.DocumentElement.SelectSingleNode("SoftKeyItem");
+                        if (xn != null)
+                        {
+                            string name = xn.SelectSingleNode("Name")?.InnerText;
+                            string url = xn.SelectSingleNode("URL")?.InnerText;
+                            string position = xn.SelectSingleNode("Position")?.InnerText;
+                            Notification.Alert(title, null, image_url, name, () => { Process.Start(url); });
+                        }
+                        else
+                        {
+                            Notification.Inform(title, null, image_url, prompt);
+                        }
+                    }
+                    break;
+                case "CiscoIPPhoneExecute":
+                    {
+                        foreach (XmlNode xn in xd.DocumentElement.SelectNodes("ExecuteItem"))
+                        {
+                            string priority = xn.Attributes["Priority"]?.Value;
+                            string url = xn.Attributes["URL"]?.Value;
+                            if (Regex.IsMatch(url, @"https?\:", RegexOptions.IgnoreCase))
+                                Process.Start(url);
+                            else
+                                Notification.Inform("Error", "URL is not supported: " + url, null, null);
+                        }
                     }
                     break;
                 default:
