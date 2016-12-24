@@ -29,7 +29,7 @@ namespace Cliver
 
         readonly int max_height = 0;
 
-        public static void AddAlert(string title, string text, string image_url, string action_name, Action action)
+        public static AlertForm AddAlert(string title, string text, string image_url, string action_name, Action action)
         {
             AlertForm a = new AlertForm();
             if (!a.IsHandleCreated)
@@ -75,6 +75,7 @@ namespace Cliver
 
                 a.BringToFront();
             });
+            return a;
         }
 
         static readonly List<AlertForm> afs = new List<AlertForm>();

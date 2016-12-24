@@ -43,9 +43,9 @@
             this.image.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
-            this.image.Location = new System.Drawing.Point(9, 8);
+            this.image.Location = new System.Drawing.Point(0, 0);
             this.image.Name = "image";
-            this.image.Size = new System.Drawing.Size(53, 53);
+            this.image.Size = new System.Drawing.Size(69, 69);
             this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.image.TabIndex = 0;
             this.image.TabStop = false;
