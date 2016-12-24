@@ -60,7 +60,11 @@ namespace Cliver
                             string name = xn.SelectSingleNode("Name")?.InnerText;
                             string url = xn.SelectSingleNode("URL")?.InnerText;
                             string position = xn.SelectSingleNode("Position")?.InnerText;
-                            Notification.Alert(title, text, null, name, () => { Process.Start(url); });
+                            Notification.Alert(title, text, null, name, () =>
+                            {
+                                if (url != null)
+                                    Process.Start(url);
+                            });
                         }
                         else
                         {

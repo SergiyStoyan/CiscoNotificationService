@@ -13,6 +13,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
+using System.Threading;
 
 namespace Cliver
 {
@@ -30,14 +31,14 @@ namespace Cliver
                 Application.Exit();
             };
         }
-
+        
         [STAThread]
         public static void Main(string[] args)
         {
             try
             {
-                NotificationForm nf = NotificationForm.This;
-                NotificationForm.AddNotification("title", "message", "test.png", "action", null);
+                //NotificationForm nf = NotificationForm.This;
+                //NotificationForm.AddNotification("title", "message", "test.png", "action", null);
                 // NotificationForm.Clear();
                 //for (int i = 0; i < 4; i++)
                 //    NotificationForm.AddNotification("title" + i, "message", "https://www.google.com/logos/doodles/2016/holidays-2016-day-1-5727116688621568.2-res.png", "action", () => { });

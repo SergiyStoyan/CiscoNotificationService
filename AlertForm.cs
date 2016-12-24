@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Cliver
 {
@@ -19,22 +20,43 @@ namespace Cliver
             max_height = Height;
 
             Disposed += AlertForm_Disposed;
+            FormClosed += AlertForm_FormClosed;
+        }
+
+        private void AlertForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            lock (afs)
+                afs.Remove(this);
         }
 
         private void AlertForm_Disposed(object sender, EventArgs e)
         {
-            lock (afs)
-                afs.Remove(this);
+            //lock (afs)
+            //    afs.Remove(this);
         }
 
         readonly int max_height = 0;
 
         public static AlertForm AddAlert(string title, string text, string image_url, string action_name, Action action)
         {
-            AlertForm a = new AlertForm();
-            if (!a.IsHandleCreated)
-                a.CreateHandle();
-            ControlRoutines.Invoke(a, () =>
+            //return (AlertForm)ControlRoutines.InvokeFromUiThread((Func<object>)(() =>
+            //{
+            //    AlertForm a = new AlertForm();
+
+            AlertForm a = null;
+            ThreadRoutines.StartTry(() =>
+            {
+                a = new AlertForm();
+                if (!a.IsHandleCreated)
+                    a.CreateHandle();
+                a.Opacity = 0;
+                a.ShowDialog();
+            });
+            SleepRoutines.WaitForObject(() => { return a; }, 1000);
+            if (a == null)
+                throw new Exception("Cound not create AlertForm");
+
+            a.Invoke(() =>
             {
                 lock (afs)
                     afs.Add(a);
@@ -68,15 +90,26 @@ namespace Cliver
                 a.DesktopLocation = new Point(wa.Right - a.Width - right_screen_span, wa.Top);
 
                 a.TopMost = true;
-                ControlRoutines.Invoke(a, () => { a.Opacity = 0.3; });
+                a.Opacity = 0.3;
                 a.Show();
                 //ControlRoutines.SlideVertically(a, 700, wa.Bottom - a.Height);
-                ControlRoutines.Condense(a, 0.1, 1);
+                double centOpacityPerMss = 0.5;
+                ControlRoutines.Condense(a, centOpacityPerMss, 1,()=> {
+                    ControlRoutines.Condense(a, centOpacityPerMss, 0.3, () => {
+                        ControlRoutines.Condense(a, centOpacityPerMss, 1, () => {
+                            ControlRoutines.Condense(a, centOpacityPerMss, 0.3, () => {
+                                ControlRoutines.Condense(a, centOpacityPerMss, 1);
+                            });
+                        });
+                    });
+                });
 
                 a.BringToFront();
             });
             return a;
         }
+
+        //Thread condensing_t = null;
 
         static readonly List<AlertForm> afs = new List<AlertForm>();
 

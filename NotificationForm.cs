@@ -13,7 +13,33 @@ namespace Cliver
 {
     public partial class NotificationForm : Form
     {
-        public NotificationForm()
+        static NotificationForm()
+        {
+        }
+
+        public static NotificationForm This
+        {
+            get
+            {
+                if (_This == null)
+                {//!!!the following code does not work in static constructor because creates a deadlock!!!
+                    ThreadRoutines.StartTry(() =>
+                    {
+                        _This = new NotificationForm();
+                        if (!_This.IsHandleCreated)
+                            _This.CreateHandle();
+                        Application.Run(_This);
+                    });
+                    SleepRoutines.WaitForObject(() => { return _This; }, 1000);
+                    if (_This == null)
+                        throw new Exception("Cound not create NotificationForm");
+                }
+                return _This;
+            }
+        }
+        static NotificationForm _This = null;
+
+        private NotificationForm()
         {
             InitializeComponent();
 
@@ -22,12 +48,11 @@ namespace Cliver
             Height = 10;
         }
         readonly int max_height = 0;
+        const int right_screen_span = 50;
 
         public static void AddNotification(string title, string text, string image_url, string action_name, Action action)
         {
-            if (!This.IsHandleCreated)
-                This.CreateHandle();
-            ControlRoutines.Invoke(This, () =>
+            This.Invoke(() =>
             {
                 var c = new InformControl(title, text, image_url, action_name, action);
                 c.Dock = DockStyle.Top;
@@ -41,7 +66,7 @@ namespace Cliver
 
         public static void Clear()
         {
-            ControlRoutines.Invoke(This, () =>
+            This.Invoke(() =>
             {
                 while (This.Controls.Count > 1)
                     RemoveNotification((InformControl)This.Controls[0]);
@@ -60,7 +85,7 @@ namespace Cliver
 
         public static void RemoveNotification(InformControl nc)
         {
-            ControlRoutines.Invoke(This, () =>
+            This.Invoke(() =>
             {
                 This.Controls.Remove(nc);
 
@@ -110,10 +135,6 @@ namespace Cliver
                 ControlRoutines.SlideVertically(this, 0.3, Top - h);
             }
         }
-
-        const int right_screen_span = 50;
-
-        public static NotificationForm This = new NotificationForm();
 
         private void bClear_Click(object sender, EventArgs e)
         {
