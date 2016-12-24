@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Cliver
 {
@@ -17,6 +18,8 @@ namespace Cliver
             InitializeComponent();
 
             max_height = Height;
+
+            Height = 10;
         }
         readonly int max_height = 0;
 
@@ -80,17 +83,6 @@ namespace Cliver
 
         void display()
         {
-            MethodInvoker tune_height = () =>
-            {
-                int b = Controls[0].Bottom;
-                if (ClientRectangle.Bottom < b && Height < max_height)
-                {
-                    int h = b - ClientRectangle.Bottom;
-                    Height += h;
-                    //This.Top -= h;
-                    ControlRoutines.SlideVertically(this, 0.3, Top - h);
-                }
-            };
             if (Visible)
             {
                 Activate();
@@ -105,6 +97,18 @@ namespace Cliver
             Show();
             ControlRoutines.SlideVertically(This, 0.3, wa.Bottom - Height, tune_height);
             ControlRoutines.Condense(This, 0.1, 1);
+        }
+
+        void tune_height()
+        {
+            int b = Controls[0].Bottom;
+            if (ClientRectangle.Bottom < b && Height < max_height)
+            {
+                int h = b - ClientRectangle.Bottom;
+                Height += h;
+                //This.Top -= h;
+                ControlRoutines.SlideVertically(this, 0.3, Top - h);
+            }
         }
 
         const int right_screen_span = 50;
