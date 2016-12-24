@@ -50,10 +50,16 @@ $(document).ready(function() {
          <FORM Method="POST">
 <TEXTAREA NAME="XML" Rows="7" Cols="80">
 <CiscoIPPhoneText>
-  <Title>Title text goes here</Title>
-  <Prompt>The prompt text goes here</Prompt>
-  <Text>The text to be displayed as the message body goes here</Text>
+  <Title>Emergency Lockdown</Title>
+  <Prompt>Emergency Alert</Prompt>
+  <Text>This is a Test of Emergency System</Text>
+   <SoftKeyItem>
+    <Name>Acknowledge</Name>
+    <URL>http://www.testserver.com/acknowledge.jsp</URL>
+    <Position>1</Position>
+   </SoftKeyItem>
 </CiscoIPPhoneText>
+
 </TEXTAREA>
          <input type=submit value=POST>
        </FORM>
@@ -61,6 +67,7 @@ $(document).ready(function() {
 <TEXTAREA NAME="XML" Rows="7" Cols="80">
 <CiscoIPPhoneExecute>
 <ExecuteItem Priority="0" URL="Play:chime.raw"/>
+<ExecuteItem Priority="0" URL="http://google.com"/>
 </CiscoIPPhoneExecute>
 </TEXTAREA>
          <input type=submit value=POST>
