@@ -1,4 +1,4 @@
-﻿namespace Cliver.Properties {
+﻿namespace Cliver.CisteraNotification.Properties {
     
     
     // This class allows you to handle specific events on the settings class:

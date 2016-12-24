@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 using System.Net;
 using Bonjour;
 
-namespace Cliver
+namespace Cliver.CisteraNotification
 {
     class BonjourService
     {

@@ -16,7 +16,7 @@
 //using System.Runtime.InteropServices;
 //using Bonjour;
 
-//namespace Cliver
+//namespace Cliver.CisteraNotification
 //{
 //    /// <summary>
 //    /// discarded

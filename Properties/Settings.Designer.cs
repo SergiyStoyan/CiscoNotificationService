@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cliver.Properties {
+namespace Cliver.CisteraNotification.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -68,6 +68,30 @@ namespace Cliver.Properties {
             }
             set {
                 this["Run"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PlayOnAlert {
+            get {
+                return ((string)(this["PlayOnAlert"]));
+            }
+            set {
+                this["PlayOnAlert"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PlayOnNotification {
+            get {
+                return ((string)(this["PlayOnNotification"]));
+            }
+            set {
+                this["PlayOnNotification"] = value;
             }
         }
     }

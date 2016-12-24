@@ -17,7 +17,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 
-namespace Cliver
+namespace Cliver.CisteraNotification
 {
     class HttpService
     {

@@ -1,4 +1,4 @@
-﻿namespace Cliver
+﻿namespace Cliver.CisteraNotification
 {
     partial class AlertForm
     {

@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 
-namespace Cliver
+namespace Cliver.CisteraNotification
 {
     public partial class NotificationForm : Form
     {
@@ -54,11 +55,17 @@ namespace Cliver
         {
             This.Invoke(() =>
             {
-                var c = new InformControl(title, text, image_url, action_name, action);
+                var c = new NotificationControl(title, text, image_url, action_name, action);
                 c.Dock = DockStyle.Top;
                 //c.Width = This.notifications.ClientRectangle.Width;
                 This.Controls.Add(c);
                 This.header.SendToBack();
+
+                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.PlayOnNotification))
+                {
+                    SoundPlayer sp = new SoundPlayer(Properties.Settings.Default.PlayOnNotification);
+                    sp.Play();
+                }
 
                 This.display();
             });
@@ -69,7 +76,7 @@ namespace Cliver
             This.Invoke(() =>
             {
                 while (This.Controls.Count > 1)
-                    RemoveNotification((InformControl)This.Controls[0]);
+                    RemoveNotification((NotificationControl)This.Controls[0]);
             });
         }
 
@@ -83,7 +90,7 @@ namespace Cliver
         //    return false;
         //}
 
-        public static void RemoveNotification(InformControl nc)
+        public static void RemoveNotification(NotificationControl nc)
         {
             This.Invoke(() =>
             {

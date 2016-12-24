@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 
-namespace Cliver
+namespace Cliver.CisteraNotification
 {
     public partial class AlertForm : Form
     {
@@ -89,20 +90,27 @@ namespace Cliver
                 Rectangle wa = Screen.GetWorkingArea(a);
                 a.DesktopLocation = new Point(wa.Right - a.Width - right_screen_span, wa.Top);
 
+                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.PlayOnAlert))
+                {
+                    SoundPlayer sp = new SoundPlayer(Properties.Settings.Default.PlayOnAlert);
+                    sp.Play();
+                }
+
                 a.TopMost = true;
                 a.Opacity = 0.3;
                 a.Show();
                 //ControlRoutines.SlideVertically(a, 700, wa.Bottom - a.Height);
                 double centOpacityPerMss = 0.5;
+                double centOpacityPerMss2 = 100;
                 ControlRoutines.Condense(a, centOpacityPerMss, 1,()=> {
-                    ControlRoutines.Condense(a, centOpacityPerMss, 0.3, () => {
+                    ControlRoutines.Condense(a, centOpacityPerMss2, 0.3, () => {
                         ControlRoutines.Condense(a, centOpacityPerMss, 1, () => {
-                            ControlRoutines.Condense(a, centOpacityPerMss, 0.3, () => {
+                            ControlRoutines.Condense(a, centOpacityPerMss2, 0.3, () => {
                                 ControlRoutines.Condense(a, centOpacityPerMss, 1);
                             });
                         });
                     });
-                });
+                }); 
 
                 a.BringToFront();
             });

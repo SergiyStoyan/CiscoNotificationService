@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 
-namespace Cliver
+namespace Cliver.CisteraNotification
 {
     public partial class SettingsForm : BaseForm//Form //
     {

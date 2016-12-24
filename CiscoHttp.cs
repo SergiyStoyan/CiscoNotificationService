@@ -21,7 +21,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 
-namespace Cliver
+namespace Cliver.CisteraNotification
 {
     class CiscoHttp
     {
@@ -60,7 +60,7 @@ namespace Cliver
                             string name = xn.SelectSingleNode("Name")?.InnerText;
                             string url = xn.SelectSingleNode("URL")?.InnerText;
                             string position = xn.SelectSingleNode("Position")?.InnerText;
-                            Notification.Alert(title, text, null, name, () =>
+                            AlertForm.AddAlert(title, text, null, name, () =>
                             {
                                 if (url != null)
                                     Process.Start(url);
@@ -68,7 +68,7 @@ namespace Cliver
                         }
                         else
                         {
-                            Notification.Inform(title, text, null, prompt);
+                            NotificationForm.AddNotification(title, text, null, prompt, null);
                         }
                     }
                     break;
@@ -91,11 +91,11 @@ namespace Cliver
                             string name = xn.SelectSingleNode("Name")?.InnerText;
                             string url = xn.SelectSingleNode("URL")?.InnerText;
                             string position = xn.SelectSingleNode("Position")?.InnerText;
-                            Notification.Alert(title, null, image_url, name, () => { Process.Start(url); });
+                            AlertForm.AddAlert(title, null, image_url, name, () => { Process.Start(url); });
                         }
                         else
                         {
-                            Notification.Inform(title, null, image_url, prompt);
+                            NotificationForm.AddNotification(title, null, image_url, prompt, null);
                         }
                     }
                     break;
@@ -108,7 +108,7 @@ namespace Cliver
                             if (Regex.IsMatch(url, @"https?\:", RegexOptions.IgnoreCase))
                                 Process.Start(url);
                             else
-                                Notification.Inform("Error", "URL is not supported: " + url, null, null);
+                                NotificationForm.AddNotification("Error", "URL is not supported: " + url, null, null, null);
                         }
                     }
                     break;

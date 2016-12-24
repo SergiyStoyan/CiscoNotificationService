@@ -8,7 +8,7 @@
     <ProjectGuid>{B0875726-757C-430E-AF2E-0AAE72F66E4B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cliver</RootNamespace>
+    <RootNamespace>Cliver.CisteraNotification</RootNamespace>
     <AssemblyName>CisteraNotificationService</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetPlatformVersion>8.0</TargetPlatformVersion>
@@ -88,11 +88,11 @@
     <Compile Include="BrowserForm.Designer.cs">
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InformControl.cs">
+    <Compile Include="NotificationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InformControl.Designer.cs">
-      <DependentUpon>InformControl.cs</DependentUpon>
+    <Compile Include="NotificationControl.Designer.cs">
+      <DependentUpon>NotificationControl.cs</DependentUpon>
     </Compile>
     <Compile Include="AlertForm.cs">
       <SubType>Form</SubType>
@@ -106,7 +106,6 @@
     <Compile Include="NotificationForm.Designer.cs">
       <DependentUpon>NotificationForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Notification.cs" />
     <Compile Include="CiscoHttp.cs" />
     <Compile Include="HttpService.cs" />
     <Compile Include="UserNameListener.cs" />
@@ -137,8 +136,8 @@
     <EmbeddedResource Include="BrowserForm.resx">
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InformControl.resx">
-      <DependentUpon>InformControl.cs</DependentUpon>
+    <EmbeddedResource Include="NotificationControl.resx">
+      <DependentUpon>NotificationControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AlertForm.resx">
       <DependentUpon>AlertForm.cs</DependentUpon>

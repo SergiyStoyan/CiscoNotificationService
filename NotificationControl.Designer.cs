@@ -1,6 +1,6 @@
-﻿namespace Cliver
+﻿namespace Cliver.CisteraNotification
 {
-    partial class InformControl
+    partial class NotificationControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InformControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NotificationControl));
             this.image = new System.Windows.Forms.PictureBox();
             this.text = new System.Windows.Forms.Label();
             this.title = new System.Windows.Forms.Label();
@@ -98,7 +98,7 @@
             this.panel1.Size = new System.Drawing.Size(234, 69);
             this.panel1.TabIndex = 4;
             // 
-            // InformControl
+            // NotificationControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -106,7 +106,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.action);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "InformControl";
+            this.Name = "NotificationControl";
             this.Size = new System.Drawing.Size(305, 93);
             ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             this.panel1.ResumeLayout(false);

@@ -15,7 +15,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 
-namespace Cliver
+namespace Cliver.CisteraNotification
 {
     static class Program
     {

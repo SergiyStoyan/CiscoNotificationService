@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Cliver
+namespace Cliver.CisteraNotification
 {
-    public partial class InformControl : UserControl
+    public partial class NotificationControl : UserControl
     {
-        public InformControl(string title, string text, string image_url, string action_name, Action action)
+        public NotificationControl(string title, string text, string image_url, string action_name, Action action)
         {
             InitializeComponent();
 
