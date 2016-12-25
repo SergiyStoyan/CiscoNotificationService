@@ -15,10 +15,10 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="PlayOnAlert" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">alert.wav</Value>
     </Setting>
     <Setting Name="PlayOnInform" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">inform.wav</Value>
     </Setting>
     <Setting Name="NotificationFormWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -36,7 +36,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="AlertFormRightPosition" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">50</Value>
     </Setting>
   </Settings>
 </SettingsFile>

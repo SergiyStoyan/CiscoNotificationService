@@ -17,20 +17,18 @@ namespace Cliver.CisteraNotification
         public AlertForm()
         {
             InitializeComponent();
-
-            max_height = Height;
-            
+                        
             FormClosed += AlertForm_FormClosed;
         }
+
+        static readonly List<AlertForm> afs = new List<AlertForm>();
 
         private void AlertForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             lock (afs)
                 afs.Remove(this);
         }
-
-        readonly int max_height = 0;
-
+        
         public static AlertForm AddAlert(string title, string text, string image_url, string action_name, Action action)
         {
             //return (AlertForm)ControlRoutines.InvokeFromUiThread((Func<object>)(() =>
@@ -38,15 +36,17 @@ namespace Cliver.CisteraNotification
             //    AlertForm a = new AlertForm();
 
             AlertForm a = null;
+            bool ready = false;
             ThreadRoutines.StartTry(() =>
             {
                 a = new AlertForm();
                 if (!a.IsHandleCreated)
                     a.CreateHandle();
                 a.Opacity = 0;
+                ready = true;
                 a.ShowDialog();
             });
-            SleepRoutines.WaitForObject(() => { return a; }, 1000);
+            SleepRoutines.WaitForCondition(() => { return ready; }, 1000);
             if (a == null)
                 throw new Exception("Cound not create AlertForm");
 
@@ -81,7 +81,7 @@ namespace Cliver.CisteraNotification
                     };
 
                 Rectangle wa = Screen.GetWorkingArea(a);
-                a.DesktopLocation = new Point(wa.Right - a.Width - right_screen_span, wa.Top);
+                a.DesktopLocation = new Point(wa.Right - a.Width - Properties.Settings.Default.AlertFormRightPosition, wa.Top);
 
                 if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.PlayOnAlert))
                 {
@@ -111,9 +111,5 @@ namespace Cliver.CisteraNotification
         }
 
         //Thread condensing_t = null;
-
-        static readonly List<AlertForm> afs = new List<AlertForm>();
-
-        const int right_screen_span = 50;
     }
 }

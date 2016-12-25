@@ -39,18 +39,18 @@
             this.UseWindowsUserAsServiceName = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.bSelectPlayOnInform = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.NotificationFormRightPosition = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.NotificationFormHeight = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.PlayOnInform = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.NotificationFormWidth = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.NotificationFormHeight = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.NotificationFormRightPosition = new System.Windows.Forms.TextBox();
-            this.bSelectPlayOnInform = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.bSelectPlayOnAlert = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.AlertFormRightPosition = new System.Windows.Forms.TextBox();
@@ -62,8 +62,8 @@
             this.AlertFormWidth = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -162,6 +162,20 @@
             this.tabPage1.Text = "Bonjour";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.UseWindowsUserAsServiceName);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.ServiceName);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.ServicePort);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(424, 215);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.bSelectPlayOnInform);
@@ -181,37 +195,47 @@
             this.tabPage2.Text = "Informs";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // bSelectPlayOnInform
             // 
-            this.groupBox1.Controls.Add(this.UseWindowsUserAsServiceName);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.ServiceName);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.ServicePort);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(424, 215);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
+            this.bSelectPlayOnInform.Location = new System.Drawing.Point(381, 28);
+            this.bSelectPlayOnInform.Name = "bSelectPlayOnInform";
+            this.bSelectPlayOnInform.Size = new System.Drawing.Size(25, 23);
+            this.bSelectPlayOnInform.TabIndex = 16;
+            this.bSelectPlayOnInform.Text = "...";
+            this.bSelectPlayOnInform.UseVisualStyleBackColor = true;
+            this.bSelectPlayOnInform.Click += new System.EventHandler(this.bSelectPlayOnInform_Click);
             // 
-            // tabPage3
+            // label6
             // 
-            this.tabPage3.Controls.Add(this.bSelectPlayOnAlert);
-            this.tabPage3.Controls.Add(this.label7);
-            this.tabPage3.Controls.Add(this.AlertFormRightPosition);
-            this.tabPage3.Controls.Add(this.label8);
-            this.tabPage3.Controls.Add(this.AlertFormHeight);
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.PlayOnAlert);
-            this.tabPage3.Controls.Add(this.label10);
-            this.tabPage3.Controls.Add(this.AlertFormWidth);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(430, 221);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Alerts";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(18, 131);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(186, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Position From Screen Right Boundary:";
+            // 
+            // NotificationFormRightPosition
+            // 
+            this.NotificationFormRightPosition.Location = new System.Drawing.Point(21, 147);
+            this.NotificationFormRightPosition.Name = "NotificationFormRightPosition";
+            this.NotificationFormRightPosition.Size = new System.Drawing.Size(52, 20);
+            this.NotificationFormRightPosition.TabIndex = 16;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(18, 92);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Height:";
+            // 
+            // NotificationFormHeight
+            // 
+            this.NotificationFormHeight.Location = new System.Drawing.Point(21, 108);
+            this.NotificationFormHeight.Name = "NotificationFormHeight";
+            this.NotificationFormHeight.Size = new System.Drawing.Size(52, 20);
+            this.NotificationFormHeight.TabIndex = 14;
             // 
             // label1
             // 
@@ -240,51 +264,29 @@
             // 
             // NotificationFormWidth
             // 
+            this.NotificationFormWidth.Enabled = false;
             this.NotificationFormWidth.Location = new System.Drawing.Point(21, 69);
             this.NotificationFormWidth.Name = "NotificationFormWidth";
             this.NotificationFormWidth.Size = new System.Drawing.Size(52, 20);
             this.NotificationFormWidth.TabIndex = 10;
             // 
-            // label5
+            // tabPage3
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 92);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Height:";
-            // 
-            // NotificationFormHeight
-            // 
-            this.NotificationFormHeight.Location = new System.Drawing.Point(21, 108);
-            this.NotificationFormHeight.Name = "NotificationFormHeight";
-            this.NotificationFormHeight.Size = new System.Drawing.Size(52, 20);
-            this.NotificationFormHeight.TabIndex = 14;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 131);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(186, 13);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Position From Screen Right Boundary:";
-            // 
-            // NotificationFormRightPosition
-            // 
-            this.NotificationFormRightPosition.Location = new System.Drawing.Point(21, 147);
-            this.NotificationFormRightPosition.Name = "NotificationFormRightPosition";
-            this.NotificationFormRightPosition.Size = new System.Drawing.Size(52, 20);
-            this.NotificationFormRightPosition.TabIndex = 16;
-            // 
-            // bSelectPlayOnInform
-            // 
-            this.bSelectPlayOnInform.Location = new System.Drawing.Point(381, 28);
-            this.bSelectPlayOnInform.Name = "bSelectPlayOnInform";
-            this.bSelectPlayOnInform.Size = new System.Drawing.Size(25, 23);
-            this.bSelectPlayOnInform.TabIndex = 16;
-            this.bSelectPlayOnInform.Text = "...";
-            this.bSelectPlayOnInform.UseVisualStyleBackColor = true;
+            this.tabPage3.Controls.Add(this.bSelectPlayOnAlert);
+            this.tabPage3.Controls.Add(this.label7);
+            this.tabPage3.Controls.Add(this.AlertFormRightPosition);
+            this.tabPage3.Controls.Add(this.label8);
+            this.tabPage3.Controls.Add(this.AlertFormHeight);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.PlayOnAlert);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.AlertFormWidth);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(430, 221);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Alerts";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // bSelectPlayOnAlert
             // 
@@ -294,6 +296,7 @@
             this.bSelectPlayOnAlert.TabIndex = 24;
             this.bSelectPlayOnAlert.Text = "...";
             this.bSelectPlayOnAlert.UseVisualStyleBackColor = true;
+            this.bSelectPlayOnAlert.Click += new System.EventHandler(this.bSelectPlayOnAlert_Click);
             // 
             // label7
             // 
@@ -322,6 +325,7 @@
             // 
             // AlertFormHeight
             // 
+            this.AlertFormHeight.Enabled = false;
             this.AlertFormHeight.Location = new System.Drawing.Point(20, 111);
             this.AlertFormHeight.Name = "AlertFormHeight";
             this.AlertFormHeight.Size = new System.Drawing.Size(52, 20);
@@ -354,6 +358,7 @@
             // 
             // AlertFormWidth
             // 
+            this.AlertFormWidth.Enabled = false;
             this.AlertFormWidth.Location = new System.Drawing.Point(20, 72);
             this.AlertFormWidth.Name = "AlertFormWidth";
             this.AlertFormWidth.Size = new System.Drawing.Size(52, 20);
@@ -378,10 +383,10 @@
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.ResumeLayout(false);

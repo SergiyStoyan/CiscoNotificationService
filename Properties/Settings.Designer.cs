@@ -73,7 +73,7 @@ namespace Cliver.CisteraNotification.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("alert.wav")]
         public string PlayOnAlert {
             get {
                 return ((string)(this["PlayOnAlert"]));
@@ -85,7 +85,7 @@ namespace Cliver.CisteraNotification.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("inform.wav")]
         public string PlayOnInform {
             get {
                 return ((string)(this["PlayOnInform"]));
@@ -157,7 +157,7 @@ namespace Cliver.CisteraNotification.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
         public int AlertFormRightPosition {
             get {
                 return ((int)(this["AlertFormRightPosition"]));

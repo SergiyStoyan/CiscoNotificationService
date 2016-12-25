@@ -24,14 +24,17 @@ namespace Cliver.CisteraNotification
             {
                 if (_This == null)
                 {//!!!the following code does not work in static constructor because creates a deadlock!!!
+                    bool ready = false;
                     ThreadRoutines.StartTry(() =>
                     {
                         _This = new NotificationForm();
                         if (!_This.IsHandleCreated)
                             _This.CreateHandle();
-                        Application.Run(_This);
+                        _This.Visible = false;
+                        ready = true;
+                        Application.Run();
                     });
-                    SleepRoutines.WaitForObject(() => { return _This; }, 1000);
+                    SleepRoutines.WaitForCondition(() => { return ready; }, 1000);
                     if (_This == null)
                         throw new Exception("Cound not create NotificationForm");
                 }
@@ -49,7 +52,6 @@ namespace Cliver.CisteraNotification
             Height = 10;
         }
         readonly int max_height = 0;
-        const int right_screen_span = 50;
 
         public static void AddNotification(string title, string text, string image_url, string action_name, Action action)
         {
@@ -122,7 +124,7 @@ namespace Cliver.CisteraNotification
                 return;
             }
             Rectangle wa = Screen.GetWorkingArea(this);
-            DesktopLocation = new Point(wa.Right - Width - right_screen_span, wa.Bottom);
+            DesktopLocation = new Point(wa.Right - Width - Properties.Settings.Default.NotificationFormRightPosition, wa.Bottom);
 
             TopMost = false;
             ControlRoutines.Invoke(this, () => { Opacity = 0.3; });

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Cliver.CisteraNotification
 {
-    public partial class SettingsForm :Form // BaseForm//
+    public partial class SettingsForm : Form // BaseForm//
     {
         SettingsForm()
         {
@@ -24,11 +24,11 @@ namespace Cliver.CisteraNotification
         static public void Open()
         {
             if (sf == null)
-                sf = new SettingsForm();            
+                sf = new SettingsForm();
             sf.Show();
             sf.Activate();
         }
-        static  SettingsForm sf = null;
+        static SettingsForm sf = null;
 
         private void SettingsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -43,8 +43,13 @@ namespace Cliver.CisteraNotification
                 Properties.Settings.Default.UseWindowsUserAsServiceName = UseWindowsUserAsServiceName.Checked;
                 if (string.IsNullOrWhiteSpace(ServiceName.Text))
                     throw new Exception("Service Name cannot be empty.");
-                if(!UseWindowsUserAsServiceName.Checked)
+                if (!UseWindowsUserAsServiceName.Checked)
                     Properties.Settings.Default.ServiceName = ServiceName.Text;
+                Properties.Settings.Default.PlayOnAlert = PlayOnAlert.Text;
+                Properties.Settings.Default.PlayOnInform = PlayOnInform.Text;
+                Properties.Settings.Default.NotificationFormHeight = int.Parse(NotificationFormHeight.Text);
+                Properties.Settings.Default.NotificationFormRightPosition = int.Parse(NotificationFormRightPosition.Text);
+                Properties.Settings.Default.AlertFormRightPosition = int.Parse(AlertFormRightPosition.Text);
             }
             catch (Exception ex)
             {
@@ -67,6 +72,11 @@ namespace Cliver.CisteraNotification
             ServicePort.Text = Properties.Settings.Default.ServicePort.ToString();
             ServiceName.Text = Properties.Settings.Default.ServiceName;
             UseWindowsUserAsServiceName.Checked = Properties.Settings.Default.UseWindowsUserAsServiceName;
+            PlayOnAlert.Text = Properties.Settings.Default.PlayOnAlert;
+            PlayOnInform.Text = Properties.Settings.Default.PlayOnInform;
+            NotificationFormHeight.Text = Properties.Settings.Default.NotificationFormHeight.ToString();
+            NotificationFormRightPosition.Text = Properties.Settings.Default.NotificationFormRightPosition.ToString();
+            AlertFormRightPosition.Text = Properties.Settings.Default.AlertFormRightPosition.ToString();
         }
 
         private void bReset_Click(object sender, EventArgs e)
@@ -84,6 +94,26 @@ namespace Cliver.CisteraNotification
                 ServiceName.Text = Environment.UserName;
             else
                 ServiceName.Text = Properties.Settings.Default.ServiceName;
+        }
+
+        private void bSelectPlayOnAlert_Click(object sender, EventArgs e)
+        {
+            PlayOnAlert.Text = get_sound_file();
+        }
+
+        private string get_sound_file()
+        {
+            OpenFileDialog d = new OpenFileDialog();
+            d.Title = "Pick an wav file";
+            d.Filter = "Filter sound files (*.wav)|*.wav|All files (*.*)|*.*";
+            if (d.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(d.FileName))
+                return null;
+            return d.FileName;
+        }
+
+        private void bSelectPlayOnInform_Click(object sender, EventArgs e)
+        {
+            PlayOnInform.Text = get_sound_file();
         }
     }
 }
