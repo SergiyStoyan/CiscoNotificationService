@@ -57,11 +57,15 @@ namespace Cliver.CisteraNotification
 
                 if (image_url != null)
                 {
-                    a.image.SizeMode = PictureBoxSizeMode.Zoom;
+                    //a.image.SizeMode = PictureBoxSizeMode.Zoom;
                     a.image.ImageLocation = image_url;
                 }
                 else
-                    a.image.Image = null;
+                {
+                    int ih = a.image.Height;
+                    a.Controls.Remove(a.image);
+                    a.Height -= ih;
+                }
 
                 //    Button b = new Button();
                 //    b.Size = a.bDismiss.Size;
@@ -114,6 +118,30 @@ namespace Cliver.CisteraNotification
                 a.BringToFront();
             });
             return a;
+        }
+
+        private void image_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            Size s = image.Size;
+            Size s2 = image.Image.Size;
+            Size fs2 = new Size(this.Width + s2.Width - s.Width, this.Height + s2.Height - s.Height);
+
+            if (fs2.Width < this.Width)
+                fs2.Width = this.Width;
+            if (fs2.Height < this.Height)
+                fs2.Height = this.Height;
+
+            double rw = 1;
+            if (fs2.Width > Screen.PrimaryScreen.WorkingArea.Width)
+                rw = Screen.PrimaryScreen.WorkingArea.Width / fs2.Width;
+            double rh = 1;
+            if (fs2.Height > Screen.PrimaryScreen.WorkingArea.Height)
+                rh = Screen.PrimaryScreen.WorkingArea.Height / fs2.Height;
+            double r = Math.Min(rw,rh);
+            if (r < 1)
+                fs2 = new Size((int)(fs2.Width * r), (int)(fs2.Height * r));
+
+            this.Size = fs2;
         }
 
         //Thread condensing_t = null;

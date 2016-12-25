@@ -36,7 +36,12 @@ namespace Cliver.CisteraNotification
                 image.ImageLocation = image_url;
             }
             else
-                image.Image = null;
+            {
+                int iw = image.Width;
+                Controls.Remove(image);
+                this.panel1.Left -= iw;
+                this.panel1.Width += iw;
+            }
             //image.Invalidate();
             if (action_name != null)
                 this.action.Text = action_name;

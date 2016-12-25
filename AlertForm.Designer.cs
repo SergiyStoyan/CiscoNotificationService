@@ -38,6 +38,8 @@
             // 
             // title
             // 
+            this.title.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.title.AutoSize = true;
             this.title.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.title.Location = new System.Drawing.Point(12, 9);
@@ -48,9 +50,10 @@
             // 
             // bDismiss
             // 
-            this.bDismiss.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bDismiss.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.bDismiss.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.bDismiss.Location = new System.Drawing.Point(12, 268);
+            this.bDismiss.Location = new System.Drawing.Point(12, 137);
             this.bDismiss.Name = "bDismiss";
             this.bDismiss.Size = new System.Drawing.Size(217, 23);
             this.bDismiss.TabIndex = 2;
@@ -59,6 +62,8 @@
             // 
             // message
             // 
+            this.message.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.message.Location = new System.Drawing.Point(12, 22);
             this.message.Name = "message";
             this.message.Size = new System.Drawing.Size(217, 38);
@@ -67,21 +72,25 @@
             // 
             // image
             // 
+            this.image.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.image.Image = ((System.Drawing.Image)(resources.GetObject("image.Image")));
             this.image.Location = new System.Drawing.Point(12, 63);
             this.image.Name = "image";
-            this.image.Size = new System.Drawing.Size(217, 199);
+            this.image.Size = new System.Drawing.Size(217, 68);
             this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.image.TabIndex = 4;
             this.image.TabStop = false;
+            this.image.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.image_LoadCompleted);
             // 
             // AlertForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(241, 303);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(241, 172);
             this.ControlBox = false;
             this.Controls.Add(this.image);
             this.Controls.Add(this.message);
