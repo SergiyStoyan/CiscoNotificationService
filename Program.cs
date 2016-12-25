@@ -31,7 +31,7 @@ namespace Cliver.CisteraNotification
                 Application.Exit();
             };
         }
-        
+
         [STAThread]
         public static void Main(string[] args)
         {
@@ -75,12 +75,20 @@ namespace Cliver.CisteraNotification
                 if (string.IsNullOrWhiteSpace(service_name))
                     service_name = "-UNKNOWN-";
                 HttpService.Start(service_name, Properties.Settings.Default.ServicePort);
-                BonjourService.Start(HttpService.Name, HttpService.Port);             
+                BonjourService.Start(HttpService.Name, HttpService.Port);
             }
             else
             {
                 BonjourService.Stop();
                 HttpService.Stop();
+            }
+        }
+
+        internal static bool IsServiceRunning
+        {
+            get
+            {
+                return BonjourService.Running && HttpService.Running;
             }
         }
     }

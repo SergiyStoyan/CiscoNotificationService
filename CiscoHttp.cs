@@ -91,7 +91,10 @@ namespace Cliver.CisteraNotification
                             string name = xn.SelectSingleNode("Name")?.InnerText;
                             string url = xn.SelectSingleNode("URL")?.InnerText;
                             string position = xn.SelectSingleNode("Position")?.InnerText;
-                            AlertForm.AddAlert(title, null, image_url, name, () => { Process.Start(url); });
+                            AlertForm.AddAlert(title, null, image_url, name, () => {
+                                if (url != null)
+                                    Process.Start(url);
+                            });
                         }
                         else
                         {

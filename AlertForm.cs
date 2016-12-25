@@ -17,7 +17,7 @@ namespace Cliver.CisteraNotification
         public AlertForm()
         {
             InitializeComponent();
-                        
+
             FormClosed += AlertForm_FormClosed;
         }
 
@@ -28,7 +28,7 @@ namespace Cliver.CisteraNotification
             lock (afs)
                 afs.Remove(this);
         }
-        
+
         public static AlertForm AddAlert(string title, string text, string image_url, string action_name, Action action)
         {
             //return (AlertForm)ControlRoutines.InvokeFromUiThread((Func<object>)(() =>
@@ -93,17 +93,23 @@ namespace Cliver.CisteraNotification
                 a.Opacity = 0.3;
                 a.Show();
                 //ControlRoutines.SlideVertically(a, 700, wa.Bottom - a.Height);
-                double centOpacityPerMss = 0.5;
-                double centOpacityPerMss2 = 100;
-                ControlRoutines.Condense(a, centOpacityPerMss, 1,()=> {
-                    ControlRoutines.Condense(a, centOpacityPerMss2, 0.3, () => {
-                        ControlRoutines.Condense(a, centOpacityPerMss, 1, () => {
-                            ControlRoutines.Condense(a, centOpacityPerMss2, 0.3, () => {
-                                ControlRoutines.Condense(a, centOpacityPerMss, 1);
+                double centOpacityPerMss = 0.7;
+                double centOpacityPerMss2 = 0.7;
+                double opacity2 = 0.3;
+                double delta = 0.2;
+                ControlRoutines.Condense(a, centOpacityPerMss, 1, delta, () =>
+                {
+                    ControlRoutines.Condense(a, centOpacityPerMss2, opacity2, delta, () =>
+                    {
+                        ControlRoutines.Condense(a, centOpacityPerMss, 1, delta, () =>
+                        {
+                            ControlRoutines.Condense(a, centOpacityPerMss2, opacity2, delta, () =>
+                            {
+                                ControlRoutines.Condense(a, centOpacityPerMss, 1, delta);
                             });
                         });
                     });
-                }); 
+                });
 
                 a.BringToFront();
             });

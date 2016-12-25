@@ -28,7 +28,6 @@ namespace Cliver.CisteraNotification
         static public void Start(string service_name, ushort port)
         {
             Stop();
-            t?.Join();
 
 #if DEBUG
             //Name = "*";//works in LAN
@@ -80,18 +79,25 @@ namespace Cliver.CisteraNotification
             { }
             catch (Exception e)
             {
-                if (e is System.Net.HttpListenerException && ((System.Net.HttpListenerException)e).NativeErrorCode == 5)
+                if (e is System.Net.HttpListenerException)
                 {
-                    if(!Message.YesNo("Http Service requires the application to run with Administartor's privileges.\r\nRestart?"))
-                        Environment.Exit(0);
+                    switch (((System.Net.HttpListenerException)e).NativeErrorCode)
+                    {
+                        case 5:
+                            if (!Message.YesNo("Http Service requires the application to run with Administartor's privileges.\r\nRestart?"))
+                                Environment.Exit(0);
 
-                    ProcessStartInfo psi = new ProcessStartInfo();
-                    psi.UseShellExecute = true;
-                    psi.WorkingDirectory = Environment.CurrentDirectory;
-                    psi.FileName = Application.ExecutablePath;
-                    psi.Verb = "runas";
-                    Process.Start(psi);
-                    Environment.Exit(0);
+                            ProcessStartInfo psi = new ProcessStartInfo();
+                            psi.UseShellExecute = true;
+                            psi.WorkingDirectory = Environment.CurrentDirectory;
+                            psi.FileName = Application.ExecutablePath;
+                            psi.Verb = "runas";
+                            Process.Start(psi);
+                            Environment.Exit(0);
+                            return;
+                        case 995:
+                            return;
+                    }
                 }
 
                 Message.Error("Http Service broken: " + e.Message);
@@ -117,9 +123,20 @@ namespace Cliver.CisteraNotification
                 listener.Close();
                 listener = null;
             }
-            if (t != null && t.IsAlive)
-                t.Abort();
-            t = null;
+            if (t != null)
+            {
+                if (t.IsAlive)
+                {
+                    t.Abort();
+                    t?.Join();
+                }
+                t = null;
+            }
+        }
+
+        public static bool Running
+        {
+            get { return listener != null; }
         }
 
         static private void request_handler(object _context)

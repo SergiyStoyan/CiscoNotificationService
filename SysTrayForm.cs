@@ -18,7 +18,7 @@ using System.Windows.Forms;
 
 namespace Cliver.CisteraNotification
 {
-    public partial class SysTray : BaseForm//Form //
+    public partial class SysTray : Form //BaseForm//
     {
         SysTray()
         {
@@ -63,6 +63,11 @@ namespace Cliver.CisteraNotification
             Properties.Settings.Default.Run = StartStop.Checked;
             Properties.Settings.Default.Save();
             Program.UpdateService();
+        }
+
+        private void RightClickMenu_Opening(object sender, CancelEventArgs e)
+        {
+            StartStop.Checked = Program.IsServiceRunning;
         }
     }
 }

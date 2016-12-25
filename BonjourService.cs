@@ -67,7 +67,7 @@ namespace Cliver.CisteraNotification
         {
             try
             {
-                if(!Properties.Settings.Default.Run)
+                if (!Properties.Settings.Default.Run)
                     return;
                 Stop();
                 Name = service_name;
@@ -79,7 +79,7 @@ namespace Cliver.CisteraNotification
                 if (null == service.Register(0, 0, Name, "_cisterarb._tcp", null, null, Port, null, eventManager))
                     throw new Exception("Register returned NULL.");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Message.Error("Bonjour Service is not available: " + e.Message);
                 Application.Exit();
@@ -100,7 +100,7 @@ namespace Cliver.CisteraNotification
         {
             Program.UpdateService();
         }
-        
+
         static DNSSDService service = null;
         static readonly DNSSDEventManager eventManager = null;
 
@@ -108,6 +108,11 @@ namespace Cliver.CisteraNotification
         {//when the app exiting, Bonjour service seems to be destroyed automatically
             service?.Stop();
             service = null;
+        }
+
+        public static bool Running
+        {
+            get { return service != null; }
         }
     }
 }

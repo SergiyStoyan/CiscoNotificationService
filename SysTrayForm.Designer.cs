@@ -33,10 +33,10 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.RightClickMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StartStop = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.StartStop = new System.Windows.Forms.ToolStripMenuItem();
             this.RightClickMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +59,7 @@
             this.exitToolStripMenuItem});
             this.RightClickMenu.Name = "Menu";
             this.RightClickMenu.Size = new System.Drawing.Size(153, 120);
+            this.RightClickMenu.Opening += new System.ComponentModel.CancelEventHandler(this.RightClickMenu_Opening);
             // 
             // settingsToolStripMenuItem
             // 
@@ -67,6 +68,14 @@
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // StartStop
+            // 
+            this.StartStop.CheckOnClick = true;
+            this.StartStop.Name = "StartStop";
+            this.StartStop.Size = new System.Drawing.Size(152, 22);
+            this.StartStop.Text = "Run On...";
+            this.StartStop.CheckedChanged += new System.EventHandler(this.StartStop_CheckedChanged);
             // 
             // aboutToolStripMenuItem
             // 
@@ -86,14 +95,6 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // StartStop
-            // 
-            this.StartStop.CheckOnClick = true;
-            this.StartStop.Name = "StartStop";
-            this.StartStop.Size = new System.Drawing.Size(152, 22);
-            this.StartStop.Text = "Run On...";
-            this.StartStop.CheckedChanged += new System.EventHandler(this.StartStop_CheckedChanged);
             // 
             // SysTray
             // 
