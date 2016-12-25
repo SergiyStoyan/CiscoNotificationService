@@ -65,6 +65,24 @@ $(document).ready(function() {
        </FORM>
          <FORM Method="POST">
 <TEXTAREA NAME="XML" Rows="7" Cols="80">
+<CiscoIPPhoneImageFile>
+  <Title>Image Title goes here</Title>
+  <Prompt>Prompt text goes here</Prompt>
+  <LocationX>100</LocationX>
+  <LocationY>200</LocationY>
+  <URL>image1.png</URL>
+   <SoftKeyItem>
+    <Name>Acknowledge</Name>
+    <URL></URL>
+    <Position>1</Position>
+   </SoftKeyItem>
+</CiscoIPPhoneImageFile>
+
+</TEXTAREA>
+         <input type=submit value=POST>
+       </FORM>
+         <FORM Method="POST">
+<TEXTAREA NAME="XML" Rows="7" Cols="80">
 <CiscoIPPhoneExecute>
 <ExecuteItem Priority="0" URL="Play:chime.raw"/>
 <ExecuteItem Priority="0" URL="http://google.com"/>
