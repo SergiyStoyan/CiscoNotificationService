@@ -83,9 +83,9 @@ namespace Cliver.CisteraNotification
                 Rectangle wa = Screen.GetWorkingArea(a);
                 a.DesktopLocation = new Point(wa.Right - a.Width - Properties.Settings.Default.AlertFormRightPosition, wa.Top);
 
-                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.PlayOnAlert))
+                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.AlertSound))
                 {
-                    SoundPlayer sp = new SoundPlayer(Properties.Settings.Default.PlayOnAlert);
+                    SoundPlayer sp = new SoundPlayer(Properties.Settings.Default.AlertSound);
                     sp.Play();
                 }
 

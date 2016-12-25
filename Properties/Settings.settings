@@ -14,20 +14,20 @@
     <Setting Name="Run" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="PlayOnAlert" Type="System.String" Scope="User">
+    <Setting Name="AlertSound" Type="System.String" Scope="User">
       <Value Profile="(Default)">alert.wav</Value>
     </Setting>
-    <Setting Name="PlayOnInform" Type="System.String" Scope="User">
+    <Setting Name="InformSound" Type="System.String" Scope="User">
       <Value Profile="(Default)">inform.wav</Value>
     </Setting>
     <Setting Name="NotificationFormWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="NotificationFormHeight" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">310</Value>
     </Setting>
     <Setting Name="NotificationFormRightPosition" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="AlertFormWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>

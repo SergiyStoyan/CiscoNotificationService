@@ -47,11 +47,8 @@ namespace Cliver.CisteraNotification
         {
             InitializeComponent();
 
-            max_height = Height;
-
             Height = 10;
         }
-        readonly int max_height = 0;
 
         public static void AddNotification(string title, string text, string image_url, string action_name, Action action)
         {
@@ -63,9 +60,9 @@ namespace Cliver.CisteraNotification
                 This.Controls.Add(c);
                 This.header.SendToBack();
 
-                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.PlayOnInform))
+                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.InformSound))
                 {
-                    SoundPlayer sp = new SoundPlayer(Properties.Settings.Default.PlayOnInform);
+                    SoundPlayer sp = new SoundPlayer(Properties.Settings.Default.InformSound);
                     sp.Play();
                 }
 
@@ -136,7 +133,7 @@ namespace Cliver.CisteraNotification
         void tune_height()
         {
             int b = Controls[0].Bottom;
-            if (ClientRectangle.Bottom < b && Height < max_height)
+            if (ClientRectangle.Bottom < b && Height < Properties.Settings.Default.NotificationFormHeight)
             {
                 int h = b - ClientRectangle.Bottom;
                 Height += h;

@@ -45,8 +45,8 @@ namespace Cliver.CisteraNotification
                     throw new Exception("Service Name cannot be empty.");
                 if (!UseWindowsUserAsServiceName.Checked)
                     Properties.Settings.Default.ServiceName = ServiceName.Text;
-                Properties.Settings.Default.PlayOnAlert = PlayOnAlert.Text;
-                Properties.Settings.Default.PlayOnInform = PlayOnInform.Text;
+                Properties.Settings.Default.AlertSound = AlertSound.Text;
+                Properties.Settings.Default.InformSound = InformSound.Text;
                 Properties.Settings.Default.NotificationFormHeight = int.Parse(NotificationFormHeight.Text);
                 Properties.Settings.Default.NotificationFormRightPosition = int.Parse(NotificationFormRightPosition.Text);
                 Properties.Settings.Default.AlertFormRightPosition = int.Parse(AlertFormRightPosition.Text);
@@ -72,8 +72,8 @@ namespace Cliver.CisteraNotification
             ServicePort.Text = Properties.Settings.Default.ServicePort.ToString();
             ServiceName.Text = Properties.Settings.Default.ServiceName;
             UseWindowsUserAsServiceName.Checked = Properties.Settings.Default.UseWindowsUserAsServiceName;
-            PlayOnAlert.Text = Properties.Settings.Default.PlayOnAlert;
-            PlayOnInform.Text = Properties.Settings.Default.PlayOnInform;
+            AlertSound.Text = Properties.Settings.Default.AlertSound;
+            InformSound.Text = Properties.Settings.Default.InformSound;
             NotificationFormHeight.Text = Properties.Settings.Default.NotificationFormHeight.ToString();
             NotificationFormRightPosition.Text = Properties.Settings.Default.NotificationFormRightPosition.ToString();
             AlertFormRightPosition.Text = Properties.Settings.Default.AlertFormRightPosition.ToString();
@@ -98,7 +98,7 @@ namespace Cliver.CisteraNotification
 
         private void bSelectPlayOnAlert_Click(object sender, EventArgs e)
         {
-            PlayOnAlert.Text = get_sound_file();
+            AlertSound.Text = get_sound_file();
         }
 
         private string get_sound_file()
@@ -113,7 +113,7 @@ namespace Cliver.CisteraNotification
 
         private void bSelectPlayOnInform_Click(object sender, EventArgs e)
         {
-            PlayOnInform.Text = get_sound_file();
+            InformSound.Text = get_sound_file();
         }
     }
 }

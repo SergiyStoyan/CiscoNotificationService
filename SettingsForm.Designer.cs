@@ -47,7 +47,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.NotificationFormHeight = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.PlayOnInform = new System.Windows.Forms.TextBox();
+            this.InformSound = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.NotificationFormWidth = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -57,7 +57,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.AlertFormHeight = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.PlayOnAlert = new System.Windows.Forms.TextBox();
+            this.AlertSound = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.AlertFormWidth = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
@@ -184,7 +184,7 @@
             this.tabPage2.Controls.Add(this.label5);
             this.tabPage2.Controls.Add(this.NotificationFormHeight);
             this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.PlayOnInform);
+            this.tabPage2.Controls.Add(this.InformSound);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.NotificationFormWidth);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -246,12 +246,12 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Width:";
             // 
-            // PlayOnInform
+            // InformSound
             // 
-            this.PlayOnInform.Location = new System.Drawing.Point(21, 30);
-            this.PlayOnInform.Name = "PlayOnInform";
-            this.PlayOnInform.Size = new System.Drawing.Size(354, 20);
-            this.PlayOnInform.TabIndex = 12;
+            this.InformSound.Location = new System.Drawing.Point(21, 30);
+            this.InformSound.Name = "InformSound";
+            this.InformSound.Size = new System.Drawing.Size(354, 20);
+            this.InformSound.TabIndex = 12;
             // 
             // label2
             // 
@@ -278,7 +278,7 @@
             this.tabPage3.Controls.Add(this.label8);
             this.tabPage3.Controls.Add(this.AlertFormHeight);
             this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.PlayOnAlert);
+            this.tabPage3.Controls.Add(this.AlertSound);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.AlertFormWidth);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -340,12 +340,12 @@
             this.label9.TabIndex = 21;
             this.label9.Text = "Width:";
             // 
-            // PlayOnAlert
+            // AlertSound
             // 
-            this.PlayOnAlert.Location = new System.Drawing.Point(20, 33);
-            this.PlayOnAlert.Name = "PlayOnAlert";
-            this.PlayOnAlert.Size = new System.Drawing.Size(354, 20);
-            this.PlayOnAlert.TabIndex = 20;
+            this.AlertSound.Location = new System.Drawing.Point(20, 33);
+            this.AlertSound.Name = "AlertSound";
+            this.AlertSound.Size = new System.Drawing.Size(354, 20);
+            this.AlertSound.TabIndex = 20;
             // 
             // label10
             // 
@@ -407,7 +407,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox PlayOnInform;
+        private System.Windows.Forms.TextBox InformSound;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox NotificationFormWidth;
         private System.Windows.Forms.TabPage tabPage3;
@@ -422,7 +422,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox AlertFormHeight;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox PlayOnAlert;
+        private System.Windows.Forms.TextBox AlertSound;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox AlertFormWidth;
     }

@@ -74,24 +74,24 @@ namespace Cliver.CisteraNotification.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("alert.wav")]
-        public string PlayOnAlert {
+        public string AlertSound {
             get {
-                return ((string)(this["PlayOnAlert"]));
+                return ((string)(this["AlertSound"]));
             }
             set {
-                this["PlayOnAlert"] = value;
+                this["AlertSound"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("inform.wav")]
-        public string PlayOnInform {
+        public string InformSound {
             get {
-                return ((string)(this["PlayOnInform"]));
+                return ((string)(this["InformSound"]));
             }
             set {
-                this["PlayOnInform"] = value;
+                this["InformSound"] = value;
             }
         }
         
@@ -109,7 +109,7 @@ namespace Cliver.CisteraNotification.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("310")]
         public int NotificationFormHeight {
             get {
                 return ((int)(this["NotificationFormHeight"]));
@@ -121,7 +121,7 @@ namespace Cliver.CisteraNotification.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
         public int NotificationFormRightPosition {
             get {
                 return ((int)(this["NotificationFormRightPosition"]));
