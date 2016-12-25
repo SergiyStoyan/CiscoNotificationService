@@ -19,8 +19,7 @@ namespace Cliver.CisteraNotification
             InitializeComponent();
 
             max_height = Height;
-
-            Disposed += AlertForm_Disposed;
+            
             FormClosed += AlertForm_FormClosed;
         }
 
@@ -28,12 +27,6 @@ namespace Cliver.CisteraNotification
         {
             lock (afs)
                 afs.Remove(this);
-        }
-
-        private void AlertForm_Disposed(object sender, EventArgs e)
-        {
-            //lock (afs)
-            //    afs.Remove(this);
         }
 
         readonly int max_height = 0;

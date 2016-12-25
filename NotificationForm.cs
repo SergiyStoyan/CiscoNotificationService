@@ -61,9 +61,9 @@ namespace Cliver.CisteraNotification
                 This.Controls.Add(c);
                 This.header.SendToBack();
 
-                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.PlayOnNotification))
+                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.PlayOnInform))
                 {
-                    SoundPlayer sp = new SoundPlayer(Properties.Settings.Default.PlayOnNotification);
+                    SoundPlayer sp = new SoundPlayer(Properties.Settings.Default.PlayOnInform);
                     sp.Play();
                 }
 

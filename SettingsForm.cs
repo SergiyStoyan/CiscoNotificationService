@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Cliver.CisteraNotification
 {
-    public partial class SettingsForm : BaseForm//Form //
+    public partial class SettingsForm :Form // BaseForm//
     {
         SettingsForm()
         {

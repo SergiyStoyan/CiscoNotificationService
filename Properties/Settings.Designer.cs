@@ -86,12 +86,84 @@ namespace Cliver.CisteraNotification.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PlayOnNotification {
+        public string PlayOnInform {
             get {
-                return ((string)(this["PlayOnNotification"]));
+                return ((string)(this["PlayOnInform"]));
             }
             set {
-                this["PlayOnNotification"] = value;
+                this["PlayOnInform"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int NotificationFormWidth {
+            get {
+                return ((int)(this["NotificationFormWidth"]));
+            }
+            set {
+                this["NotificationFormWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int NotificationFormHeight {
+            get {
+                return ((int)(this["NotificationFormHeight"]));
+            }
+            set {
+                this["NotificationFormHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int NotificationFormRightPosition {
+            get {
+                return ((int)(this["NotificationFormRightPosition"]));
+            }
+            set {
+                this["NotificationFormRightPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int AlertFormWidth {
+            get {
+                return ((int)(this["AlertFormWidth"]));
+            }
+            set {
+                this["AlertFormWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int AlertFormHeight {
+            get {
+                return ((int)(this["AlertFormHeight"]));
+            }
+            set {
+                this["AlertFormHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int AlertFormRightPosition {
+            get {
+                return ((int)(this["AlertFormRightPosition"]));
+            }
+            set {
+                this["AlertFormRightPosition"] = value;
             }
         }
     }
