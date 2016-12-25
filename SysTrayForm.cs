@@ -18,7 +18,7 @@ using System.Windows.Forms;
 
 namespace Cliver.CisteraNotification
 {
-    public partial class SysTray : Form //BaseForm//
+    public partial class SysTray : BaseForm// Form //
     {
         SysTray()
         {

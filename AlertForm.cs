@@ -132,7 +132,7 @@ namespace Cliver.CisteraNotification
                 fs2.Height = this.Height;
 
             double rw = 1;
-            if (fs2.Width > Screen.PrimaryScreen.WorkingArea.Width)
+            if (fs2.Width + Properties.Settings.Default.AlertFormRightPosition > Screen.PrimaryScreen.WorkingArea.Width)
                 rw = Screen.PrimaryScreen.WorkingArea.Width / fs2.Width;
             double rh = 1;
             if (fs2.Height > Screen.PrimaryScreen.WorkingArea.Height)
@@ -141,6 +141,7 @@ namespace Cliver.CisteraNotification
             if (r < 1)
                 fs2 = new Size((int)(fs2.Width * r), (int)(fs2.Height * r));
 
+            this.Left -= fs2.Width - this.Width;
             this.Size = fs2;
         }
 

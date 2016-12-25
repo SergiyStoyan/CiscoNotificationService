@@ -42,7 +42,6 @@ namespace Cliver.CisteraNotification
                 this.panel1.Left -= iw;
                 this.panel1.Width += iw;
             }
-            //image.Invalidate();
             if (action_name != null)
                 this.action.Text = action_name;
             this.action.Click += (object sender, EventArgs e) =>
