@@ -108,11 +108,33 @@ namespace Cliver.CisteraNotification
                         foreach (XmlNode xn in xd.DocumentElement.SelectNodes("ExecuteItem"))
                         {
                             string priority = xn.Attributes["Priority"]?.Value;
-                            string url = xn.Attributes["URL"]?.Value;
+                            string url = xn.Attributes["URL"]?.Value.Trim();
                             if (Regex.IsMatch(url, @"https?\:", RegexOptions.IgnoreCase))
+                            {
                                 Process.Start(url);
-                            else
-                                NotificationForm.AddNotification("Error", "URL is not supported: " + url, null, null, null);
+                                continue;
+                            }
+                            m = Regex.Match(url, @"(RTPRx|RTPMRx)\:(?'Ip'.*?)\:(?'Port'.*?)(\:(?'Volume '.*?))?");
+                            if (m.Success)
+                            {
+                                switch (RtpClient.Play(IPAddress.Parse(m.Groups["Ip"].Value), uint.Parse(m.Groups["Port"].Value), uint.Parse(m.Groups["Volume"].Value)))
+                                {
+                                    case RtpClient.Status.ACCEPTED:
+                                        break;
+                                    case RtpClient.Status.BUSY:
+                                        return get_CiscoIPPhoneError(Error.Parsing, "A stream is being received already.");
+                                    default:
+                                        throw new Exception("Unknown option.");
+                                }
+                                continue;
+                            }
+                            m = Regex.Match(url, @"(RTPRx|RTPMRx)\:Stop");
+                            if (m.Success)
+                            {
+                                RtpClient.Stop();
+                                continue;
+                            }
+                            NotificationForm.AddNotification("Error", "URL is not supported: " + url, null, null, null);
                         }
                     }
                     break;
