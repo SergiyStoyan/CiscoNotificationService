@@ -128,7 +128,7 @@ namespace Cliver.CisteraNotification
                                 }
                                 continue;
                             }
-                            m = Regex.Match(url, @"(RTPRx|RTPMRx)\:Stop");
+                            m = Regex.Match(url, @"RTPRx\:Stop");
                             if (m.Success)
                             {
                                 RtpClient.Stop();
