@@ -32,10 +32,9 @@ namespace Cliver.CisteraNotification
         static public String SoundDeviceName = "";
         readonly static public int SamplesPerSecond = 8000;//G.711
         readonly static public short BitsPerSample = 8;//G.711
-        static public short Channels = 1;
+        static public short Channels = 2;
         readonly static public Int32 PacketSize = 4096;
         static public Int32 BufferCount = 8;
-        // static public uint JitterBuffer = 20;
 
         static public Status Play(IPAddress ip, int port, uint? volume = null)
         {

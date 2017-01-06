@@ -114,7 +114,7 @@ namespace Cliver.CisteraNotification
                                 Process.Start(url);
                                 continue;
                             }
-                            m = Regex.Match(url, @"(?:RTPRx|RTPMRx)\:(?'Ip'.*?)\:(?'Port'.*?)(\:(?'Volume'.*?))?$");
+                            m = Regex.Match(url, @"(?'Type'RTPRx|RTPMRx)\:(?'Ip'.*?)\:(?'Port'.*?)(\:(?'Volume'.*?))?$");
                             if (m.Success)
                             {
                                 switch (RtpClient.Play(IPAddress.Parse(m.Groups["Ip"].Value), int.Parse(m.Groups["Port"].Value), uint.Parse(m.Groups["Volume"].Value)))
@@ -122,6 +122,7 @@ namespace Cliver.CisteraNotification
                                     case RtpClient.Status.ACCEPTED:
                                         break;
                                     case RtpClient.Status.BUSY:
+                                        NotificationForm.AddNotification("Error!", "A stream is being received already.", null, null, null);
                                         return get_CiscoIPPhoneError(Error.Parsing, "A stream is being received already.");
                                     default:
                                         throw new Exception("Unknown option.");

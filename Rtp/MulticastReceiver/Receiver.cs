@@ -6,8 +6,8 @@ using System.Net.Sockets;
 
 namespace NF
 {
-	public class Receiver
-	{
+    public class Receiver
+    {
         public static bool IsMulticast(IPAddress ip)
         {
             try
@@ -25,22 +25,22 @@ namespace NF
         }
 
         public Receiver(int bufferSize)
-		{
-			bytes = new Byte[bufferSize];
-		}
-        
-	protected	Socket socket;
-	protected	IPAddress ip;
-	protected	Int32 port;
-	protected	EndPoint endPoint;
-		Byte[] bytes;
-        
-		public delegate void DelegateDataReceived2(NF.Receiver mc, Byte[] bytes);
-		public delegate void DelegateDisconnected(string Reason);
-		public delegate void DelegateExceptionAppeared(Exception ex);
+        {
+            bytes = new Byte[bufferSize];
+        }
+
+        protected Socket socket;
+        protected IPAddress ip;
+        protected Int32 port;
+        protected EndPoint endPoint;
+        Byte[] bytes;
+
+        public delegate void DelegateDataReceived2(NF.Receiver mc, Byte[] bytes);
+        public delegate void DelegateDisconnected(string Reason);
+        public delegate void DelegateExceptionAppeared(Exception ex);
         public event DelegateDataReceived2 DataReceived2;
-		public event DelegateDisconnected Disconnected;
-        
+        public event DelegateDisconnected Disconnected;
+
         public bool Connected
         {
             get
@@ -75,21 +75,21 @@ namespace NF
         }
 
         protected void DoRead()
-		{
-			try
-			{
+        {
+            try
+            {
                 socket.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, new AsyncCallback(OnDataReceived), socket);
-			}
-			catch (Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
-		}
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
-		private void OnDataReceived(IAsyncResult ar)
-		{
-			try
-			{
+        private void OnDataReceived(IAsyncResult ar)
+        {
+            try
+            {
                 if (connected)
                 {
                     //Anzahl gelesener Bytes
@@ -127,28 +127,23 @@ namespace NF
                         socket.Close();
                     }
                 }
-			}
-			catch (Exception ex)
-			{
-				System.Diagnostics.Debug.WriteLine(String.Format("MulticastReceiver.cs | OnDataReceived() | {0}", ex.Message));
-				//Verbindung beenden
-				Disconnect();
-			}
-		}
-
-		public void Disconnect()
-		{
-			if (connected)
-			{
-				//Nicht mehr verbunden
-				connected = false;
-                //Kündige Mitgliedschaft in der Multicast Gruppe
-                socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.DropMembership, new MulticastOption(ip, IPAddress.Any));
-                //Verbindung beenden
-                socket.Close();
-                
-                Disconnected?.Invoke("Connection has been finished");
             }
-		}
-	}
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(String.Format("MulticastReceiver.cs | OnDataReceived() | {0}", ex.Message));
+                //Verbindung beenden
+                Disconnect();
+            }
+        }
+
+        public void Disconnect()
+        {
+            if (connected)
+            {
+                socket.Close();
+                Disconnected?.Invoke("Connection has been finished");
+                connected = false;
+            }
+        }
+    }
 }
