@@ -114,10 +114,10 @@ namespace Cliver.CisteraNotification
                                 Process.Start(url);
                                 continue;
                             }
-                            m = Regex.Match(url, @"(RTPRx|RTPMRx)\:(?'Ip'.*?)\:(?'Port'.*?)(\:(?'Volume '.*?))?");
+                            m = Regex.Match(url, @"(?:RTPRx|RTPMRx)\:(?'Ip'.*?)\:(?'Port'.*?)(\:(?'Volume'.*?))?$");
                             if (m.Success)
                             {
-                                switch (RtpClient.Play(IPAddress.Parse(m.Groups["Ip"].Value), uint.Parse(m.Groups["Port"].Value), uint.Parse(m.Groups["Volume"].Value)))
+                                switch (RtpClient.Play(IPAddress.Parse(m.Groups["Ip"].Value), int.Parse(m.Groups["Port"].Value), uint.Parse(m.Groups["Volume"].Value)))
                                 {
                                     case RtpClient.Status.ACCEPTED:
                                         break;

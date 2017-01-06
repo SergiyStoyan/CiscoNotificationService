@@ -84,8 +84,27 @@ $(document).ready(function() {
          <FORM Method="POST">
 <TEXTAREA NAME="XML" Rows="7" Cols="80">
 <CiscoIPPhoneExecute>
-<ExecuteItem Priority="0" URL="Play:chime.raw"/>
-<ExecuteItem Priority="0" URL="http://google.com"/>
+ 	<ExecuteItem URL="RTPRx:224.0.0.1:20700:3"/>
+</CiscoIPPhoneExecute>
+</TEXTAREA>
+
+</TEXTAREA>
+         <input type=submit value=POST>
+       </FORM>
+         <FORM Method="POST">
+<TEXTAREA NAME="XML" Rows="7" Cols="80">
+<CiscoIPPhoneExecute>
+ 	<ExecuteItem URL="RTPMRx:224.0.0.1:20700:3"/>
+</CiscoIPPhoneExecute>
+</TEXTAREA>
+
+</TEXTAREA>
+         <input type=submit value=POST>
+       </FORM>
+         <FORM Method="POST">
+<TEXTAREA NAME="XML" Rows="7" Cols="80">
+<CiscoIPPhoneExecute>
+	<ExecuteItem URL="RTPRx:Stop"/>
 </CiscoIPPhoneExecute>
 </TEXTAREA>
          <input type=submit value=POST>

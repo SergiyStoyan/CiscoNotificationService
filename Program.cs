@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace Cliver.CisteraNotification
 {

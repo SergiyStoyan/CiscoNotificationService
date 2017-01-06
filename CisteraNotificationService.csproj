@@ -58,67 +58,25 @@
   <PropertyGroup>
     <ApplicationIcon>Finger.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Media, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Codec, Version=1.0.7.41643, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Codec.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Codecs.Image, Version=1.0.7.41646, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Codecs.Image.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Codecs.Video.H264, Version=1.0.7.41646, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Codecs.Video.H264.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Common, Version=1.0.7.41642, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Compression, Version=1.0.7.41643, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Compression.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Container, Version=1.0.7.41643, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Container.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Containers.Mpeg, Version=1.0.7.41645, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Containers.Mpeg.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Ntp, Version=1.0.7.41643, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Ntp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Rtmp, Version=1.0.7.41644, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Rtmp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Rtp, Version=1.0.7.41643, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Rtp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.RtpTools, Version=1.0.7.41644, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.RtpTools.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Rtsp, Version=1.0.7.41644, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Rtsp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.RtspServer, Version=1.0.7.41647, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.RtspServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Media.Sdp, Version=1.0.7.41643, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\net7mma.0.111192.1\lib\net452\Media.Sdp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -130,10 +88,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Windows.Data" />
-    <Reference Include="Windows.Foundation" />
-    <Reference Include="Windows.UI" />
-    <Reference Include="System.Runtime" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutForm.cs">
@@ -223,7 +177,6 @@
       <DependentUpon>SysTrayForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -256,6 +209,14 @@
     <ProjectReference Include="..\..\..\CLIVER\CliverBot\CliverRoutines\CliverRoutines.csproj">
       <Project>{aca94788-bed1-4b8e-94ef-e54293e8d139}</Project>
       <Name>CliverRoutines</Name>
+    </ProjectReference>
+    <ProjectReference Include="Rtp\MulticastReceiver\MulticastReceiver.csproj">
+      <Project>{9faa6285-1815-441f-afb5-e2b31199002f}</Project>
+      <Name>MulticastReceiver</Name>
+    </ProjectReference>
+    <ProjectReference Include="Rtp\WinSound\WinSound.csproj">
+      <Project>{28120d29-4f6e-4c3b-ab6a-900a26420b9c}</Project>
+      <Name>WinSound</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

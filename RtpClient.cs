@@ -29,14 +29,73 @@ namespace Cliver.CisteraNotification
         {
         }
 
-        static public Status Play(IPAddress ip, uint port, uint? volume = null)
+        static public String SoundDeviceName = "";
+        readonly static public int SamplesPerSecond = 8000;//G.711
+        readonly static public short BitsPerSample = 8;//G.711
+        static public short Channels = 1;
+        readonly static public Int32 PacketSize = 4096;
+        static public Int32 BufferCount = 8;
+        // static public uint JitterBuffer = 20;
+
+        static public Status Play(IPAddress ip, int port, uint? volume = null)
         {
-            //Media.Rtp.RtpClient rc = new Media.Rtp.RtpClient()
-            return Status.BUSY;
+            if (player.Opened)
+                return Status.BUSY;
+
+            receiver = new NF.Receiver(PacketSize);
+            receiver.DataReceived2 += new NF.Receiver.DelegateDataReceived2(OnDataReceived);
+            receiver.Disconnected += new NF.Receiver.DelegateDisconnected(OnDisconnected);
+            receiver.Connect(ip, port);
+
+            player.Open(SoundDeviceName, SamplesPerSecond, BitsPerSample, Channels, BufferCount);
+            return Status.ACCEPTED;
+        }
+        readonly static WinSound.Player player = new WinSound.Player();
+        static NF.Receiver receiver = null;
+
+        static private void OnDataReceived(NF.Receiver mc, Byte[] bytes)
+        {
+            try
+            {
+                WinSound.RTPPacket rtp = new WinSound.RTPPacket(bytes);
+                if (rtp.Data != null)
+                {
+                    Byte[] linearBytes = WinSound.Utils.MuLawToLinear(rtp.Data, BitsPerSample, Channels);
+                    player.PlayData(linearBytes, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(String.Format("FormMain.cs | OnDataReceived() | {0}", ex.Message));
+            }
+        }
+
+        static private void OnDisconnected(string reason)
+        {
+            try
+            {
+                player.Close();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(String.Format("FormMain.cs | OnDisconnected() | {0}", ex.Message));
+            }
         }
 
         static public void Stop()
         {
+            if (receiver != null)
+            {
+                receiver.Disconnect();
+                receiver.DataReceived2 -= new NF.Receiver.DelegateDataReceived2(OnDataReceived);
+                receiver.Disconnected -= new NF.Receiver.DelegateDisconnected(OnDisconnected);
+                receiver = null;
+            }
+            if (player != null)
+            {
+                player.Close();
+                //player = null;
+            }
         }
 
         public enum Status
