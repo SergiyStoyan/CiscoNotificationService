@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CliverRoutines", "..\..\..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinSound", "Rtp\WinSound\WinSound.csproj", "{28120D29-4F6E-4C3B-AB6A-900A26420B9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MulticastReceiver", "Rtp\MulticastReceiver\MulticastReceiver.csproj", "{9FAA6285-1815-441F-AFB5-E2B31199002F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Receiver", "Rtp\Receiver\Receiver.csproj", "{9FAA6285-1815-441F-AFB5-E2B31199002F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -210,9 +210,9 @@
       <Project>{aca94788-bed1-4b8e-94ef-e54293e8d139}</Project>
       <Name>CliverRoutines</Name>
     </ProjectReference>
-    <ProjectReference Include="Rtp\MulticastReceiver\MulticastReceiver.csproj">
+    <ProjectReference Include="Rtp\Receiver\Receiver.csproj">
       <Project>{9faa6285-1815-441f-afb5-e2b31199002f}</Project>
-      <Name>MulticastReceiver</Name>
+      <Name>Receiver</Name>
     </ProjectReference>
     <ProjectReference Include="Rtp\WinSound\WinSound.csproj">
       <Project>{28120d29-4f6e-4c3b-ab6a-900a26420b9c}</Project>
