@@ -39,7 +39,7 @@ namespace WinSound
         private Win32.DelegateWaveOutProc delegateWaveOutProc;
         private System.Threading.Thread ThreadPlayWaveOut;
         private System.Threading.AutoResetEvent AutoResetEventDataPlayed = new System.Threading.AutoResetEvent(false);
-        private uint Volume = 0;
+        private uint? Volume = null;
 
         //Delegates bzw. Events
         public delegate void DelegateStopped();
@@ -286,7 +286,8 @@ namespace WinSound
                         return false;
                     }
 
-                    Win32.waveOutSetVolume(hWaveOut, Volume);
+                    if (Volume != null)
+                        Win32.waveOutSetVolume(hWaveOut, (uint)Volume);
 
                     //Handle sperren
                     GCHandle.Alloc(hWaveOut, GCHandleType.Pinned);
@@ -307,7 +308,7 @@ namespace WinSound
         /// <param name="bufferCount"></param>
         /// <param name="volume255">A value of 0xFFFF represents full volume, and a value of 0x0000 is silence.</param>
         /// <returns></returns>
-        public bool Open(string waveOutDeviceName, int samplesPerSecond, int bitsPerSample, int channels, int bufferCount, uint volumeFFFF)
+        public bool Open(string waveOutDeviceName, int samplesPerSecond, int bitsPerSample, int channels, int bufferCount, uint? volumeFFFF)
         {
             try
             {

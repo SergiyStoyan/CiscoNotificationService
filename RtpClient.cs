@@ -53,7 +53,14 @@ namespace Cliver.CisteraNotification
             receiver.Disconnected += new NF.Receiver.DelegateDisconnected(OnDisconnected);
             receiver.Connect(ip, port);
 
-            player.Open(SoundDeviceName, SamplesPerSecond, BitsPerSample, Channels, BufferCount, (uint)((float)volume100 / 100 * 0xFFFF));
+            uint? v = null;
+            if (volume100 != null)
+            {
+                if (volume100 > 100)
+                    volume100 = 100;
+                v = (uint)((float)volume100 / 100 * 0xFFFF);
+            }
+            player.Open(SoundDeviceName, SamplesPerSecond, BitsPerSample, Channels, BufferCount, v);
             return Status.ACCEPTED;
         }
         readonly static WinSound.Player player = new WinSound.Player();
