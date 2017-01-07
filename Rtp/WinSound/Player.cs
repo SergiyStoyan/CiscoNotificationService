@@ -16,7 +16,6 @@ namespace WinSound
         /// </summary>
         public Player()
         {
-
             delegateWaveOutProc = new Win32.DelegateWaveOutProc(waveOutProc);
         }
 
@@ -426,12 +425,14 @@ namespace WinSound
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public bool PlayFile(string fileName, string waveOutDeviceName)
+        public bool PlayFile(string fileName, string waveOutDeviceName, uint volumeFFFF)
         {
             lock (Locker)
             {
                 try
                 {
+                    Volume = volumeFFFF;
+
                     //WaveFile auslesen
                     WaveFileHeader header = WaveFile.Read(fileName);
 
