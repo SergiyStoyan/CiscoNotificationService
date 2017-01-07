@@ -244,7 +244,10 @@ namespace WinSound
 		[DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Auto)]
 		public static extern MMRESULT waveOutOpen(ref IntPtr hWaveOut, int uDeviceID, ref WAVEFORMATEX lpFormat, DelegateWaveOutProc dwCallBack, int dwInstance, int dwFlags);
 
-		[DllImport("winmm.dll")]
+        [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int waveOutSetVolume(IntPtr hWaveOut, uint dwVolume);
+
+        [DllImport("winmm.dll")]
 		public static extern MMRESULT waveInOpen(ref IntPtr hWaveIn, int deviceId, ref WAVEFORMATEX wfx, DelegateWaveInProc dwCallBack, int dwInstance, int dwFlags);
 
 		[DllImport("winmm.dll", SetLastError = true, EntryPoint = "waveInOpen")]

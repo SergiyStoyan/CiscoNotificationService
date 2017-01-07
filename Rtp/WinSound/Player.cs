@@ -40,6 +40,7 @@ namespace WinSound
         private Win32.DelegateWaveOutProc delegateWaveOutProc;
         private System.Threading.Thread ThreadPlayWaveOut;
         private System.Threading.AutoResetEvent AutoResetEventDataPlayed = new System.Threading.AutoResetEvent(false);
+        private uint Volume = 0;
 
         //Delegates bzw. Events
         public delegate void DelegateStopped();
@@ -278,13 +279,15 @@ namespace WinSound
                     int deviceId = WinSound.GetWaveOutDeviceIdByName(WaveOutDeviceName);
                     //WaveIn Gerät öffnen
                     Win32.MMRESULT hr = Win32.waveOutOpen(ref hWaveOut, deviceId, ref waveFormatEx, delegateWaveOutProc, 0, (int)Win32.WaveProcFlags.CALLBACK_FUNCTION);
-
+                    
                     //Wenn nicht erfolgreich
                     if (hr != Win32.MMRESULT.MMSYSERR_NOERROR)
                     {
                         IsWaveOutOpened = false;
                         return false;
                     }
+
+                    Win32.waveOutSetVolume(hWaveOut, Volume);
 
                     //Handle sperren
                     GCHandle.Alloc(hWaveOut, GCHandleType.Pinned);
@@ -294,16 +297,18 @@ namespace WinSound
             IsWaveOutOpened = true;
             return true;
         }
+
         /// <summary>
-        ///Open
+        /// 
         /// </summary>
-        /// <param name="waveInDeviceName"></param>
         /// <param name="waveOutDeviceName"></param>
         /// <param name="samplesPerSecond"></param>
         /// <param name="bitsPerSample"></param>
         /// <param name="channels"></param>
+        /// <param name="bufferCount"></param>
+        /// <param name="volume255">A value of 0xFFFF represents full volume, and a value of 0x0000 is silence.</param>
         /// <returns></returns>
-        public bool Open(string waveOutDeviceName, int samplesPerSecond, int bitsPerSample, int channels, int bufferCount)
+        public bool Open(string waveOutDeviceName, int samplesPerSecond, int bitsPerSample, int channels, int bufferCount, uint volumeFFFF)
         {
             try
             {
@@ -312,13 +317,13 @@ namespace WinSound
                     //Wenn nicht schon geöffnet
                     if (Opened == false)
                     {
-
                         //Daten übernehmen
                         WaveOutDeviceName = waveOutDeviceName;
                         SamplesPerSecond = samplesPerSecond;
                         BitsPerSample = bitsPerSample;
                         Channels = channels;
                         BufferCount = Math.Max(bufferCount, 1);
+                        Volume = volumeFFFF;
 
                         //Wenn WaveOut geöffnet werden konnte
                         if (OpenWaveOut())
@@ -434,7 +439,7 @@ namespace WinSound
                     if (header.Payload.Length > 0)
                     {
                         //Wenn geöffnet
-                        if (Open(waveOutDeviceName, (int)header.SamplesPerSecond, (int)header.BitsPerSample, (int)header.Channels, 8))
+                        if (Open(waveOutDeviceName, (int)header.SamplesPerSecond, (int)header.BitsPerSample, (int)header.Channels, 8, Volume))
                         {
                             int index = GetNextFreeWaveOutHeaderIndex();
                             if (index != -1)

@@ -135,6 +135,14 @@ namespace Cliver.CisteraNotification
                                 RtpClient.Stop();
                                 continue;
                             }
+                            m = Regex.Match(url, @"Play\:(?'File'.*)");
+                            if (m.Success)
+                            {
+
+
+
+                                continue;
+                            }
                             NotificationForm.AddNotification("Error", "URL is not supported: " + url, null, null, null);
                         }
                     }

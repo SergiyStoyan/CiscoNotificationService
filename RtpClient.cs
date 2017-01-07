@@ -36,7 +36,14 @@ namespace Cliver.CisteraNotification
         readonly static public Int32 PacketSize = 4096;
         static public Int32 BufferCount = 8;
 
-        static public Status Play(IPAddress ip, int port, uint? volume = null)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ip"></param>
+        /// <param name="port"></param>
+        /// <param name="volume">The supplied value is a percentage of the maximum volume level of the device and must be in the range 0-100.</param>
+        /// <returns></returns>
+        static public Status Play(IPAddress ip, int port, uint? volume100 = null)
         {
             if (player.Opened)
                 return Status.BUSY;
@@ -46,7 +53,7 @@ namespace Cliver.CisteraNotification
             receiver.Disconnected += new NF.Receiver.DelegateDisconnected(OnDisconnected);
             receiver.Connect(ip, port);
 
-            player.Open(SoundDeviceName, SamplesPerSecond, BitsPerSample, Channels, BufferCount);
+            player.Open(SoundDeviceName, SamplesPerSecond, BitsPerSample, Channels, BufferCount, (uint)((float)volume100 / 100 * 0xFFFF));
             return Status.ACCEPTED;
         }
         readonly static WinSound.Player player = new WinSound.Player();

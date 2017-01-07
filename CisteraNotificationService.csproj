@@ -88,6 +88,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tftp.Net">
+      <HintPath>Tftp\Tftp.Net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutForm.cs">
@@ -123,6 +126,7 @@
     </Compile>
     <Compile Include="CiscoHttp.cs" />
     <Compile Include="HttpService.cs" />
+    <Compile Include="TftpClient.cs" />
     <Compile Include="UserNameListener.cs" />
     <Compile Include="BonjourService.cs" />
     <Compile Include="Program.cs" />
