@@ -88,9 +88,6 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tftp.Net">
-      <HintPath>Tftp\Tftp.Net.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutForm.cs">
@@ -221,6 +218,10 @@
     <ProjectReference Include="Rtp\WinSound\WinSound.csproj">
       <Project>{28120d29-4f6e-4c3b-ab6a-900a26420b9c}</Project>
       <Name>WinSound</Name>
+    </ProjectReference>
+    <ProjectReference Include="Tftp\Tftp.Net.csproj">
+      <Project>{a3f0de15-ac97-428d-830c-4f9721ee3627}</Project>
+      <Name>Tftp.Net</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
