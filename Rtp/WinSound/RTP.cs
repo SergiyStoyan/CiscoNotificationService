@@ -22,9 +22,9 @@ namespace WinSound
 		/// Konstuktor
 		/// </summary>
 		/// <param name="_data"></param>
-		public RTPPacket(byte[] data)
+		public RTPPacket(byte[] data, int size)
 		{
-			Parse(data);
+			Parse(data, size);
 		}
 
 		//Attribute
@@ -48,9 +48,9 @@ namespace WinSound
 		/// Parse
 		/// </summary>
 		/// <param name="linearData"></param>
-		private void Parse(Byte[] data)
+		private void Parse(Byte[] data, int size)
 		{
-			if (data.Length >= MinHeaderLength)
+			if (size >= MinHeaderLength)
 			{
 				Version = ValueFromByte(data[0], 6, 2);
 				Padding = Convert.ToBoolean(ValueFromByte(data[0], 5, 1));
@@ -103,8 +103,8 @@ namespace WinSound
 				}
 
 				//Daten kopieren
-				Data = new Byte[data.Length - HeaderLength];
-				Array.Copy(data, HeaderLength, this.Data, 0, data.Length - HeaderLength);
+				Data = new Byte[size - HeaderLength];
+				Array.Copy(data, HeaderLength, this.Data, 0, size - HeaderLength);
 			}
 		}
 		/// <summary>

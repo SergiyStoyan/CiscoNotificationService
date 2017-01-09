@@ -29,16 +29,16 @@ namespace NF
             bytes = new Byte[bufferSize];
         }
 
-        protected Socket socket;
+        protected Socket socket = null;
         protected IPAddress ip;
         protected Int32 port;
         protected EndPoint endPoint;
         Byte[] bytes;
 
-        public delegate void DelegateDataReceived2(NF.Receiver mc, Byte[] bytes);
+        public delegate void DelegateDataReceived(NF.Receiver mc, Byte[] bytes, int size);
         public delegate void DelegateDisconnected(string Reason);
         public delegate void DelegateExceptionAppeared(Exception ex);
-        public event DelegateDataReceived2 DataReceived2;
+        public event DelegateDataReceived DataReceived;
         public event DelegateDisconnected Disconnected;
 
         public bool Connected
@@ -61,88 +61,52 @@ namespace NF
 
         public void Connect(IPAddress ip, int port)
         {
-            multicast = IsMulticast(ip);
             this.ip = ip;
             this.port = port;
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
-            endPoint = new IPEndPoint(IPAddress.Any, port);
-            socket.Bind(endPoint);
+            multicast = IsMulticast(ip);
             if (multicast)
+            {
+                endPoint = new IPEndPoint(IPAddress.Any, port);
+                socket.Bind(endPoint);
                 socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, new MulticastOption(ip, IPAddress.Any));
-            connected = true;
-            DoRead();
+            }
+            else
+            {
+                endPoint = new IPEndPoint(ip, port);
+                socket.Bind(endPoint);
+            }
+            socket.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, new AsyncCallback(received), socket);
         }
 
-        protected void DoRead()
+        private void received(IAsyncResult ar)
         {
             try
             {
-                socket.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, new AsyncCallback(OnDataReceived), socket);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        private void OnDataReceived(IAsyncResult ar)
-        {
-            try
-            {
-                if (connected)
+                int size = socket.EndReceive(ar);                
+                if (size > 0)
                 {
-                    //Anzahl gelesener Bytes
-                    int read = socket.EndReceive(ar);
-
-                    //Wenn Daten vorhanden
-                    if (read > 0)
-                    {
-                        //Wenn das Event verwendet wird
-                        if (this.DataReceived2 != null)
-                        {
-                            //Wenn gelesene Bytes und Datengrösse übereinstimmen
-                            if (read == bytes.Length)
-                            {
-                                //Event abschicken
-                                this.DataReceived2(this, bytes);
-                            }
-                            else
-                            {
-                                //Nur den gelesenen Teil übermitteln
-                                Byte[] readed = new Byte[read];
-                                Array.Copy(bytes, readed, read);
-
-                                //Event abschicken
-                                this.DataReceived2(this, readed);
-                            }
-                        }
-
-                        //Weiterlesen
-                        socket.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, new AsyncCallback(OnDataReceived), null);
-                    }
-                    else
-                    {
-                        //Verbindung beendet
-                        socket.Close();
-                    }
+                    DataReceived?.Invoke(this, bytes, size);
+                    socket.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, new AsyncCallback(received), null);
                 }
+                else
+                    socket.Close();
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(String.Format("MulticastReceiver.cs | OnDataReceived() | {0}", ex.Message));
-                //Verbindung beenden
-                Disconnect();
+                Disconnect();                
             }
         }
 
         public void Disconnect()
         {
-            if (connected)
+            if (socket != null)
             {
                 socket.Close();
+                socket = null;
                 Disconnected?.Invoke("Connection has been finished");
-                connected = false;
             }
         }
     }
