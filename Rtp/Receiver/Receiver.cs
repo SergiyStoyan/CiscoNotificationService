@@ -65,17 +65,11 @@ namespace NF
             this.port = port;
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, 1);
+            socket.Bind(new IPEndPoint(IPAddress.Any, port));
             multicast = IsMulticast(ip);
             if (multicast)
             {
-                endPoint = new IPEndPoint(IPAddress.Any, port);
-                socket.Bind(endPoint);
                 socket.SetSocketOption(SocketOptionLevel.IP, SocketOptionName.AddMembership, new MulticastOption(ip, IPAddress.Any));
-            }
-            else
-            {
-                endPoint = new IPEndPoint(ip, port);
-                socket.Bind(endPoint);
             }
             socket.BeginReceive(bytes, 0, bytes.Length, SocketFlags.None, new AsyncCallback(received), socket);
         }

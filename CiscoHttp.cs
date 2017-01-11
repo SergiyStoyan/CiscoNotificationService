@@ -117,11 +117,11 @@ namespace Cliver.CisteraNotification
                             m = Regex.Match(url, @"(?'Type'RTPRx|RTPMRx)\:(?'Ip'.*?)\:(?'Port'.*?)(\:(?'Volume'.*?))?$");
                             if (m.Success)
                             {
-                                switch (RtpClient.Play(IPAddress.Parse(m.Groups["Ip"].Value), int.Parse(m.Groups["Port"].Value), uint.Parse(m.Groups["Volume"].Value)))
+                                switch (Rtp.Play(m.Groups["Type"].Value == "RTPMRx", IPAddress.Parse(m.Groups["Ip"].Value), int.Parse(m.Groups["Port"].Value), uint.Parse(m.Groups["Volume"].Value)))
                                 {
-                                    case RtpClient.Status.ACCEPTED:
+                                    case Rtp.Status.ACCEPTED:
                                         break;
-                                    case RtpClient.Status.BUSY:
+                                    case Rtp.Status.BUSY:
                                         NotificationForm.AddNotification("Error!", "A stream is being received already.", null, null, null);
                                         return get_CiscoIPPhoneError(Error.Parsing, "A stream is being received already.");
                                     default:
@@ -132,7 +132,7 @@ namespace Cliver.CisteraNotification
                             m = Regex.Match(url, @"RTPRx\:Stop");
                             if (m.Success)
                             {
-                                RtpClient.Stop();
+                                Rtp.Stop();
                                 continue;
                             }
                             m = Regex.Match(url, @"Play\:(?'File'.*)");

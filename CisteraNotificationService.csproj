@@ -102,7 +102,7 @@
     <Compile Include="BrowserForm.Designer.cs">
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="RtpClient.cs" />
+    <Compile Include="Rtp.cs" />
     <Compile Include="NotificationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -210,6 +210,10 @@
     <ProjectReference Include="..\..\..\CLIVER\CliverBot\CliverRoutines\CliverRoutines.csproj">
       <Project>{aca94788-bed1-4b8e-94ef-e54293e8d139}</Project>
       <Name>CliverRoutines</Name>
+    </ProjectReference>
+    <ProjectReference Include="Rtp\Lumisoft.Net.Rtp\Net\Net.csproj">
+      <Project>{7ab36ccf-5ffd-4780-a54e-a102eca028b5}</Project>
+      <Name>Net</Name>
     </ProjectReference>
     <ProjectReference Include="Rtp\Receiver\Receiver.csproj">
       <Project>{9faa6285-1815-441f-afb5-e2b31199002f}</Project>
