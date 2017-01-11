@@ -175,22 +175,6 @@ namespace LumiSoft.Net.RTP
             return session;
         }
 
-        public static bool IsMulticast(IPAddress ip)
-        {
-            try
-            {
-                byte[] bs = ip.GetAddressBytes();
-                if (bs[0] >= 224 && bs[0] <= 239)
-                    return true;
-            }
-            catch (Exception ex)
-            {
-                string str = ex.Message;
-            }
-
-            return false;
-        }
-
         #endregion
 
 

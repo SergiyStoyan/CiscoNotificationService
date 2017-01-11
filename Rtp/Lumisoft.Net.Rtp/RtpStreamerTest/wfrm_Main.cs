@@ -324,10 +324,10 @@ namespace Rtp_Audio_Demo
                 string ip = "127.0.0.1";
                 int port = 1100;
                 int remote_port = 20700;
-                RTP_Session session = m_pRtpSession.CreateSession(new RTP_Address(IPAddress.Parse(ip), port, port + 1), new RTP_Clock(0, 8000));
-                session.AddTarget(new RTP_Address(IPAddress.Parse("127.0.0.1"), remote_port, remote_port + 1));
-                //RTP_Session session = m_pRtpSession.CreateMulticastSession(new RTP_Clock(0, 8000));
-                //session.AddTarget(new RTP_Address(IPAddress.Parse("224.0.0.1"), remote_port, remote_port + 1));
+                //RTP_Session session = m_pRtpSession.CreateSession(new RTP_Address(IPAddress.Parse(ip), port, port + 1), new RTP_Clock(0, 8000));
+                //session.AddTarget(new RTP_Address(IPAddress.Parse("127.0.0.1"), remote_port, remote_port + 1));
+                RTP_Session session = m_pRtpSession.CreateMulticastSession(new RTP_Clock(0, 8000));
+                session.AddTarget(new RTP_Address(IPAddress.Parse("224.0.0.1"), remote_port, remote_port + 1));
                 session.Payload = 0;
                 session.Start();
 

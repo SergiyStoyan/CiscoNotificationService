@@ -65,10 +65,10 @@ namespace Cliver.CisteraNotification
             //    v = (uint)((float)volume100 / 100 * 0xFFFF);
             //}
             //player.Open(SoundDeviceName, SamplesPerSecond, BitsPerSample, Channels, BufferCount, v);
-
+            Rtp.source_ip = source_ip;
             sesson = new RTP_MultimediaSession(RTP_Utils.GenerateCNAME());
             if(multicast)
-                sesson.CreateMulticastSession(new RTP_Clock(0, SamplesPerSecond));
+                sesson.CreateMulticastSession(new RTP_Clock(0, SamplesPerSecond), new RTP_Address(source_ip, port, port + 1));
             else
                 sesson.CreateSession(new RTP_Address(IPAddress.Any, port, port + 1), new RTP_Clock(0, SamplesPerSecond));
             sesson.Sessions[0].NewReceiveStream += new EventHandler<RTP_ReceiveStreamEventArgs>(m_pRtpSession_NewReceiveStream);
@@ -79,6 +79,7 @@ namespace Cliver.CisteraNotification
         }
         static int payload = 0;//8;
         static RTP_MultimediaSession sesson = null;
+        static IPAddress source_ip = null;
 
         static private void m_pRtpSession_NewReceiveStream(object sender, RTP_ReceiveStreamEventArgs e)
         {
