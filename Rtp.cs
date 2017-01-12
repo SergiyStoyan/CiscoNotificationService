@@ -75,7 +75,7 @@ namespace Cliver.CisteraNotification
                     ao = new AudioOut_RTP(
                         device,
                        e.Stream,
-                        new Dictionary<int, AudioCodec> { { payload, new PCMA() } }
+                        new Dictionary<int, AudioCodec> { { payload, new PCMU() } }
                         );
                     ao.Start(volume100);
                     break;
