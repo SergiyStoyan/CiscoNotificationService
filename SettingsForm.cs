@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using LumiSoft.Net.Media;
 
 
 namespace Cliver.CisteraNotification
@@ -39,17 +40,20 @@ namespace Cliver.CisteraNotification
         {
             try
             {
-                Properties.Settings.Default.ServicePort = ushort.Parse(ServicePort.Text);
-                Properties.Settings.Default.UseWindowsUserAsServiceName = UseWindowsUserAsServiceName.Checked;
+                if (AudioDevices.Items.Count > 0 && AudioDevices.SelectedItem == null)
+                    throw new Exception("Audio Device is not selected.");
+                Settings.Default.AudioDeviceName = ((AudioOutDevice)AudioDevices.SelectedItem).Name;
+                Settings.Default.ServicePort = ushort.Parse(ServicePort.Text);
+                Settings.Default.UseWindowsUserAsServiceName = UseWindowsUserAsServiceName.Checked;
                 if (string.IsNullOrWhiteSpace(ServiceName.Text))
                     throw new Exception("Service Name cannot be empty.");
                 if (!UseWindowsUserAsServiceName.Checked)
-                    Properties.Settings.Default.ServiceName = ServiceName.Text;
-                Properties.Settings.Default.AlertSound = AlertSound.Text;
-                Properties.Settings.Default.InformSound = InformSound.Text;
-                Properties.Settings.Default.NotificationFormHeight = int.Parse(NotificationFormHeight.Text);
-                Properties.Settings.Default.NotificationFormRightPosition = int.Parse(NotificationFormRightPosition.Text);
-                Properties.Settings.Default.AlertFormRightPosition = int.Parse(AlertFormRightPosition.Text);
+                    Settings.Default.ServiceName = ServiceName.Text;
+                Settings.Default.AlertSound = AlertSound.Text;
+                Settings.Default.InformSound = InformSound.Text;
+                Settings.Default.NotificationFormHeight = int.Parse(NotificationFormHeight.Text);
+                Settings.Default.NotificationFormRightPosition = int.Parse(NotificationFormRightPosition.Text);
+                Settings.Default.AlertFormRightPosition = int.Parse(AlertFormRightPosition.Text);
             }
             catch (Exception ex)
             {
@@ -57,7 +61,7 @@ namespace Cliver.CisteraNotification
                 return;
             }
 
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
             this.Close();
             Program.UpdateService();
         }
@@ -69,21 +73,30 @@ namespace Cliver.CisteraNotification
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            ServicePort.Text = Properties.Settings.Default.ServicePort.ToString();
-            ServiceName.Text = Properties.Settings.Default.ServiceName;
-            UseWindowsUserAsServiceName.Checked = Properties.Settings.Default.UseWindowsUserAsServiceName;
-            AlertSound.Text = Properties.Settings.Default.AlertSound;
-            InformSound.Text = Properties.Settings.Default.InformSound;
-            NotificationFormHeight.Text = Properties.Settings.Default.NotificationFormHeight.ToString();
-            NotificationFormRightPosition.Text = Properties.Settings.Default.NotificationFormRightPosition.ToString();
-            AlertFormRightPosition.Text = Properties.Settings.Default.AlertFormRightPosition.ToString();
+            AudioDevices.DisplayMember = "Name";
+            foreach (AudioOutDevice device in AudioOut.Devices)
+            {
+                AudioDevices.Items.Add(device);
+                if (device.Name == Settings.Default.AudioDeviceName)
+                    AudioDevices.SelectedItem = device;
+            }
+            if (AudioDevices.SelectedItem == null && AudioDevices.Items.Count > 0)
+                AudioDevices.SelectedIndex = 0;
+            ServicePort.Text = Settings.Default.ServicePort.ToString();
+            ServiceName.Text = Settings.Default.ServiceName;
+            UseWindowsUserAsServiceName.Checked = Settings.Default.UseWindowsUserAsServiceName;
+            AlertSound.Text = Settings.Default.AlertSound;
+            InformSound.Text = Settings.Default.InformSound;
+            NotificationFormHeight.Text = Settings.Default.NotificationFormHeight.ToString();
+            NotificationFormRightPosition.Text = Settings.Default.NotificationFormRightPosition.ToString();
+            AlertFormRightPosition.Text = Settings.Default.AlertFormRightPosition.ToString();
         }
 
         private void bReset_Click(object sender, EventArgs e)
         {
             if (!Message.YesNo("The settings will be reset to the initial state. Proceed?", this))
                 return;
-            Properties.Settings.Default.Reset();
+            Settings.Default.Reset();
             SettingsForm_Load(null, null);
         }
 
@@ -93,7 +106,7 @@ namespace Cliver.CisteraNotification
             if (UseWindowsUserAsServiceName.Checked)
                 ServiceName.Text = Environment.UserName;
             else
-                ServiceName.Text = Properties.Settings.Default.ServiceName;
+                ServiceName.Text = Settings.Default.ServiceName;
         }
 
         private void bSelectPlayOnAlert_Click(object sender, EventArgs e)

@@ -762,6 +762,37 @@ namespace LumiSoft.Net.Media
                 }
             }
 
+            //[ComImport]
+            //[Guid("A95664D2-9614-4F35-A746-DE8DB63617E6")]
+            //[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+            //public interface IMMDeviceEnumerator
+            //{
+            //    [PreserveSig]
+            //    int EnumAudioEndpoints(int dataFlow, long dwStateMask, out IMMDeviceCollection ppDevices);
+
+            //    [PreserveSig]
+            //    int GetDefaultAudioEndpoint(EDataFlow dataFlow, ERole role, out IMMDevice ppEndpoint);
+
+            //    //[PreserveSig]
+            //    //int GetDevice([MarshalAs(UnmanagedType.LPWStr)] string pwstrId, out IMMDevice ppDevice);
+
+            //    //[PreserveSig]
+            //    //int RegisterEndpointNotificationCallback(IMMNotificationClient pClient);
+
+            //    //[PreserveSig]
+            //    //int UnregisterEndpointNotificationCallback(IMMNotificationClient pClient);
+            //}
+
+            //public static class MMDeviceEnumeratorFactory
+            //{
+            //    private static readonly Guid MMDeviceEnumerator = new Guid("BCDE0395-E52F-467C-8E3D-C4579291692E");
+
+            //    public static IMMDeviceEnumerator CreateInstance()
+            //    {
+            //        var type = Type.GetTypeFromCLSID(MMDeviceEnumerator);
+            //        return (IMMDeviceEnumerator)Activator.CreateInstance(type);
+            //    }
+            //}
 
             /// <summary>
             /// Gets if this object is disposed.

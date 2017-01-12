@@ -24,7 +24,7 @@ namespace Cliver.CisteraNotification
         {
             InitializeComponent();
 
-            StartStop.Checked = Properties.Settings.Default.Run;
+            StartStop.Checked = Settings.Default.Run;
         }
 
         public static readonly SysTray This = new SysTray();
@@ -60,8 +60,8 @@ namespace Cliver.CisteraNotification
 
         private void StartStop_CheckedChanged(object sender, EventArgs e)
         {
-            Properties.Settings.Default.Run = StartStop.Checked;
-            Properties.Settings.Default.Save();
+            Settings.Default.Run = StartStop.Checked;
+            Settings.Default.Save();
             Program.UpdateService();
         }
 

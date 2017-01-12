@@ -67,7 +67,7 @@ namespace Cliver.CisteraNotification
         {
             try
             {
-                if (!Properties.Settings.Default.Run)
+                if (!Settings.Default.Run)
                     return;
                 Stop();
                 Name = service_name;

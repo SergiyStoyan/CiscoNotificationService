@@ -41,34 +41,38 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.InformSound = new System.Windows.Forms.TextBox();
             this.bSelectPlayOnInform = new System.Windows.Forms.Button();
+            this.NotificationFormWidth = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.NotificationFormRightPosition = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.NotificationFormHeight = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.InformSound = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.NotificationFormWidth = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.AlertSound = new System.Windows.Forms.TextBox();
             this.bSelectPlayOnAlert = new System.Windows.Forms.Button();
+            this.AlertFormWidth = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.AlertFormRightPosition = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.AlertFormHeight = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.AlertSound = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.AlertFormWidth = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.label11 = new System.Windows.Forms.Label();
+            this.AudioDevices = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Cancel
@@ -146,6 +150,7 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
@@ -192,168 +197,6 @@
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
-            // bSelectPlayOnInform
-            // 
-            this.bSelectPlayOnInform.Location = new System.Drawing.Point(378, 35);
-            this.bSelectPlayOnInform.Name = "bSelectPlayOnInform";
-            this.bSelectPlayOnInform.Size = new System.Drawing.Size(25, 23);
-            this.bSelectPlayOnInform.TabIndex = 16;
-            this.bSelectPlayOnInform.Text = "...";
-            this.bSelectPlayOnInform.UseVisualStyleBackColor = true;
-            this.bSelectPlayOnInform.Click += new System.EventHandler(this.bSelectPlayOnInform_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 138);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(181, 13);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Distance To Screen Right Boundary:";
-            // 
-            // NotificationFormRightPosition
-            // 
-            this.NotificationFormRightPosition.Location = new System.Drawing.Point(18, 154);
-            this.NotificationFormRightPosition.Name = "NotificationFormRightPosition";
-            this.NotificationFormRightPosition.Size = new System.Drawing.Size(52, 20);
-            this.NotificationFormRightPosition.TabIndex = 16;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(15, 99);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Height:";
-            // 
-            // NotificationFormHeight
-            // 
-            this.NotificationFormHeight.Location = new System.Drawing.Point(18, 115);
-            this.NotificationFormHeight.Name = "NotificationFormHeight";
-            this.NotificationFormHeight.Size = new System.Drawing.Size(52, 20);
-            this.NotificationFormHeight.TabIndex = 14;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Width:";
-            // 
-            // InformSound
-            // 
-            this.InformSound.Location = new System.Drawing.Point(18, 37);
-            this.InformSound.Name = "InformSound";
-            this.InformSound.Size = new System.Drawing.Size(354, 20);
-            this.InformSound.TabIndex = 12;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 13);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "Play When Appears:";
-            // 
-            // NotificationFormWidth
-            // 
-            this.NotificationFormWidth.Enabled = false;
-            this.NotificationFormWidth.Location = new System.Drawing.Point(18, 76);
-            this.NotificationFormWidth.Name = "NotificationFormWidth";
-            this.NotificationFormWidth.Size = new System.Drawing.Size(52, 20);
-            this.NotificationFormWidth.TabIndex = 10;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.groupBox3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(430, 221);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Alerts";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // bSelectPlayOnAlert
-            // 
-            this.bSelectPlayOnAlert.Location = new System.Drawing.Point(378, 35);
-            this.bSelectPlayOnAlert.Name = "bSelectPlayOnAlert";
-            this.bSelectPlayOnAlert.Size = new System.Drawing.Size(25, 23);
-            this.bSelectPlayOnAlert.TabIndex = 24;
-            this.bSelectPlayOnAlert.Text = "...";
-            this.bSelectPlayOnAlert.UseVisualStyleBackColor = true;
-            this.bSelectPlayOnAlert.Click += new System.EventHandler(this.bSelectPlayOnAlert_Click);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 138);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(181, 13);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "Distance To Screen Right Boundary:";
-            // 
-            // AlertFormRightPosition
-            // 
-            this.AlertFormRightPosition.Location = new System.Drawing.Point(18, 154);
-            this.AlertFormRightPosition.Name = "AlertFormRightPosition";
-            this.AlertFormRightPosition.Size = new System.Drawing.Size(52, 20);
-            this.AlertFormRightPosition.TabIndex = 25;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 99);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 13);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Height:";
-            // 
-            // AlertFormHeight
-            // 
-            this.AlertFormHeight.Enabled = false;
-            this.AlertFormHeight.Location = new System.Drawing.Point(18, 115);
-            this.AlertFormHeight.Name = "AlertFormHeight";
-            this.AlertFormHeight.Size = new System.Drawing.Size(52, 20);
-            this.AlertFormHeight.TabIndex = 22;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 60);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 13);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "Width:";
-            // 
-            // AlertSound
-            // 
-            this.AlertSound.Location = new System.Drawing.Point(18, 37);
-            this.AlertSound.Name = "AlertSound";
-            this.AlertSound.Size = new System.Drawing.Size(354, 20);
-            this.AlertSound.TabIndex = 20;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(15, 21);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(104, 13);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "Play When Appears:";
-            // 
-            // AlertFormWidth
-            // 
-            this.AlertFormWidth.Enabled = false;
-            this.AlertFormWidth.Location = new System.Drawing.Point(18, 76);
-            this.AlertFormWidth.Name = "AlertFormWidth";
-            this.AlertFormWidth.Size = new System.Drawing.Size(52, 20);
-            this.AlertFormWidth.TabIndex = 18;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.InformSound);
@@ -372,6 +215,92 @@
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             // 
+            // InformSound
+            // 
+            this.InformSound.Location = new System.Drawing.Point(18, 37);
+            this.InformSound.Name = "InformSound";
+            this.InformSound.Size = new System.Drawing.Size(354, 20);
+            this.InformSound.TabIndex = 12;
+            // 
+            // bSelectPlayOnInform
+            // 
+            this.bSelectPlayOnInform.Location = new System.Drawing.Point(378, 35);
+            this.bSelectPlayOnInform.Name = "bSelectPlayOnInform";
+            this.bSelectPlayOnInform.Size = new System.Drawing.Size(25, 23);
+            this.bSelectPlayOnInform.TabIndex = 16;
+            this.bSelectPlayOnInform.Text = "...";
+            this.bSelectPlayOnInform.UseVisualStyleBackColor = true;
+            this.bSelectPlayOnInform.Click += new System.EventHandler(this.bSelectPlayOnInform_Click);
+            // 
+            // NotificationFormWidth
+            // 
+            this.NotificationFormWidth.Enabled = false;
+            this.NotificationFormWidth.Location = new System.Drawing.Point(18, 76);
+            this.NotificationFormWidth.Name = "NotificationFormWidth";
+            this.NotificationFormWidth.Size = new System.Drawing.Size(52, 20);
+            this.NotificationFormWidth.TabIndex = 10;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(181, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Distance To Screen Right Boundary:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Play When Appears:";
+            // 
+            // NotificationFormRightPosition
+            // 
+            this.NotificationFormRightPosition.Location = new System.Drawing.Point(18, 154);
+            this.NotificationFormRightPosition.Name = "NotificationFormRightPosition";
+            this.NotificationFormRightPosition.Size = new System.Drawing.Size(52, 20);
+            this.NotificationFormRightPosition.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(15, 60);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Width:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(15, 99);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Height:";
+            // 
+            // NotificationFormHeight
+            // 
+            this.NotificationFormHeight.Location = new System.Drawing.Point(18, 115);
+            this.NotificationFormHeight.Name = "NotificationFormHeight";
+            this.NotificationFormHeight.Size = new System.Drawing.Size(52, 20);
+            this.NotificationFormHeight.TabIndex = 14;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(430, 221);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Alerts";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.AlertSound);
@@ -389,6 +318,111 @@
             this.groupBox3.Size = new System.Drawing.Size(424, 215);
             this.groupBox3.TabIndex = 27;
             this.groupBox3.TabStop = false;
+            // 
+            // AlertSound
+            // 
+            this.AlertSound.Location = new System.Drawing.Point(18, 37);
+            this.AlertSound.Name = "AlertSound";
+            this.AlertSound.Size = new System.Drawing.Size(354, 20);
+            this.AlertSound.TabIndex = 20;
+            // 
+            // bSelectPlayOnAlert
+            // 
+            this.bSelectPlayOnAlert.Location = new System.Drawing.Point(378, 35);
+            this.bSelectPlayOnAlert.Name = "bSelectPlayOnAlert";
+            this.bSelectPlayOnAlert.Size = new System.Drawing.Size(25, 23);
+            this.bSelectPlayOnAlert.TabIndex = 24;
+            this.bSelectPlayOnAlert.Text = "...";
+            this.bSelectPlayOnAlert.UseVisualStyleBackColor = true;
+            this.bSelectPlayOnAlert.Click += new System.EventHandler(this.bSelectPlayOnAlert_Click);
+            // 
+            // AlertFormWidth
+            // 
+            this.AlertFormWidth.Enabled = false;
+            this.AlertFormWidth.Location = new System.Drawing.Point(18, 76);
+            this.AlertFormWidth.Name = "AlertFormWidth";
+            this.AlertFormWidth.Size = new System.Drawing.Size(52, 20);
+            this.AlertFormWidth.TabIndex = 18;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 138);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(181, 13);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "Distance To Screen Right Boundary:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(15, 21);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 13);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "Play When Appears:";
+            // 
+            // AlertFormRightPosition
+            // 
+            this.AlertFormRightPosition.Location = new System.Drawing.Point(18, 154);
+            this.AlertFormRightPosition.Name = "AlertFormRightPosition";
+            this.AlertFormRightPosition.Size = new System.Drawing.Size(52, 20);
+            this.AlertFormRightPosition.TabIndex = 25;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(15, 60);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 13);
+            this.label9.TabIndex = 21;
+            this.label9.Text = "Width:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(15, 99);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 13);
+            this.label8.TabIndex = 23;
+            this.label8.Text = "Height:";
+            // 
+            // AlertFormHeight
+            // 
+            this.AlertFormHeight.Enabled = false;
+            this.AlertFormHeight.Location = new System.Drawing.Point(18, 115);
+            this.AlertFormHeight.Name = "AlertFormHeight";
+            this.AlertFormHeight.Size = new System.Drawing.Size(52, 20);
+            this.AlertFormHeight.TabIndex = 22;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.AudioDevices);
+            this.tabPage4.Controls.Add(this.label11);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(430, 221);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "General";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(19, 19);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(74, 13);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "Audio Device:";
+            // 
+            // AudioDevices
+            // 
+            this.AudioDevices.FormattingEnabled = true;
+            this.AudioDevices.Location = new System.Drawing.Point(22, 35);
+            this.AudioDevices.Name = "AudioDevices";
+            this.AudioDevices.Size = new System.Drawing.Size(377, 21);
+            this.AudioDevices.TabIndex = 21;
             // 
             // SettingsForm
             // 
@@ -412,11 +446,13 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -455,5 +491,8 @@
         private System.Windows.Forms.TextBox AlertFormWidth;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.ComboBox AudioDevices;
+        private System.Windows.Forms.Label label11;
     }
 }

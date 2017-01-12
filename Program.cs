@@ -70,12 +70,12 @@ namespace Cliver.CisteraNotification
 
         internal static void UpdateService()
         {
-            if (Properties.Settings.Default.Run)
+            if (Settings.Default.Run)
             {
-                string service_name = Properties.Settings.Default.UseWindowsUserAsServiceName ? Environment.UserName : Properties.Settings.Default.ServiceName;
+                string service_name = Settings.Default.UseWindowsUserAsServiceName ? Environment.UserName : Settings.Default.ServiceName;
                 if (string.IsNullOrWhiteSpace(service_name))
                     service_name = "-UNKNOWN-";
-                HttpService.Start(service_name, Properties.Settings.Default.ServicePort);
+                HttpService.Start(service_name, Settings.Default.ServicePort);
                 BonjourService.Start(HttpService.Name, HttpService.Port);
             }
             else

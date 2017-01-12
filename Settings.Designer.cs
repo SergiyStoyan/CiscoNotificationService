@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Cliver.CisteraNotification.Properties {
+namespace Cliver.CisteraNotification {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -164,6 +164,18 @@ namespace Cliver.CisteraNotification.Properties {
             }
             set {
                 this["AlertFormRightPosition"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string AudioDeviceName {
+            get {
+                return ((string)(this["AudioDeviceName"]));
+            }
+            set {
+                this["AudioDeviceName"] = value;
             }
         }
     }

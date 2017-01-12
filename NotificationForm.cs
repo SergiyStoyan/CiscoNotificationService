@@ -60,9 +60,9 @@ namespace Cliver.CisteraNotification
                 This.Controls.Add(c);
                 This.header.SendToBack();
 
-                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.InformSound))
+                if (!string.IsNullOrWhiteSpace(Settings.Default.InformSound))
                 {
-                    SoundPlayer sp = new SoundPlayer(Properties.Settings.Default.InformSound);
+                    SoundPlayer sp = new SoundPlayer(Settings.Default.InformSound);
                     sp.Play();
                 }
 
@@ -121,7 +121,7 @@ namespace Cliver.CisteraNotification
                 return;
             }
             Rectangle wa = Screen.GetWorkingArea(this);
-            DesktopLocation = new Point(wa.Right - Width - Properties.Settings.Default.NotificationFormRightPosition, wa.Bottom);
+            DesktopLocation = new Point(wa.Right - Width - Settings.Default.NotificationFormRightPosition, wa.Bottom);
 
             TopMost = false;
             ControlRoutines.Invoke(this, () => { Opacity = 0.3; });
@@ -133,7 +133,7 @@ namespace Cliver.CisteraNotification
         void tune_height()
         {
             int b = Controls[0].Bottom;
-            if (ClientRectangle.Bottom < b && Height < Properties.Settings.Default.NotificationFormHeight)
+            if (ClientRectangle.Bottom < b && Height < Settings.Default.NotificationFormHeight)
             {
                 int h = b - ClientRectangle.Bottom;
                 Height += h;

@@ -70,13 +70,16 @@ namespace Cliver.CisteraNotification
             //e.Stream.Session.Stop();
             foreach (AudioOutDevice device in AudioOut.Devices)
             {
-                ao = new AudioOut_RTP(
-                    device,
-                   e.Stream,
-                    new Dictionary<int, AudioCodec> { { payload, new PCMA() } }
-                    );
-                ao.Start(volume100);
-                break;
+                if (Settings.Default.AudioDeviceName == device.Name)
+                {
+                    ao = new AudioOut_RTP(
+                        device,
+                       e.Stream,
+                        new Dictionary<int, AudioCodec> { { payload, new PCMA() } }
+                        );
+                    ao.Start(volume100);
+                    break;
+                }
             }
         }
         static AudioOut_RTP ao;
