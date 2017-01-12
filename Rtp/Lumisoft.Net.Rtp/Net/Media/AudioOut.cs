@@ -812,7 +812,7 @@ namespace LumiSoft.Net.Media
                         throw new ArgumentException("Property 'Volume' value must be >=0 and <= 100.");
                     }
 
-                    int level = (int)(value * (0xFFFF / 100.0));
+                    int level = (int)((0xFFFF / 100.0) * value);
 
                     WavMethods.waveOutSetVolume(m_pWavDevHandle,(level << 16 | level & 0xFFFF));
                 }
@@ -844,19 +844,23 @@ namespace LumiSoft.Net.Media
         /// <param name="device">Audio output device.</param>
         /// <param name="format">Audio output format.</param>
         /// <exception cref="ArgumentNullException">Is raised when <b>device</b> or <b>format</b> is null reference.</exception>
-        public AudioOut(AudioOutDevice device,AudioFormat format)
+        public AudioOut(AudioOutDevice device, AudioFormat format, uint? volume100 = null)
         {
-            if(device == null){
+            if (device == null)
+            {
                 throw new ArgumentNullException("device");
             }
-            if(format == null){
+            if (format == null)
+            {
                 throw new ArgumentNullException("format");
             }
 
-            m_pDevice      = device;
+            m_pDevice = device;
             m_pAudioFormat = format;
 
-            m_pWaveOut = new WaveOut(device,format.SamplesPerSecond,format.BitsPerSample,format.Channels);
+            m_pWaveOut = new WaveOut(device, format.SamplesPerSecond, format.BitsPerSample, format.Channels);
+            if (volume100 != null)
+                Volume = (int)volume100;
         }
 
         /// <summary>

@@ -32,13 +32,6 @@ namespace Cliver.CisteraNotification
         {
         }
 
-        //static public String SoundDeviceName = "";
-        readonly static public int SamplesPerSecond = 8000;//G.711
-        //readonly static public short BitsPerSample = 8;//G.711
-        //static public short Channels = 2;
-        //readonly static public Int32 MaxUdpPacketSize = 10000;
-        //static public Int32 BufferCount = 8;
-
         /// <summary>
         /// 
         /// </summary>
@@ -48,41 +41,31 @@ namespace Cliver.CisteraNotification
         /// <returns></returns>
         static public Status Play(bool multicast, IPAddress source_ip, int port, uint? volume100 = null)
         {
-            //if (player.Opened)
-            if (sesson != null)
+            if (session != null)
                 return Status.BUSY;
 
-            //receiver = new NF.Receiver(MaxUdpPacketSize);
-            //receiver.DataReceived += new NF.Receiver.DelegateDataReceived(OnDataReceived);
-            //receiver.Disconnected += new NF.Receiver.DelegateDisconnected(OnDisconnected);
-            //receiver.Connect(source_ip, port);
-
-            //uint? v = null;
-            //if (volume100 != null)
-            //{
-            //    if (volume100 > 100)
-            //        volume100 = 100;
-            //    v = (uint)((float)volume100 / 100 * 0xFFFF);
-            //}
-            //player.Open(SoundDeviceName, SamplesPerSecond, BitsPerSample, Channels, BufferCount, v);
             Rtp.source_ip = source_ip;
-            sesson = new RTP_MultimediaSession(RTP_Utils.GenerateCNAME());
+            Rtp.volume100 = volume100;
+            session = new RTP_MultimediaSession(RTP_Utils.GenerateCNAME());
             if(multicast)
-                sesson.CreateMulticastSession(new RTP_Clock(0, SamplesPerSecond), new RTP_Address(source_ip, port, port + 1));
+                session.CreateMulticastSession(null, new RTP_Clock(0, 8000), new RTP_Address(source_ip, port, port + 1));
             else
-                sesson.CreateSession(new RTP_Address(IPAddress.Any, port, port + 1), new RTP_Clock(0, SamplesPerSecond));
-            sesson.Sessions[0].NewReceiveStream += new EventHandler<RTP_ReceiveStreamEventArgs>(m_pRtpSession_NewReceiveStream);
-            sesson.Sessions[0].Payload = payload;
-            sesson.Sessions[0].Start();
+                //TBD: for unicast we have to check source ip when accept a stream
+                session.CreateSession(new RTP_Address(IPAddress.Any, port, port + 1), new RTP_Clock(0, 8000));
+            session.Sessions[0].NewReceiveStream += new EventHandler<RTP_ReceiveStreamEventArgs>(m_pRtpSession_NewReceiveStream);
+            session.Sessions[0].Payload = payload;
+            session.Sessions[0].Start();
 
             return Status.ACCEPTED;
         }
         static int payload = 0;//8;
-        static RTP_MultimediaSession sesson = null;
+        static RTP_MultimediaSession session = null;
         static IPAddress source_ip = null;
+        static uint? volume100 = null;
 
         static private void m_pRtpSession_NewReceiveStream(object sender, RTP_ReceiveStreamEventArgs e)
         {
+            //TBD: for unicast we have to check source ip 
             //if(e.Stream.Session.StunPublicEndPoints)
             //e.Stream.Session.Stop();
             foreach (AudioOutDevice device in AudioOut.Devices)
@@ -92,60 +75,18 @@ namespace Cliver.CisteraNotification
                    e.Stream,
                     new Dictionary<int, AudioCodec> { { payload, new PCMA() } }
                     );
-                ao.Start();
+                ao.Start(volume100);
                 break;
             }
         }
         static AudioOut_RTP ao;
 
-        //readonly static WinSound.Player player = new WinSound.Player();
-        //static NF.Receiver receiver = null;
-
-        //static private void OnDataReceived(NF.Receiver mc, Byte[] bytes, int size)
-        //{
-        //    try
-        //    {
-        //        WinSound.RTPPacket rtp = new WinSound.RTPPacket(bytes, size);
-        //        if (rtp.Data != null)
-        //        {
-        //            Byte[] linearBytes = WinSound.Utils.MuLawToLinear(rtp.Data, BitsPerSample, Channels);
-        //            player.PlayData(linearBytes, false);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine(String.Format("FormMain.cs | OnDataReceived() | {0}", ex.Message));
-        //    }
-        //}
-
-        //static private void OnDisconnected(string reason)
-        //{
-        //    try
-        //    {
-        //        player.Close();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        System.Diagnostics.Debug.WriteLine(String.Format("FormMain.cs | OnDisconnected() | {0}", ex.Message));
-        //    }
-        //}
-
         static public void Stop()
         {
-            //if (receiver != null)
-            //{
-            //    receiver.Disconnect();
-            //    receiver = null;
-            //}
-            //if (player != null)
-            //{
-            //    player.Close();
-            //    //player = null;
-            //}
-            if (sesson != null)
+            if (session != null)
             {
-                sesson.Close("Closed.");
-                sesson = null;
+                session.Close("Closed.");
+                session = null;
             }
         }
 

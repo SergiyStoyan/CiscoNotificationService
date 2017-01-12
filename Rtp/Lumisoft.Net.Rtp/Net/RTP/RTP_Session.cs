@@ -110,26 +110,31 @@ namespace LumiSoft.Net.RTP
         /// Multicast session
         /// </summary>
         /// <param name="session"></param>
+        /// <param name="localEP">if Sender then set else null</param>
         /// <param name="clock"></param>
-        /// <param name="sourceEP"></param>
-        internal RTP_Session(RTP_MultimediaSession session, RTP_Clock clock, RTP_Address sourceEP = null)
+        /// <param name="sourceEP">if Receiver then set else null</param>
+        internal RTP_Session(RTP_MultimediaSession session, RTP_Address localEP, RTP_Clock clock, RTP_Address sourceEP)
         {
             if (session == null)
             {
                 throw new ArgumentNullException("session");
             }
-            //if (sourceEP == null)
+            //if (localEP == null)
             //{
-            //    throw new ArgumentNullException("sourceEP");
+            //    throw new ArgumentNullException("localEP");
             //}
             if (clock == null)
             {
                 throw new ArgumentNullException("clock");
             }
+            //if (sourceEP == null)
+            //{
+            //    throw new ArgumentNullException("sourceEP");
+            //}
             m_pSession = session;
-            if (sourceEP == null)
-                m_pLocalEP = new RTP_Address(IPAddress.Any, 0, 1);//it is only for testing streamer
-            else
+            if (sourceEP == null)//sender
+                m_pLocalEP = localEP;
+            else//receiver
                 m_pLocalEP = new RTP_Address(IPAddress.Any, sourceEP.DataPort, sourceEP.ControlPort);
             m_pSourceEP = sourceEP;
             m_pRtpClock = clock;

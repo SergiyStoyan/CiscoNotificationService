@@ -76,15 +76,18 @@ namespace LumiSoft.Net.Media
         /// </summary>
         /// <param name="sender">Sender.</param>
         /// <param name="e">Event data.</param>
-        private void m_pRTP_Stream_PacketReceived(object sender,RTP_PacketEventArgs e)
+        private void m_pRTP_Stream_PacketReceived(object sender, RTP_PacketEventArgs e)
         {
-            if(m_IsDisposed){
+            if (m_IsDisposed)
+            {
                 return;
             }
 
-            try{
+            try
+            {
                 AudioCodec codec = null;
-                if(!m_pAudioCodecs.TryGetValue(e.Packet.PayloadType,out codec)){
+                if (!m_pAudioCodecs.TryGetValue(e.Packet.PayloadType, out codec))
+                {
                     // Unknown codec(payload value), skip it.
 
                     return;
@@ -92,21 +95,25 @@ namespace LumiSoft.Net.Media
                 m_pActiveCodec = codec;
 
                 // Audio-out not created yet, create it.
-                if(m_pAudioOut == null){
-                    m_pAudioOut = new AudioOut(m_pAudioOutDevice,codec.AudioFormat);
+                if (m_pAudioOut == null)
+                {
+                    m_pAudioOut = new AudioOut(m_pAudioOutDevice, codec.AudioFormat, volume100);
                 }
                 // Audio-out audio format not compatible to codec, recreate it.
-                else if(!m_pAudioOut.AudioFormat.Equals(codec.AudioFormat)){
+                else if (!m_pAudioOut.AudioFormat.Equals(codec.AudioFormat))
+                {
                     m_pAudioOut.Dispose();
-                    m_pAudioOut = new AudioOut(m_pAudioOutDevice,codec.AudioFormat);
+                    m_pAudioOut = new AudioOut(m_pAudioOutDevice, codec.AudioFormat, volume100);
                 }
 
                 // Decode RTP audio frame and queue it for play out.
-                byte[] decodedData = codec.Decode(e.Packet.Data,0,e.Packet.Data.Length);
-                m_pAudioOut.Write(decodedData,0,decodedData.Length);
+                byte[] decodedData = codec.Decode(e.Packet.Data, 0, e.Packet.Data.Length);
+                m_pAudioOut.Write(decodedData, 0, decodedData.Length);
             }
-            catch(Exception x){
-                if(!this.IsDisposed){
+            catch (Exception x)
+            {
+                if (!this.IsDisposed)
+                {
                     // Raise error event(We can't throw expection directly, we are on threadpool thread).
                     OnError(x);
                 }
@@ -124,7 +131,7 @@ namespace LumiSoft.Net.Media
         /// Starts receiving RTP audio and palying it out.
         /// </summary>
         /// <exception cref="ObjectDisposedException">Is raised when this object is disposed and this method is accessed.</exception>
-        public void Start()
+        public void Start(uint? volume100 = null)
         {   
             if(this.IsDisposed){
                 throw new ObjectDisposedException(this.GetType().Name);
@@ -134,10 +141,11 @@ namespace LumiSoft.Net.Media
             }
 
             m_IsRunning = true;
-      
+            this.volume100 = volume100;
             m_pRTP_Stream.PacketReceived += new EventHandler<RTP_PacketEventArgs>(m_pRTP_Stream_PacketReceived);
         }
-                
+        uint? volume100 = null;
+
         #endregion
 
         #region method Stop

@@ -21,12 +21,12 @@ namespace TestReceive
 
 
 
-            RTP_MultimediaSession sesson = new RTP_MultimediaSession(RTP_Utils.GenerateCNAME());
-            //sesson.CreateMulticastSession(new RTP_Clock(0, 8000), new RTP_Address(IPAddress.Parse(ip), port, port + 1));
-            sesson.CreateSession(new RTP_Address(IPAddress.Any, port, port + 1), new RTP_Clock(0, 8000));
-            sesson.Sessions[0].NewReceiveStream += new EventHandler<RTP_ReceiveStreamEventArgs>(m_pRtpSession_NewReceiveStream);
-            sesson.Sessions[0].Payload = payload;
-            sesson.Sessions[0].Start();
+            RTP_MultimediaSession session = new RTP_MultimediaSession(RTP_Utils.GenerateCNAME());
+            session.CreateMulticastSession(null, new RTP_Clock(0, 8000), new RTP_Address(IPAddress.Parse(ip), port, port + 1));
+            //session.CreateSession(new RTP_Address(IPAddress.Any, port, port + 1), new RTP_Clock(0, 8000));
+            session.Sessions[0].NewReceiveStream += new EventHandler<RTP_ReceiveStreamEventArgs>(m_pRtpSession_NewReceiveStream);
+            session.Sessions[0].Payload = payload;
+            session.Sessions[0].Start();
             
 
             Console.ReadKey();

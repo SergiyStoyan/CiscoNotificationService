@@ -154,7 +154,14 @@ namespace LumiSoft.Net.RTP
             return session;
         }
 
-        public RTP_Session CreateMulticastSession(RTP_Clock clock, RTP_Address sourceEP = null)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="localEP">if Sender then set else null</param>
+        /// <param name="clock"></param>
+        /// <param name="sourceEP">if Receiver then set else null</param>
+        /// <returns></returns>
+        public RTP_Session CreateMulticastSession(RTP_Address localEP, RTP_Clock clock, RTP_Address sourceEP)
         {
             if (m_IsDisposed)
             {
@@ -164,7 +171,7 @@ namespace LumiSoft.Net.RTP
             {
                 throw new ArgumentNullException("clock");
             }
-            RTP_Session session = new RTP_Session(this, clock, sourceEP);
+            RTP_Session session = new RTP_Session(this, localEP, clock, sourceEP);
             session.Disposed += new EventHandler(delegate (object s, EventArgs e) {
                 m_pSessions.Remove((RTP_Session)s);
             });

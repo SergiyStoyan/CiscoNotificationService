@@ -215,14 +215,6 @@
       <Project>{7ab36ccf-5ffd-4780-a54e-a102eca028b5}</Project>
       <Name>Net</Name>
     </ProjectReference>
-    <ProjectReference Include="Rtp\Receiver\Receiver.csproj">
-      <Project>{9faa6285-1815-441f-afb5-e2b31199002f}</Project>
-      <Name>Receiver</Name>
-    </ProjectReference>
-    <ProjectReference Include="Rtp\WinSound\WinSound.csproj">
-      <Project>{28120d29-4f6e-4c3b-ab6a-900a26420b9c}</Project>
-      <Name>WinSound</Name>
-    </ProjectReference>
     <ProjectReference Include="Tftp\Tftp.Net.csproj">
       <Project>{a3f0de15-ac97-428d-830c-4f9721ee3627}</Project>
       <Name>Tftp.Net</Name>

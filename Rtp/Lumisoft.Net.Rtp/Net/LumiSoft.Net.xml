@@ -1859,7 +1859,7 @@
             <param name="sender">Sender.</param>
             <param name="e">Event data.</param>
         </member>
-        <member name="M:LumiSoft.Net.Media.AudioOut_RTP.Start">
+        <member name="M:LumiSoft.Net.Media.AudioOut_RTP.Start(System.Nullable{System.UInt32})">
             <summary>
             Starts receiving RTP audio and palying it out.
             </summary>
@@ -3297,7 +3297,7 @@
             Gets number of bytes buffered for playing.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.Media.AudioOut.#ctor(LumiSoft.Net.Media.AudioOutDevice,LumiSoft.Net.Media.AudioFormat)">
+        <member name="M:LumiSoft.Net.Media.AudioOut.#ctor(LumiSoft.Net.Media.AudioOutDevice,LumiSoft.Net.Media.AudioFormat,System.Nullable{System.UInt32})">
             <summary>
             Default constructor.
             </summary>
@@ -17781,6 +17781,15 @@
             <exception cref="T:System.ObjectDisposedException">Is raised when this class is Disposed and this method is accessed.</exception>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>localEP</b> or <b>clock</b> is null reference.</exception>
         </member>
+        <member name="M:LumiSoft.Net.RTP.RTP_MultimediaSession.CreateMulticastSession(LumiSoft.Net.RTP.RTP_Address,LumiSoft.Net.RTP.RTP_Clock,LumiSoft.Net.RTP.RTP_Address)">
+            <summary>
+            
+            </summary>
+            <param name="localEP">if Sender then set else null</param>
+            <param name="clock"></param>
+            <param name="sourceEP">if Receiver then set else null</param>
+            <returns></returns>
+        </member>
         <member name="M:LumiSoft.Net.RTP.RTP_MultimediaSession.GetOrCreateParticipant(System.String)">
             <summary>
             Gets or creates new participant if participant does not exist.
@@ -19426,13 +19435,14 @@
             <param name="clock">RTP media clock.</param>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>localEP</b>, <b>localEP</b> or <b>clock</b> is null reference.</exception>
         </member>
-        <member name="M:LumiSoft.Net.RTP.RTP_Session.#ctor(LumiSoft.Net.RTP.RTP_MultimediaSession,LumiSoft.Net.RTP.RTP_Clock,LumiSoft.Net.RTP.RTP_Address)">
+        <member name="M:LumiSoft.Net.RTP.RTP_Session.#ctor(LumiSoft.Net.RTP.RTP_MultimediaSession,LumiSoft.Net.RTP.RTP_Address,LumiSoft.Net.RTP.RTP_Clock,LumiSoft.Net.RTP.RTP_Address)">
             <summary>
             Multicast session
             </summary>
             <param name="session"></param>
+            <param name="localEP">if Sender then set else null</param>
             <param name="clock"></param>
-            <param name="sourceEP"></param>
+            <param name="sourceEP">if Receiver then set else null</param>
         </member>
         <member name="M:LumiSoft.Net.RTP.RTP_Session.Dispose">
             <summary>
