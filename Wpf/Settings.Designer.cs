@@ -49,7 +49,7 @@ namespace Cliver.CisteraNotification {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("inform.wav")]
         public string InformSoundFile {
             get {
                 return ((string)(this["InformSoundFile"]));

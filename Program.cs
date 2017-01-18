@@ -49,7 +49,7 @@ namespace Cliver.CisteraNotification
                 //a.Close();
                 //BrowserForm bf = new BrowserForm();
                 //bf.Show();
-
+                Api.Initialize();
                 Application.Run(SysTray.This);
             }
             catch (Exception e)

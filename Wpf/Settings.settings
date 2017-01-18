@@ -9,7 +9,7 @@
       <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="InformSoundFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">inform.wav</Value>
     </Setting>
   </Settings>
 </SettingsFile>

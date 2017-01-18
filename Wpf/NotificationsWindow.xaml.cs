@@ -18,7 +18,7 @@ using System.Threading;
 
 namespace Cliver.CisteraNotification
 {
-    public partial class InformWindow : Window
+    public partial class NotificationsWindow : Window
     {
         static public void Initialize()
         {
@@ -28,7 +28,7 @@ namespace Cliver.CisteraNotification
             //_This.Visibility = Visibility.Hidden;
         }
 
-        public static InformWindow This
+        public static NotificationsWindow This
         {
             get
             {
@@ -36,7 +36,7 @@ namespace Cliver.CisteraNotification
                 {//!!!the following code does not work in static constructor because creates a deadlock!!!
                     Thread t = ThreadRoutines.StartTry(() =>
                      {
-                         InformWindow w = new InformWindow();
+                         NotificationsWindow w = new NotificationsWindow();
                          WindowInteropHelper h = new WindowInteropHelper(w);
                          h.EnsureHandle();
                          w.Visibility = Visibility.Hidden;
@@ -54,9 +54,9 @@ namespace Cliver.CisteraNotification
                 return _This;
             }
         }
-        static InformWindow _This = null;
+        static NotificationsWindow _This = null;
 
-        InformWindow()
+        NotificationsWindow()
         {
             InitializeComponent();
 

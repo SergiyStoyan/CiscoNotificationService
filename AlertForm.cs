@@ -48,9 +48,9 @@ namespace Cliver.CisteraNotification
             });
             SleepRoutines.WaitForCondition(() => { return ready; }, 1000);
             if (a == null)
-                throw new Exception("Cound not create AlertForm");
+                throw new Exception("Could not create AlertForm");
 
-            a.Invoke(() =>
+            ControlRoutines.Invoke(a, () =>
             {
                 lock (afs)
                     afs.Add(a);

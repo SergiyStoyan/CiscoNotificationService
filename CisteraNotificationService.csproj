@@ -211,6 +211,10 @@
       <Project>{a3f0de15-ac97-428d-830c-4f9721ee3627}</Project>
       <Name>Tftp.Net</Name>
     </ProjectReference>
+    <ProjectReference Include="Wpf\Wpf.csproj">
+      <Project>{36ade037-22c2-4b16-b68c-48f761d48d35}</Project>
+      <Name>Wpf</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Bonjour">
@@ -225,6 +229,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Finger.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NotificationForms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

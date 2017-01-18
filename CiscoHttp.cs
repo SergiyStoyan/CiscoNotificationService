@@ -68,7 +68,8 @@ namespace Cliver.CisteraNotification
                         }
                         else
                         {
-                            NotificationForm.AddNotification(title, text, null, prompt, null);
+                            //NotificationForm.AddNotification(title, text, null, prompt, null);
+                            Api.ShowInform(title, text, null, prompt, null);
                         }
                     }
                     break;
@@ -99,7 +100,8 @@ namespace Cliver.CisteraNotification
                         }
                         else
                         {
-                            NotificationForm.AddNotification(title, null, image_url, prompt, null);
+                            //NotificationForm.AddNotification(title, null, image_url, prompt, null);
+                            Api.ShowInform(title, null, image_url, prompt, null);
                         }
                     }
                     break;
@@ -122,7 +124,8 @@ namespace Cliver.CisteraNotification
                                     case Rtp.Status.ACCEPTED:
                                         break;
                                     case Rtp.Status.BUSY:
-                                        NotificationForm.AddNotification("Error!", "A stream is being received already.", null, null, null);
+                                        //NotificationForm.AddNotification("Error!", "A stream is being received already.", null, null, null);
+                                        Api.ShowInform("Error!", "A stream is being received already.", null, null, null);
                                         return get_CiscoIPPhoneError(Error.Parsing, "A stream is being received already.");
                                     default:
                                         throw new Exception("Unknown option.");
@@ -143,7 +146,8 @@ namespace Cliver.CisteraNotification
 
                                 continue;
                             }
-                            NotificationForm.AddNotification("Error", "URL is not supported: " + url, null, null, null);
+                            //NotificationForm.AddNotification("Error", "URL is not supported: " + url, null, null, null);
+                            Api.ShowInform("Error!", "URL is not supported: " + url, null, null, null);
                         }
                     }
                     break;

@@ -61,6 +61,10 @@
     <Compile Include="InformControl.xaml.cs">
       <DependentUpon>InformControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Api.cs" />
+    <Compile Include="NotificationsWindow.xaml.cs">
+      <DependentUpon>NotificationsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -68,6 +72,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="WindowControlRoutines.cs" />
+    <Page Include="NotificationsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="InformWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

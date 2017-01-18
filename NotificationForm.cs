@@ -36,7 +36,7 @@ namespace Cliver.CisteraNotification
                     });
                     SleepRoutines.WaitForCondition(() => { return ready; }, 1000);
                     if (_This == null)
-                        throw new Exception("Cound not create NotificationForm");
+                        throw new Exception("Could not create NotificationForm");
                 }
                 return _This;
             }
@@ -52,7 +52,7 @@ namespace Cliver.CisteraNotification
 
         public static void AddNotification(string title, string text, string image_url, string action_name, Action action)
         {
-            This.Invoke(() =>
+            ControlRoutines.Invoke(This, () =>
             {
                 var c = new NotificationControl(title, text, image_url, action_name, action);
                 c.Dock = DockStyle.Top;
@@ -72,7 +72,7 @@ namespace Cliver.CisteraNotification
 
         public static void Clear()
         {
-            This.Invoke(() =>
+            ControlRoutines.Invoke(This, () =>
             {
                 while (This.Controls.Count > 1)
                     RemoveNotification((NotificationControl)This.Controls[0]);
@@ -91,7 +91,7 @@ namespace Cliver.CisteraNotification
 
         public static void RemoveNotification(NotificationControl nc)
         {
-            This.Invoke(() =>
+            ControlRoutines.Invoke(This, () =>
             {
                 This.Controls.Remove(nc);
 

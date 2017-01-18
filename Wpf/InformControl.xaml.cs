@@ -45,7 +45,13 @@ namespace Cliver.CisteraNotification
             {
                 if (!image_url.Contains(":"))
                     image_url = Log.AppDir + image_url;
-                image.Source = new BitmapImage(new Uri(image_url));
+                try
+                {
+                    image.Source = new BitmapImage(new Uri(image_url));
+                }
+                catch
+                {
+                }
             }
             else
             {
