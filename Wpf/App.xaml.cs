@@ -16,57 +16,57 @@ namespace Cliver.CisteraNotification
         //private System.Windows.Forms.NotifyIcon _notifyIcon;
         //private bool _isExit;
 
-        //protected override void OnStartup(StartupEventArgs e)
-        //{
-        //    base.OnStartup(e);
-        //    NotificationWindow = new NotificationWindow();
-        //    NotificationWindow.Closing += MainWindow_Closing;
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            //InformWindow = new InformWindow();
+            //InformWindow.Closing += MainWindow_Closing;
 
-        //    _notifyIcon = new System.Windows.Forms.NotifyIcon();
-        //    _notifyIcon.DoubleClick += (s, args) => ShowMainWindow();
-        //    _notifyIcon.Icon = BackgroundApplication.Properties.Resources.MyIcon;
-        //    _notifyIcon.Visible = true;
+            //_notifyIcon = new System.Windows.Forms.NotifyIcon();
+            //_notifyIcon.DoubleClick += (s, args) => ShowMainWindow();
+            //_notifyIcon.Icon = BackgroundApplication.Properties.Resources.MyIcon;
+            //_notifyIcon.Visible = true;
 
-        //    CreateContextMenu();
-        //}
+            //CreateContextMenu();
+        }
 
         //private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         //{
         //    if (!_isExit)
         //    {
         //        e.Cancel = true;
-        //        NotificationWindow.Hide(); // A hidden window can be shown again, a closed one not
+        //        InformWindow.Hide(); // A hidden window can be shown again, a closed one not
         //    }
         //}
 
         //private void CreateContextMenu()
         //{
         //    _notifyIcon.ContextMenuStrip =              new System.Windows.Forms.ContextMenuStrip();
-        //    _notifyIcon.ContextMenuStrip.Items.Add("NotificationWindow...").Click += (s, e) => ShowMainWindow();
+        //    _notifyIcon.ContextMenuStrip.Items.Add("InformWindow...").Click += (s, e) => ShowMainWindow();
         //    _notifyIcon.ContextMenuStrip.Items.Add("Exit").Click += (s, e) => ExitApplication();
         //}
 
         //private void ExitApplication()
         //{
         //    _isExit = true;
-        //    NotificationWindow.Close();
+        //    InformWindow.Close();
         //    _notifyIcon.Dispose();
         //    _notifyIcon = null;
         //}
 
         //private void ShowMainWindow()
         //{
-        //    if (NotificationWindow.IsVisible)
+        //    if (InformWindow.IsVisible)
         //    {
-        //        if (NotificationWindow.WindowState == WindowState.Minimized)
+        //        if (InformWindow.WindowState == WindowState.Minimized)
         //        {
-        //            NotificationWindow.WindowState = WindowState.Normal;
+        //            InformWindow.WindowState = WindowState.Normal;
         //        }
-        //        NotificationWindow.Activate();
+        //        InformWindow.Activate();
         //    }
         //    else
         //    {
-        //        NotificationWindow.Show();
+        //        InformWindow.Show();
         //    }
         //}
     }

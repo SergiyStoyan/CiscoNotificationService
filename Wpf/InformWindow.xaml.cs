@@ -17,9 +17,9 @@ using System.Windows.Interop;
 
 namespace Cliver.CisteraNotification
 {
-    public partial class NotificationWindow : Window
+    public partial class InformWindow : Window
     {
-        public static NotificationWindow This
+        public static InformWindow This
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Cliver.CisteraNotification
                     bool ready = false;
                     ThreadRoutines.StartTry(() =>
                     {
-                        _This = new NotificationWindow();
+                        _This = new InformWindow();
                         WindowInteropHelper h = new WindowInteropHelper(_This);
                         h.EnsureHandle();
                         _This.Visibility = Visibility.Hidden;
@@ -42,26 +42,26 @@ namespace Cliver.CisteraNotification
                 return _This;
             }
         }
-        static NotificationWindow _This = null;
+        static InformWindow _This = null;
 
-        private NotificationWindow()
+        private InformWindow()
         {
             InitializeComponent();
 
             Height = 10;
         }
 
-        public static void AddNotification(string title, string text, string image_url, string action_name, Action action, string sound_file)
+        public static void AddNotification(string title, string text, string image_url, string action_name, Action action)
         {
             This.Invoke(() =>
             {
-                var c = new NotificationControl(title, text, image_url, action_name, action);
+                var c = new InformControl(title, text, image_url, action_name, action);
                 Grid.SetRow(c, 1);
                 This.grid.Children.Insert(0, c);
 
-                if (!string.IsNullOrWhiteSpace(sound_file))
+                if (!string.IsNullOrWhiteSpace(Settings.Default.InformSoundFile))
                 {
-                    SoundPlayer sp = new SoundPlayer(sound_file);
+                    SoundPlayer sp = new SoundPlayer(Settings.Default.InformSoundFile);
                     sp.Play();
                 }
 
@@ -74,7 +74,7 @@ namespace Cliver.CisteraNotification
             This.Invoke(() =>
             {
                 while (This.grid.Children.Count > 1)
-                    RemoveNotification((NotificationControl)This.grid.Children[This.grid.Children.Count - 1]);
+                    RemoveNotification((InformControl)This.grid.Children[This.grid.Children.Count - 1]);
             });
         }
 
@@ -82,13 +82,13 @@ namespace Cliver.CisteraNotification
         //{
         //    if (This.Controls.Count > 1)
         //    {
-        //        RemoveNotification((NotificationControl)This.Controls[0]);
+        //        RemoveNotification((InformControl)This.Controls[0]);
         //        return true;
         //    }
         //    return false;
         //}
 
-        public static void RemoveNotification(NotificationControl nc)
+        public static void RemoveNotification(InformControl nc)
         {
             This.Invoke(() =>
             {
@@ -125,7 +125,7 @@ namespace Cliver.CisteraNotification
             }
             Rect wa = System.Windows.SystemParameters.WorkArea;
             var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
-            this.Left = wa.Right - Width - Settings.Default.NotificationFormRightPosition;
+            this.Left = wa.Right - Width - Settings.Default.InformFormRightPosition;
             this.Top = wa.Bottom;
 
             Topmost = false;
@@ -141,7 +141,7 @@ namespace Cliver.CisteraNotification
             var gt = last_e.TransformToAncestor(This);
             double b = gt.Transform(new Point(0, last_e.RenderSize.Height)).Y;
             Rect r = VisualTreeHelper.GetDescendantBounds(This);
-            if (r.Bottom < b && Height < Settings.Default.NotificationFormHeight)
+            if (r.Bottom < b && Height < Settings.Default.InformFormHeight)
             {
                 double h = b - r.Bottom;
                 Height += h;

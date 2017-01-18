@@ -33,7 +33,7 @@ namespace Cliver
         //    return Application.OpenForms[0].Invoke(d);
         //}
 
-        public static Thread SlideVertically(this System.Windows.Controls.Control c, double pixelsPerMss, double position2, int delta = 1, MethodInvoker finished = null)
+        public static Thread SlideVertically(this System.Windows.Window c, double pixelsPerMss, double position2, int delta = 1, MethodInvoker finished = null)
         {
             lock (c)
             {
@@ -48,7 +48,7 @@ namespace Cliver
                 {
                     try
                     {
-                        while (c.Visible && !(bool)WindowControlRoutines.Invoke(c, () =>
+                        while (c.Visibility == Visibility.Visible && !(bool)WindowControlRoutines.Invoke(c, () =>
                         {
                             c.Top = c.Top + delta;
                             return delta < 0 ? c.Top <= position2 : c.Top >= position2;
@@ -70,29 +70,29 @@ namespace Cliver
         }
         //static readonly  Dictionary<Control, Thread> controls2sliding_thread = new Dictionary<Control, Thread>();
 
-        public static Thread Condense(this System.Windows.Window f, double centOpacityPerMss, double opacity2, double delta = 0.05, MethodInvoker finished = null)
+        public static Thread Condense(this System.Windows.Window c, double centOpacityPerMss, double opacity2, double delta = 0.05, MethodInvoker finished = null)
         {
-            lock (f)
+            lock (c)
             {
                 Thread t = null;
                 //if (controls2condensing_thread.TryGetValue(f, out t) && t.IsAlive)
                 //    return t;
 
-                delta = f.Opacity < opacity2 ? delta : -delta;
-                double total_mss = Math.Abs(opacity2 - f.Opacity) / (centOpacityPerMss / 100);
-                int sleep = (int)(total_mss / ((opacity2 - f.Opacity) / delta));
+                delta = c.Opacity < opacity2 ? delta : -delta;
+                double total_mss = Math.Abs(opacity2 - c.Opacity) / (centOpacityPerMss / 100);
+                int sleep = (int)(total_mss / ((opacity2 - c.Opacity) / delta));
                 t = ThreadRoutines.Start(() =>
                 {
                     try
                     {
-                        while (!(bool)WindowControlRoutines.Invoke(f, () =>
+                        while (!(bool)WindowControlRoutines.Invoke(c, () =>
                         {
-                            f.Opacity = f.Opacity + delta;
-                            return delta > 0 ? f.Opacity >= opacity2 : f.Opacity <= opacity2;
+                            c.Opacity = c.Opacity + delta;
+                            return delta > 0 ? c.Opacity >= opacity2 : c.Opacity <= opacity2;
                         })
                         )
                             System.Threading.Thread.Sleep(sleep);
-                        WindowControlRoutines.Invoke(f, () =>
+                        WindowControlRoutines.Invoke(c, () =>
                         {
                             finished?.Invoke();
                         });
