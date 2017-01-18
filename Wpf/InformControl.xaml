@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cliver.CisteraNotification"
              mc:Ignorable="d"  d:DesignHeight="200" d:DesignWidth="500">
-    <Grid Margin="0,0,0,0">
-        <RichTextBox Margin="0,0,0,0">
+    <Grid >
+        <RichTextBox>
             <FlowDocument>
-                <Paragraph Margin="0,0,0,0">
+                <Paragraph>
                     <Floater Name="image_container" HorizontalAlignment="Left" Width="100" Margin="0,0,5,0" Padding="0">
                         <BlockUIContainer>
                             <Image Name="image" HorizontalAlignment="Left" Width="100" Height="100" Stretch="Uniform" />

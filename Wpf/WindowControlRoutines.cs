@@ -15,17 +15,17 @@ namespace Cliver
     {
         public static object Invoke(this System.Windows.Controls.Control c, Func<object> function)
         {
-            return c.Invoke(function);
+            return c.Dispatcher.Invoke(function);
         }
 
         public static void Invoke(this System.Windows.Controls.Control c, MethodInvoker code)
         {
-            c.Invoke(code);
+            c.Dispatcher.Invoke(code);
         }
 
         public static void BeginInvoke(this System.Windows.Controls.Control c, MethodInvoker code)
         {
-            c.BeginInvoke(code);
+            c.Dispatcher.BeginInvoke(code);
         }
 
         //public static object InvokeFromUiThread(Delegate d)

@@ -5,16 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cliver.CisteraNotification"
         mc:Ignorable="d"
-        Title="InformWindow" Height="500" Width="1025" WindowStyle="None" ResizeMode="CanResize">
-    <Grid Name="grid">
+        Title="InformWindow" Height="100" Width="400" WindowStyle="None" ResizeMode="CanResize" AllowsTransparency="True" Background="Transparent" Topmost="False" >
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="43*" />
-            <RowDefinition Name="notifications" Height="222*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="192.609,129,0,0" VerticalAlignment="Top" Width="75" Grid.Row="1"/>
-        <local:InformControl HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Top" Height="167"  Grid.Row="2"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
+        <StackPanel Name="infos" HorizontalAlignment="Stretch" Height="auto" Margin="0,27,0,0" VerticalAlignment="Top"  Orientation="Vertical"/>
 
     </Grid>
 </Window>

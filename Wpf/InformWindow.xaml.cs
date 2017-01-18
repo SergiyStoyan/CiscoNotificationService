@@ -24,31 +24,25 @@ namespace Cliver.CisteraNotification
             get
             {
                 if (_This == null)
-                {//!!!the following code does not work in static constructor because creates a deadlock!!!
-                    bool ready = false;
-                    ThreadRoutines.StartTry(() =>
-                    {
-                        _This = new InformWindow();
-                        WindowInteropHelper h = new WindowInteropHelper(_This);
-                        h.EnsureHandle();
-                        _This.Visibility = Visibility.Hidden;
-                        ready = true;
-                        System.Windows.Forms.Application.Run();
-                    });
-                    SleepRoutines.WaitForCondition(() => { return ready; }, 1000);
-                    if (_This == null)
-                        throw new Exception("Cound not create NotificationForm");
+                {
+                    _This = new InformWindow();
+                    WindowInteropHelper h = new WindowInteropHelper(_This);
+                    h.EnsureHandle();
+                    _This.Visibility = Visibility.Hidden;
                 }
                 return _This;
             }
         }
         static InformWindow _This = null;
 
-        private InformWindow()
+        InformWindow()
         {
             InitializeComponent();
 
-            Height = 10;
+            // Height = 10;
+            //if(_This!=null)
+            //    throw new Exception("InformWindow should not be created more than once!");
+            //_This = this;
         }
 
         public static void AddNotification(string title, string text, string image_url, string action_name, Action action)
@@ -56,8 +50,8 @@ namespace Cliver.CisteraNotification
             This.Invoke(() =>
             {
                 var c = new InformControl(title, text, image_url, action_name, action);
-                Grid.SetRow(c, 1);
-                This.grid.Children.Insert(0, c);
+                //Grid.SetRow(c, 1);
+                This.infos.Children.Insert(0, c);
 
                 if (!string.IsNullOrWhiteSpace(Settings.Default.InformSoundFile))
                 {
@@ -73,8 +67,8 @@ namespace Cliver.CisteraNotification
         {
             This.Invoke(() =>
             {
-                while (This.grid.Children.Count > 1)
-                    RemoveNotification((InformControl)This.grid.Children[This.grid.Children.Count - 1]);
+                while (This.infos.Children.Count > 0)
+                    RemoveNotification((InformControl)This.infos.Children[This.infos.Children.Count - 1]);
             });
         }
 
@@ -92,22 +86,25 @@ namespace Cliver.CisteraNotification
         {
             This.Invoke(() =>
             {
-                This.grid.Children.Remove(nc);
+                This.infos.Children.Remove(nc);
 
-                UIElement last_e = This.grid.Children[This.grid.Children.Count-1];
-                var gt = last_e.TransformToAncestor(This);
-                double b = gt.Transform(new Point(0, last_e.RenderSize.Height)).Y;
-
-                Rect r= VisualTreeHelper.GetDescendantBounds(This); 
-                if (r.Bottom > b)
+                if (This.infos.Children.Count > 0)
                 {
-                    double h = r.Bottom - b;
-                    This.Height -= h;
-                    //This.Top += h;
-                    WindowControlRoutines.SlideVertically(This, 0.3, This.Top + h);
+                    UIElement last_e = This.infos.Children[This.infos.Children.Count - 1];
+                    var gt = last_e.TransformToAncestor(This);
+                    double b = gt.Transform(new Point(0, last_e.RenderSize.Height)).Y;
+
+                    Rect r = VisualTreeHelper.GetDescendantBounds(This);
+                    if (r.Bottom > b)
+                    {
+                        double h = r.Bottom - b;
+                        This.Height -= h;
+                        //This.Top += h;
+                        WindowControlRoutines.SlideVertically(This, 0.3, This.Top + h);
+                    }
                 }
 
-                if (This.grid.Children.Count <= 1)
+                if (This.infos.Children.Count < 1)
                     WindowControlRoutines.Condense(This, 0.1, 0, 0.1, () =>
                     {
                         This.Visibility = Visibility.Hidden;
@@ -124,20 +121,22 @@ namespace Cliver.CisteraNotification
                 return;
             }
             Rect wa = System.Windows.SystemParameters.WorkArea;
-            var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
             this.Left = wa.Right - Width - Settings.Default.InformFormRightPosition;
-            this.Top = wa.Bottom;
-
-            Topmost = false;
+ 
+             this.Top = wa.Bottom;
+            
             WindowControlRoutines.Invoke(this, () => { Opacity = 0.3; });
             Show();
-            WindowControlRoutines.SlideVertically(This, 0.3, wa.Bottom - Height, 1, tune_height);
+            WindowControlRoutines.SlideVertically(This, 0.3, wa.Bottom - ActualHeight, 1, tune_height);
             WindowControlRoutines.Condense(This, 0.1, 1);
         }
 
         void tune_height()
         {
-            UIElement last_e = This.grid.Children[This.grid.Children.Count - 1];
+            //Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+            //Arrange(new Rect(0, 0, DesiredSize.Width, DesiredSize.Height));
+
+            UIElement last_e = This.infos.Children[This.infos.Children.Count - 1];
             var gt = last_e.TransformToAncestor(This);
             double b = gt.Transform(new Point(0, last_e.RenderSize.Height)).Y;
             Rect r = VisualTreeHelper.GetDescendantBounds(This);

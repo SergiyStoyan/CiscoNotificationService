@@ -25,7 +25,7 @@ namespace Cliver.CisteraNotification
             InitializeComponent();
         }
 
-        public InformControl(string title, string text, string image_url, string action_name, Action action)
+        internal InformControl(string title, string text, string image_url, string action_name, Action action)
         {
             InitializeComponent();
 

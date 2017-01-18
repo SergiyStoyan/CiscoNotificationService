@@ -19,7 +19,8 @@ namespace Cliver.CisteraNotification
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            //InformWindow = new InformWindow();
+            InformWindow.AddNotification("title:", "text...", "http://www.testserver.com/acknowledge.jsp", "action...", () => { });
+            //InformWindow.AddNotification("title:", "text...", "http://www.testserver.com/acknowledge.jsp", "action...", () => { });
             //InformWindow.Closing += MainWindow_Closing;
 
             //_notifyIcon = new System.Windows.Forms.NotifyIcon();
@@ -28,6 +29,8 @@ namespace Cliver.CisteraNotification
             //_notifyIcon.Visible = true;
 
             //CreateContextMenu();
+
+
         }
 
         //private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
