@@ -19,8 +19,8 @@ namespace Cliver.CisteraNotification
         //protected override void OnStartup(StartupEventArgs e)
         //{
         //    base.OnStartup(e);
-        //    MainWindow = new MainWindow();
-        //    MainWindow.Closing += MainWindow_Closing;
+        //    NotificationWindow = new NotificationWindow();
+        //    NotificationWindow.Closing += MainWindow_Closing;
 
         //    _notifyIcon = new System.Windows.Forms.NotifyIcon();
         //    _notifyIcon.DoubleClick += (s, args) => ShowMainWindow();
@@ -35,38 +35,38 @@ namespace Cliver.CisteraNotification
         //    if (!_isExit)
         //    {
         //        e.Cancel = true;
-        //        MainWindow.Hide(); // A hidden window can be shown again, a closed one not
+        //        NotificationWindow.Hide(); // A hidden window can be shown again, a closed one not
         //    }
         //}
 
         //private void CreateContextMenu()
         //{
         //    _notifyIcon.ContextMenuStrip =              new System.Windows.Forms.ContextMenuStrip();
-        //    _notifyIcon.ContextMenuStrip.Items.Add("MainWindow...").Click += (s, e) => ShowMainWindow();
+        //    _notifyIcon.ContextMenuStrip.Items.Add("NotificationWindow...").Click += (s, e) => ShowMainWindow();
         //    _notifyIcon.ContextMenuStrip.Items.Add("Exit").Click += (s, e) => ExitApplication();
         //}
 
         //private void ExitApplication()
         //{
         //    _isExit = true;
-        //    MainWindow.Close();
+        //    NotificationWindow.Close();
         //    _notifyIcon.Dispose();
         //    _notifyIcon = null;
         //}
 
         //private void ShowMainWindow()
         //{
-        //    if (MainWindow.IsVisible)
+        //    if (NotificationWindow.IsVisible)
         //    {
-        //        if (MainWindow.WindowState == WindowState.Minimized)
+        //        if (NotificationWindow.WindowState == WindowState.Minimized)
         //        {
-        //            MainWindow.WindowState = WindowState.Normal;
+        //            NotificationWindow.WindowState = WindowState.Normal;
         //        }
-        //        MainWindow.Activate();
+        //        NotificationWindow.Activate();
         //    }
         //    else
         //    {
-        //        MainWindow.Show();
+        //        NotificationWindow.Show();
         //    }
         //}
     }

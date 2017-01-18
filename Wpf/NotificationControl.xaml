@@ -9,12 +9,11 @@
         <RichTextBox Margin="0,0,0,0">
             <FlowDocument>
                 <Paragraph Margin="0,0,0,0">
-                    <Floater HorizontalAlignment="Left" Width="100" Margin="0,0,5,0" Padding="0">
+                    <Floater Name="image_container" HorizontalAlignment="Left" Width="100" Margin="0,0,5,0" Padding="0">
                         <BlockUIContainer>
-                            <Image Name="image" Width="100" Height="100" />
+                            <Image Name="image" HorizontalAlignment="Left" Width="100" Height="100" Stretch="Uniform" />
                         </BlockUIContainer>
-                    </Floater>
-                    <Run Name="title" FontWeight="Bold">The said Eliza, John, and Georgiana etc. etc.
+                    </Floater><Run Name="title" FontWeight="Bold">The said Eliza, John, and Georgiana etc. etc.
                     The said Eliza, John, and Georgiana etc. etc.
                     </Run>
                     <LineBreak></LineBreak>
