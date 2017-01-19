@@ -43,9 +43,6 @@ namespace Cliver.CisteraNotification
 
             WpfControlRoutines.BeginInvoke(w, () =>
             {
-                //Rectangle wa = Screen.GetWorkingArea(a);
-                //w.DesktopLocation = new Point(wa.Right - a.Width - Settings.Default.AlertFormRightPosition, wa.Top);
-
                 if (!string.IsNullOrWhiteSpace(Settings.Default.InformSoundFile))
                 {
                     SoundPlayer sp = new SoundPlayer(Settings.Default.InformSoundFile);
@@ -53,9 +50,7 @@ namespace Cliver.CisteraNotification
                 }
 
                 w.Topmost = true;
-                w.Opacity = 0.3;
                 w.Show();
-                WpfControlRoutines.Condense(w, 0.002, 1);
             });
             return w;
         }
@@ -80,32 +75,11 @@ namespace Cliver.CisteraNotification
                     ws.Remove(this);
             };
 
-            //this.title.Text = title;
-            //this.text.Text = text;
-            //if (image_url != null)
-            //{
-            //    if (!image_url.Contains(":"))
-            //        image_url = Log.AppDir + image_url;
-            //    try
-            //    {
-            //        image.Source = new BitmapImage(new Uri(image_url));
-            //    }
-            //    catch
-            //    {
-            //    }
-            //}
-            //else
-            //{
-            //    image_container.Width = 0;
-            //    image_container.Margin = new Thickness(0);
-            //}
-            //if (action_name != null)
-            //    button.Content = action_name;
-            //button.Click += (object sender, RoutedEventArgs e) =>
-            //{
-            //    action?.Invoke();
-            //    Close();
-            //};
+            Rect wa = System.Windows.SystemParameters.WorkArea;
+            this.Top = wa.Bottom - 300;
+            sliding.From = wa.Right;
+            sliding.To = wa.Right - Width - Settings.Default.InformFormRightPosition;
+            sliding.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 300));
         }
     }
 }

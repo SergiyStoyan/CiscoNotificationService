@@ -8,8 +8,22 @@
         Title="InfoWindow" Height="auto" Width="400" 
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" 
         Background="Beige" Topmost="False" ShowInTaskbar="False" SizeToContent="Height" >
-
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded">
+            <BeginStoryboard>
+                <Storyboard Storyboard.TargetProperty="Opacity">
+                    <DoubleAnimation Name="condensing" Duration="00:00:3" From="0" To="1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard >
+                    <DoubleAnimation Name="sliding" Duration="0:0:3" Storyboard.TargetProperty="Left" From="920" To="100" AccelerationRatio=".1"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
     <Grid x:Name="grid">
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="365,10,-40,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>
