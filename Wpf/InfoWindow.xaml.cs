@@ -21,17 +21,30 @@ namespace Cliver.CisteraNotification
 {
     public partial class InfoWindow : Window
     {
+        //public static void Initialize(SynchronizationContext main_context)
+        //{
+        //    InfoWindow.main_context = main_context;
+        //}
+        //private static SynchronizationContext main_context;
+
         static readonly List<InfoWindow> ws = new List<InfoWindow>();
+
+        static InfoWindow()
+        {
+        }
+        static System.Windows.Threading.Dispatcher dispatcher = null;
 
         public static InfoWindow Create(string title, string text, string image_url, string action_name, Action action)
         {
             InfoWindow w = null;
-            Application.Current.Dispatcher.Invoke(new Action(() => {
-              w = new InfoWindow(title, text, image_url, action_name, action);
-              WindowInteropHelper h = new WindowInteropHelper(w);
-              h.EnsureHandle();
-              //w.Visibility = Visibility.Hidden;
-             // System.Windows.Threading.Dispatcher.Run();
+
+            Action a = () =>
+            {
+                w = new InfoWindow(title, text, image_url, action_name, action);
+                WindowInteropHelper h = new WindowInteropHelper(w);
+                h.EnsureHandle();
+                //w.Visibility = Visibility.Hidden;
+                //System.Windows.Threading.Dispatcher.Run();
                 w.Show();
                 ThreadRoutines.StartTry(() =>
                 {
@@ -43,7 +56,24 @@ namespace Cliver.CisteraNotification
                     SoundPlayer sp = new SoundPlayer(Settings.Default.InfoSoundFile);
                     sp.Play();
                 }
-            }));
+            };
+
+            //Application.Current.Dispatcher.Invoke(new Action(() => {}));
+            // main_context.Send(new SendOrPostCallback((_) => { a(); }), null);
+            lock (ws)
+            {
+                if (dispatcher == null)
+                {//!!!cannot be done by static constructor!!!
+                    ThreadRoutines.StartTry(() =>
+                    {
+                        dispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher;
+                        System.Windows.Threading.Dispatcher.Run();
+                    }, null, null, true, ApartmentState.STA);
+                    if (!SleepRoutines.WaitForCondition(() => { return dispatcher != null; }, 3000))
+                        throw new Exception("Could not get dispatcher.");
+                }
+            }
+            dispatcher.Invoke(a);
             return w;
         }
 
@@ -125,7 +155,7 @@ namespace Cliver.CisteraNotification
                     DoubleAnimation da = new DoubleAnimation(w.Top + this.Height, (Duration)TimeSpan.FromMilliseconds(300));
                     Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
                     sb.Children.Add(da);
-                    BeginStoryboard(sb);
+                    w.BeginStoryboard(sb);
                 }
 
                 ws.Remove(this);

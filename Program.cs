@@ -31,7 +31,15 @@ namespace Cliver.CisteraNotification
                 Message.Error(e);
                 Application.Exit();
             };
+
+            main_context = SynchronizationContext.Current;
         }
+
+        private readonly static SynchronizationContext main_context;
+
+
+
+
 
         [STAThread]
         public static void Main(string[] args)
