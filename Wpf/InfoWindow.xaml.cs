@@ -21,12 +21,6 @@ namespace Cliver.CisteraNotification
 {
     public partial class InfoWindow : Window
     {
-        //public static void Initialize(SynchronizationContext main_context)
-        //{
-        //    InfoWindow.main_context = main_context;
-        //}
-        //private static SynchronizationContext main_context;
-
         static readonly List<InfoWindow> ws = new List<InfoWindow>();
 
         static InfoWindow()
@@ -67,8 +61,6 @@ namespace Cliver.CisteraNotification
                     {
                         //this window is used to hide notification windows from Alt+Tab panel
                         invisible_owner_w = new Window();
-                        //invisible_owner_w.Top = -100;
-                        //invisible_owner_w.Left = -100;
                         invisible_owner_w.Width = 0;
                         invisible_owner_w.Height = 0;
                         invisible_owner_w.WindowStyle = WindowStyle.ToolWindow;
@@ -99,6 +91,14 @@ namespace Cliver.CisteraNotification
             Loaded += Window_Loaded;
             Closing += Window_Closing;
             Closed += Window_Closed;
+            PreviewMouseDown += (object sender, MouseButtonEventArgs e) =>
+        {
+            try
+            {//might be closed already
+                Close();
+            }
+            catch { }
+        };
 
             Topmost = true;
             Owner = invisible_owner_w;

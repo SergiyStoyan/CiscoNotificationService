@@ -66,7 +66,11 @@ namespace Cliver.CisteraNotification
                 if (close_on_button_click)
                 {
                     Window w = Window.GetWindow(this);
-                    w.Close();
+                    try
+                    {//might be closed already
+                        w.Close();
+                    }
+                    catch { }
                 }
             };
         }
