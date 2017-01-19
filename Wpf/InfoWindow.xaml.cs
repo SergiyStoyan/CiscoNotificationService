@@ -32,6 +32,9 @@ namespace Cliver.CisteraNotification
         static InfoWindow()
         {
         }
+
+        static Window invisible_owner_w;
+
         static System.Windows.Threading.Dispatcher dispatcher = null;
 
         public static InfoWindow Create(string title, string text, string image_url, string action_name, Action action)
@@ -43,8 +46,6 @@ namespace Cliver.CisteraNotification
                 w = new InfoWindow(title, text, image_url, action_name, action);
                 WindowInteropHelper h = new WindowInteropHelper(w);
                 h.EnsureHandle();
-                //w.Visibility = Visibility.Hidden;
-                //System.Windows.Threading.Dispatcher.Run();
                 w.Show();
                 ThreadRoutines.StartTry(() =>
                 {
@@ -57,15 +58,24 @@ namespace Cliver.CisteraNotification
                     sp.Play();
                 }
             };
-
-            //Application.Current.Dispatcher.Invoke(new Action(() => {}));
-            // main_context.Send(new SendOrPostCallback((_) => { a(); }), null);
+            
             lock (ws)
             {
                 if (dispatcher == null)
                 {//!!!cannot be done by static constructor!!!
                     ThreadRoutines.StartTry(() =>
                     {
+                        //this window is used to hide notification windows from Alt+Tab panel
+                        invisible_owner_w = new Window();
+                        //invisible_owner_w.Top = -100;
+                        //invisible_owner_w.Left = -100;
+                        invisible_owner_w.Width = 0;
+                        invisible_owner_w.Height = 0;
+                        invisible_owner_w.WindowStyle = WindowStyle.ToolWindow;
+                        invisible_owner_w.ShowInTaskbar = false;
+                        invisible_owner_w.Show();
+                        invisible_owner_w.Hide();
+
                         dispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher;
                         System.Windows.Threading.Dispatcher.Run();
                     }, null, null, true, ApartmentState.STA);
@@ -91,8 +101,12 @@ namespace Cliver.CisteraNotification
             Closed += Window_Closed;
 
             Topmost = true;
+            Owner = invisible_owner_w;
 
             this.grid.Children.Add(new InfoControl(title, text, image_url, action_name, action, true));
+
+            //LayoutTransform = new ScaleTransform(0.1, 0.1);
+            //UpdateLayout();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
