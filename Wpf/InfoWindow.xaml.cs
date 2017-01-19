@@ -69,6 +69,8 @@ namespace Cliver.CisteraNotification
         {
             InitializeComponent();
 
+            this.grid.Children.Add(new InfoControl(title, text, image_url, action_name, action, true));
+
             lock (ws)
                 ws.Add(this);
 
@@ -78,32 +80,32 @@ namespace Cliver.CisteraNotification
                     ws.Remove(this);
             };
 
-            this.title.Text = title;
-            this.text.Text = text;
-            if (image_url != null)
-            {
-                if (!image_url.Contains(":"))
-                    image_url = Log.AppDir + image_url;
-                try
-                {
-                    image.Source = new BitmapImage(new Uri(image_url));
-                }
-                catch
-                {
-                }
-            }
-            else
-            {
-                image_container.Width = 0;
-                image_container.Margin = new Thickness(0);
-            }
-            if (action_name != null)
-                button.Content = action_name;
-            button.Click += (object sender, RoutedEventArgs e) =>
-            {
-                action?.Invoke();
-                Close();
-            };
+            //this.title.Text = title;
+            //this.text.Text = text;
+            //if (image_url != null)
+            //{
+            //    if (!image_url.Contains(":"))
+            //        image_url = Log.AppDir + image_url;
+            //    try
+            //    {
+            //        image.Source = new BitmapImage(new Uri(image_url));
+            //    }
+            //    catch
+            //    {
+            //    }
+            //}
+            //else
+            //{
+            //    image_container.Width = 0;
+            //    image_container.Margin = new Thickness(0);
+            //}
+            //if (action_name != null)
+            //    button.Content = action_name;
+            //button.Click += (object sender, RoutedEventArgs e) =>
+            //{
+            //    action?.Invoke();
+            //    Close();
+            //};
         }
     }
 }

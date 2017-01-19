@@ -9,35 +9,7 @@
         WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True" 
         Background="Beige" Topmost="False" ShowInTaskbar="False" SizeToContent="Height" >
 
-    <Grid >
-        <RichTextBox >
-            <FlowDocument >
-                <Paragraph >
-                    <Floater Name="image_container" HorizontalAlignment="Left" Width="100" Margin="0,0,5,0" Padding="0">
-                        <BlockUIContainer>
-                            <Image Name="image" HorizontalAlignment="Left" Width="100" Height="100" Stretch="Uniform" />
-                        </BlockUIContainer>
-                    </Floater>
-                    <Run Name="title" FontWeight="Bold">The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    </Run>
-                    <LineBreak></LineBreak>
-                    <Run Name="text">
-                        The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    </Run>
-                </Paragraph>
-            </FlowDocument>
-        </RichTextBox>
-        <Button Name="button" Content="Button" HorizontalAlignment="Stretch" Height="41" VerticalAlignment="Bottom" />
+    <Grid x:Name="grid">
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="365,10,-40,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

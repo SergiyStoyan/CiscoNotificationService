@@ -70,7 +70,7 @@ namespace Cliver.CisteraNotification
         {            
             This.Invoke(() =>
             {
-                var c = new InfoControl(title, text, image_url, action_name, action);
+                var c = new InfoControl(title, text, image_url, action_name, action, false);
                 This.infos.Children.Insert(0, c);
 
                 if (!string.IsNullOrWhiteSpace(Settings.Default.InformSoundFile))

@@ -25,7 +25,7 @@ namespace Cliver.CisteraNotification
             InitializeComponent();
         }
 
-        internal InfoControl(string title, string text, string image_url, string action_name, Action action)
+        internal InfoControl(string title, string text, string image_url, string action_name, Action action, bool close_on_button_click)
         {
             InitializeComponent();
 
@@ -63,8 +63,11 @@ namespace Cliver.CisteraNotification
             this.button.Click += (object sender, RoutedEventArgs e) =>
             {
                 action?.Invoke();
-                //Window w = Window.GetWindow(this);
-                //w.Close();
+                if (close_on_button_click)
+                {
+                    Window w = Window.GetWindow(this);
+                    w.Close();
+                }
             };
         }
     }
