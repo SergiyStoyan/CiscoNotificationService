@@ -97,6 +97,10 @@
     <Compile Include="AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Notifications\Alert.cs" />
+    <Compile Include="Notifications\Info.cs" />
+    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications.cs" />
     <Compile Include="Rtp.cs" />
     <Compile Include="NotificationControl.cs">
       <SubType>UserControl</SubType>
@@ -230,9 +234,7 @@
   <ItemGroup>
     <Content Include="Finger.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NotificationForms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y "$(ProjectDir)config_files" "$(TargetDir)"

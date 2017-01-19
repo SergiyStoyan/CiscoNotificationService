@@ -19,9 +19,9 @@ namespace Cliver.CisteraNotification
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            InformWindow.AddInform("title:", "text...", "http://www.testserver.com/acknowledge.jsp", "action...", () => { });
-            //InformWindow.AddNotification("title:", "text...", "http://www.testserver.com/acknowledge.jsp", "action...", () => { });
-            //InformWindow.Closing += MainWindow_Closing;
+            InfoWindow.AddInform("title:", "text...", "http://www.testserver.com/acknowledge.jsp", "action...", () => { });
+            //InfoWindow.AddNotification("title:", "text...", "http://www.testserver.com/acknowledge.jsp", "action...", () => { });
+            //InfoWindow.Closing += MainWindow_Closing;
 
             //_notifyIcon = new System.Windows.Forms.NotifyIcon();
             //_notifyIcon.DoubleClick += (s, args) => ShowMainWindow();
@@ -38,38 +38,38 @@ namespace Cliver.CisteraNotification
         //    if (!_isExit)
         //    {
         //        e.Cancel = true;
-        //        InformWindow.Hide(); // A hidden window can be shown again, a closed one not
+        //        InfoWindow.Hide(); // A hidden window can be shown again, a closed one not
         //    }
         //}
 
         //private void CreateContextMenu()
         //{
         //    _notifyIcon.ContextMenuStrip =              new System.Windows.Forms.ContextMenuStrip();
-        //    _notifyIcon.ContextMenuStrip.Items.Add("InformWindow...").Click += (s, e) => ShowMainWindow();
+        //    _notifyIcon.ContextMenuStrip.Items.Add("InfoWindow...").Click += (s, e) => ShowMainWindow();
         //    _notifyIcon.ContextMenuStrip.Items.Add("Exit").Click += (s, e) => ExitApplication();
         //}
 
         //private void ExitApplication()
         //{
         //    _isExit = true;
-        //    InformWindow.Close();
+        //    InfoWindow.Close();
         //    _notifyIcon.Dispose();
         //    _notifyIcon = null;
         //}
 
         //private void ShowMainWindow()
         //{
-        //    if (InformWindow.IsVisible)
+        //    if (InfoWindow.IsVisible)
         //    {
-        //        if (InformWindow.WindowState == WindowState.Minimized)
+        //        if (InfoWindow.WindowState == WindowState.Minimized)
         //        {
-        //            InformWindow.WindowState = WindowState.Normal;
+        //            InfoWindow.WindowState = WindowState.Normal;
         //        }
-        //        InformWindow.Activate();
+        //        InfoWindow.Activate();
         //    }
         //    else
         //    {
-        //        InformWindow.Show();
+        //        InfoWindow.Show();
         //    }
         //}
     }

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cliver.CisteraNotification"
         mc:Ignorable="d"
-        Title="InformWindow" Height="100" Width="400" 
+        Title="InfoWindow" Height="100" Width="400" 
         WindowStyle="None" ResizeMode="CanResize" AllowsTransparency="True" 
-        Background="Transparent" Topmost="False" ShowInTaskbar="False"  >
+        Background="Transparent" Topmost="False" ShowInTaskbar="True"  >
     <Grid>
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>

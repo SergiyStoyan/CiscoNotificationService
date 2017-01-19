@@ -58,8 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="InformControl.xaml.cs">
-      <DependentUpon>InformControl.xaml</DependentUpon>
+    <Compile Include="InfoControl.xaml.cs">
+      <DependentUpon>InfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Api.cs" />
     <Compile Include="NotificationsWindow.xaml.cs">
@@ -76,7 +76,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="InformWindow.xaml">
+    <Page Include="InfoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -84,11 +84,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="InformWindow.xaml.cs">
-      <DependentUpon>InformWindow.xaml</DependentUpon>
+    <Compile Include="InfoWindow.xaml.cs">
+      <DependentUpon>InfoWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="InformControl.xaml">
+    <Page Include="InfoControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

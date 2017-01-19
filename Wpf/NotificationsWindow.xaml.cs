@@ -22,7 +22,7 @@ namespace Cliver.CisteraNotification
     {
         static public void Initialize()
         {
-            //_This = new InformWindow();
+            //_This = new InfoWindow();
             //WindowInteropHelper h = new WindowInteropHelper(_This);
             //h.EnsureHandle();
             //_This.Visibility = Visibility.Hidden;
@@ -49,7 +49,7 @@ namespace Cliver.CisteraNotification
                        ApartmentState.STA
                        );
                     if(!SleepRoutines.WaitForCondition(() => { return _This!=null; }, 3000))
-                        throw new Exception("Could not create InformWindow");
+                        throw new Exception("Could not create InfoWindow");
                 }
                 return _This;
             }
@@ -62,15 +62,15 @@ namespace Cliver.CisteraNotification
 
             // Height = 10;
             //if(_This!=null)
-            //    throw new Exception("InformWindow should not be created more than once!");
+            //    throw new Exception("InfoWindow should not be created more than once!");
             //_This = this;
         }
 
-        public static void AddInform(string title, string text, string image_url, string action_name, Action action)
+        public static void AddNotification(string title, string text, string image_url, string action_name, Action action)
         {            
             This.Invoke(() =>
             {
-                var c = new InformControl(title, text, image_url, action_name, action);
+                var c = new InfoControl(title, text, image_url, action_name, action);
                 This.infos.Children.Insert(0, c);
 
                 if (!string.IsNullOrWhiteSpace(Settings.Default.InformSoundFile))
@@ -88,7 +88,7 @@ namespace Cliver.CisteraNotification
             This.Invoke(() =>
             {
                 while (This.infos.Children.Count > 0)
-                    RemoveNotification((InformControl)This.infos.Children[This.infos.Children.Count - 1]);
+                    RemoveNotification((InfoControl)This.infos.Children[This.infos.Children.Count - 1]);
             });
         }
 
@@ -96,13 +96,13 @@ namespace Cliver.CisteraNotification
         //{
         //    if (This.Controls.Count > 1)
         //    {
-        //        RemoveNotification((InformControl)This.Controls[0]);
+        //        RemoveNotification((InfoControl)This.Controls[0]);
         //        return true;
         //    }
         //    return false;
         //}
 
-        public static void RemoveNotification(InformControl nc)
+        public static void RemoveNotification(InfoControl nc)
         {
             This.Invoke(() =>
             {

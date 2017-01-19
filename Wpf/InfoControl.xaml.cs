@@ -16,16 +16,16 @@ using System.Windows.Shapes;
 namespace Cliver.CisteraNotification
 {
     /// <summary>
-    /// Interaction logic for InformControl.xaml
+    /// Interaction logic for InfoControl.xaml
     /// </summary>
-    public partial class InformControl : UserControl
+    public partial class InfoControl : UserControl
     {
-        public InformControl()
+        public InfoControl()
         {
             InitializeComponent();
         }
 
-        internal InformControl(string title, string text, string image_url, string action_name, Action action)
+        internal InfoControl(string title, string text, string image_url, string action_name, Action action)
         {
             InitializeComponent();
 
@@ -63,7 +63,8 @@ namespace Cliver.CisteraNotification
             this.button.Click += (object sender, RoutedEventArgs e) =>
             {
                 action?.Invoke();
-                InformWindow.RemoveNotification(this);
+                Window w = Window.GetWindow(this);
+                w.Close();
             };
         }
     }
