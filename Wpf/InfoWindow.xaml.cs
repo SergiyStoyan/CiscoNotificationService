@@ -55,7 +55,7 @@ namespace Cliver.CisteraNotification
                 w.Topmost = true;
                 w.Opacity = 0.3;
                 w.Show();
-                WpfControlRoutines.Condense(w, 0.001, 1);
+                WpfControlRoutines.Condense(w, 0.002, 1);
             });
             return w;
         }

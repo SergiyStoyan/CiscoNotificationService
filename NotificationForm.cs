@@ -105,7 +105,7 @@ namespace Cliver.CisteraNotification
                 }
 
                 if (This.Controls.Count <= 1)
-                    ControlRoutines.Condense(This, 0.1, 0, 0.1, () =>
+                    ControlRoutines.Condense(This, 0.001, 0, 0.1, () =>
                     {
                         This.Visible = false;
                     });
@@ -127,7 +127,7 @@ namespace Cliver.CisteraNotification
             ControlRoutines.Invoke(this, () => { Opacity = 0.3; });
             Show();
             ControlRoutines.SlideVertically(This, 0.3, wa.Bottom - Height, 1, tune_height);
-            ControlRoutines.Condense(This, 0.1, 1);
+            ControlRoutines.Condense(This, 0.001, 1);
         }
 
         void tune_height()

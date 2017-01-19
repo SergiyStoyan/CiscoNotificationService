@@ -97,8 +97,8 @@ namespace Cliver.CisteraNotification
                 a.Opacity = 0.3;
                 a.Show();
                 //ControlRoutines.SlideVertically(a, 700, wa.Bottom - a.Height);
-                double centOpacityPerMss = 0.7;
-                double centOpacityPerMss2 = 0.7;
+                double centOpacityPerMss = 0.007;
+                double centOpacityPerMss2 = 0.007;
                 double opacity2 = 0.3;
                 double delta = 0.2;
                 ControlRoutines.Condense(a, centOpacityPerMss, 1, delta, () =>
