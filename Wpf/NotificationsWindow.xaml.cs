@@ -120,12 +120,12 @@ namespace Cliver.CisteraNotification
                         double h = r.Bottom - b;
                         This.Height -= h;
                         //This.Top += h;
-                        WindowControlRoutines.SlideVertically(This, 0.3, This.Top + h);
+                        WpfControlRoutines.SlideVertically(This, 0.3, This.Top + h);
                     }
                 }
 
                 if (This.infos.Children.Count < 1)
-                    WindowControlRoutines.Condense(This, 0.1, 0, 0.1, () =>
+                    WpfControlRoutines.Condense(This, 0.001, 0, 0.1, () =>
                     {
                         This.Visibility = Visibility.Hidden;
                     });
@@ -144,11 +144,11 @@ namespace Cliver.CisteraNotification
             this.Left = wa.Right - Width - Settings.Default.InformFormRightPosition;
  
              this.Top = wa.Bottom;
-            
-            WindowControlRoutines.Invoke(this, () => { Opacity = 0.3; });
+
+            WpfControlRoutines.Invoke(this, () => { Opacity = 0.3; });
             Show();
-            WindowControlRoutines.SlideVertically(This, 0.3, wa.Bottom - ActualHeight, 1, tune_height);
-            WindowControlRoutines.Condense(This, 0.1, 1);
+            WpfControlRoutines.SlideVertically(This, 0.3, wa.Bottom - ActualHeight, 1, tune_height);
+            WpfControlRoutines.Condense(This, 0.001, 1);
         }
 
         void tune_height()
@@ -165,7 +165,7 @@ namespace Cliver.CisteraNotification
                 double h = b - r.Bottom;
                 Height += h;
                 //This.Top -= h;
-                WindowControlRoutines.SlideVertically(this, 0.3, Top - h);
+                WpfControlRoutines.SlideVertically(this, 0.3, Top - h);
             }
         }
 

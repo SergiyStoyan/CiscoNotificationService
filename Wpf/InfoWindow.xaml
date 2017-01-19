@@ -4,14 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cliver.CisteraNotification"
-        mc:Ignorable="d"
-        Title="InfoWindow" Height="100" Width="400" 
+        mc:Ignorable="d" 
+        Title="InfoWindow" Height="auto" Width="400" 
         WindowStyle="None" ResizeMode="CanResize" AllowsTransparency="True" 
-        Background="Transparent" Topmost="False" ShowInTaskbar="False"  >
-    <Grid>
-        <Grid.RowDefinitions>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-        </Grid.ColumnDefinitions>
+        Background="Beige" Topmost="False" ShowInTaskbar="False"  >
+
+    <Grid >
+        <RichTextBox Height="auto">
+            <FlowDocument >
+                <Paragraph >
+                    <Floater Name="image_container" HorizontalAlignment="Left" Width="100" Margin="0,0,5,0" Padding="0">
+                        <BlockUIContainer>
+                            <Image Name="image" HorizontalAlignment="Left" Width="100" Height="100" Stretch="Uniform" />
+                        </BlockUIContainer>
+                    </Floater>
+                    <Run Name="title" FontWeight="Bold">The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    </Run>
+                    <LineBreak></LineBreak>
+                    <Run Name="text">
+                        The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                    </Run>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Button Name="button" Content="Button" HorizontalAlignment="Stretch" Height="41" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
     </Grid>
 </Window>

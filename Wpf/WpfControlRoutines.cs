@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Cliver
 {
-    public static class WindowControlRoutines
+    public static class WpfControlRoutines
     {
         public static object Invoke(this System.Windows.Controls.Control c, Func<object> function)
         {
@@ -33,7 +33,7 @@ namespace Cliver
         //    return Application.OpenForms[0].Invoke(d);
         //}
 
-        public static Thread SlideVertically(this System.Windows.Window c, double pixelsPerMss, double position2, int delta = 1, MethodInvoker finished = null)
+        public static Thread SlideVertically(this System.Windows.Window c, double pixelsPerMss, double position2, int step = 1, MethodInvoker finished = null)
         {
             lock (c)
             {
@@ -41,21 +41,21 @@ namespace Cliver
                 //if (controls2sliding_thread.TryGetValue(c, out t) && t.IsAlive)
                 //    return t;
 
-                delta = c.Top > position2 ? -delta : delta;
+                step = c.Top > position2 ? -step : step;
                 double total_mss = Math.Abs(position2 - c.Top) / pixelsPerMss;
-                int sleep = (int)(total_mss / ((position2 - c.Top) / delta));
+                int sleep = (int)(total_mss / ((position2 - c.Top) / step));
                 t = ThreadRoutines.Start(() =>
                 {
                     try
                     {
-                        while (c.Visibility == Visibility.Visible && !(bool)WindowControlRoutines.Invoke(c, () =>
+                        while (c.Visibility == Visibility.Visible && !(bool)WpfControlRoutines.Invoke(c, () =>
                         {
-                            c.Top = c.Top + delta;
-                            return delta < 0 ? c.Top <= position2 : c.Top >= position2;
+                            c.Top = c.Top + step;
+                            return step < 0 ? c.Top <= position2 : c.Top >= position2;
                         })
                         )
                             System.Threading.Thread.Sleep(sleep);
-                        WindowControlRoutines.Invoke(c, () =>
+                        WpfControlRoutines.Invoke(c, () =>
                         {
                             finished?.Invoke();
                         });
@@ -70,7 +70,7 @@ namespace Cliver
         }
         //static readonly  Dictionary<Control, Thread> controls2sliding_thread = new Dictionary<Control, Thread>();
 
-        public static Thread Condense(this System.Windows.Window c, double centOpacityPerMss, double opacity2, double delta = 0.05, MethodInvoker finished = null)
+        public static Thread Condense(this System.Windows.Window c, double opacityPerMss, double opacity2, double step = 0.05, MethodInvoker finished = null)
         {
             lock (c)
             {
@@ -78,21 +78,21 @@ namespace Cliver
                 //if (controls2condensing_thread.TryGetValue(f, out t) && t.IsAlive)
                 //    return t;
 
-                delta = c.Opacity < opacity2 ? delta : -delta;
-                double total_mss = Math.Abs(opacity2 - c.Opacity) / (centOpacityPerMss / 100);
-                int sleep = (int)(total_mss / ((opacity2 - c.Opacity) / delta));
+                step = c.Opacity < opacity2 ? step : -step;
+                double total_mss = Math.Abs(opacity2 - c.Opacity) / opacityPerMss;
+                int sleep = (int)(total_mss / ((opacity2 - c.Opacity) / step));
                 t = ThreadRoutines.Start(() =>
                 {
                     try
                     {
-                        while (!(bool)WindowControlRoutines.Invoke(c, () =>
+                        while (!(bool)WpfControlRoutines.Invoke(c, () =>
                         {
-                            c.Opacity = c.Opacity + delta;
-                            return delta > 0 ? c.Opacity >= opacity2 : c.Opacity <= opacity2;
+                            c.Opacity = c.Opacity + step;
+                            return step > 0 ? c.Opacity >= opacity2 : c.Opacity <= opacity2;
                         })
                         )
                             System.Threading.Thread.Sleep(sleep);
-                        WindowControlRoutines.Invoke(c, () =>
+                        WpfControlRoutines.Invoke(c, () =>
                         {
                             finished?.Invoke();
                         });

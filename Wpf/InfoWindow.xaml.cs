@@ -22,30 +22,27 @@ namespace Cliver.CisteraNotification
     {
         static readonly List<InfoWindow> ws = new List<InfoWindow>();
 
-        public static InfoWindow AddInform(string title, string text, string image_url, string action_name, Action action)
+        public static InfoWindow Create(string title, string text, string image_url, string action_name, Action action)
         {
             InfoWindow w = null;
-                   Thread t = ThreadRoutines.StartTry(() =>
-                 {
-                     w = new InfoWindow();
-                     WindowInteropHelper h = new WindowInteropHelper(w);
-                     h.EnsureHandle();
-                     //w.Visibility = Visibility.Hidden;
-                     //System.Windows.Threading.Dispatcher.Run();
-                 },
-                   null,
-                   null,
-                   true,
-                   ApartmentState.STA
-                   );
-                if (!SleepRoutines.WaitForCondition(() => { return w != null; }, 3000))
-                    throw new Exception("Could not create InfoWindow");
+            Thread t = ThreadRoutines.StartTry(() =>
+          {
+              w = new InfoWindow(title, text, image_url, action_name, action);
+              WindowInteropHelper h = new WindowInteropHelper(w);
+              h.EnsureHandle();
+              //w.Visibility = Visibility.Hidden;
+              System.Windows.Threading.Dispatcher.Run();
+          },
+            null,
+            null,
+            true,
+            ApartmentState.STA
+            );
+            if (!SleepRoutines.WaitForCondition(() => { return w != null; }, 3000))
+                throw new Exception("Could not create InfoWindow");
 
-            WindowControlRoutines.Invoke(w, () =>
+            WpfControlRoutines.BeginInvoke(w, () =>
             {
-                lock (ws)
-                    ws.Add(w);
-
                 //Rectangle wa = Screen.GetWorkingArea(a);
                 //w.DesktopLocation = new Point(wa.Right - a.Width - Settings.Default.AlertFormRightPosition, wa.Top);
 
@@ -57,12 +54,8 @@ namespace Cliver.CisteraNotification
 
                 w.Topmost = true;
                 w.Opacity = 0.3;
-                w.ShowDialog();
-                double centOpacityPerMss = 0.7;
-                double delta = 0.2;
-                WindowControlRoutines.Condense(w, centOpacityPerMss, 1, delta, () =>
-                {
-                });
+                w.Show();
+                WpfControlRoutines.Condense(w, 0.001, 1);
             });
             return w;
         }
@@ -70,8 +63,47 @@ namespace Cliver.CisteraNotification
         InfoWindow()
         {
             InitializeComponent();
+        }
 
-           // this.grid.
+        InfoWindow(string title, string text, string image_url, string action_name, Action action)
+        {
+            InitializeComponent();
+
+            lock (ws)
+                ws.Add(this);
+
+            Closing += (object sender, System.ComponentModel.CancelEventArgs e) =>
+            {
+                lock (ws)
+                    ws.Remove(this);
+            };
+
+            this.title.Text = title;
+            this.text.Text = text;
+            if (image_url != null)
+            {
+                if (!image_url.Contains(":"))
+                    image_url = Log.AppDir + image_url;
+                try
+                {
+                    image.Source = new BitmapImage(new Uri(image_url));
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                image_container.Width = 0;
+                image_container.Margin = new Thickness(0);
+            }
+            if (action_name != null)
+                button.Content = action_name;
+            button.Click += (object sender, RoutedEventArgs e) =>
+            {
+                action?.Invoke();
+                Close();
+            };
         }
     }
 }

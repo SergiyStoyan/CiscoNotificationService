@@ -21,7 +21,9 @@ namespace Cliver.CisteraNotification
 {
   abstract  class Notification
     {
-        internal Notification(string title, string text, string image_url, string action_name, Action action)
+        readonly static List<Notification> notifications = new List<Notification>();
+
+        protected Notification(string title, string text, string image_url, string action_name, Action action)
         {
             Title = title;
             Text = text;
@@ -29,6 +31,16 @@ namespace Cliver.CisteraNotification
             ActionName = action_name;
             Action = action;
             Created = DateTime.Now;
+            lock (notifications)
+            {
+                notifications.Add(this);
+            }
+            Show();
+        }
+
+        ~Notification()
+        {
+            Delete();
         }
 
         readonly public string Title;
@@ -40,5 +52,14 @@ namespace Cliver.CisteraNotification
 
         internal abstract void Show();
         internal abstract void Deleting();
+
+        internal void Delete()
+        {
+            Deleting();
+            lock (notifications)
+            {
+                notifications.Remove(this);
+            }
+        }
     }
 }

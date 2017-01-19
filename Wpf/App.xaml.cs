@@ -19,7 +19,7 @@ namespace Cliver.CisteraNotification
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            InfoWindow.AddInform("title:", "text...", "http://www.testserver.com/acknowledge.jsp", "action...", () => { });
+            InfoWindow.Create("title:", "text...", "http://www.testserver.com/acknowledge.jsp", "action...", () => { });
             //InfoWindow.AddNotification("title:", "text...", "http://www.testserver.com/acknowledge.jsp", "action...", () => { });
             //InfoWindow.Closing += MainWindow_Closing;
 

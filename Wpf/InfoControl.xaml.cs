@@ -63,8 +63,8 @@ namespace Cliver.CisteraNotification
             this.button.Click += (object sender, RoutedEventArgs e) =>
             {
                 action?.Invoke();
-                Window w = Window.GetWindow(this);
-                w.Close();
+                //Window w = Window.GetWindow(this);
+                //w.Close();
             };
         }
     }
