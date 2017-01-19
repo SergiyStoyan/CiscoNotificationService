@@ -7,12 +7,12 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CisteraNotificationService(WPF)")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("CisteraNotificationServiceWpf")]
+[assembly: AssemblyDescription("CisteraNotificationServiceWpf")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("CisteraNotificationService(WPF)")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2017")]
+[assembly: AssemblyCompany("CliverSoft.com")]
+[assembly: AssemblyProduct("CisteraNotificationServiceWpf")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

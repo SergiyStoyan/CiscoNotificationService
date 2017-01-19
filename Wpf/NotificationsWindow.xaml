@@ -5,16 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cliver.CisteraNotification"
         mc:Ignorable="d"
-        Title="InfoWindow" Height="100" Width="400" 
-        WindowStyle="None" ResizeMode="CanResize" AllowsTransparency="True" 
-        Background="Transparent" Topmost="False" ShowInTaskbar="True"  >
-    <Grid>
+        Title="Notifications" Height="auto" Width="auto" 
+        WindowStyle="SingleBorderWindow" ResizeMode="CanResize" AllowsTransparency="True" 
+        Topmost="False" ShowInTaskbar="True"  >
+    <Grid Name="grid">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
-        <Button x:Name="button" Content="Button" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
-        <StackPanel Name="infos" HorizontalAlignment="Stretch" Height="auto" Margin="0,27,0,0" VerticalAlignment="Top"  Orientation="Vertical"/>
-
+        <StackPanel HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"  Orientation="Horizontal" Grid.Row="0">
+            <Button x:Name="all" Content="Select All" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
+            <Button x:Name="delete" Content="Delete Selected" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
+        </StackPanel>
+        <StackPanel Name="notifications" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"  Orientation="Vertical" Grid.Row="1"/>
     </Grid>
 </Window>

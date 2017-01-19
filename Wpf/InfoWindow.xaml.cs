@@ -92,13 +92,13 @@ namespace Cliver.CisteraNotification
             Closing += Window_Closing;
             Closed += Window_Closed;
             PreviewMouseDown += (object sender, MouseButtonEventArgs e) =>
-        {
-            try
-            {//might be closed already
-                Close();
-            }
-            catch { }
-        };
+            {
+                try
+                {//might be closed already
+                    Close();
+                }
+                catch { }
+            };
 
             Topmost = true;
             Owner = invisible_owner_w;
