@@ -49,7 +49,7 @@ namespace Cliver.CisteraNotification
                 ThreadRoutines.StartTry(() =>
                 {
                     Thread.Sleep(Settings.Default.InfoWindowLifeTimeInSecs * 1000);
-                    //w.BeginInvoke(() => { w.Close(); });
+                    w.BeginInvoke(() => { w.Close(); });
                 });
                 if (!string.IsNullOrWhiteSpace(Settings.Default.InfoSoundFile))
                 {

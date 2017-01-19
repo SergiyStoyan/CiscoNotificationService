@@ -32,14 +32,9 @@ namespace Cliver.CisteraNotification
                 Application.Exit();
             };
 
-            main_context = SynchronizationContext.Current;
+            //main_context = SynchronizationContext.Current;
         }
-
-        private readonly static SynchronizationContext main_context;
-
-
-
-
+        //private readonly static SynchronizationContext main_context;
 
         [STAThread]
         public static void Main(string[] args)
@@ -57,6 +52,7 @@ namespace Cliver.CisteraNotification
                 //a.Close();
                 //BrowserForm bf = new BrowserForm();
                 //bf.Show();
+
                 Application.Run(SysTray.This);
             }
             catch (Exception e)
