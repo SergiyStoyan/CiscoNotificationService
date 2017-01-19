@@ -8,8 +8,14 @@
     <Setting Name="InformFormRightPosition" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
     </Setting>
-    <Setting Name="InformSoundFile" Type="System.String" Scope="User">
+    <Setting Name="InfoSoundFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">inform.wav</Value>
+    </Setting>
+    <Setting Name="InfoWindowLifeTimeInSecs" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">15</Value>
+    </Setting>
+    <Setting Name="InfoWindowRightBottomPosition" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 50</Value>
     </Setting>
   </Settings>
 </SettingsFile>

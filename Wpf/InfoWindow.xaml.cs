@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Media;
 using System.Windows.Interop;
 using System.Threading;
+using System.Windows.Media.Animation;
 
 namespace Cliver.CisteraNotification
 {
@@ -25,33 +26,24 @@ namespace Cliver.CisteraNotification
         public static InfoWindow Create(string title, string text, string image_url, string action_name, Action action)
         {
             InfoWindow w = null;
-            Thread t = ThreadRoutines.StartTry(() =>
-          {
+            Application.Current.Dispatcher.Invoke(new Action(() => {
               w = new InfoWindow(title, text, image_url, action_name, action);
               WindowInteropHelper h = new WindowInteropHelper(w);
               h.EnsureHandle();
               //w.Visibility = Visibility.Hidden;
-              System.Windows.Threading.Dispatcher.Run();
-          },
-            null,
-            null,
-            true,
-            ApartmentState.STA
-            );
-            if (!SleepRoutines.WaitForCondition(() => { return w != null; }, 3000))
-                throw new Exception("Could not create InfoWindow");
-
-            WpfControlRoutines.BeginInvoke(w, () =>
-            {
-                if (!string.IsNullOrWhiteSpace(Settings.Default.InformSoundFile))
+             // System.Windows.Threading.Dispatcher.Run();
+                w.Show();
+                ThreadRoutines.StartTry(() =>
                 {
-                    SoundPlayer sp = new SoundPlayer(Settings.Default.InformSoundFile);
+                    Thread.Sleep(Settings.Default.InfoWindowLifeTimeInSecs * 1000);
+                    //w.BeginInvoke(() => { w.Close(); });
+                });
+                if (!string.IsNullOrWhiteSpace(Settings.Default.InfoSoundFile))
+                {
+                    SoundPlayer sp = new SoundPlayer(Settings.Default.InfoSoundFile);
                     sp.Play();
                 }
-
-                w.Topmost = true;
-                w.Show();
-            });
+            }));
             return w;
         }
 
@@ -64,22 +56,80 @@ namespace Cliver.CisteraNotification
         {
             InitializeComponent();
 
+            Loaded += Window_Loaded;
+            Closing += Window_Closing;
+            Closed += Window_Closed;
+
+            Topmost = true;
+
             this.grid.Children.Add(new InfoControl(title, text, image_url, action_name, action, true));
+        }
 
-            lock (ws)
-                ws.Add(this);
-
-            Closing += (object sender, System.ComponentModel.CancelEventArgs e) =>
-            {
-                lock (ws)
-                    ws.Remove(this);
-            };
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var a = new DoubleAnimation(0, 1, (Duration)TimeSpan.FromMilliseconds(300));
+            this.BeginAnimation(UIElement.OpacityProperty, a);
 
             Rect wa = System.Windows.SystemParameters.WorkArea;
-            this.Top = wa.Bottom - 300;
-            sliding.From = wa.Right;
-            sliding.To = wa.Right - Width - Settings.Default.InformFormRightPosition;
-            sliding.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 300));
+
+            Storyboard sb = new Storyboard();
+            DoubleAnimation da = new DoubleAnimation(wa.Right, wa.Right - Width - Settings.Default.InfoWindowRightBottomPosition.X, (Duration)TimeSpan.FromMilliseconds(300));
+            Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'
+            sb.Children.Add(da);
+            BeginStoryboard(sb);
+
+            lock (ws)
+            {
+                if (ws.Count > 0)
+                {
+                    Window w = ws[ws.Count - 1];
+                    this.Top = w.Top - this.ActualHeight;
+                }
+                else
+                    this.Top = wa.Bottom - this.ActualHeight - Settings.Default.InfoWindowRightBottomPosition.Y;
+
+                ws.Add(this);
+            }
+        }
+
+        //new double Top
+        //{
+        //    get
+        //    {
+        //        return (double)this.Invoke(() => { return base.Top; });
+        //    }
+        //    set
+        //    {
+        //        base.Top = value;
+        //    }
+        //}
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Closing -= Window_Closing;
+            e.Cancel = true;
+            var a = new System.Windows.Media.Animation.DoubleAnimation(0, (Duration)TimeSpan.FromMilliseconds(300));
+            a.Completed += (s, _) => this.Close();
+            this.BeginAnimation(UIElement.OpacityProperty, a);
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            lock (ws)
+            {
+                int i = ws.IndexOf(this);
+                for (int j = i + 1; j < ws.Count; j++)
+                {
+                    Window w = ws[j];
+                    Storyboard sb = new Storyboard();
+                    DoubleAnimation da = new DoubleAnimation(w.Top + this.Height, (Duration)TimeSpan.FromMilliseconds(300));
+                    Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
+                    sb.Children.Add(da);
+                    BeginStoryboard(sb);
+                }
+
+                ws.Remove(this);
+            }
         }
     }
 }

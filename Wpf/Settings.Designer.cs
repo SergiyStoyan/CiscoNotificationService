@@ -50,12 +50,36 @@ namespace Cliver.CisteraNotification {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("inform.wav")]
-        public string InformSoundFile {
+        public string InfoSoundFile {
             get {
-                return ((string)(this["InformSoundFile"]));
+                return ((string)(this["InfoSoundFile"]));
             }
             set {
-                this["InformSoundFile"] = value;
+                this["InfoSoundFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int InfoWindowLifeTimeInSecs {
+            get {
+                return ((int)(this["InfoWindowLifeTimeInSecs"]));
+            }
+            set {
+                this["InfoWindowLifeTimeInSecs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 50")]
+        public global::System.Drawing.Point InfoWindowRightBottomPosition {
+            get {
+                return ((global::System.Drawing.Point)(this["InfoWindowRightBottomPosition"]));
+            }
+            set {
+                this["InfoWindowRightBottomPosition"] = value;
             }
         }
     }

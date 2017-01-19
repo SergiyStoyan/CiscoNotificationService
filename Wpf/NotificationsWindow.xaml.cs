@@ -73,9 +73,9 @@ namespace Cliver.CisteraNotification
                 var c = new InfoControl(title, text, image_url, action_name, action, false);
                 This.infos.Children.Insert(0, c);
 
-                if (!string.IsNullOrWhiteSpace(Settings.Default.InformSoundFile))
+                if (!string.IsNullOrWhiteSpace(Settings.Default.InfoSoundFile))
                 {
-                    SoundPlayer sp = new SoundPlayer(Settings.Default.InformSoundFile);
+                    SoundPlayer sp = new SoundPlayer(Settings.Default.InfoSoundFile);
                     sp.Play();
                 }
                 This.Topmost = true;
