@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Notifications" Height="auto" Width="auto"
         WindowStyle="SingleBorderWindow" ResizeMode="CanResize" 
-        Topmost="False" ShowInTaskbar="True"  >
+        Topmost="False" ShowInTaskbar="True" >
 
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid Name="grid">

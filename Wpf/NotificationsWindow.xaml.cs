@@ -49,6 +49,8 @@ namespace Cliver.CisteraNotification
         {
             InitializeComponent();
 
+            //Icon = new BitmapImage().; System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
+
             Closing += (object sender, System.ComponentModel.CancelEventArgs e) =>
             {
                 //This = null;
@@ -117,7 +119,7 @@ namespace Cliver.CisteraNotification
             if (nc.Notification is Info)
                 nc.Visibility = (show_infos.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
             else if (nc.Notification is Alert)
-                nc.Visibility = (show_infos.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
+                nc.Visibility = (show_alerts.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         static internal void AddToTable(Notification n)
