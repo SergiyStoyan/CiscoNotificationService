@@ -98,36 +98,24 @@ namespace Cliver.CisteraNotification {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int AlertFormWidth {
+        public int AlertWindowTop {
             get {
-                return ((int)(this["AlertFormWidth"]));
+                return ((int)(this["AlertWindowTop"]));
             }
             set {
-                this["AlertFormWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int AlertFormHeight {
-            get {
-                return ((int)(this["AlertFormHeight"]));
-            }
-            set {
-                this["AlertFormHeight"] = value;
+                this["AlertWindowTop"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int AlertFormRightPosition {
+        public int AlertWindowRight {
             get {
-                return ((int)(this["AlertFormRightPosition"]));
+                return ((int)(this["AlertWindowRight"]));
             }
             set {
-                this["AlertFormRightPosition"] = value;
+                this["AlertWindowRight"] = value;
             }
         }
         

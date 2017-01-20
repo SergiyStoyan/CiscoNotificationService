@@ -56,6 +56,7 @@ namespace Cliver.CisteraNotification
                     //    Thread.Sleep(Settings.Default.InfoWindowLifeTimeInSecs * 1000);
                     //    This.BeginInvoke(() => { This.Close(); });
                     //});
+                    This.keep_active_t = ThreadRoutines.StartTry(This.keep_active);
                     if (!string.IsNullOrWhiteSpace(Settings.Default.InfoSoundFile))
                     {
                         SoundPlayer sp = new SoundPlayer(Settings.Default.AlertSoundFile);
@@ -87,6 +88,25 @@ namespace Cliver.CisteraNotification
             }
         }
 
+        void keep_active()
+        {
+            while ((bool)this.Invoke(() =>
+                 {
+                     //if (This.Visibility == Visibility.Visible)
+                     //    return false;
+                     //if (!this.IsActive)
+                     {
+                         this.Activate();
+                         //SystemSounds.Beep.Play();
+                     }
+                     UIElement focus = this as UIElement;
+                     Keyboard.Focus(focus);
+                     return true;
+                 }))
+                Thread.Sleep(100);
+        }
+        Thread keep_active_t = null;
+
         AlertWindow()
         {
             InitializeComponent();
@@ -98,6 +118,11 @@ namespace Cliver.CisteraNotification
 
             Loaded += Window_Loaded;
             Closing += Window_Closing;
+            Closed += (s, _) =>
+            {
+                if (keep_active_t == null || !keep_active_t.IsAlive)
+                    keep_active_t.Abort();
+            };
             PreviewMouseDown += (object sender, MouseButtonEventArgs e) =>
             {
                 try
@@ -106,8 +131,16 @@ namespace Cliver.CisteraNotification
                 }
                 catch { }
             };
+            ShowActivated = true;
+            //Deactivated += (sender, _) =>
+            //{
+                
+            //    Activate();
+            //}; 
+            //Keyboard.Focus(focus);
 
             Topmost = true;
+            //ShowInTaskbar = true;
             Owner = invisible_owner_w;
 
             this.title.Text = title;
@@ -155,8 +188,10 @@ namespace Cliver.CisteraNotification
 
             Rect wa = System.Windows.SystemParameters.WorkArea;
 
+            Left = wa.Right - Settings.Default.AlertWindowRight - Width;
+
             Storyboard sb = new Storyboard();
-            DoubleAnimation da = new DoubleAnimation(-Height, Height, (Duration)TimeSpan.FromMilliseconds(300));
+            DoubleAnimation da = new DoubleAnimation(-Height, Settings.Default.AlertWindowTop, (Duration)TimeSpan.FromMilliseconds(300));
             Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
             sb.Children.Add(da);
             BeginStoryboard(sb);

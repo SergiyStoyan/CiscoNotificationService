@@ -54,7 +54,7 @@ namespace Cliver.CisteraNotification
                 Settings.Default.InfoWindowRight = int.Parse(InfoWindowRight.Text);
                 Settings.Default.InfoWindowBottom = int.Parse(InfoWindowBottom.Text);
                 Settings.Default.InfoWindowLifeTimeInSecs = int.Parse(InfoWindowLifeTimeInSecs.Text);
-                Settings.Default.AlertFormRightPosition = int.Parse(AlertFormRightPosition.Text);
+                Settings.Default.AlertWindowRight = int.Parse(AlertFormRightPosition.Text);
             }
             catch (Exception ex)
             {
@@ -91,7 +91,7 @@ namespace Cliver.CisteraNotification
             InfoWindowRight.Text = Settings.Default.InfoWindowRight.ToString();
             InfoWindowBottom.Text = Settings.Default.InfoWindowBottom.ToString();
             InfoWindowLifeTimeInSecs.Text = Settings.Default.InfoWindowLifeTimeInSecs.ToString();
-            AlertFormRightPosition.Text = Settings.Default.AlertFormRightPosition.ToString();
+            AlertFormRightPosition.Text = Settings.Default.AlertWindowRight.ToString();
         }
 
         private void bReset_Click(object sender, EventArgs e)

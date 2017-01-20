@@ -18,9 +18,9 @@ namespace Cliver
             return c.Dispatcher.Invoke(function);
         }
 
-        public static void Invoke(this System.Windows.Controls.Control c, MethodInvoker code)
+        public static object Invoke(this System.Windows.Controls.Control c, MethodInvoker code)
         {
-            c.Dispatcher.Invoke(code);
+            return c.Dispatcher.Invoke(code);
         }
 
         public static void BeginInvoke(this System.Windows.Controls.Control c, MethodInvoker code)

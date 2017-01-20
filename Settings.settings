@@ -20,13 +20,10 @@
     <Setting Name="InfoSoundFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">inform.wav</Value>
     </Setting>
-    <Setting Name="AlertFormWidth" Type="System.Int32" Scope="User">
+    <Setting Name="AlertWindowTop" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="AlertFormHeight" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="AlertFormRightPosition" Type="System.Int32" Scope="User">
+    <Setting Name="AlertWindowRight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="AudioDeviceName" Type="System.String" Scope="User">

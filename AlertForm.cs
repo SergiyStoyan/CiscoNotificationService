@@ -85,7 +85,7 @@ namespace Cliver.CisteraNotification
                     };
 
                 Rectangle wa = Screen.GetWorkingArea(a);
-                a.DesktopLocation = new Point(wa.Right - a.Width - Settings.Default.AlertFormRightPosition, wa.Top);
+                a.DesktopLocation = new Point(wa.Right - a.Width - Settings.Default.AlertWindowRight, wa.Top);
 
                 if (!string.IsNullOrWhiteSpace(Settings.Default.AlertSoundFile))
                 {
@@ -132,7 +132,7 @@ namespace Cliver.CisteraNotification
                 fs2.Height = this.Height;
 
             double rw = 1;
-            if (fs2.Width + Settings.Default.AlertFormRightPosition > Screen.PrimaryScreen.WorkingArea.Width)
+            if (fs2.Width + Settings.Default.AlertWindowRight > Screen.PrimaryScreen.WorkingArea.Width)
                 rw = Screen.PrimaryScreen.WorkingArea.Width / fs2.Width;
             double rh = 1;
             if (fs2.Height > Screen.PrimaryScreen.WorkingArea.Height)
