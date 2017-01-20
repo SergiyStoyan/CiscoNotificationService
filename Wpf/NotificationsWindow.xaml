@@ -8,32 +8,36 @@
         Title="Notifications" Height="auto" Width="auto"
         WindowStyle="SingleBorderWindow" ResizeMode="CanResize" 
         Topmost="False" ShowInTaskbar="True"  >
-    <Grid Name="grid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-        </Grid.ColumnDefinitions>
-        <StackPanel HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"  Orientation="Horizontal" Grid.Row="0">
-            <StackPanel.Resources>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Margin" Value="0,0,10,0"/>
-                </Style>
-                <Style TargetType="{x:Type CheckBox}">
-                    <Setter Property="Margin" Value="0,5,10,0"/>
-                </Style>
-                <Style TargetType="{x:Type Label}">
-                    <Setter Property="Margin" Value="0,0,5,0"/>
-                </Style>
-            </StackPanel.Resources>
-            <Button x:Name="select_all" Content="Select All" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
-            <Button x:Name="clear_selection" Content="Clear Selection" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
-            <Button x:Name="delete_selected" Content="Delete Selected" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
-            <Label x:Name="label" Content="Show:"/>
-            <CheckBox x:Name="show_infos" Content="Infos"/>
-            <CheckBox x:Name="show_alerts" Content="Alerts"/>
-        </StackPanel>
-        <StackPanel Name="notifications" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"  Orientation="Vertical" Grid.Row="1"/>
-    </Grid>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Name="grid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"  Orientation="Horizontal" Grid.Row="0">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="0,0,10,0"/>
+                    </Style>
+                    <Style TargetType="{x:Type CheckBox}">
+                        <Setter Property="Margin" Value="0,5,10,0"/>
+                    </Style>
+                    <Style TargetType="{x:Type Label}">
+                        <Setter Property="Margin" Value="0,0,5,0"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button x:Name="select_all" Content="Select All" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
+                <Button x:Name="clear_selection" Content="Clear Selection" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
+                <Button x:Name="delete_selected" Content="Delete Selected" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
+                <Label x:Name="label" Content="Show:"/>
+                <CheckBox x:Name="show_infos" Content="Infos" IsChecked="True"/>
+                <CheckBox x:Name="show_alerts" Content="Alerts" IsChecked="True"/>
+            </StackPanel>
+            <StackPanel Name="notifications" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"  Orientation="Vertical" Grid.Row="1">
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>

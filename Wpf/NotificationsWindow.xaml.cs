@@ -40,6 +40,7 @@ namespace Cliver.CisteraNotification
         public static void Display()
         {
             This.Show();
+            This.Activate();
         }
 
         static readonly NotificationsWindow This = null;
@@ -90,6 +91,33 @@ namespace Cliver.CisteraNotification
                 foreach (Notification n in ns)
                     n.Delete();
             };
+
+            show_infos.Click += (object sender, RoutedEventArgs e) =>
+            {
+                set_visibility();
+            };
+
+            show_alerts.Click += (object sender, RoutedEventArgs e) =>
+            {
+                set_visibility();
+            };
+        }
+
+        void set_visibility()
+        {
+            lock (this.notifications.Children)
+            {
+                foreach (NotificationControl nc in this.notifications.Children)
+                    set_visibility(nc);
+            }
+        }
+
+        void set_visibility(NotificationControl nc)
+        {
+            if (nc.Notification is Info)
+                nc.Visibility = (show_infos.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
+            else if (nc.Notification is Alert)
+                nc.Visibility = (show_infos.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         static internal void AddToTable(Notification n)
@@ -100,6 +128,7 @@ namespace Cliver.CisteraNotification
                 lock (This.notifications.Children)
                 {
                     nc.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    This.set_visibility(nc);
                     This.notifications.Children.Insert(0, nc);
                 }
             });

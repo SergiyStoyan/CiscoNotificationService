@@ -5,42 +5,44 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Cliver.CisteraNotification"
              mc:Ignorable="d">
-    <Grid Name="grid" >
-        <Grid.RowDefinitions>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Name="control" Width="auto" MinWidth="134"></ColumnDefinition>
-            <ColumnDefinition Width="auto"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1">
-            <RichTextBox Name="box" Height="auto" MinWidth="500">
-                <FlowDocument>
-                    <Paragraph>
-                        <Floater Name="image_container" HorizontalAlignment="Left" Width="60" Margin="0,0,5,0" Padding="0">
-                            <BlockUIContainer>
-                                <Image Name="image" HorizontalAlignment="Left" Width="60" Height="60" Stretch="Uniform" />
-                            </BlockUIContainer>
-                        </Floater>
-                        <Run Name="title" FontWeight="Bold">The said Eliza, John, and Georgiana etc. etc.
+    <Border BorderThickness="0 0 0 1" BorderBrush="#61738B" >
+        <Grid Name="grid" >
+            <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="control" Width="auto" MinWidth="134"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <RichTextBox Name="box" Height="auto" MinWidth="500" HorizontalAlignment="Stretch">
+                    <FlowDocument PagePadding="0">
+                        <Paragraph Padding="0">
+                            <Floater Name="image_container" HorizontalAlignment="Left" Width="60" Margin="0,0,5,0" Padding="0">
+                                <BlockUIContainer>
+                                    <Image Name="image" HorizontalAlignment="Left" Width="60" Height="60" Stretch="Uniform" />
+                                </BlockUIContainer>
+                            </Floater>
+                            <Run Name="title" FontWeight="Bold">The said Eliza, John, and Georgiana etc. etc.
                     The said Eliza, John, and Georgiana etc. etc.
-                        </Run>
-                        <LineBreak></LineBreak>
-                        <Run Name="text">
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
-                    The said Eliza, John, and Georgiana etc. etc.
+                            </Run>
+                            <Run Name="text">
+                                The said Eliza, John, and Georgiana etc. etc.
                     The said Eliza, John, and Georgiana etc. etc.
                     The said Eliza, John, and Georgiana etc. etc.
                     The said Eliza, John, and Georgiana etc. etc.
-                        </Run>
-                    </Paragraph>
-                </FlowDocument>
-            </RichTextBox>
-            <Button Name="button" Content="Button" HorizontalAlignment="Stretch" Height="27" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
-        </StackPanel>
-        <CheckBox x:Name="checkBox" Content="" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Grid.Column="0" Height="16" Width="17"/>
-        <Label x:Name="time" Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Height="26" Width="auto"/>
-        <Button x:Name="delete" Content="X" HorizontalAlignment="Left" Margin="99,25,0,0" VerticalAlignment="Top" Width="25" Grid.Column="0" Height="22"/>
-        <Button x:Name="show" Content="Show" HorizontalAlignment="Left" Margin="43,25,0,0" VerticalAlignment="Top" Width="40" Grid.Column="0" Height="22"/>
-    </Grid>
+                    The said Eliza, John, and Georgiana etc. etc.
+                    The said Eliza, John, and Georgiana etc. etc.
+                            </Run>
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox>
+                <Button Name="button" Content="Button" HorizontalAlignment="Stretch" Height="24" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            <CheckBox x:Name="checkBox" Content="" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" Grid.Column="0" Height="16" Width="17"/>
+            <Label x:Name="type" Content="type" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="0" Height="26" Width="auto" Margin="5,0,0,0" FontWeight="Bold"/>
+            <Label x:Name="time" Content="time" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Grid.Column="0" Height="26" Width="auto"/>
+            <Button x:Name="delete" Content="X" HorizontalAlignment="Left" Margin="99,53,0,0" VerticalAlignment="Top" Width="25" Grid.Column="0" Height="22" RenderTransformOrigin="-0.048,0.588"/>
+            <Button x:Name="show" Content="Show" HorizontalAlignment="Left" Margin="41,53,0,0" VerticalAlignment="Top" Width="40" Grid.Column="0" Height="22" RenderTransformOrigin="-0.425,0.588"/>
+        </Grid>
+    </Border>
 </UserControl>

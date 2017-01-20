@@ -29,11 +29,20 @@ namespace Cliver.CisteraNotification
             Notification = n;
 
             if (n is Info)
+            {
+                type.Content = "Info:";
                 grid.Background = Brushes.Beige;
+            }
             else if (n is Alert)
+            {
+                type.Content = "Alert:";
                 grid.Background = Brushes.OrangeRed;
+            }
 
-            this.title.Text = n.Title;
+            if (string.IsNullOrWhiteSpace(n.Text))
+                this.title.Text = n.Title;
+            else
+                this.title.Text = n.Title + new LineBreak();
             this.text.Text = n.Text;
             //var request = System.Net.WebRequest.Create(image_url);
             //request.BeginGetResponse((r) =>
