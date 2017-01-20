@@ -49,7 +49,7 @@ namespace Cliver.CisteraNotification
                     throw new Exception("Service Name cannot be empty.");
                 if (!UseWindowsUserAsServiceName.Checked)
                     Settings.Default.ServiceName = ServiceName.Text;
-                Settings.Default.AlertSound = AlertSound.Text;
+                Settings.Default.AlertSoundFile = AlertSound.Text;
                 Settings.Default.InfoSoundFile = InformSound.Text;
                 Settings.Default.InfoWindowRight = int.Parse(InfoWindowRight.Text);
                 Settings.Default.InfoWindowBottom = int.Parse(InfoWindowBottom.Text);
@@ -86,7 +86,7 @@ namespace Cliver.CisteraNotification
             ServicePort.Text = Settings.Default.ServicePort.ToString();
             ServiceName.Text = Settings.Default.ServiceName;
             UseWindowsUserAsServiceName.Checked = Settings.Default.UseWindowsUserAsServiceName;
-            AlertSound.Text = Settings.Default.AlertSound;
+            AlertSound.Text = Settings.Default.AlertSoundFile;
             InformSound.Text = Settings.Default.InfoSoundFile;
             InfoWindowRight.Text = Settings.Default.InfoWindowRight.ToString();
             InfoWindowBottom.Text = Settings.Default.InfoWindowBottom.ToString();

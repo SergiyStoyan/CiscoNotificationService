@@ -60,7 +60,12 @@ namespace Cliver.CisteraNotification
                             string name = xn.SelectSingleNode("Name")?.InnerText;
                             string url = xn.SelectSingleNode("URL")?.InnerText;
                             string position = xn.SelectSingleNode("Position")?.InnerText;
-                            AlertForm.AddAlert(title, text, null, name, () =>
+                            //AlertForm.AddAlert(title, text, null, name, () =>
+                            //{
+                            //    if (!string.IsNullOrWhiteSpace(url))
+                            //        Process.Start(url);
+                            //});
+                            new Alert(title, text, null, name, () =>
                             {
                                 if (!string.IsNullOrWhiteSpace(url))
                                     Process.Start(url);
@@ -92,7 +97,12 @@ namespace Cliver.CisteraNotification
                             string name = xn.SelectSingleNode("Name")?.InnerText;
                             string url = xn.SelectSingleNode("URL")?.InnerText;
                             string position = xn.SelectSingleNode("Position")?.InnerText;
-                            AlertForm.AddAlert(title, null, image_url, name, () =>
+                            //AlertForm.AddAlert(title, null, image_url, name, () =>
+                            //{
+                            //    if (!string.IsNullOrWhiteSpace(url))
+                            //        Process.Start(url);
+                            //});
+                            new Alert(title, null, image_url, name, () =>
                             {
                                 if (!string.IsNullOrWhiteSpace(url))
                                     Process.Start(url);

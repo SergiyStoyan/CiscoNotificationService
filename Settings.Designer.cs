@@ -74,12 +74,12 @@ namespace Cliver.CisteraNotification {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("alert.wav")]
-        public string AlertSound {
+        public string AlertSoundFile {
             get {
-                return ((string)(this["AlertSound"]));
+                return ((string)(this["AlertSoundFile"]));
             }
             set {
-                this["AlertSound"] = value;
+                this["AlertSoundFile"] = value;
             }
         }
         

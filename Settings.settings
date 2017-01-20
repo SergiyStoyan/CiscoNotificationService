@@ -14,7 +14,7 @@
     <Setting Name="Run" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="AlertSound" Type="System.String" Scope="User">
+    <Setting Name="AlertSoundFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">alert.wav</Value>
     </Setting>
     <Setting Name="InfoSoundFile" Type="System.String" Scope="User">

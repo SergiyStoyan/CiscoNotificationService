@@ -30,53 +30,57 @@ namespace Cliver.CisteraNotification
         static Window invisible_owner_w;
 
         static System.Windows.Threading.Dispatcher dispatcher = null;
+        static object lock_object = new object();
 
         public static InfoWindow Create(string title, string text, string image_url, string action_name, Action action)
         {
-            InfoWindow w = null;
-
-            Action a = () =>
+            lock (lock_object)
             {
-                w = new InfoWindow(title, text, image_url, action_name, action);
-                WindowInteropHelper h = new WindowInteropHelper(w);
-                h.EnsureHandle();
-                w.Show();
-                ThreadRoutines.StartTry(() =>
-                {
-                    Thread.Sleep(Settings.Default.InfoWindowLifeTimeInSecs * 1000);
-                    w.BeginInvoke(() => { w.Close(); });
-                });
-                if (!string.IsNullOrWhiteSpace(Settings.Default.InfoSoundFile))
-                {
-                    SoundPlayer sp = new SoundPlayer(Settings.Default.InfoSoundFile);
-                    sp.Play();
-                }
-            };
+                InfoWindow w = null;
 
-            lock (ws)
-            {
-                if (dispatcher == null)
-                {//!!!the following code does not work in static constructor because creates a deadlock!!!
+                Action a = () =>
+                {
+                    w = new InfoWindow(title, text, image_url, action_name, action);
+                    WindowInteropHelper h = new WindowInteropHelper(w);
+                    h.EnsureHandle();
+                    w.Show();
                     ThreadRoutines.StartTry(() =>
                     {
+                        Thread.Sleep(Settings.Default.InfoWindowLifeTimeInSecs * 1000);
+                        w.BeginInvoke(() => { w.Close(); });
+                    });
+                    if (!string.IsNullOrWhiteSpace(Settings.Default.InfoSoundFile))
+                    {
+                        SoundPlayer sp = new SoundPlayer(Settings.Default.InfoSoundFile);
+                        sp.Play();
+                    }
+                };
+
+                lock (ws)
+                {
+                    if (dispatcher == null)
+                    {//!!!the following code does not work in static constructor because creates a deadlock!!!
+                        ThreadRoutines.StartTry(() =>
+                        {
                         //this window is used to hide notification windows from Alt+Tab panel
                         invisible_owner_w = new Window();
-                        invisible_owner_w.Width = 0;
-                        invisible_owner_w.Height = 0;
-                        invisible_owner_w.WindowStyle = WindowStyle.ToolWindow;
-                        invisible_owner_w.ShowInTaskbar = false;
-                        invisible_owner_w.Show();
-                        invisible_owner_w.Hide();
+                            invisible_owner_w.Width = 0;
+                            invisible_owner_w.Height = 0;
+                            invisible_owner_w.WindowStyle = WindowStyle.ToolWindow;
+                            invisible_owner_w.ShowInTaskbar = false;
+                            invisible_owner_w.Show();
+                            invisible_owner_w.Hide();
 
-                        dispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher;
-                        System.Windows.Threading.Dispatcher.Run();
-                    }, null, null, true, ApartmentState.STA);
-                    if (!SleepRoutines.WaitForCondition(() => { return dispatcher != null; }, 3000))
-                        throw new Exception("Could not get dispatcher.");
+                            dispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher;
+                            System.Windows.Threading.Dispatcher.Run();
+                        }, null, null, true, ApartmentState.STA);
+                        if (!SleepRoutines.WaitForCondition(() => { return dispatcher != null; }, 3000))
+                            throw new Exception("Could not get dispatcher.");
+                    }
                 }
+                dispatcher.Invoke(a);
+                return w;
             }
-            dispatcher.Invoke(a);
-            return w;
         }
 
         InfoWindow()
@@ -115,13 +119,8 @@ namespace Cliver.CisteraNotification
             this.BeginAnimation(UIElement.OpacityProperty, a);
 
             Rect wa = System.Windows.SystemParameters.WorkArea;
-
-            Storyboard sb = new Storyboard();
-            DoubleAnimation da = new DoubleAnimation(wa.Right, wa.Right - Width - Settings.Default.InfoWindowRight, (Duration)TimeSpan.FromMilliseconds(300));
-            Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'
-            sb.Children.Add(da);
-            BeginStoryboard(sb);
-
+            Storyboard sb;
+            DoubleAnimation da;
             lock (ws)
             {
                 if (ws.Count > 0)
@@ -146,6 +145,11 @@ namespace Cliver.CisteraNotification
                     }
                 }
             }
+            sb = new Storyboard();
+            da = new DoubleAnimation(wa.Right, wa.Right - Width - Settings.Default.InfoWindowRight, (Duration)TimeSpan.FromMilliseconds(300));
+            Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'
+            sb.Children.Add(da);
+            BeginStoryboard(sb);
         }
 
         //new double Top

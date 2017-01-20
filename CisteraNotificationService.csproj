@@ -139,6 +139,9 @@
     <Compile Include="Wpf\InfoControl.xaml.cs">
       <DependentUpon>InfoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\AlertWindow.xaml.cs">
+      <DependentUpon>AlertWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
@@ -230,6 +233,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Wpf\InfoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wpf\AlertWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

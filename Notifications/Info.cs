@@ -33,7 +33,11 @@ namespace Cliver.CisteraNotification
 
         protected override void Deleting()
         {
-            w?.Close();
+            try
+            {
+                w?.Close();
+            }
+            catch { }
             w = null;
         }
     }

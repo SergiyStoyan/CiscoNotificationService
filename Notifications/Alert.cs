@@ -26,9 +26,19 @@ namespace Cliver.CisteraNotification
         }
 
         internal override void Show()
-        { }
+        {
+            AlertWindow w = AlertWindow.Create(Title, Text, ImageUrl, ActionName, Action);
+        }
+        AlertWindow w = null;
 
         protected override void Deleting()
-        { }
+        {
+            try
+            {
+                w?.Close();
+            }
+            catch { }
+            w = null;
+        }
     }
 }
