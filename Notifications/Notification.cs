@@ -39,11 +39,12 @@ namespace Cliver.CisteraNotification
             ImageUrl = image_url;
             ActionName = action_name;
             Action = action;
-            Created = DateTime.Now;
+            CreateTime = DateTime.Now;
             lock (notifications)
             {
                 notifications.Add(this);
             }
+            NotificationsWindow.AddToTable(this);
             Show();
         }
 
@@ -57,14 +58,16 @@ namespace Cliver.CisteraNotification
         readonly public string ImageUrl;
         readonly public string ActionName;
         readonly public Action Action;
-        readonly public DateTime Created;
+        readonly public DateTime CreateTime;
 
         internal abstract void Show();
-        internal abstract void Deleting();
+
+        protected abstract void Deleting();
 
         internal void Delete()
         {
             Deleting();
+            NotificationsWindow.DeleteFromTable(this);
             lock (notifications)
             {
                 notifications.Remove(this);

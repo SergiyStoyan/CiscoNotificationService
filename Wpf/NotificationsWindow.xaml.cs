@@ -15,93 +15,109 @@ using System.Windows.Shapes;
 using System.Media;
 using System.Windows.Interop;
 using System.Threading;
+using System.Windows.Forms.Integration;
 
 namespace Cliver.CisteraNotification
 {
     public partial class NotificationsWindow : Window
     {
-        static public void Initialize()
+        /// <summary>
+        /// Must be called from the main UI thread to trigger the static constructor
+        /// </summary>
+        public static void Initialize()
         {
-            //_This = new InfoWindow();
-            //WindowInteropHelper h = new WindowInteropHelper(_This);
-            //h.EnsureHandle();
-            //_This.Visibility = Visibility.Hidden;
+        }
+
+        static NotificationsWindow()
+        {
+            //System.Windows.Forms.Application.OpenForms[0].Invoke(() =>
+            //{
+                This = new NotificationsWindow();
+                ElementHost.EnableModelessKeyboardInterop(This);
+            //});
         }
 
         public static void Display()
         {
-            if (This == null)
-            {//!!!the following code does not work in static constructor because creates a deadlock!!!
-                Thread t = ThreadRoutines.StartTry(() =>
-                 {
-                     NotificationsWindow w = new NotificationsWindow();
-                     WindowInteropHelper h = new WindowInteropHelper(w);
-                     h.EnsureHandle();
-                     This = w;
-                     System.Windows.Threading.Dispatcher.Run();
-                 },
-                   null,
-                   null,
-                   true,
-                   ApartmentState.STA
-                   );
-                if (!SleepRoutines.WaitForCondition(() => { return This != null; }, 3000))
-                    throw new Exception("Could not create NotificationsWindow");
-            }
             This.Show();
         }
 
-        static NotificationsWindow This = null;
+        static readonly NotificationsWindow This = null;
 
         NotificationsWindow()
         {
             InitializeComponent();
 
-            Closed += (object sender, EventArgs e) =>
+            Closing += (object sender, System.ComponentModel.CancelEventArgs e) =>
             {
-                This = null;
+                //This = null;
+                e.Cancel = true;
+                This.Hide();
             };
 
-            foreach (Notification n in Notification.Notifications)
-                this.notifications.Children.Add(new NotificationControl(n));
+            //Closed += (object sender, EventArgs e) =>
+            //{
+            //    This = null;
+            //};
+
+            select_all.Click += (object sender, RoutedEventArgs e) =>
+            {
+                lock (this.notifications.Children)
+                {
+                    foreach (NotificationControl nc in this.notifications.Children)
+                        nc.checkBox.IsChecked = true;
+                }
+            };
+
+            clear_selection.Click += (object sender, RoutedEventArgs e) =>
+            {
+                lock (this.notifications.Children)
+                {
+                    foreach (NotificationControl nc in this.notifications.Children)
+                        nc.checkBox.IsChecked = false;
+                }
+            };
+
+            delete_selected.Click += (object sender, RoutedEventArgs e) =>
+            {
+                List<Notification> ns = new List<Notification>();
+                lock (this.notifications.Children)
+                {
+                    foreach (NotificationControl nc in this.notifications.Children)
+                        if (nc.checkBox.IsChecked ?? true)
+                            ns.Add(nc.Notification);
+                }
+                foreach (Notification n in ns)
+                    n.Delete();
+            };
         }
 
-        public static void Clear()
+        static internal void AddToTable(Notification n)
         {
-            This.Invoke(() =>
+            This.BeginInvoke(() =>
             {
-                while (This.notifications.Children.Count > 0)
-                    RemoveNotification((InfoControl)This.notifications.Children[This.notifications.Children.Count - 1]);
+                NotificationControl nc = new NotificationControl(n);
+                lock (This.notifications.Children)
+                {
+                    nc.HorizontalAlignment = HorizontalAlignment.Stretch;
+                    This.notifications.Children.Insert(0, nc);
+                }
             });
         }
 
-        public static void RemoveNotification(InfoControl nc)
+        static internal void DeleteFromTable(Notification n)
         {
-            This.Invoke(() =>
+            This.BeginInvoke(() =>
             {
-                This.notifications.Children.Remove(nc);
-
-                if (This.notifications.Children.Count > 0)
+                lock (This.notifications.Children)
                 {
-                    UIElement last_e = This.notifications.Children[This.notifications.Children.Count - 1];
-                    var gt = last_e.TransformToAncestor(This);
-                    double b = gt.Transform(new Point(0, last_e.RenderSize.Height)).Y;
-
-                    //Rect r = VisualTreeHelper.GetDescendantBounds(This);
-                    //if (r.Bottom > b)
-                    //{
-                    //    double h = r.Bottom - b;
-                    //    This.Height -= h;
-                    //    //This.Top += h;
-                    //    WpfControlRoutines.SlideVertically(This, 0.3, This.Top + h);
-                    //}
+                    for (int i = This.notifications.Children.Count - 1; i >= 0; i--)
+                    {
+                        NotificationControl nc = (NotificationControl)This.notifications.Children[i];
+                        if (nc.Notification == n)
+                            This.notifications.Children.RemoveAt(i);
+                    }
                 }
-
-                //if (This.notifications.Children.Count < 1)
-                //    WpfControlRoutines.Condense(This, 0.001, 0, 0.1, () =>
-                //    {
-                //        This.Visibility = Visibility.Hidden;
-                //    });
             });
         }
     }

@@ -26,6 +26,8 @@ namespace Cliver.CisteraNotification
         {
             InitializeComponent();
 
+            Notification = n;
+
             if (n is Info)
                 grid.Background = Brushes.Beige;
             else if (n is Alert)
@@ -67,6 +69,20 @@ namespace Cliver.CisteraNotification
             {
                 n.Action?.Invoke();
             };
+
+            delete.Click += (object sender, RoutedEventArgs e) =>
+            {
+                n.Delete();
+            };
+
+            show.Click += (object sender, RoutedEventArgs e) =>
+            {
+                n.Show();
+            };
+
+            time.Content = n.CreateTime.ToString("yy-MM-dd HH:mm:ss");
         }
+
+        internal readonly Notification Notification = null;
     }
 }

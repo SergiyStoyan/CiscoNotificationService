@@ -28,7 +28,7 @@ namespace Cliver.CisteraNotification
         internal override void Show()
         { }
 
-        internal override void Deleting()
+        protected override void Deleting()
         { }
     }
 }

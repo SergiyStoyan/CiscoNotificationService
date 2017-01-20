@@ -31,7 +31,7 @@ namespace Cliver.CisteraNotification
         }
         InfoWindow w = null;
 
-        internal override void Deleting()
+        protected override void Deleting()
         {
             w?.Close();
             w = null;

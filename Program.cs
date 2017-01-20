@@ -41,6 +41,8 @@ namespace Cliver.CisteraNotification
         {
             try
             {
+                NotificationsWindow.Initialize();
+
                 //NotificationForm nf = NotificationForm.This;
                 //NotificationForm.AddNotification("title", "message", "test.png", "action", null);
                 // NotificationForm.Clear();
