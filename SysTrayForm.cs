@@ -18,7 +18,7 @@ using System.Windows.Forms;
 
 namespace Cliver.CisteraNotification
 {
-    public partial class SysTray : BaseForm// Form //
+    public partial class SysTray : Form //BaseForm// 
     {
         SysTray()
         {
@@ -29,9 +29,9 @@ namespace Cliver.CisteraNotification
 
         public static readonly SysTray This = new SysTray();
 
-        private void notifyIcon1_DoubleClick(object sender, EventArgs e)
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            settingsToolStripMenuItem_Click(null, null);
+            Notifications_Click(null, null);
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,10 +54,6 @@ namespace Cliver.CisteraNotification
             this.Visible = false;
         }
 
-        private void notifyIcon1_MouseMove(object sender, MouseEventArgs e)
-        {
-        }
-
         private void StartStop_CheckedChanged(object sender, EventArgs e)
         {
             Settings.Default.Run = StartStop.Checked;
@@ -68,6 +64,16 @@ namespace Cliver.CisteraNotification
         private void RightClickMenu_Opening(object sender, CancelEventArgs e)
         {
             StartStop.Checked = Program.IsServiceRunning;
+        }
+
+        private void Notifications_Click(object sender, EventArgs e)
+        {
+            NotificationsWindow.Display();
+        }
+
+        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            Notifications_Click(null, null);
         }
     }
 }

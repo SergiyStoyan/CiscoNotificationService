@@ -19,8 +19,17 @@ using Bonjour;
 
 namespace Cliver.CisteraNotification
 {
-  abstract  class Notification
+    abstract class Notification
     {
+        internal static Notification[] Notifications
+        {
+            get
+            {
+                lock (notifications)
+                    return notifications.ToArray();
+            }
+        }
+
         readonly static List<Notification> notifications = new List<Notification>();
 
         protected Notification(string title, string text, string image_url, string action_name, Action action)

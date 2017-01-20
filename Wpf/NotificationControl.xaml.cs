@@ -22,12 +22,17 @@ namespace Cliver.CisteraNotification
             InitializeComponent();
         }
 
-        internal NotificationControl(string title, string text, string image_url, string action_name, Action action, bool close_on_button_click)
+        internal NotificationControl(Notification n)
         {
             InitializeComponent();
 
-            this.title.Text = title;
-            this.text.Text = text;
+            if (n is Info)
+                grid.Background = Brushes.Beige;
+            else if (n is Alert)
+                grid.Background = Brushes.OrangeRed;
+
+            this.title.Text = n.Title;
+            this.text.Text = n.Text;
             //var request = System.Net.WebRequest.Create(image_url);
             //request.BeginGetResponse((r) =>
             //{
@@ -38,10 +43,11 @@ namespace Cliver.CisteraNotification
             //        image.Image = Bitmap.FromStream(stream);
             //    }
             //}, request);
+            string image_url = n.ImageUrl;
             if (image_url != null)
             {
                 if (!image_url.Contains(":"))
-                    image_url = Log.AppDir + image_url;
+                    image_url = Log.AppDir + n.ImageUrl;
                 try
                 {
                     image.Source = new BitmapImage(new Uri(image_url));
@@ -53,22 +59,13 @@ namespace Cliver.CisteraNotification
             else
             {
                 image_container.Width = 0;
-                image_container.Margin = new Thickness( 0);
+                image_container.Margin = new Thickness(0);
             }
-            if (action_name != null)
-                this.button.Content = action_name;
+            if (n.ActionName != null)
+                this.button.Content = n.ActionName;
             this.button.Click += (object sender, RoutedEventArgs e) =>
             {
-                action?.Invoke();
-                if (close_on_button_click)
-                {
-                    Window w = Window.GetWindow(this);
-                    try
-                    {//might be closed already
-                        w.Close();
-                    }
-                    catch { }
-                }
+                n.Action?.Invoke();
             };
         }
     }

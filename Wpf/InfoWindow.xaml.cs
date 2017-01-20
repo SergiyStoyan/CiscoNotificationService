@@ -56,7 +56,7 @@ namespace Cliver.CisteraNotification
             lock (ws)
             {
                 if (dispatcher == null)
-                {//!!!cannot be done by static constructor!!!
+                {//!!!the following code does not work in static constructor because creates a deadlock!!!
                     ThreadRoutines.StartTry(() =>
                     {
                         //this window is used to hide notification windows from Alt+Tab panel

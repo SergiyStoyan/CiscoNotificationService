@@ -28,83 +28,76 @@ namespace Cliver
             c.Dispatcher.BeginInvoke(code);
         }
 
-        //public static object InvokeFromUiThread(Delegate d)
+        //public static Thread SlideVertically(this System.Windows.Window c, double pixelsPerMss, double position2, int step = 1, MethodInvoker finished = null)
         //{
-        //    return Application.OpenForms[0].Invoke(d);
+        //    lock (c)
+        //    {
+        //        Thread t = null;
+        //        //if (controls2sliding_thread.TryGetValue(c, out t) && t.IsAlive)
+        //        //    return t;
+
+        //        step = c.Top > position2 ? -step : step;
+        //        double total_mss = Math.Abs(position2 - c.Top) / pixelsPerMss;
+        //        int sleep = (int)(total_mss / ((position2 - c.Top) / step));
+        //        t = ThreadRoutines.Start(() =>
+        //        {
+        //            try
+        //            {
+        //                while (c.Visibility == Visibility.Visible && !(bool)WpfControlRoutines.Invoke(c, () =>
+        //                {
+        //                    c.Top = c.Top + step;
+        //                    return step < 0 ? c.Top <= position2 : c.Top >= position2;
+        //                })
+        //                )
+        //                    System.Threading.Thread.Sleep(sleep);
+        //                WpfControlRoutines.Invoke(c, () =>
+        //                {
+        //                    finished?.Invoke();
+        //                });
+        //            }
+        //            catch (Exception e)//control disposed
+        //            {
+        //            }
+        //        });
+        //        //controls2sliding_thread[c] = t;
+        //        return t;
+        //    }
         //}
 
-        public static Thread SlideVertically(this System.Windows.Window c, double pixelsPerMss, double position2, int step = 1, MethodInvoker finished = null)
-        {
-            lock (c)
-            {
-                Thread t = null;
-                //if (controls2sliding_thread.TryGetValue(c, out t) && t.IsAlive)
-                //    return t;
+        //public static Thread Condense(this System.Windows.Window c, double opacityPerMss, double opacity2, double step = 0.05, MethodInvoker finished = null)
+        //{
+        //    lock (c)
+        //    {
+        //        Thread t = null;
+        //        //if (controls2condensing_thread.TryGetValue(f, out t) && t.IsAlive)
+        //        //    return t;
 
-                step = c.Top > position2 ? -step : step;
-                double total_mss = Math.Abs(position2 - c.Top) / pixelsPerMss;
-                int sleep = (int)(total_mss / ((position2 - c.Top) / step));
-                t = ThreadRoutines.Start(() =>
-                {
-                    try
-                    {
-                        while (c.Visibility == Visibility.Visible && !(bool)WpfControlRoutines.Invoke(c, () =>
-                        {
-                            c.Top = c.Top + step;
-                            return step < 0 ? c.Top <= position2 : c.Top >= position2;
-                        })
-                        )
-                            System.Threading.Thread.Sleep(sleep);
-                        WpfControlRoutines.Invoke(c, () =>
-                        {
-                            finished?.Invoke();
-                        });
-                    }
-                    catch (Exception e)//control disposed
-                    {
-                    }
-                });
-                //controls2sliding_thread[c] = t;
-                return t;
-            }
-        }
-        //static readonly  Dictionary<Control, Thread> controls2sliding_thread = new Dictionary<Control, Thread>();
-
-        public static Thread Condense(this System.Windows.Window c, double opacityPerMss, double opacity2, double step = 0.05, MethodInvoker finished = null)
-        {
-            lock (c)
-            {
-                Thread t = null;
-                //if (controls2condensing_thread.TryGetValue(f, out t) && t.IsAlive)
-                //    return t;
-
-                step = c.Opacity < opacity2 ? step : -step;
-                double total_mss = Math.Abs(opacity2 - c.Opacity) / opacityPerMss;
-                int sleep = (int)(total_mss / ((opacity2 - c.Opacity) / step));
-                t = ThreadRoutines.Start(() =>
-                {
-                    try
-                    {
-                        while (!(bool)WpfControlRoutines.Invoke(c, () =>
-                        {
-                            c.Opacity = c.Opacity + step;
-                            return step > 0 ? c.Opacity >= opacity2 : c.Opacity <= opacity2;
-                        })
-                        )
-                            System.Threading.Thread.Sleep(sleep);
-                        WpfControlRoutines.Invoke(c, () =>
-                        {
-                            finished?.Invoke();
-                        });
-                    }
-                    catch (Exception e)//control disposed
-                    {
-                    }
-                });
-                //controls2condensing_thread[f] = t;
-                return t;
-            }
-        }
-        //static readonly Dictionary<Form, Thread> controls2condensing_thread = new Dictionary<Form, Thread>();
+        //        step = c.Opacity < opacity2 ? step : -step;
+        //        double total_mss = Math.Abs(opacity2 - c.Opacity) / opacityPerMss;
+        //        int sleep = (int)(total_mss / ((opacity2 - c.Opacity) / step));
+        //        t = ThreadRoutines.Start(() =>
+        //        {
+        //            try
+        //            {
+        //                while (!(bool)WpfControlRoutines.Invoke(c, () =>
+        //                {
+        //                    c.Opacity = c.Opacity + step;
+        //                    return step > 0 ? c.Opacity >= opacity2 : c.Opacity <= opacity2;
+        //                })
+        //                )
+        //                    System.Threading.Thread.Sleep(sleep);
+        //                WpfControlRoutines.Invoke(c, () =>
+        //                {
+        //                    finished?.Invoke();
+        //                });
+        //            }
+        //            catch (Exception e)//control disposed
+        //            {
+        //            }
+        //        });
+        //        //controls2condensing_thread[f] = t;
+        //        return t;
+        //    }
+        //}
     }
 }

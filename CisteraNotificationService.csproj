@@ -82,6 +82,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -103,23 +104,11 @@
     <Compile Include="Notifications\Info.cs" />
     <Compile Include="Notifications\Notification.cs" />
     <Compile Include="Rtp.cs" />
-    <Compile Include="NotificationControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="NotificationControl.Designer.cs">
-      <DependentUpon>NotificationControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="AlertForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AlertForm.Designer.cs">
       <DependentUpon>AlertForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NotificationForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NotificationForm.Designer.cs">
-      <DependentUpon>NotificationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CiscoHttp.cs" />
     <Compile Include="HttpService.cs" />
@@ -146,17 +135,24 @@
     <Compile Include="SysTrayForm.designer.cs">
       <DependentUpon>SysTrayForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\InfoControl.xaml.cs">
+      <DependentUpon>InfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\InfoWindow.xaml.cs">
+      <DependentUpon>InfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\NotificationControl.xaml.cs">
+      <DependentUpon>NotificationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\NotificationsWindow.xaml.cs">
+      <DependentUpon>NotificationsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\WpfControlRoutines.cs" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NotificationControl.resx">
-      <DependentUpon>NotificationControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="AlertForm.resx">
       <DependentUpon>AlertForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NotificationForm.resx">
-      <DependentUpon>NotificationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -216,10 +212,6 @@
       <Project>{a3f0de15-ac97-428d-830c-4f9721ee3627}</Project>
       <Name>Tftp.Net</Name>
     </ProjectReference>
-    <ProjectReference Include="Wpf\Wpf.csproj">
-      <Project>{36ade037-22c2-4b16-b68c-48f761d48d35}</Project>
-      <Name>Wpf</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Bonjour">
@@ -235,7 +227,24 @@
   <ItemGroup>
     <Content Include="Finger.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Wpf\InfoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wpf\InfoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wpf\NotificationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wpf\NotificationsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Y "$(ProjectDir)config_files" "$(TargetDir)"

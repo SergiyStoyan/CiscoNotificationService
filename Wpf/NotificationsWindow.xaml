@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Cliver.CisteraNotification"
         mc:Ignorable="d"
         Title="Notifications" Height="auto" Width="auto" 
-        WindowStyle="SingleBorderWindow" ResizeMode="CanResize" AllowsTransparency="True" 
+        WindowStyle="SingleBorderWindow" ResizeMode="CanResize" 
         Topmost="False" ShowInTaskbar="True"  >
     <Grid Name="grid">
         <Grid.RowDefinitions>

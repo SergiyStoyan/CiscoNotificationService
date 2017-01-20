@@ -50,7 +50,7 @@ namespace Cliver.CisteraNotification
                 if (!UseWindowsUserAsServiceName.Checked)
                     Settings.Default.ServiceName = ServiceName.Text;
                 Settings.Default.AlertSound = AlertSound.Text;
-                Settings.Default.InformSound = InformSound.Text;
+                Settings.Default.InfoSoundFile = InformSound.Text;
                 Settings.Default.NotificationFormHeight = int.Parse(NotificationFormHeight.Text);
                 Settings.Default.NotificationFormRightPosition = int.Parse(NotificationFormRightPosition.Text);
                 Settings.Default.AlertFormRightPosition = int.Parse(AlertFormRightPosition.Text);
@@ -86,7 +86,7 @@ namespace Cliver.CisteraNotification
             ServiceName.Text = Settings.Default.ServiceName;
             UseWindowsUserAsServiceName.Checked = Settings.Default.UseWindowsUserAsServiceName;
             AlertSound.Text = Settings.Default.AlertSound;
-            InformSound.Text = Settings.Default.InformSound;
+            InformSound.Text = Settings.Default.InfoSoundFile;
             NotificationFormHeight.Text = Settings.Default.NotificationFormHeight.ToString();
             NotificationFormRightPosition.Text = Settings.Default.NotificationFormRightPosition.ToString();
             AlertFormRightPosition.Text = Settings.Default.AlertFormRightPosition.ToString();
