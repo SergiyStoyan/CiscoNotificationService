@@ -98,42 +98,6 @@ namespace Cliver.CisteraNotification {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int NotificationFormWidth {
-            get {
-                return ((int)(this["NotificationFormWidth"]));
-            }
-            set {
-                this["NotificationFormWidth"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("310")]
-        public int NotificationFormHeight {
-            get {
-                return ((int)(this["NotificationFormHeight"]));
-            }
-            set {
-                this["NotificationFormHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int NotificationFormRightPosition {
-            get {
-                return ((int)(this["NotificationFormRightPosition"]));
-            }
-            set {
-                this["NotificationFormRightPosition"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int AlertFormWidth {
             get {
                 return ((int)(this["AlertFormWidth"]));
@@ -193,13 +157,25 @@ namespace Cliver.CisteraNotification {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 50")]
-        public global::System.Drawing.Point InfoWindowRightBottomPosition {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int InfoWindowRight {
             get {
-                return ((global::System.Drawing.Point)(this["InfoWindowRightBottomPosition"]));
+                return ((int)(this["InfoWindowRight"]));
             }
             set {
-                this["InfoWindowRightBottomPosition"] = value;
+                this["InfoWindowRight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int InfoWindowBottom {
+            get {
+                return ((int)(this["InfoWindowBottom"]));
+            }
+            set {
+                this["InfoWindowBottom"] = value;
             }
         }
     }

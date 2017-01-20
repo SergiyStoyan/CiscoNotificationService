@@ -38,19 +38,22 @@
             this.bReset = new System.Windows.Forms.Button();
             this.UseWindowsUserAsServiceName = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.AudioDevices = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.InformSound = new System.Windows.Forms.TextBox();
             this.bSelectPlayOnInform = new System.Windows.Forms.Button();
-            this.NotificationFormWidth = new System.Windows.Forms.TextBox();
+            this.InfoWindowRight = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.NotificationFormRightPosition = new System.Windows.Forms.TextBox();
+            this.InfoWindowLifeTimeInSecs = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.NotificationFormHeight = new System.Windows.Forms.TextBox();
+            this.InfoWindowBottom = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.AlertSound = new System.Windows.Forms.TextBox();
@@ -62,17 +65,14 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.AlertFormHeight = new System.Windows.Forms.TextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label11 = new System.Windows.Forms.Label();
-            this.AudioDevices = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // Cancel
@@ -160,6 +160,35 @@
             this.tabControl1.Size = new System.Drawing.Size(438, 247);
             this.tabControl1.TabIndex = 15;
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.AudioDevices);
+            this.tabPage4.Controls.Add(this.label11);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(430, 221);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "General";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // AudioDevices
+            // 
+            this.AudioDevices.FormattingEnabled = true;
+            this.AudioDevices.Location = new System.Drawing.Point(22, 35);
+            this.AudioDevices.Name = "AudioDevices";
+            this.AudioDevices.Size = new System.Drawing.Size(377, 21);
+            this.AudioDevices.TabIndex = 21;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(19, 19);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(74, 13);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "Audio Device:";
+            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.groupBox1);
@@ -193,7 +222,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(430, 221);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Informs";
+            this.tabPage2.Text = "Infos";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
@@ -201,13 +230,13 @@
             // 
             this.groupBox2.Controls.Add(this.InformSound);
             this.groupBox2.Controls.Add(this.bSelectPlayOnInform);
-            this.groupBox2.Controls.Add(this.NotificationFormWidth);
+            this.groupBox2.Controls.Add(this.InfoWindowRight);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.NotificationFormRightPosition);
+            this.groupBox2.Controls.Add(this.InfoWindowLifeTimeInSecs);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.NotificationFormHeight);
+            this.groupBox2.Controls.Add(this.InfoWindowBottom);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
             this.groupBox2.Name = "groupBox2";
@@ -232,22 +261,21 @@
             this.bSelectPlayOnInform.UseVisualStyleBackColor = true;
             this.bSelectPlayOnInform.Click += new System.EventHandler(this.bSelectPlayOnInform_Click);
             // 
-            // NotificationFormWidth
+            // InfoWindowRight
             // 
-            this.NotificationFormWidth.Enabled = false;
-            this.NotificationFormWidth.Location = new System.Drawing.Point(18, 76);
-            this.NotificationFormWidth.Name = "NotificationFormWidth";
-            this.NotificationFormWidth.Size = new System.Drawing.Size(52, 20);
-            this.NotificationFormWidth.TabIndex = 10;
+            this.InfoWindowRight.Location = new System.Drawing.Point(18, 76);
+            this.InfoWindowRight.Name = "InfoWindowRight";
+            this.InfoWindowRight.Size = new System.Drawing.Size(52, 20);
+            this.InfoWindowRight.TabIndex = 10;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(15, 138);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(181, 13);
+            this.label6.Size = new System.Drawing.Size(126, 13);
             this.label6.TabIndex = 17;
-            this.label6.Text = "Distance To Screen Right Boundary:";
+            this.label6.Text = "Toast Display Time (sec):";
             // 
             // label2
             // 
@@ -258,37 +286,37 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Play When Appears:";
             // 
-            // NotificationFormRightPosition
+            // InfoWindowLifeTimeInSecs
             // 
-            this.NotificationFormRightPosition.Location = new System.Drawing.Point(18, 154);
-            this.NotificationFormRightPosition.Name = "NotificationFormRightPosition";
-            this.NotificationFormRightPosition.Size = new System.Drawing.Size(52, 20);
-            this.NotificationFormRightPosition.TabIndex = 16;
+            this.InfoWindowLifeTimeInSecs.Location = new System.Drawing.Point(18, 154);
+            this.InfoWindowLifeTimeInSecs.Name = "InfoWindowLifeTimeInSecs";
+            this.InfoWindowLifeTimeInSecs.Size = new System.Drawing.Size(52, 20);
+            this.InfoWindowLifeTimeInSecs.TabIndex = 16;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(15, 60);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(107, 13);
             this.label1.TabIndex = 13;
-            this.label1.Text = "Width:";
+            this.label1.Text = "First Toast Right (px):";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(15, 99);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.Size = new System.Drawing.Size(115, 13);
             this.label5.TabIndex = 15;
-            this.label5.Text = "Height:";
+            this.label5.Text = "First Toast Bottom (px):";
             // 
-            // NotificationFormHeight
+            // InfoWindowBottom
             // 
-            this.NotificationFormHeight.Location = new System.Drawing.Point(18, 115);
-            this.NotificationFormHeight.Name = "NotificationFormHeight";
-            this.NotificationFormHeight.Size = new System.Drawing.Size(52, 20);
-            this.NotificationFormHeight.TabIndex = 14;
+            this.InfoWindowBottom.Location = new System.Drawing.Point(18, 115);
+            this.InfoWindowBottom.Name = "InfoWindowBottom";
+            this.InfoWindowBottom.Size = new System.Drawing.Size(52, 20);
+            this.InfoWindowBottom.TabIndex = 14;
             // 
             // tabPage3
             // 
@@ -395,35 +423,6 @@
             this.AlertFormHeight.Size = new System.Drawing.Size(52, 20);
             this.AlertFormHeight.TabIndex = 22;
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.AudioDevices);
-            this.tabPage4.Controls.Add(this.label11);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(430, 221);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "General";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(19, 19);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(74, 13);
-            this.label11.TabIndex = 20;
-            this.label11.Text = "Audio Device:";
-            // 
-            // AudioDevices
-            // 
-            this.AudioDevices.FormattingEnabled = true;
-            this.AudioDevices.Location = new System.Drawing.Point(22, 35);
-            this.AudioDevices.Name = "AudioDevices";
-            this.AudioDevices.Size = new System.Drawing.Size(377, 21);
-            this.AudioDevices.TabIndex = 21;
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -442,6 +441,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SettingsForm_FormClosed);
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.tabControl1.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -451,8 +452,6 @@
             this.tabPage3.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -473,13 +472,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox InformSound;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox NotificationFormWidth;
+        private System.Windows.Forms.TextBox InfoWindowRight;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox NotificationFormHeight;
+        private System.Windows.Forms.TextBox InfoWindowBottom;
         private System.Windows.Forms.Button bSelectPlayOnInform;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox NotificationFormRightPosition;
+        private System.Windows.Forms.TextBox InfoWindowLifeTimeInSecs;
         private System.Windows.Forms.Button bSelectPlayOnAlert;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox AlertFormRightPosition;

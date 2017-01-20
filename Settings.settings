@@ -20,15 +20,6 @@
     <Setting Name="InfoSoundFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">inform.wav</Value>
     </Setting>
-    <Setting Name="NotificationFormWidth" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="NotificationFormHeight" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">310</Value>
-    </Setting>
-    <Setting Name="NotificationFormRightPosition" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">50</Value>
-    </Setting>
     <Setting Name="AlertFormWidth" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
@@ -44,8 +35,11 @@
     <Setting Name="InfoWindowLifeTimeInSecs" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="InfoWindowRightBottomPosition" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 50</Value>
+    <Setting Name="InfoWindowRight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="InfoWindowBottom" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
     </Setting>
   </Settings>
 </SettingsFile>

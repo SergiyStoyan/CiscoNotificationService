@@ -10,9 +10,9 @@
         <RichTextBox Height="auto">
             <FlowDocument>
                 <Paragraph>
-                    <Floater Name="image_container" HorizontalAlignment="Left" Width="100" Margin="0,0,5,0" Padding="0">
+                    <Floater Name="image_container" HorizontalAlignment="Left" Width="60" Margin="0,0,5,0" Padding="0">
                         <BlockUIContainer>
-                            <Image Name="image" HorizontalAlignment="Left" Width="100" Height="100" Stretch="Uniform" />
+                            <Image Name="image" HorizontalAlignment="Left" Width="60" Height="60" Stretch="Uniform" />
                         </BlockUIContainer>
                     </Floater><Run Name="title" FontWeight="Bold">The said Eliza, John, and Georgiana etc. etc.
                     The said Eliza, John, and Georgiana etc. etc.
@@ -34,7 +34,7 @@
                 </Paragraph>
             </FlowDocument>
         </RichTextBox>
-                    <Button Name="button" Content="Button" HorizontalAlignment="Stretch" Height="41" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
+                    <Button Name="button" Content="Button" HorizontalAlignment="Stretch" Height="23" Margin="0,0,0,0" VerticalAlignment="Bottom"/>
             </StackPanel>
     </Grid>
 </UserControl>

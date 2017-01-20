@@ -31,7 +31,7 @@ namespace Cliver.CisteraNotification
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            Notifications_Click(null, null);
+            //Notifications_Click(null, null);
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,7 +73,9 @@ namespace Cliver.CisteraNotification
 
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
         {
-            Notifications_Click(null, null);
+            //RightClickMenu.Visible = true;
+            if (e.Button == MouseButtons.Left)
+                Notifications_Click(null, null);
         }
     }
 }

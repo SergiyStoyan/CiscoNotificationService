@@ -51,8 +51,9 @@ namespace Cliver.CisteraNotification
                     Settings.Default.ServiceName = ServiceName.Text;
                 Settings.Default.AlertSound = AlertSound.Text;
                 Settings.Default.InfoSoundFile = InformSound.Text;
-                Settings.Default.NotificationFormHeight = int.Parse(NotificationFormHeight.Text);
-                Settings.Default.NotificationFormRightPosition = int.Parse(NotificationFormRightPosition.Text);
+                Settings.Default.InfoWindowRight = int.Parse(InfoWindowRight.Text);
+                Settings.Default.InfoWindowBottom = int.Parse(InfoWindowBottom.Text);
+                Settings.Default.InfoWindowLifeTimeInSecs = int.Parse(InfoWindowLifeTimeInSecs.Text);
                 Settings.Default.AlertFormRightPosition = int.Parse(AlertFormRightPosition.Text);
             }
             catch (Exception ex)
@@ -87,8 +88,9 @@ namespace Cliver.CisteraNotification
             UseWindowsUserAsServiceName.Checked = Settings.Default.UseWindowsUserAsServiceName;
             AlertSound.Text = Settings.Default.AlertSound;
             InformSound.Text = Settings.Default.InfoSoundFile;
-            NotificationFormHeight.Text = Settings.Default.NotificationFormHeight.ToString();
-            NotificationFormRightPosition.Text = Settings.Default.NotificationFormRightPosition.ToString();
+            InfoWindowRight.Text = Settings.Default.InfoWindowRight.ToString();
+            InfoWindowBottom.Text = Settings.Default.InfoWindowBottom.ToString();
+            InfoWindowLifeTimeInSecs.Text = Settings.Default.InfoWindowLifeTimeInSecs.ToString();
             AlertFormRightPosition.Text = Settings.Default.AlertFormRightPosition.ToString();
         }
 

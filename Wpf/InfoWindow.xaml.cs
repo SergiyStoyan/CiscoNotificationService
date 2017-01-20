@@ -52,7 +52,7 @@ namespace Cliver.CisteraNotification
                     sp.Play();
                 }
             };
-            
+
             lock (ws)
             {
                 if (dispatcher == null)
@@ -117,7 +117,7 @@ namespace Cliver.CisteraNotification
             Rect wa = System.Windows.SystemParameters.WorkArea;
 
             Storyboard sb = new Storyboard();
-            DoubleAnimation da = new DoubleAnimation(wa.Right, wa.Right - Width - Settings.Default.InfoWindowRightBottomPosition.X, (Duration)TimeSpan.FromMilliseconds(300));
+            DoubleAnimation da = new DoubleAnimation(wa.Right, wa.Right - Width - Settings.Default.InfoWindowRight, (Duration)TimeSpan.FromMilliseconds(300));
             Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'
             sb.Children.Add(da);
             BeginStoryboard(sb);
@@ -130,9 +130,21 @@ namespace Cliver.CisteraNotification
                     this.Top = w.Top - this.ActualHeight;
                 }
                 else
-                    this.Top = wa.Bottom - this.ActualHeight - Settings.Default.InfoWindowRightBottomPosition.Y;
+                    this.Top = wa.Bottom - this.ActualHeight - Settings.Default.InfoWindowBottom;
 
                 ws.Add(this);
+
+                if (Top < 0)
+                {
+                    foreach (Window w in ws)
+                    {
+                        sb = new Storyboard();
+                        da = new DoubleAnimation(w.Top + this.Height, (Duration)TimeSpan.FromMilliseconds(300));
+                        Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
+                        sb.Children.Add(da);
+                        w.BeginStoryboard(sb);
+                    }
+                }
             }
         }
 
@@ -161,6 +173,10 @@ namespace Cliver.CisteraNotification
         {
             lock (ws)
             {
+                Rect wa = System.Windows.SystemParameters.WorkArea;
+                if (Top + Height > wa.Bottom)
+                    return;
+
                 int i = ws.IndexOf(this);
                 for (int j = i + 1; j < ws.Count; j++)
                 {
