@@ -58,13 +58,15 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.AlertSound = new System.Windows.Forms.TextBox();
             this.bSelectPlayOnAlert = new System.Windows.Forms.Button();
-            this.AlertFormWidth = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.AlertFormRightPosition = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.AlertToastRight = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.AlertFormHeight = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.AlertToastTop = new System.Windows.Forms.TextBox();
+            this.RecordIncomingRTPStreams = new System.Windows.Forms.CheckBox();
+            this.RtpStreamStorageFolder = new System.Windows.Forms.TextBox();
+            this.bRtpStreamStorageFolder = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -162,6 +164,10 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.RtpStreamStorageFolder);
+            this.tabPage4.Controls.Add(this.bRtpStreamStorageFolder);
+            this.tabPage4.Controls.Add(this.label7);
+            this.tabPage4.Controls.Add(this.RecordIncomingRTPStreams);
             this.tabPage4.Controls.Add(this.AudioDevices);
             this.tabPage4.Controls.Add(this.label11);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -224,7 +230,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Infos";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // groupBox2
             // 
@@ -331,15 +336,13 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.AlertToastRight);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.AlertToastTop);
             this.groupBox3.Controls.Add(this.AlertSound);
             this.groupBox3.Controls.Add(this.bSelectPlayOnAlert);
-            this.groupBox3.Controls.Add(this.AlertFormWidth);
-            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.AlertFormRightPosition);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.AlertFormHeight);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(3, 3);
             this.groupBox3.Name = "groupBox3";
@@ -364,23 +367,6 @@
             this.bSelectPlayOnAlert.UseVisualStyleBackColor = true;
             this.bSelectPlayOnAlert.Click += new System.EventHandler(this.bSelectPlayOnAlert_Click);
             // 
-            // AlertFormWidth
-            // 
-            this.AlertFormWidth.Enabled = false;
-            this.AlertFormWidth.Location = new System.Drawing.Point(18, 76);
-            this.AlertFormWidth.Name = "AlertFormWidth";
-            this.AlertFormWidth.Size = new System.Drawing.Size(52, 20);
-            this.AlertFormWidth.TabIndex = 18;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 138);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(181, 13);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "Distance To Screen Right Boundary:";
-            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -390,38 +376,73 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Play When Appears:";
             // 
-            // AlertFormRightPosition
+            // AlertToastRight
             // 
-            this.AlertFormRightPosition.Location = new System.Drawing.Point(18, 154);
-            this.AlertFormRightPosition.Name = "AlertFormRightPosition";
-            this.AlertFormRightPosition.Size = new System.Drawing.Size(52, 20);
-            this.AlertFormRightPosition.TabIndex = 25;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 60);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 13);
-            this.label9.TabIndex = 21;
-            this.label9.Text = "Width:";
+            this.AlertToastRight.Location = new System.Drawing.Point(18, 76);
+            this.AlertToastRight.Name = "AlertToastRight";
+            this.AlertToastRight.Size = new System.Drawing.Size(52, 20);
+            this.AlertToastRight.TabIndex = 27;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(15, 99);
+            this.label8.Location = new System.Drawing.Point(15, 60);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 13);
-            this.label8.TabIndex = 23;
-            this.label8.Text = "Height:";
+            this.label8.Size = new System.Drawing.Size(85, 13);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "Toast Right (px):";
             // 
-            // AlertFormHeight
+            // label9
             // 
-            this.AlertFormHeight.Enabled = false;
-            this.AlertFormHeight.Location = new System.Drawing.Point(18, 115);
-            this.AlertFormHeight.Name = "AlertFormHeight";
-            this.AlertFormHeight.Size = new System.Drawing.Size(52, 20);
-            this.AlertFormHeight.TabIndex = 22;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(15, 99);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(79, 13);
+            this.label9.TabIndex = 30;
+            this.label9.Text = "Toast Top (px):";
+            // 
+            // AlertToastTop
+            // 
+            this.AlertToastTop.Location = new System.Drawing.Point(18, 115);
+            this.AlertToastTop.Name = "AlertToastTop";
+            this.AlertToastTop.Size = new System.Drawing.Size(52, 20);
+            this.AlertToastTop.TabIndex = 29;
+            // 
+            // RecordIncomingRTPStreams
+            // 
+            this.RecordIncomingRTPStreams.AutoSize = true;
+            this.RecordIncomingRTPStreams.Location = new System.Drawing.Point(22, 73);
+            this.RecordIncomingRTPStreams.Name = "RecordIncomingRTPStreams";
+            this.RecordIncomingRTPStreams.Size = new System.Drawing.Size(173, 17);
+            this.RecordIncomingRTPStreams.TabIndex = 22;
+            this.RecordIncomingRTPStreams.Text = "Record Incoming RTP Streams";
+            this.RecordIncomingRTPStreams.UseVisualStyleBackColor = true;
+            // 
+            // RtpStreamStorageFolder
+            // 
+            this.RtpStreamStorageFolder.Location = new System.Drawing.Point(24, 108);
+            this.RtpStreamStorageFolder.Name = "RtpStreamStorageFolder";
+            this.RtpStreamStorageFolder.Size = new System.Drawing.Size(354, 20);
+            this.RtpStreamStorageFolder.TabIndex = 24;
+            // 
+            // bRtpStreamStorageFolder
+            // 
+            this.bRtpStreamStorageFolder.Location = new System.Drawing.Point(384, 106);
+            this.bRtpStreamStorageFolder.Name = "bRtpStreamStorageFolder";
+            this.bRtpStreamStorageFolder.Size = new System.Drawing.Size(25, 23);
+            this.bRtpStreamStorageFolder.TabIndex = 25;
+            this.bRtpStreamStorageFolder.Text = "...";
+            this.bRtpStreamStorageFolder.UseVisualStyleBackColor = true;
+            this.bRtpStreamStorageFolder.Click += new System.EventHandler(this.bRtpStreamStorageFolder_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(21, 92);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(79, 13);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Storage Folder:";
             // 
             // SettingsForm
             // 
@@ -480,18 +501,20 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox InfoWindowLifeTimeInSecs;
         private System.Windows.Forms.Button bSelectPlayOnAlert;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox AlertFormRightPosition;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox AlertFormHeight;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox AlertSound;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox AlertFormWidth;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ComboBox AudioDevices;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox AlertToastRight;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox AlertToastTop;
+        private System.Windows.Forms.CheckBox RecordIncomingRTPStreams;
+        private System.Windows.Forms.TextBox RtpStreamStorageFolder;
+        private System.Windows.Forms.Button bRtpStreamStorageFolder;
+        private System.Windows.Forms.Label label7;
     }
 }

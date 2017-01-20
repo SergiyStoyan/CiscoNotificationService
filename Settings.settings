@@ -20,23 +20,26 @@
     <Setting Name="InfoSoundFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">inform.wav</Value>
     </Setting>
-    <Setting Name="AlertWindowTop" Type="System.Int32" Scope="User">
+    <Setting Name="AlertToastTop" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="AlertWindowRight" Type="System.Int32" Scope="User">
+    <Setting Name="AlertToastRight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="AudioDeviceName" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="InfoWindowLifeTimeInSecs" Type="System.Int32" Scope="User">
+    <Setting Name="InfoToastLifeTimeInSecs" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">15</Value>
     </Setting>
-    <Setting Name="InfoWindowRight" Type="System.Int32" Scope="User">
+    <Setting Name="InfoToastRight" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="InfoWindowBottom" Type="System.Int32" Scope="User">
+    <Setting Name="InfoToastBottom" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="RtpStreamStorageFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

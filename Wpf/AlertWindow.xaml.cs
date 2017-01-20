@@ -188,10 +188,10 @@ namespace Cliver.CisteraNotification
 
             Rect wa = System.Windows.SystemParameters.WorkArea;
 
-            Left = wa.Right - Settings.Default.AlertWindowRight - Width;
+            Left = wa.Right - Settings.Default.AlertToastRight - Width;
 
             Storyboard sb = new Storyboard();
-            DoubleAnimation da = new DoubleAnimation(-Height, Settings.Default.AlertWindowTop, (Duration)TimeSpan.FromMilliseconds(300));
+            DoubleAnimation da = new DoubleAnimation(-Height, Settings.Default.AlertToastTop, (Duration)TimeSpan.FromMilliseconds(300));
             Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
             sb.Children.Add(da);
             BeginStoryboard(sb);

@@ -50,11 +50,13 @@ namespace Cliver.CisteraNotification
                 if (!UseWindowsUserAsServiceName.Checked)
                     Settings.Default.ServiceName = ServiceName.Text;
                 Settings.Default.AlertSoundFile = AlertSound.Text;
+                Settings.Default.AlertToastRight = int.Parse(AlertToastRight.Text);
+                Settings.Default.AlertToastTop = int.Parse(AlertToastTop.Text);
                 Settings.Default.InfoSoundFile = InformSound.Text;
-                Settings.Default.InfoWindowRight = int.Parse(InfoWindowRight.Text);
-                Settings.Default.InfoWindowBottom = int.Parse(InfoWindowBottom.Text);
-                Settings.Default.InfoWindowLifeTimeInSecs = int.Parse(InfoWindowLifeTimeInSecs.Text);
-                Settings.Default.AlertWindowRight = int.Parse(AlertFormRightPosition.Text);
+                Settings.Default.InfoToastRight = int.Parse(InfoWindowRight.Text);
+                Settings.Default.InfoToastBottom = int.Parse(InfoWindowBottom.Text);
+                Settings.Default.InfoToastLifeTimeInSecs = int.Parse(InfoWindowLifeTimeInSecs.Text);
+                Settings.Default.RtpStreamStorageFolder = RtpStreamStorageFolder.Text;
             }
             catch (Exception ex)
             {
@@ -87,11 +89,13 @@ namespace Cliver.CisteraNotification
             ServiceName.Text = Settings.Default.ServiceName;
             UseWindowsUserAsServiceName.Checked = Settings.Default.UseWindowsUserAsServiceName;
             AlertSound.Text = Settings.Default.AlertSoundFile;
+            AlertToastRight.Text = Settings.Default.AlertToastRight.ToString();
+            AlertToastTop.Text = Settings.Default.AlertToastTop.ToString();
             InformSound.Text = Settings.Default.InfoSoundFile;
-            InfoWindowRight.Text = Settings.Default.InfoWindowRight.ToString();
-            InfoWindowBottom.Text = Settings.Default.InfoWindowBottom.ToString();
-            InfoWindowLifeTimeInSecs.Text = Settings.Default.InfoWindowLifeTimeInSecs.ToString();
-            AlertFormRightPosition.Text = Settings.Default.AlertWindowRight.ToString();
+            InfoWindowRight.Text = Settings.Default.InfoToastRight.ToString();
+            InfoWindowBottom.Text = Settings.Default.InfoToastBottom.ToString();
+            InfoWindowLifeTimeInSecs.Text = Settings.Default.InfoToastLifeTimeInSecs.ToString();
+            RtpStreamStorageFolder.Text = Settings.Default.RtpStreamStorageFolder;
         }
 
         private void bReset_Click(object sender, EventArgs e)
@@ -131,9 +135,12 @@ namespace Cliver.CisteraNotification
             InformSound.Text = get_sound_file();
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
+        private void bRtpStreamStorageFolder_Click(object sender, EventArgs e)
         {
-
+           FolderBrowserDialog d = new FolderBrowserDialog();
+            d.Description = "Pick a folder where RTP streams will be stored";
+            if (d.ShowDialog(this) == DialogResult.OK)
+                RtpStreamStorageFolder.Text = d.SelectedPath;
         }
     }
 }

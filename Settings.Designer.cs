@@ -98,24 +98,24 @@ namespace Cliver.CisteraNotification {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int AlertWindowTop {
+        public int AlertToastTop {
             get {
-                return ((int)(this["AlertWindowTop"]));
+                return ((int)(this["AlertToastTop"]));
             }
             set {
-                this["AlertWindowTop"] = value;
+                this["AlertToastTop"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int AlertWindowRight {
+        public int AlertToastRight {
             get {
-                return ((int)(this["AlertWindowRight"]));
+                return ((int)(this["AlertToastRight"]));
             }
             set {
-                this["AlertWindowRight"] = value;
+                this["AlertToastRight"] = value;
             }
         }
         
@@ -134,36 +134,48 @@ namespace Cliver.CisteraNotification {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("15")]
-        public int InfoWindowLifeTimeInSecs {
+        public int InfoToastLifeTimeInSecs {
             get {
-                return ((int)(this["InfoWindowLifeTimeInSecs"]));
+                return ((int)(this["InfoToastLifeTimeInSecs"]));
             }
             set {
-                this["InfoWindowLifeTimeInSecs"] = value;
+                this["InfoToastLifeTimeInSecs"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int InfoWindowRight {
+        public int InfoToastRight {
             get {
-                return ((int)(this["InfoWindowRight"]));
+                return ((int)(this["InfoToastRight"]));
             }
             set {
-                this["InfoWindowRight"] = value;
+                this["InfoToastRight"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("50")]
-        public int InfoWindowBottom {
+        public int InfoToastBottom {
             get {
-                return ((int)(this["InfoWindowBottom"]));
+                return ((int)(this["InfoToastBottom"]));
             }
             set {
-                this["InfoWindowBottom"] = value;
+                this["InfoToastBottom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RtpStreamStorageFolder {
+            get {
+                return ((string)(this["RtpStreamStorageFolder"]));
+            }
+            set {
+                this["RtpStreamStorageFolder"] = value;
             }
         }
     }

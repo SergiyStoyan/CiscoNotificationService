@@ -46,7 +46,7 @@ namespace Cliver.CisteraNotification
                     w.Show();
                     ThreadRoutines.StartTry(() =>
                     {
-                        Thread.Sleep(Settings.Default.InfoWindowLifeTimeInSecs * 1000);
+                        Thread.Sleep(Settings.Default.InfoToastLifeTimeInSecs * 1000);
                         w.BeginInvoke(() => { w.Close(); });
                     });
                     if (!string.IsNullOrWhiteSpace(Settings.Default.InfoSoundFile))
@@ -129,7 +129,7 @@ namespace Cliver.CisteraNotification
                     this.Top = w.Top - this.ActualHeight;
                 }
                 else
-                    this.Top = wa.Bottom - this.ActualHeight - Settings.Default.InfoWindowBottom;
+                    this.Top = wa.Bottom - this.ActualHeight - Settings.Default.InfoToastBottom;
 
                 ws.Add(this);
 
@@ -146,7 +146,7 @@ namespace Cliver.CisteraNotification
                 }
             }
             sb = new Storyboard();
-            da = new DoubleAnimation(wa.Right, wa.Right - Width - Settings.Default.InfoWindowRight, (Duration)TimeSpan.FromMilliseconds(300));
+            da = new DoubleAnimation(wa.Right, wa.Right - Width - Settings.Default.InfoToastRight, (Duration)TimeSpan.FromMilliseconds(300));
             Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'
             sb.Children.Add(da);
             BeginStoryboard(sb);
