@@ -77,16 +77,28 @@ namespace Cliver.CisteraNotification
             this.button.Click += (object sender, RoutedEventArgs e) =>
             {
                 n.Action?.Invoke();
+                e.Handled = true;
             };
 
             delete.Click += (object sender, RoutedEventArgs e) =>
             {
                 n.Delete();
+                e.Handled = true;
             };
 
             show.Click += (object sender, RoutedEventArgs e) =>
             {
                 n.Show();
+                e.Handled = true;
+            };
+
+            grid.PreviewMouseDown += (object sender, MouseButtonEventArgs e) =>
+            {
+                checkBox.IsChecked = !checkBox.IsChecked;
+                if (checkBox.IsChecked??true)
+                    box.Background = Brushes.LightGray;
+                else
+                    box.Background = Brushes.White;
             };
 
             time.Content = n.CreateTime.ToString("yy-MM-dd HH:mm:ss");

@@ -32,6 +32,7 @@
                 <Button x:Name="select_all" Content="Select All" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
                 <Button x:Name="clear_selection" Content="Clear Selection" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
                 <Button x:Name="delete_selected" Content="Delete Selected" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
+                <Button x:Name="restore" Content="Restore" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
                 <Label x:Name="label" Content="Show:"/>
                 <CheckBox x:Name="show_infos" Content="Infos" IsChecked="True"/>
                 <CheckBox x:Name="show_alerts" Content="Alerts" IsChecked="True"/>

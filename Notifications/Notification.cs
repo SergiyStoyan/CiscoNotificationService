@@ -21,14 +21,22 @@ namespace Cliver.CisteraNotification
 {
     abstract class Notification
     {
-        internal static Notification[] Notifications
-        {
-            get
-            {
-                lock (notifications)
-                    return notifications.ToArray();
-            }
-        }
+        //internal static Notification[] Notifications
+        //{
+        //    get
+        //    {
+        //        lock (notifications)
+        //            return notifications.Where(n => !n.Deleted).ToArray();
+        //    }
+        //}
+
+        //static internal bool IsDeleted
+        //{
+        //    get
+        //    {
+        //        return notifications.Where(x => x.Deleted).Count() > 0;
+        //    }
+        //}
 
         readonly static List<Notification> notifications = new List<Notification>();
 
@@ -46,6 +54,8 @@ namespace Cliver.CisteraNotification
             }
             NotificationsWindow.AddToTable(this);
             Show();
+
+            forget_old();
         }
 
         ~Notification()
@@ -68,9 +78,47 @@ namespace Cliver.CisteraNotification
         {
             Deleting();
             NotificationsWindow.DeleteFromTable(this);
+            //lock (notifications)
+            //{
+            //    notifications.Remove(this);
+            //}
+            DeleteTime = DateTime.Now;
+            NotificationsWindow.EnableRestore(true);
+        }
+
+        public bool Deleted {
+            get
+            {
+                return DeleteTime > DateTime.MinValue;
+            }
+        }
+        public DateTime DeleteTime { get; private set; }
+
+        static internal void RestoreLastDeleted()
+        {
+            Notification n;
             lock (notifications)
             {
-                notifications.Remove(this);
+                n = notifications.Where(x => x.Deleted).OrderByDescending(x => x.DeleteTime).FirstOrDefault();
+                if (n == null)
+                {
+                    NotificationsWindow.EnableRestore(false);
+                    return;
+                }
+            }
+            n.DeleteTime = DateTime.MinValue;
+            NotificationsWindow.AddToTable(n);
+            NotificationsWindow.EnableRestore(notifications.Where(x => x.Deleted).Count() > 0);
+        }
+
+        static void forget_old()
+        {
+            lock (notifications)
+            {
+                DateTime forget_t = DateTime.Now.AddDays(-Settings.Default.ForgetNotificationsOlderThanDays);
+                var ns = notifications.Where(x => x.CreateTime < forget_t).ToList();
+                foreach (Notification n in ns)
+                    notifications.Remove(n);
             }
         }
     }

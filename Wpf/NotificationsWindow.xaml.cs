@@ -51,6 +51,8 @@ namespace Cliver.CisteraNotification
 
             //Icon = new BitmapImage().; System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
 
+            restore.IsEnabled = false;
+
             Closing += (object sender, System.ComponentModel.CancelEventArgs e) =>
             {
                 //This = null;
@@ -94,6 +96,11 @@ namespace Cliver.CisteraNotification
                     n.Delete();
             };
 
+            restore.Click += (object sender, RoutedEventArgs e) =>
+            {
+                Notification.RestoreLastDeleted();
+            };
+
             show_infos.Click += (object sender, RoutedEventArgs e) =>
             {
                 set_visibility();
@@ -131,7 +138,12 @@ namespace Cliver.CisteraNotification
                 {
                     nc.HorizontalAlignment = HorizontalAlignment.Stretch;
                     This.set_visibility(nc);
-                    This.notifications.Children.Insert(0, nc);
+
+                    int i = 0;
+                    for (; i < This.notifications.Children.Count; i++)
+                        if (((NotificationControl)This.notifications.Children[i]).Notification.CreateTime < n.CreateTime)
+                            break;
+                    This.notifications.Children.Insert(i, nc);
                 }
             });
         }
@@ -150,6 +162,11 @@ namespace Cliver.CisteraNotification
                     }
                 }
             });
+        }
+
+        static internal void EnableRestore(bool enable)
+        {
+            This.restore.IsEnabled = enable;
         }
     }
 }

@@ -57,6 +57,7 @@ namespace Cliver.CisteraNotification
                 Settings.Default.InfoToastBottom = int.Parse(InfoWindowBottom.Text);
                 Settings.Default.InfoToastLifeTimeInSecs = int.Parse(InfoWindowLifeTimeInSecs.Text);
                 Settings.Default.RtpStreamStorageFolder = RtpStreamStorageFolder.Text;
+                Settings.Default.ForgetNotificationsOlderThanDays = int.Parse(ForgetNotificationsOlderThanDays.Text);
             }
             catch (Exception ex)
             {
@@ -96,6 +97,7 @@ namespace Cliver.CisteraNotification
             InfoWindowBottom.Text = Settings.Default.InfoToastBottom.ToString();
             InfoWindowLifeTimeInSecs.Text = Settings.Default.InfoToastLifeTimeInSecs.ToString();
             RtpStreamStorageFolder.Text = Settings.Default.RtpStreamStorageFolder;
+            ForgetNotificationsOlderThanDays.Text = Settings.Default.ForgetNotificationsOlderThanDays.ToString();
         }
 
         private void bReset_Click(object sender, EventArgs e)
