@@ -95,7 +95,7 @@ namespace Cliver.CisteraNotification
             Loaded += Window_Loaded;
             Closing += Window_Closing;
             Closed += Window_Closed;
-            PreviewMouseDown += (object sender, MouseButtonEventArgs e) =>
+            PreviewMouseDown += delegate
             {
                 try
                 {//might be closed already

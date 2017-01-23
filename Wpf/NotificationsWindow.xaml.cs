@@ -78,7 +78,7 @@ namespace Cliver.CisteraNotification
 
             restore.IsEnabled = false;
 
-            select_all.Click += (object sender, RoutedEventArgs e) =>
+            select_all.Click += delegate
             {
                 lock (this.notifications.Children)
                 {
@@ -87,7 +87,7 @@ namespace Cliver.CisteraNotification
                 }
             };
 
-            clear_selection.Click += (object sender, RoutedEventArgs e) =>
+            clear_selection.Click += delegate
             {
                 lock (this.notifications.Children)
                 {
@@ -96,7 +96,7 @@ namespace Cliver.CisteraNotification
                 }
             };
 
-            delete_selected.Click += (object sender, RoutedEventArgs e) =>
+            delete_selected.Click += delegate
             {
                 List<Notification> ns = new List<Notification>();
                 lock (this.notifications.Children)
@@ -109,17 +109,17 @@ namespace Cliver.CisteraNotification
                     n.Delete();
             };
 
-            restore.Click += (object sender, RoutedEventArgs e) =>
+            restore.Click += delegate
             {
                 Notification.RestoreLastDeleted();
             };
 
-            show_infos.Click += (object sender, RoutedEventArgs e) =>
+            show_infos.Click += delegate
             {
                 set_visibility();
             };
 
-            show_alerts.Click += (object sender, RoutedEventArgs e) =>
+            show_alerts.Click += delegate
             {
                 set_visibility();
             };

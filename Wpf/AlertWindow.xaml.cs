@@ -16,6 +16,7 @@ using System.Media;
 using System.Windows.Interop;
 using System.Threading;
 using System.Windows.Media.Animation;
+using Gma.System.MouseKeyHook;
 
 namespace Cliver.CisteraNotification
 {
@@ -56,7 +57,6 @@ namespace Cliver.CisteraNotification
                     //    Thread.Sleep(Settings.Default.InfoWindowLifeTimeInSecs * 1000);
                     //    This.BeginInvoke(() => { This.Close(); });
                     //});
-                    This.keep_active_t = ThreadRoutines.StartTry(This.keep_active);
                     if (!string.IsNullOrWhiteSpace(Settings.Default.InfoSoundFile))
                     {
                         SoundPlayer sp = new SoundPlayer(Settings.Default.AlertSoundFile);
@@ -88,25 +88,6 @@ namespace Cliver.CisteraNotification
             }
         }
 
-        void keep_active()
-        {
-            while ((bool)this.Invoke(() =>
-                 {
-                     //if (This.Visibility == Visibility.Visible)
-                     //    return false;
-                     //if (!this.IsActive)
-                     {
-                         this.Activate();
-                         //SystemSounds.Beep.Play();
-                     }
-                     UIElement focus = this as UIElement;
-                     Keyboard.Focus(focus);
-                     return true;
-                 }))
-                Thread.Sleep(100);
-        }
-        Thread keep_active_t = null;
-
         AlertWindow()
         {
             InitializeComponent();
@@ -117,13 +98,16 @@ namespace Cliver.CisteraNotification
             InitializeComponent();
 
             Loaded += Window_Loaded;
+
             Closing += Window_Closing;
+
             Closed += (s, _) =>
             {
-                if (keep_active_t == null || !keep_active_t.IsAlive)
-                    keep_active_t.Abort();
+                if (globalHook != null)
+                    globalHook.Dispose();
             };
-            PreviewMouseDown += (object sender, MouseButtonEventArgs e) =>
+
+            PreviewMouseDown += delegate
             {
                 try
                 {//might be closed already
@@ -132,12 +116,6 @@ namespace Cliver.CisteraNotification
                 catch { }
             };
             ShowActivated = true;
-            //Deactivated += (sender, _) =>
-            //{
-                
-            //    Activate();
-            //}; 
-            //Keyboard.Focus(focus);
 
             Topmost = true;
             //ShowInTaskbar = true;
@@ -195,7 +173,36 @@ namespace Cliver.CisteraNotification
             Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
             sb.Children.Add(da);
             BeginStoryboard(sb);
+
+            globalHook = Hook.GlobalEvents();
+            globalHook.MouseDownExt += GlobalHook_MouseDownExt;
+            globalHook.KeyPress += GlobalHook_KeyPress;
+
+            Activate();
+            Focus();
         }
+
+        private void GlobalHook_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            if (Win32.GetForegroundWindow() == new WindowInteropHelper(this).Handle)
+                return;
+            SystemSounds.Beep.Play();
+            Activate();
+            //Focus();
+            //e.Handled = true;
+        }
+
+        private void GlobalHook_MouseDownExt(object sender, MouseEventExtArgs e)
+        {
+            if (Win32.GetForegroundWindow() == new WindowInteropHelper(this).Handle)
+                return;
+            SystemSounds.Beep.Play();
+            Activate();
+            //Focus();
+            //e.Handled = true;
+        }
+
+        IKeyboardMouseEvents globalHook = null;
 
         //new double Top
         //{
