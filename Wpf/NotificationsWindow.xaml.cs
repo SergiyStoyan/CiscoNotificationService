@@ -16,6 +16,7 @@ using System.Media;
 using System.Windows.Interop;
 using System.Threading;
 using System.Windows.Forms.Integration;
+using System.Windows.Media.Animation;
 
 namespace Cliver.CisteraNotification
 {
@@ -32,13 +33,18 @@ namespace Cliver.CisteraNotification
         {
             //System.Windows.Forms.Application.OpenForms[0].Invoke(() =>
             //{
-                This = new NotificationsWindow();
-                ElementHost.EnableModelessKeyboardInterop(This);
+            This = new NotificationsWindow();
+            ElementHost.EnableModelessKeyboardInterop(This);
             //});
         }
 
         public static void Display()
         {
+            if(This.Visibility == Visibility.Visible)
+            {
+                This.Close();
+                return;
+            }
             This.Show();
             This.Activate();
         }
@@ -50,20 +56,27 @@ namespace Cliver.CisteraNotification
             InitializeComponent();
 
             //Icon = new BitmapImage().; System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
-
-            restore.IsEnabled = false;
+            
+            IsVisibleChanged += (object sender, DependencyPropertyChangedEventArgs e) =>
+            {
+                if (Visibility != Visibility.Visible)
+                    return;
+                show(true);
+            };
 
             Closing += (object sender, System.ComponentModel.CancelEventArgs e) =>
             {
-                //This = null;
                 e.Cancel = true;
-                This.Hide();
+                //This.Hide();
+                show(false);
             };
 
             //Closed += (object sender, EventArgs e) =>
             //{
             //    This = null;
             //};
+
+            restore.IsEnabled = false;
 
             select_all.Click += (object sender, RoutedEventArgs e) =>
             {
@@ -111,7 +124,7 @@ namespace Cliver.CisteraNotification
                 set_visibility();
             };
         }
-
+        
         void set_visibility()
         {
             lock (this.notifications.Children)
@@ -168,5 +181,55 @@ namespace Cliver.CisteraNotification
         {
             This.restore.IsEnabled = enable;
         }
+
+        void show(bool show)
+        {
+            Storyboard sb = new Storyboard();
+            DoubleAnimation da;
+            Rect wa = System.Windows.SystemParameters.WorkArea;
+            if (show)
+            {
+                if (position.Y < 0)
+                    position = new Point(Left, Top);
+
+                da = new DoubleAnimation(wa.Right, position.X, (Duration)TimeSpan.FromMilliseconds(animation_duration));
+                Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'
+                sb.Children.Add(da);
+                da = new DoubleAnimation(wa.Bottom, position.Y, (Duration)TimeSpan.FromMilliseconds(animation_duration));
+                Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
+                sb.Children.Add(da);
+
+                //da = new DoubleAnimation(10, this.Width, (Duration)TimeSpan.FromMilliseconds(1000));
+                //Storyboard.SetTargetProperty(da, new PropertyPath("(Width)")); //Do not miss the '(' and ')'
+                //sb.Children.Add(da);
+                //da = new DoubleAnimation(10, this.Height, (Duration)TimeSpan.FromMilliseconds(1000));
+                //Storyboard.SetTargetProperty(da, new PropertyPath("(Height)")); //Do not miss the '(' and ')'
+                //sb.Children.Add(da);
+            }
+            else
+            {
+                position = new Point(Left, Top);
+
+                da = new DoubleAnimation(wa.Right, (Duration)TimeSpan.FromMilliseconds(animation_duration));
+                Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'                
+                //RenderOptions.SetCachingHint(_PictureBrush, CachingHint.Cache);
+                //RenderOptions.SetBitmapScalingMode(_PictureBrush, BitmapScalingMode.LowQuality);
+                sb.Children.Add(da);
+                da = new DoubleAnimation(wa.Bottom, (Duration)TimeSpan.FromMilliseconds(animation_duration));
+                da.Completed += (object sender, EventArgs e) => { Hide(); };
+                Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
+                sb.Children.Add(da);
+
+                //da = new DoubleAnimation(10, this.Width, (Duration)TimeSpan.FromMilliseconds(1000));
+                //Storyboard.SetTargetProperty(da, new PropertyPath("(Width)")); //Do not miss the '(' and ')'
+                //sb.Children.Add(da);
+                //da = new DoubleAnimation(10, this.Height, (Duration)TimeSpan.FromMilliseconds(1000));
+                //Storyboard.SetTargetProperty(da, new PropertyPath("(Height)")); //Do not miss the '(' and ')'
+                //sb.Children.Add(da);                
+            }
+            BeginStoryboard(sb);
+        }        
+        Point position = new Point(-1, -1);
+        double animation_duration = 500;
     }
 }

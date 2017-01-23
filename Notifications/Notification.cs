@@ -86,7 +86,8 @@ namespace Cliver.CisteraNotification
             NotificationsWindow.EnableRestore(true);
         }
 
-        public bool Deleted {
+        public bool Deleted
+        {
             get
             {
                 return DeleteTime > DateTime.MinValue;
