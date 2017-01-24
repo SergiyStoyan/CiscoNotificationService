@@ -77,5 +77,21 @@ namespace Cliver.CisteraNotification
             if (e.Button == MouseButtons.Left)
                 Notifications_Click(null, null);
         }
+
+        private void rtpRecordsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(Settings.Default.RtpStreamStorageFolder))
+            {
+                Message.Exclaim("Rtp Storage Folder is not set.");
+                return;
+            }
+            OpenFileDialog d = new OpenFileDialog();
+            d.InitialDirectory = Settings.Default.RtpStreamStorageFolder;
+            d.Title = "Pick a wav file";
+            d.Filter = "Filter sound files (*.wav)|*.wav|All files (*.*)|*.*";
+            if (d.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(d.FileName))
+                return;
+            System.Diagnostics.Process.Start(d.FileName);
+        }
     }
 }

@@ -38,6 +38,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rtpRecordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RightClickMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,19 +56,20 @@
             this.RightClickMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Notifications,
             this.settingsToolStripMenuItem,
+            this.rtpRecordsToolStripMenuItem,
             this.StartStop,
             this.aboutToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
             this.RightClickMenu.Name = "Menu";
-            this.RightClickMenu.Size = new System.Drawing.Size(146, 120);
+            this.RightClickMenu.Size = new System.Drawing.Size(153, 164);
             this.RightClickMenu.Opening += new System.ComponentModel.CancelEventHandler(this.RightClickMenu_Opening);
             // 
             // Notifications
             // 
             this.Notifications.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Notifications.Name = "Notifications";
-            this.Notifications.Size = new System.Drawing.Size(145, 22);
+            this.Notifications.Size = new System.Drawing.Size(152, 22);
             this.Notifications.Text = "Notifications";
             this.Notifications.Click += new System.EventHandler(this.Notifications_Click);
             // 
@@ -75,7 +77,7 @@
             // 
             this.settingsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
@@ -83,28 +85,35 @@
             // 
             this.StartStop.CheckOnClick = true;
             this.StartStop.Name = "StartStop";
-            this.StartStop.Size = new System.Drawing.Size(145, 22);
+            this.StartStop.Size = new System.Drawing.Size(152, 22);
             this.StartStop.Text = "Run On...";
             this.StartStop.CheckedChanged += new System.EventHandler(this.StartStop_CheckedChanged);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(142, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // rtpRecordsToolStripMenuItem
+            // 
+            this.rtpRecordsToolStripMenuItem.Name = "rtpRecordsToolStripMenuItem";
+            this.rtpRecordsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.rtpRecordsToolStripMenuItem.Text = "Rtp Records";
+            this.rtpRecordsToolStripMenuItem.Click += new System.EventHandler(this.rtpRecordsToolStripMenuItem_Click);
             // 
             // SysTray
             // 
@@ -133,5 +142,6 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StartStop;
         private System.Windows.Forms.ToolStripMenuItem Notifications;
+        private System.Windows.Forms.ToolStripMenuItem rtpRecordsToolStripMenuItem;
     }
 }

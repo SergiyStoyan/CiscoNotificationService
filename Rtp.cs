@@ -66,25 +66,32 @@ namespace Cliver.CisteraNotification
 
         static private void m_pRtpSession_NewReceiveStream(object sender, RTP_ReceiveStreamEventArgs e)
         {
-            //make sure that the stream is from the expected source ip 
-            if (null == e.Stream.Session.Targets.FirstOrDefault(i => i.IP.Equals(source_ip)))
-                return;
-            AudioOutDevice device = AudioOut.Devices.Where(d => d.Name == Settings.Default.AudioDeviceName).FirstOrDefault();
-            if (device == null)
+            try
             {
-                Message.Error("Could not find audio device: " + Settings.Default.AudioDeviceName);
-                return;
+                //for unicast make sure that the stream is from the expected source ip 
+                if (!multicast && e.Stream.SSRC.RtpEP.Address.Equals(source_ip))
+                    return;
+                AudioOutDevice device = AudioOut.Devices.Where(d => d.Name == Settings.Default.AudioDeviceName).FirstOrDefault();
+                if (device == null)
+                {
+                    Message.Error("Could not find audio device: " + Settings.Default.AudioDeviceName);
+                    return;
+                }
+                AudioCodec ac = new PCMU();
+                ao = new AudioOut_RTP(
+                    device,
+                    e.Stream,
+                    new Dictionary<int, AudioCodec> { { payload, ac } }
+                    );
+                Dictionary<AudioCodec, string> acs2of = new Dictionary<AudioCodec, string>();
+                if (Settings.Default.RecordIncomingRtpStreams)
+                    acs2of[ac] = PathRoutines.CreateDirectory(Settings.Default.RtpStreamStorageFolder) + "\\" + e.Stream.SSRC.RtpEP.Address.ToString() + ".wav";
+                ao.Start(volume100, acs2of);
             }
-            AudioCodec ac = new PCMU();
-            ao = new AudioOut_RTP(
-                device,
-                e.Stream,
-                new Dictionary<int, AudioCodec> { { payload, ac } }
-                );
-            Dictionary<AudioCodec, string> acs2of = new Dictionary<AudioCodec, string>();
-            if (Settings.Default.RecordIncomingRtpStreams)
-                acs2of[ac] = Settings.Default.RtpStreamStorageFolder + "\\" + e.Stream.Session.Targets[0].RtpEP.Serialize() + ".wav";
-            ao.Start(volume100, acs2of);
+            catch(Exception ex)
+            {
+                Message.Error(ex);
+            }
         }
         static AudioOut_RTP ao;
 

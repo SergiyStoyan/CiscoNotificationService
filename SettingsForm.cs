@@ -66,7 +66,7 @@ namespace Cliver.CisteraNotification
             }
             catch (Exception ex)
             {
-                Message.Error(ex);
+                Message.Error2(ex);
                 return;
             }
 
@@ -132,7 +132,7 @@ namespace Cliver.CisteraNotification
         private string get_sound_file()
         {
             OpenFileDialog d = new OpenFileDialog();
-            d.Title = "Pick an wav file";
+            d.Title = "Pick an audio file";
             d.Filter = "Filter sound files (*.wav)|*.wav|All files (*.*)|*.*";
             if (d.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(d.FileName))
                 return null;
@@ -155,6 +155,8 @@ namespace Cliver.CisteraNotification
         private void RecordIncomingRtpStreams_CheckedChanged(object sender, EventArgs e)
         {
             RtpStreamStorageFolder.Enabled = RecordIncomingRtpStreams.Checked;
+            if (RecordIncomingRtpStreams.Checked && string.IsNullOrWhiteSpace(RtpStreamStorageFolder.Text))
+                RtpStreamStorageFolder.Text = Cliver.Log.AppCommonDataDir + "\\ReceivedRtpStreams";
         }
     }
 }

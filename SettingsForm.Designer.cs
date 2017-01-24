@@ -192,9 +192,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(19, 128);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(199, 13);
+            this.label12.Size = new System.Drawing.Size(184, 13);
             this.label12.TabIndex = 26;
-            this.label12.Text = "Forget Notifications Received Days Ago:";
+            this.label12.Text = "Forget Notifications Older Than Days:";
             // 
             // RtpStreamStorageFolder
             // 
