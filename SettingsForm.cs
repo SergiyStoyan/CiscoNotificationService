@@ -45,10 +45,12 @@ namespace Cliver.CisteraNotification
                 Settings.Default.AudioDeviceName = ((AudioOutDevice)AudioDevices.SelectedItem).Name;
                 Settings.Default.ServicePort = ushort.Parse(ServicePort.Text);
                 Settings.Default.UseWindowsUserAsServiceName = UseWindowsUserAsServiceName.Checked;
-                if (string.IsNullOrWhiteSpace(ServiceName.Text))
-                    throw new Exception("Service Name cannot be empty.");
                 if (!UseWindowsUserAsServiceName.Checked)
+                { 
+                    if (string.IsNullOrWhiteSpace(ServiceName.Text))
+                        throw new Exception("Service Name cannot be empty.");
                     Settings.Default.ServiceName = ServiceName.Text;
+                }
                 Settings.Default.AlertSoundFile = AlertSound.Text;
                 Settings.Default.AlertToastRight = int.Parse(AlertToastRight.Text);
                 Settings.Default.AlertToastTop = int.Parse(AlertToastTop.Text);
@@ -56,6 +58,9 @@ namespace Cliver.CisteraNotification
                 Settings.Default.InfoToastRight = int.Parse(InfoWindowRight.Text);
                 Settings.Default.InfoToastBottom = int.Parse(InfoWindowBottom.Text);
                 Settings.Default.InfoToastLifeTimeInSecs = int.Parse(InfoWindowLifeTimeInSecs.Text);
+                if (RecordIncomingRtpStreams.Checked && string.IsNullOrWhiteSpace(RtpStreamStorageFolder.Text))
+                    throw new Exception("Rtp Stream Storage Folder cannot be empty.");
+                Settings.Default.RecordIncomingRtpStreams = RecordIncomingRtpStreams.Checked;
                 Settings.Default.RtpStreamStorageFolder = RtpStreamStorageFolder.Text;
                 Settings.Default.ForgetNotificationsOlderThanDays = int.Parse(ForgetNotificationsOlderThanDays.Text);
             }
@@ -96,7 +101,9 @@ namespace Cliver.CisteraNotification
             InfoWindowRight.Text = Settings.Default.InfoToastRight.ToString();
             InfoWindowBottom.Text = Settings.Default.InfoToastBottom.ToString();
             InfoWindowLifeTimeInSecs.Text = Settings.Default.InfoToastLifeTimeInSecs.ToString();
+            RecordIncomingRtpStreams.Checked = Settings.Default.RecordIncomingRtpStreams;
             RtpStreamStorageFolder.Text = Settings.Default.RtpStreamStorageFolder;
+            RtpStreamStorageFolder.Enabled = RecordIncomingRtpStreams.Checked;
             ForgetNotificationsOlderThanDays.Text = Settings.Default.ForgetNotificationsOlderThanDays.ToString();
         }
 
@@ -143,6 +150,11 @@ namespace Cliver.CisteraNotification
             d.Description = "Pick a folder where RTP streams will be stored";
             if (d.ShowDialog(this) == DialogResult.OK)
                 RtpStreamStorageFolder.Text = d.SelectedPath;
+        }
+
+        private void RecordIncomingRtpStreams_CheckedChanged(object sender, EventArgs e)
+        {
+            RtpStreamStorageFolder.Enabled = RecordIncomingRtpStreams.Checked;
         }
     }
 }

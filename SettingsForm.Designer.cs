@@ -39,9 +39,11 @@
             this.UseWindowsUserAsServiceName = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.ForgetNotificationsOlderThanDays = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.RtpStreamStorageFolder = new System.Windows.Forms.TextBox();
             this.bRtpStreamStorageFolder = new System.Windows.Forms.Button();
-            this.RecordIncomingRTPStreams = new System.Windows.Forms.CheckBox();
+            this.RecordIncomingRtpStreams = new System.Windows.Forms.CheckBox();
             this.AudioDevices = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -66,8 +68,6 @@
             this.AlertSound = new System.Windows.Forms.TextBox();
             this.bSelectPlayOnAlert = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.ForgetNotificationsOlderThanDays = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -169,7 +169,7 @@
             this.tabPage4.Controls.Add(this.label12);
             this.tabPage4.Controls.Add(this.RtpStreamStorageFolder);
             this.tabPage4.Controls.Add(this.bRtpStreamStorageFolder);
-            this.tabPage4.Controls.Add(this.RecordIncomingRTPStreams);
+            this.tabPage4.Controls.Add(this.RecordIncomingRtpStreams);
             this.tabPage4.Controls.Add(this.AudioDevices);
             this.tabPage4.Controls.Add(this.label11);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -179,6 +179,22 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "General";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // ForgetNotificationsOlderThanDays
+            // 
+            this.ForgetNotificationsOlderThanDays.Location = new System.Drawing.Point(22, 144);
+            this.ForgetNotificationsOlderThanDays.Name = "ForgetNotificationsOlderThanDays";
+            this.ForgetNotificationsOlderThanDays.Size = new System.Drawing.Size(47, 20);
+            this.ForgetNotificationsOlderThanDays.TabIndex = 27;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(19, 128);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(199, 13);
+            this.label12.TabIndex = 26;
+            this.label12.Text = "Forget Notifications Received Days Ago:";
             // 
             // RtpStreamStorageFolder
             // 
@@ -197,15 +213,16 @@
             this.bRtpStreamStorageFolder.UseVisualStyleBackColor = true;
             this.bRtpStreamStorageFolder.Click += new System.EventHandler(this.bRtpStreamStorageFolder_Click);
             // 
-            // RecordIncomingRTPStreams
+            // RecordIncomingRtpStreams
             // 
-            this.RecordIncomingRTPStreams.AutoSize = true;
-            this.RecordIncomingRTPStreams.Location = new System.Drawing.Point(22, 73);
-            this.RecordIncomingRTPStreams.Name = "RecordIncomingRTPStreams";
-            this.RecordIncomingRTPStreams.Size = new System.Drawing.Size(224, 17);
-            this.RecordIncomingRTPStreams.TabIndex = 22;
-            this.RecordIncomingRTPStreams.Text = "Record Incoming RTP Streams To Folder:";
-            this.RecordIncomingRTPStreams.UseVisualStyleBackColor = true;
+            this.RecordIncomingRtpStreams.AutoSize = true;
+            this.RecordIncomingRtpStreams.Location = new System.Drawing.Point(22, 73);
+            this.RecordIncomingRtpStreams.Name = "RecordIncomingRtpStreams";
+            this.RecordIncomingRtpStreams.Size = new System.Drawing.Size(224, 17);
+            this.RecordIncomingRtpStreams.TabIndex = 22;
+            this.RecordIncomingRtpStreams.Text = "Record Incoming RTP Streams To Folder:";
+            this.RecordIncomingRtpStreams.UseVisualStyleBackColor = true;
+            this.RecordIncomingRtpStreams.CheckedChanged += new System.EventHandler(this.RecordIncomingRtpStreams_CheckedChanged);
             // 
             // AudioDevices
             // 
@@ -437,22 +454,6 @@
             this.label10.TabIndex = 19;
             this.label10.Text = "Play When Appears:";
             // 
-            // ForgetNotificationsOlderThanDays
-            // 
-            this.ForgetNotificationsOlderThanDays.Location = new System.Drawing.Point(22, 144);
-            this.ForgetNotificationsOlderThanDays.Name = "ForgetNotificationsOlderThanDays";
-            this.ForgetNotificationsOlderThanDays.Size = new System.Drawing.Size(47, 20);
-            this.ForgetNotificationsOlderThanDays.TabIndex = 27;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(19, 128);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(199, 13);
-            this.label12.TabIndex = 26;
-            this.label12.Text = "Forget Notifications Received Days Ago:";
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,7 +522,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox AlertToastTop;
-        private System.Windows.Forms.CheckBox RecordIncomingRTPStreams;
+        private System.Windows.Forms.CheckBox RecordIncomingRtpStreams;
         private System.Windows.Forms.TextBox RtpStreamStorageFolder;
         private System.Windows.Forms.Button bRtpStreamStorageFolder;
         private System.Windows.Forms.TextBox ForgetNotificationsOlderThanDays;

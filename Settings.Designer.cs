@@ -190,5 +190,17 @@ namespace Cliver.CisteraNotification {
                 this["ForgetNotificationsOlderThanDays"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RecordIncomingRtpStreams {
+            get {
+                return ((bool)(this["RecordIncomingRtpStreams"]));
+            }
+            set {
+                this["RecordIncomingRtpStreams"] = value;
+            }
+        }
     }
 }

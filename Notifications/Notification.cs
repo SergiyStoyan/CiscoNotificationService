@@ -15,7 +15,7 @@ using System.IO;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Net;
-using Bonjour;
+//using LiteDB;
 
 namespace Cliver.CisteraNotification
 {
@@ -40,6 +40,8 @@ namespace Cliver.CisteraNotification
 
         readonly static List<Notification> notifications = new List<Notification>();
 
+        //readonly static LiteDatabase db = new LiteDatabase(@"MyData.db");
+        
         protected Notification(string title, string text, string image_url, string action_name, Action action)
         {
             Title = title;

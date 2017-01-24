@@ -874,6 +874,7 @@ namespace LumiSoft.Net.Media
         /// </summary>
         /// <param name="device">Audio output device.</param>
         /// <param name="format">Audio output format.</param>
+        /// <param name="volume100">Volume level between 0 and 100.</param>
         /// <exception cref="ArgumentNullException">Is raised when <b>device</b> or <b>format</b> is null reference.</exception>
         public AudioOut(AudioOutDevice device, AudioFormat format, uint? volume100 = null)
         {

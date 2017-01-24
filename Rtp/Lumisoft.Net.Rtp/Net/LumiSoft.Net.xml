@@ -1844,7 +1844,7 @@
             </summary>
             <param name="audioOutDevice">Audio-out device used to play out RTP audio.</param>
             <param name="stream">RTP receive stream which audio to play.</param>
-            <param name="codecs">Audio codecs with RTP payload number. For example: 0-PCMU,8-PCMA.</param>
+            <param name="payloads2codec">Audio codecs with RTP payload number. For example: 0-PCMU,8-PCMA.</param>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>audioOutDevice</b>,<b>stream</b> or <b>codecs</b> is null reference.</exception>
         </member>
         <member name="M:LumiSoft.Net.Media.AudioOut_RTP.Dispose">
@@ -1859,10 +1859,12 @@
             <param name="sender">Sender.</param>
             <param name="e">Event data.</param>
         </member>
-        <member name="M:LumiSoft.Net.Media.AudioOut_RTP.Start(System.Nullable{System.UInt32})">
+        <member name="M:LumiSoft.Net.Media.AudioOut_RTP.Start(System.Nullable{System.UInt32},System.Collections.Generic.Dictionary{LumiSoft.Net.Media.Codec.Audio.AudioCodec,System.String})">
             <summary>
             Starts receiving RTP audio and palying it out.
             </summary>
+            <param name="volume100">Volume level between 0 and 100.</param>
+            <param name="codecs2output_wav_file">Audio codecs to output file if any</param>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this method is accessed.</exception>
         </member>
         <member name="M:LumiSoft.Net.Media.AudioOut_RTP.Stop">
@@ -3303,6 +3305,7 @@
             </summary>
             <param name="device">Audio output device.</param>
             <param name="format">Audio output format.</param>
+            <param name="volume100">Volume level between 0 and 100.</param>
             <exception cref="T:System.ArgumentNullException">Is raised when <b>device</b> or <b>format</b> is null reference.</exception>
         </member>
         <member name="M:LumiSoft.Net.Media.AudioOut.#ctor(LumiSoft.Net.Media.AudioOutDevice,System.Int32,System.Int32,System.Int32)">

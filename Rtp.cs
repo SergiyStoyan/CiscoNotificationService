@@ -46,11 +46,11 @@ namespace Cliver.CisteraNotification
 
             Rtp.source_ip = source_ip;
             Rtp.volume100 = volume100;
+            Rtp.multicast = multicast;
             session = new RTP_MultimediaSession(RTP_Utils.GenerateCNAME());
             if(multicast)
                 session.CreateMulticastSession(null, new RTP_Clock(0, 8000), new RTP_Address(source_ip, port, port + 1));
             else
-                //TBD: for unicast we have to check source ip when accept a stream
                 session.CreateSession(new RTP_Address(IPAddress.Any, port, port + 1), new RTP_Clock(0, 8000));
             session.Sessions[0].NewReceiveStream += new EventHandler<RTP_ReceiveStreamEventArgs>(m_pRtpSession_NewReceiveStream);
             session.Sessions[0].Payload = payload;
@@ -62,25 +62,29 @@ namespace Cliver.CisteraNotification
         static RTP_MultimediaSession session = null;
         static IPAddress source_ip = null;
         static uint? volume100 = null;
+        static bool multicast = false;
 
         static private void m_pRtpSession_NewReceiveStream(object sender, RTP_ReceiveStreamEventArgs e)
         {
-            //TBD: for unicast we have to check source ip 
-            //if(e.Stream.Session.StunPublicEndPoints)
-            //e.Stream.Session.Stop();
-            foreach (AudioOutDevice device in AudioOut.Devices)
+            //make sure that the stream is from the expected source ip 
+            if (null == e.Stream.Session.Targets.FirstOrDefault(i => i.IP.Equals(source_ip)))
+                return;
+            AudioOutDevice device = AudioOut.Devices.Where(d => d.Name == Settings.Default.AudioDeviceName).FirstOrDefault();
+            if (device == null)
             {
-                if (Settings.Default.AudioDeviceName == device.Name)
-                {
-                    ao = new AudioOut_RTP(
-                        device,
-                       e.Stream,
-                        new Dictionary<int, AudioCodec> { { payload, new PCMU() } }
-                        );
-                    ao.Start(volume100);
-                    break;
-                }
+                Message.Error("Could not find audio device: " + Settings.Default.AudioDeviceName);
+                return;
             }
+            AudioCodec ac = new PCMU();
+            ao = new AudioOut_RTP(
+                device,
+                e.Stream,
+                new Dictionary<int, AudioCodec> { { payload, ac } }
+                );
+            Dictionary<AudioCodec, string> acs2of = new Dictionary<AudioCodec, string>();
+            if (Settings.Default.RecordIncomingRtpStreams)
+                acs2of[ac] = Settings.Default.RtpStreamStorageFolder + "\\" + e.Stream.Session.Targets[0].RtpEP.Serialize() + ".wav";
+            ao.Start(volume100, acs2of);
         }
         static AudioOut_RTP ao;
 
@@ -88,7 +92,11 @@ namespace Cliver.CisteraNotification
         {
             if (session != null)
             {
+                ao.Stop();
+                ao.Dispose();
+                ao = null;
                 session.Close("Closed.");
+                session.Dispose();
                 session = null;
             }
         }

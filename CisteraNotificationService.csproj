@@ -81,6 +81,10 @@
       <HintPath>packages\MouseKeyHook.5.4.0\lib\net40\Gma.System.MouseKeyHook.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LiteDB, Version=3.0.0.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>packages\LiteDB.3.0.0\lib\net35\LiteDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />

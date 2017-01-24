@@ -47,6 +47,7 @@ namespace Cliver.CisteraNotification
             }
             This.Show();
             This.Activate();
+            This.WindowState = WindowState.Normal;
         }
 
         static readonly NotificationsWindow This = null;
