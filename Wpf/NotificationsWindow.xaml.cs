@@ -56,7 +56,9 @@ namespace Cliver.CisteraNotification
             InitializeComponent();
 
             //Icon = new BitmapImage().; System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
-            
+
+            //ShowInTaskbar = false;
+
             IsVisibleChanged += (object sender, DependencyPropertyChangedEventArgs e) =>
             {
                 if (Visibility != Visibility.Visible)
@@ -186,16 +188,15 @@ namespace Cliver.CisteraNotification
         {
             Storyboard sb = new Storyboard();
             DoubleAnimation da;
-            Rect wa = System.Windows.SystemParameters.WorkArea;
             if (show)
             {
                 if (position.Y < 0)
                     position = new Point(Left, Top);
 
-                da = new DoubleAnimation(wa.Right, position.X, (Duration)TimeSpan.FromMilliseconds(animation_duration));
+                da = new DoubleAnimation(SystemParameters.PrimaryScreenWidth, position.X, TimeSpan.FromMilliseconds(animation_duration));
                 Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'
                 sb.Children.Add(da);
-                da = new DoubleAnimation(wa.Bottom, position.Y, (Duration)TimeSpan.FromMilliseconds(animation_duration));
+                da = new DoubleAnimation(SystemParameters.PrimaryScreenHeight, position.Y, TimeSpan.FromMilliseconds(animation_duration));
                 Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
                 sb.Children.Add(da);
 
@@ -210,12 +211,12 @@ namespace Cliver.CisteraNotification
             {
                 position = new Point(Left, Top);
 
-                da = new DoubleAnimation(wa.Right, (Duration)TimeSpan.FromMilliseconds(animation_duration));
+                da = new DoubleAnimation(SystemParameters.PrimaryScreenWidth, (Duration)TimeSpan.FromMilliseconds(animation_duration));
                 Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'                
                 //RenderOptions.SetCachingHint(_PictureBrush, CachingHint.Cache);
                 //RenderOptions.SetBitmapScalingMode(_PictureBrush, BitmapScalingMode.LowQuality);
                 sb.Children.Add(da);
-                da = new DoubleAnimation(wa.Bottom, (Duration)TimeSpan.FromMilliseconds(animation_duration));
+                da = new DoubleAnimation(SystemParameters.PrimaryScreenHeight, (Duration)TimeSpan.FromMilliseconds(animation_duration));
                 da.Completed += (object sender, EventArgs e) => { Hide(); };
                 Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
                 sb.Children.Add(da);

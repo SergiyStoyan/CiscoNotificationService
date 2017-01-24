@@ -190,14 +190,22 @@ namespace Cliver.CisteraNotification
             var a = new DoubleAnimation(0, 1, (Duration)TimeSpan.FromMilliseconds(300));
             this.BeginAnimation(UIElement.OpacityProperty, a);
 
-            Rect wa = System.Windows.SystemParameters.WorkArea;
-
-            Left = wa.Right - Settings.Default.AlertToastRight - Width;
+            Left = SystemParameters.WorkArea.Right - Settings.Default.AlertToastRight - Width;
+            //Top = Settings.Default.AlertToastTop;
 
             Storyboard sb = new Storyboard();
-            DoubleAnimation da = new DoubleAnimation(-Height, Settings.Default.AlertToastTop, (Duration)TimeSpan.FromMilliseconds(300));
+            DoubleAnimation da;
+            da = new DoubleAnimation(-Height, Settings.Default.AlertToastTop, TimeSpan.FromMilliseconds(animation_duration));
             Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
+            //da = new DoubleAnimation(SystemParameters.WorkArea.Right, SystemParameters.WorkArea.Right - Settings.Default.AlertToastRight - Width, TimeSpan.FromMilliseconds(animation_duration));
+            //Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'
             sb.Children.Add(da);
+            //da = new DoubleAnimation(SystemParameters.PrimaryScreenWidth, (SystemParameters.WorkArea.Right - Width) / 2, TimeSpan.FromMilliseconds(animation_duration));
+            //Storyboard.SetTargetProperty(da, new PropertyPath("(Left)")); //Do not miss the '(' and ')'
+            //sb.Children.Add(da);
+            //da = new DoubleAnimation(SystemParameters.PrimaryScreenHeight, (SystemParameters.WorkArea.Height - Height) / 2, TimeSpan.FromMilliseconds(animation_duration));
+            //Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
+            //sb.Children.Add(da);
             BeginStoryboard(sb);
 
             globalHook = Hook.GlobalEvents();
@@ -211,38 +219,33 @@ namespace Cliver.CisteraNotification
             //HwndSource hs = HwndSource.FromHwnd(handle);
             //hs.AddHook(WndProc);
         }
+        double animation_duration = 500;
 
         IKeyboardMouseEvents globalHook = null;
 
         private void GlobalHook_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
             //if (Win32.GetForegroundWindow() == handle)
-            //{
-                switch (KeyInterop.KeyFromVirtualKey(Win32.VkKeyScan(e.KeyChar)))
-                {
-                    case Key.Escape:
-                        Close();
-                        break;
-                    case Key.Enter:
-                        button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        break;
-                    default:
-                        ThreadRoutines.StartTry(() => {
-                            activate();
-                            //SystemSounds.Beep.Play();
-                        });
-                        break;
-                }
-            //    return;
-            //}
+            switch (KeyInterop.KeyFromVirtualKey(Win32.VkKeyScan(e.KeyChar)))
+            {
+                case Key.Escape:
+                    Close();
+                    break;
+                case Key.Enter:
+                    button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                    break;
+                default:
+                    activate();
+                    break;
+            }
             e.Handled = true;
-            //activate();
         }
 
         private void GlobalHook_MouseDownExt(object sender, MouseEventExtArgs e)
         {
             if (e.Location.X > Left && e.Location.X <= Left + Width
-                && e.Location.Y > Top && e.Location.Y <= Top + Height)
+                && e.Location.Y > Top && e.Location.Y <= Top + Height
+                )
                 return;
             e.Handled = true;
             activate();
@@ -252,7 +255,6 @@ namespace Cliver.CisteraNotification
         {
             //var h = new WindowInteropHelper(this).Handle;
             //Win32.SendMessage(h, Win32.WM_SYSCOMMAND, (int)Win32.SC_RESTORE, 0);
-
             Activate();
             Focus();
             //if (IntPtr.Zero == Win32.SetForegroundWindow(h))
@@ -263,28 +265,28 @@ namespace Cliver.CisteraNotification
             });
         }
 
-        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            //var htLocation = Win32.DefWindowProc(hwnd, msg, wParam, lParam).ToInt32();
-            switch ((uint)msg)
-            {
-                //case Win32.WM_MOUSEACTIVATE:
-                //case Win32.WM_NCACTIVATE:
-                case Win32.WM_ACTIVATE:
-                    if (wParam == new IntPtr(Win32.WA_INACTIVE))
-                    {
-                        handled = true;
-                        activate();
-                    }
-                    break;
-                case Win32.WM_KILLFOCUS:
-                    handled = true;
-                    activate();
-                    break;
-            }
+        //private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        //{
+        //    //var htLocation = Win32.DefWindowProc(hwnd, msg, wParam, lParam).ToInt32();
+        //    switch ((uint)msg)
+        //    {
+        //        //case Win32.WM_MOUSEACTIVATE:
+        //        //case Win32.WM_NCACTIVATE:
+        //        case Win32.WM_ACTIVATE:
+        //            if (wParam == new IntPtr(Win32.WA_INACTIVE))
+        //            {
+        //                handled = true;
+        //                activate();
+        //            }
+        //            break;
+        //        case Win32.WM_KILLFOCUS:
+        //            handled = true;
+        //            activate();
+        //            break;
+        //    }
 
-            return IntPtr.Zero;
-        }
+        //    return IntPtr.Zero;
+        //}
 
         //new double Top
         //{
