@@ -17,6 +17,7 @@ using System.Windows.Interop;
 using System.Threading;
 using System.Windows.Media.Animation;
 using Gma.System.MouseKeyHook;
+using System.Windows.Forms.Integration;
 
 namespace Cliver.CisteraNotification
 {
@@ -48,9 +49,39 @@ namespace Cliver.CisteraNotification
                         { }
                     }
 
+                    if (invisible_owner_w == null)
+                    {
+                        //this window is used to hide notification windows from Alt+Tab panel
+                        invisible_owner_w = new Window();
+                        invisible_owner_w.WindowStyle = WindowStyle.ToolWindow;
+                        invisible_owner_w.Width = 0;
+                        invisible_owner_w.Height = 0;
+                        //invisible_owner_w.Width = SystemParameters.FullPrimaryScreenWidth;
+                        //invisible_owner_w.Height = SystemParameters.FullPrimaryScreenHeight;
+                        //invisible_owner_w.AllowsTransparency = true;
+                        //invisible_owner_w.Background = Brushes.Transparent;
+                        //invisible_owner_w.Topmost = true;
+                        invisible_owner_w.ShowInTaskbar = false;
+                        invisible_owner_w.Top = 0;
+                        invisible_owner_w.Left = 0;
+                        //invisible_owner_w.MouseDown += delegate
+                        //{
+                        //    invisible_owner_w.Hide();
+                        //};
+                        //invisible_owner_w.KeyDown += delegate
+                        //{
+                        //    invisible_owner_w.Hide();
+                        //};
+
+                        invisible_owner_w.Show();
+                        invisible_owner_w.Hide();
+                    }
+
                     This = new AlertWindow(title, text, image_url, action_name, action);
-                    WindowInteropHelper h = new WindowInteropHelper(This);
-                    h.EnsureHandle();
+                    //ElementHost.EnableModelessKeyboardInterop(This);
+                    WindowInteropHelper wih = new WindowInteropHelper(This);
+                    This.handle = wih.EnsureHandle();
+                    This.Owner = invisible_owner_w;
                     This.Show();
                     //ThreadRoutines.StartTry(() =>
                     //{
@@ -68,15 +99,6 @@ namespace Cliver.CisteraNotification
                 {//!!!the following code does not work in static constructor because creates a deadlock!!!
                     ThreadRoutines.StartTry(() =>
                     {
-                        //this window is used to hide notification windows from Alt+Tab panel
-                        invisible_owner_w = new Window();
-                        invisible_owner_w.Width = 0;
-                        invisible_owner_w.Height = 0;
-                        invisible_owner_w.WindowStyle = WindowStyle.ToolWindow;
-                        invisible_owner_w.ShowInTaskbar = false;
-                        invisible_owner_w.Show();
-                        invisible_owner_w.Hide();
-
                         dispatcher = System.Windows.Threading.Dispatcher.CurrentDispatcher;
                         System.Windows.Threading.Dispatcher.Run();
                     }, null, null, true, ApartmentState.STA);
@@ -84,9 +106,14 @@ namespace Cliver.CisteraNotification
                         throw new Exception("Could not get dispatcher.");
                 }
                 dispatcher.Invoke(a);
+
+                //ControlRoutines.InvokeFromUiThread(a);
+
                 return This;
             }
         }
+
+        IntPtr handle;
 
         AlertWindow()
         {
@@ -119,7 +146,6 @@ namespace Cliver.CisteraNotification
 
             Topmost = true;
             //ShowInTaskbar = true;
-            Owner = invisible_owner_w;
 
             this.title.Text = title;
             this.text.Text = text;
@@ -180,29 +206,85 @@ namespace Cliver.CisteraNotification
 
             Activate();
             Focus();
+            Win32.SetForegroundWindow(handle);
+
+            //HwndSource hs = HwndSource.FromHwnd(handle);
+            //hs.AddHook(WndProc);
         }
+
+        IKeyboardMouseEvents globalHook = null;
 
         private void GlobalHook_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-            if (Win32.GetForegroundWindow() == new WindowInteropHelper(this).Handle)
-                return;
-            SystemSounds.Beep.Play();
-            Activate();
-            //Focus();
-            //e.Handled = true;
+            //if (Win32.GetForegroundWindow() == handle)
+            //{
+                switch (KeyInterop.KeyFromVirtualKey(Win32.VkKeyScan(e.KeyChar)))
+                {
+                    case Key.Escape:
+                        Close();
+                        break;
+                    case Key.Enter:
+                        button.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                        break;
+                    default:
+                        ThreadRoutines.StartTry(() => {
+                            activate();
+                            //SystemSounds.Beep.Play();
+                        });
+                        break;
+                }
+            //    return;
+            //}
+            e.Handled = true;
+            //activate();
         }
 
         private void GlobalHook_MouseDownExt(object sender, MouseEventExtArgs e)
         {
-            if (Win32.GetForegroundWindow() == new WindowInteropHelper(this).Handle)
+            if (e.Location.X > Left && e.Location.X <= Left + Width
+                && e.Location.Y > Top && e.Location.Y <= Top + Height)
                 return;
-            SystemSounds.Beep.Play();
-            Activate();
-            //Focus();
-            //e.Handled = true;
+            e.Handled = true;
+            activate();
         }
 
-        IKeyboardMouseEvents globalHook = null;
+        void activate()
+        {
+            //var h = new WindowInteropHelper(this).Handle;
+            //Win32.SendMessage(h, Win32.WM_SYSCOMMAND, (int)Win32.SC_RESTORE, 0);
+
+            Activate();
+            Focus();
+            //if (IntPtr.Zero == Win32.SetForegroundWindow(h))
+            //Win32.SendMessage(h, Win32.WM_SYSCOMMAND, (int)Win32.SC_RESTORE, 0);
+            ThreadRoutines.StartTry(() => {
+                Win32.SetForegroundWindow(handle);
+                SystemSounds.Beep.Play();
+            });
+        }
+
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            //var htLocation = Win32.DefWindowProc(hwnd, msg, wParam, lParam).ToInt32();
+            switch ((uint)msg)
+            {
+                //case Win32.WM_MOUSEACTIVATE:
+                //case Win32.WM_NCACTIVATE:
+                case Win32.WM_ACTIVATE:
+                    if (wParam == new IntPtr(Win32.WA_INACTIVE))
+                    {
+                        handled = true;
+                        activate();
+                    }
+                    break;
+                case Win32.WM_KILLFOCUS:
+                    handled = true;
+                    activate();
+                    break;
+            }
+
+            return IntPtr.Zero;
+        }
 
         //new double Top
         //{
