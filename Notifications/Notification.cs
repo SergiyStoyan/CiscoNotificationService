@@ -48,6 +48,7 @@ namespace Cliver.CisteraNotification
             ActionName = action_name;
             Action = action;
             CreateTime = DateTime.Now;
+            DeleteTime = DateTime.MinValue;
             lock (notifications)
             {
                 notifications.Add(this);
