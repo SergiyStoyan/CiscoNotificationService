@@ -42,7 +42,12 @@ namespace Cliver.CisteraNotification
         static public Status Play(bool multicast, IPAddress source_ip, int port, uint? volume100 = null)
         {
             if (session != null)
-                return Status.BUSY;
+            {
+                if(!Message.YesNo("Would you like to drop the previous stream?"))
+                    return Status.BUSY;
+                session.Stop();
+                session.Dispose();
+            }
 
             Rtp.source_ip = source_ip;
             Rtp.volume100 = volume100;
@@ -69,7 +74,7 @@ namespace Cliver.CisteraNotification
             try
             {
                 //for unicast make sure that the stream is from the expected source ip 
-                if (!multicast && e.Stream.SSRC.RtpEP.Address.Equals(source_ip))
+                if (!multicast && !e.Stream.SSRC.RtpEP.Address.Equals(source_ip))
                     return;
                 AudioOutDevice device = AudioOut.Devices.Where(d => d.Name == Settings.Default.AudioDeviceName).FirstOrDefault();
                 if (device == null)
@@ -85,7 +90,7 @@ namespace Cliver.CisteraNotification
                     );
                 Dictionary<AudioCodec, string> acs2of = new Dictionary<AudioCodec, string>();
                 if (Settings.Default.RecordIncomingRtpStreams)
-                    acs2of[ac] = PathRoutines.CreateDirectory(Settings.Default.RtpStreamStorageFolder) + "\\" + e.Stream.SSRC.RtpEP.Address.ToString() + ".wav";
+                    acs2of[ac] = PathRoutines.CreateDirectory(Settings.Default.RtpStreamStorageFolder) + "\\" + e.Stream.SSRC.RtpEP.Address.ToString() + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".wav";
                 ao.Start(volume100, acs2of);
             }
             catch(Exception ex)
