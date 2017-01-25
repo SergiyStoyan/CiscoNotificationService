@@ -175,30 +175,22 @@ namespace LumiSoft.Net.Media
                 if (!Regex.IsMatch(output_file, @"\.wav$", RegexOptions.IgnoreCase))
                     output_file += ".wav";
                 BinaryWriter bw = new BinaryWriter(File.Create(output_file));
-
-                char[] Riff = { 'R', 'I', 'F', 'F' };
-                char[] Wave = { 'W', 'A', 'V', 'E' };
-                char[] Fmt = { 'f', 'm', 't', ' ' };
-                char[] Data = { 'd', 'a', 't', 'a' };
-                short padding = 1;
-                int formatLength = 0x10;
-                int length = 0; // fill this in later!
-                short shBytesPerSample = 2; // changing the WaveFormat recording parameters will impact on this
-
-                bw.Write(Riff);
-                bw.Write(length);
-                bw.Write(Wave);
-                bw.Write(Fmt);
-                bw.Write(formatLength);
-                bw.Write(padding);
-                bw.Write(ac.AudioFormat.Channels);
-                bw.Write(ac.AudioFormat.SamplesPerSecond);
-                var averageBytesPerSecond = ac.AudioFormat.Channels * ac.AudioFormat.SamplesPerSecond * ac.AudioFormat.SamplesPerSecond * (int)((float)ac.AudioFormat.BitsPerSample / 8);
-                bw.Write(averageBytesPerSecond);
-                bw.Write(shBytesPerSample);
-                bw.Write(ac.AudioFormat.BitsPerSample);
-                bw.Write(Data);
-                bw.Write((int)0); // update sample later
+                                
+                bw.Write(new char[4]{ 'R', 'I', 'F', 'F' });
+                bw.Write(new byte[4]);//FileSize – 8. This is the size of the entire file following this data, i.e., the size of the rest of the file
+                bw.Write(new char[4] { 'W', 'A', 'V', 'E' });//format
+                bw.Write(new char[4] { 'f', 'm', 't', ' ' });//subchunk id
+                bw.Write((UInt32)16);//The size of the WAVEFORMATEX data to follow
+                bw.Write((UInt16)1);//audio format
+                bw.Write((UInt16)ac.AudioFormat.Channels);
+                bw.Write((UInt32)ac.AudioFormat.SamplesPerSecond);//sample rate 4
+                UInt16 bytesPerSample = (UInt16)(ac.AudioFormat.BitsPerSample * ac.AudioFormat.Channels / 8); // changing the WaveFormat recording parameters will impact on this
+                UInt32 averageBytesPerSecond = (UInt32)ac.AudioFormat.SamplesPerSecond * bytesPerSample;
+                bw.Write((UInt32)averageBytesPerSecond);//byte rate 4
+                bw.Write((UInt16)bytesPerSample);//block align 2 (Specifies how each audio block must be aligned in bytes)
+                bw.Write((UInt16)ac.AudioFormat.BitsPerSample); //2
+                bw.Write(new char[4] { 'd', 'a', 't', 'a' });
+                bw.Write((UInt32)0); // data size
 
                 codecs2OutputWavFile[ac] = new OutputWavFile { BW = bw, SampleCount = 0 };
             }
@@ -208,10 +200,11 @@ namespace LumiSoft.Net.Media
         {
             foreach (OutputWavFile of in codecs2OutputWavFile.Values)
             {
+                of.BW.Flush();
                 of.BW.Seek(4, SeekOrigin.Begin);
-                of.BW.Write(of.SampleCount + 36);
+                of.BW.Write((UInt32)(of.BW.BaseStream.Length - 8));
                 of.BW.Seek(40, SeekOrigin.Begin);
-                of.BW.Write(of.SampleCount);
+                of.BW.Write((UInt32)(of.BW.BaseStream.Length - 44));
                 of.BW.Close();
             }
             codecs2OutputWavFile.Clear();

@@ -88,7 +88,7 @@ namespace Cliver.CisteraNotification
             OpenFileDialog d = new OpenFileDialog();
             d.InitialDirectory = Settings.Default.RtpStreamStorageFolder;
             d.Title = "Pick a wav file";
-            d.Filter = "Filter sound files (*.wav)|*.wav|All files (*.*)|*.*";
+            d.Filter = "Filter WAVE files (*.wav)|*.wav|All files (*.*)|*.*";
             if (d.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(d.FileName))
                 return;
             System.Diagnostics.Process.Start(d.FileName);

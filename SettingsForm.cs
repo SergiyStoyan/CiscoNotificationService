@@ -133,7 +133,7 @@ namespace Cliver.CisteraNotification
         {
             OpenFileDialog d = new OpenFileDialog();
             d.Title = "Pick an audio file";
-            d.Filter = "Filter sound files (*.wav)|*.wav|All files (*.*)|*.*";
+            d.Filter = "Filter WAVE files (*.wav)|*.wav|All files (*.*)|*.*";
             if (d.ShowDialog(this) != DialogResult.OK || string.IsNullOrWhiteSpace(d.FileName))
                 return null;
             return d.FileName;
