@@ -36,7 +36,7 @@ namespace Cliver.CisteraNotification
             //Name = "127.0.0.1";//not work in LAN
             //Name = "localhos";//some string not work in LAN
             //Name = "192.168.2.*";//does not start
-            Name = "127.0.0.1";//not work in LAN
+            //Name = "127.0.0.1";//not work in LAN
             Name = "localhost";//not work in LAN
 #else
             Name = service_name;

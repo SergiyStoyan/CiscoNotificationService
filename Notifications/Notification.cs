@@ -63,7 +63,6 @@ namespace Cliver.CisteraNotification
 
         ~Notification()
         {
-            Delete();
         }
 
         readonly public string Title;

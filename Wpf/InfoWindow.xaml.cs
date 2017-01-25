@@ -62,8 +62,8 @@ namespace Cliver.CisteraNotification
                     {//!!!the following code does not work in static constructor because creates a deadlock!!!
                         ThreadRoutines.StartTry(() =>
                         {
-                        //this window is used to hide notification windows from Alt+Tab panel
-                        invisible_owner_w = new Window();
+                            //this window is used to hide notification windows from Alt+Tab panel
+                            invisible_owner_w = new Window();
                             invisible_owner_w.Width = 0;
                             invisible_owner_w.Height = 0;
                             invisible_owner_w.WindowStyle = WindowStyle.ToolWindow;

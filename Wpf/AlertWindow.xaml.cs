@@ -187,14 +187,26 @@ namespace Cliver.CisteraNotification
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var a = new DoubleAnimation(0, 1, (Duration)TimeSpan.FromMilliseconds(300));
-            this.BeginAnimation(UIElement.OpacityProperty, a);
+            var da = new DoubleAnimation(0, 1, TimeSpan.FromMilliseconds(animation_duration));
+            da.Completed += delegate
+              {
+                  var a = new DoubleAnimation(1, 0.6, TimeSpan.FromMilliseconds(300));
+                  a.AutoReverse = true;
+                  var storyboard = new Storyboard
+                  {
+                      Duration = TimeSpan.FromSeconds(2),
+                      RepeatBehavior = RepeatBehavior.Forever
+                  };                  
+                  Storyboard.SetTargetProperty(a, new PropertyPath(OpacityProperty));
+                  storyboard.Children.Add(a);
+                  BeginStoryboard(storyboard);
+              };
+            this.BeginAnimation(UIElement.OpacityProperty, da);
 
             Left = SystemParameters.WorkArea.Right - Settings.Default.AlertToastRight - Width;
             //Top = Settings.Default.AlertToastTop;
 
             Storyboard sb = new Storyboard();
-            DoubleAnimation da;
             da = new DoubleAnimation(-Height, Settings.Default.AlertToastTop, TimeSpan.FromMilliseconds(animation_duration));
             Storyboard.SetTargetProperty(da, new PropertyPath("(Top)")); //Do not miss the '(' and ')'
             //da = new DoubleAnimation(SystemParameters.WorkArea.Right, SystemParameters.WorkArea.Right - Settings.Default.AlertToastRight - Width, TimeSpan.FromMilliseconds(animation_duration));
@@ -208,16 +220,16 @@ namespace Cliver.CisteraNotification
             //sb.Children.Add(da);
             BeginStoryboard(sb);
 
-            globalHook = Hook.GlobalEvents();
-            globalHook.MouseDownExt += GlobalHook_MouseDownExt;
-            globalHook.KeyPress += GlobalHook_KeyPress;
-
-            Activate();
-            Focus();
+            //Activate();
+            //Focus();
             Win32.SetForegroundWindow(handle);
 
             //HwndSource hs = HwndSource.FromHwnd(handle);
             //hs.AddHook(WndProc);
+
+            globalHook = Hook.GlobalEvents();
+            globalHook.MouseDownExt += GlobalHook_MouseDownExt;
+            globalHook.KeyPress += GlobalHook_KeyPress;
         }
         double animation_duration = 500;
 
@@ -243,9 +255,11 @@ namespace Cliver.CisteraNotification
 
         private void GlobalHook_MouseDownExt(object sender, MouseEventExtArgs e)
         {
-            if (e.Location.X > Left && e.Location.X <= Left + Width
-                && e.Location.Y > Top && e.Location.Y <= Top + Height
-                )
+            //if (e.Location.X > Left && e.Location.X <= Left + Width
+            //    && e.Location.Y > Top && e.Location.Y <= Top + Height
+            //    ) //does not work for Win10 - coordinates differ
+            Point p = Mouse.GetPosition(this);
+            if (p.X >= 0)//inside the window
                 return;
             e.Handled = true;
             activate();
