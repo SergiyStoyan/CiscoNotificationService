@@ -56,7 +56,7 @@ namespace Cliver.CisteraNotification
         {
             InitializeComponent();
 
-            //Icon = new BitmapImage().; System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
+            Icon = WindowRoutines.GetAppIcon();
 
             //ShowInTaskbar = false;
 

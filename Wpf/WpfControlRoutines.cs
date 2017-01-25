@@ -8,9 +8,26 @@ using System.Windows.Controls;
 using System.Threading;
 using System.Reflection;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Interop;
 
 namespace Cliver
 {
+    public class WindowRoutines
+    {
+        public static ImageSource GetAppIcon()
+        {
+            Icon i = System.Drawing.Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().ManifestModule.Name);
+            return Imaging.CreateBitmapSourceFromHIcon(
+                i.Handle,
+                new Int32Rect(0, 0, i.Width, i.Height),
+                BitmapSizeOptions.FromEmptyOptions()
+                );
+        }
+    }
+
     public static class WpfControlRoutines
     {
         public static object Invoke(this System.Windows.Controls.Control c, Func<object> function)
