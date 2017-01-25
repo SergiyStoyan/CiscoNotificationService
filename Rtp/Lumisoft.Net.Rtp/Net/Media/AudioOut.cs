@@ -152,6 +152,9 @@ namespace LumiSoft.Net.Media
                 public const int WHDR_BEGINLOOP = 0x00000004;
                 public const int WHDR_ENDLOOP = 0x00000008;
                 public const int WHDR_INQUEUE = 0x00000010;
+
+                public const int WAVE_MAPPER = -1;
+                public const int WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE = 0x0010;
             }
 
             #endregion
@@ -163,6 +166,25 @@ namespace LumiSoft.Net.Media
             /// </summary>
             private class WavMethods
             {
+                /// <summary>
+                /// The DSEnumCallback function is an application-defined callback function that enumerates the DirectSound drivers. 
+                /// The system calls this function in response to the application's call to the DirectSoundEnumerate or DirectSoundCaptureEnumerate function.
+                /// </summary>
+                /// <param name="lpGuid">Address of the GUID that identifies the device being enumerated, or NULL for the primary device. This value can be passed to the DirectSoundCreate8 or DirectSoundCaptureCreate8 function to create a device object for that driver. </param>
+                /// <param name="lpcstrDescription">Address of a null-terminated string that provides a textual description of the DirectSound device. </param>
+                /// <param name="lpcstrModule">Address of a null-terminated string that specifies the module name of the DirectSound driver corresponding to this device. </param>
+                /// <param name="lpContext">Address of application-defined data. This is the pointer passed to DirectSoundEnumerate or DirectSoundCaptureEnumerate as the lpContext parameter. </param>
+                /// <returns>Returns TRUE to continue enumerating drivers, or FALSE to stop.</returns>
+                public delegate bool DSEnumCallback(IntPtr lpGuid, IntPtr lpcstrDescription, IntPtr lpcstrModule, IntPtr lpContext);
+
+                /// <summary>
+                /// The DirectSoundEnumerate function enumerates the DirectSound drivers installed in the system.
+                /// </summary>
+                /// <param name="lpDSEnumCallback">callback function</param>
+                /// <param name="lpContext">User context</param>
+                [DllImport("dsound.dll", EntryPoint = "DirectSoundEnumerateA", SetLastError = true, CharSet = CharSet.Unicode, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+                public static extern void DirectSoundEnumerate(DSEnumCallback lpDSEnumCallback, IntPtr lpContext);
+                                
                 /// <summary>
                 /// Closes the specified waveform output device.
                 /// </summary>
@@ -179,7 +201,7 @@ namespace LumiSoft.Net.Media
                 /// <param name="cbwoc">Size, in bytes, of the WAVEOUTCAPS structure.</param>
                 /// <returns>Returns value of MMSYSERR.</returns>
                 [DllImport("winmm.dll")]
-                public static extern uint waveOutGetDevCaps(uint hwo,ref WAVEOUTCAPS pwoc,int cbwoc);
+                public static extern uint waveOutGetDevCaps(uint hwo,ref WAVEOUTCAPS2 pwoc,int cbwoc);
 
                 /// <summary>
                 /// Retrieves the number of waveform output devices present in the system.
@@ -222,7 +244,7 @@ namespace LumiSoft.Net.Media
                 /// <returns>Returns value of MMSYSERR.</returns>
 		        [DllImport("winmm.dll")]
 		        public static extern int waveOutOpen(out IntPtr hWaveOut,int uDeviceID,WAVEFORMATEX lpFormat,waveOutProc dwCallback,int dwInstance,int dwFlags);
-        
+                
                 /// <summary>
                 /// Pauses playback on a specified waveform output device.
                 /// </summary>
@@ -333,6 +355,23 @@ namespace LumiSoft.Net.Media
                 /// Optional functionality supported by the device.
                 /// </summary>
                 public uint dwSupport;
+            }
+
+            [StructLayout(LayoutKind.Sequential)]
+            private struct WAVEOUTCAPS2
+            {
+                public ushort wMid;
+                public ushort wPid;
+                public uint vDriverVersion;
+                [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+                public string szPname;
+                public uint dwFormats;
+                public ushort wChannels;
+                public ushort wReserved1;
+                public uint dwSupport;
+                public Guid ManufacturerGuid;
+                public Guid ProductGuid;
+                public Guid NameGuid;
             }
 
             #endregion
@@ -564,8 +603,9 @@ namespace LumiSoft.Net.Media
                 format.cbSize          = 0; 
                 // We must delegate reference, otherwise GC will collect it.
                 m_pWaveOutProc = new waveOutProc(this.OnWaveOutProc);
-                int result = WavMethods.waveOutOpen(out m_pWavDevHandle,m_pOutDevice.Index,format,m_pWaveOutProc,0,WavConstants.CALLBACK_FUNCTION);
-                if(result != MMSYSERR.NOERROR){
+                int result = WavMethods.waveOutOpen(out m_pWavDevHandle, m_pOutDevice.Index, format, m_pWaveOutProc, 0, WavConstants.CALLBACK_FUNCTION);
+                //int result = WavMethods.waveOutOpen(out m_pWavDevHandle, WavConstants.WAVE_MAPPER, format, m_pWaveOutProc, 0, WavConstants.CALLBACK_FUNCTION | WavConstants.WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE);
+                if (result != MMSYSERR.NOERROR){
                     throw new Exception("Failed to open wav device, error: " + result.ToString() + ".");
                 }
             }
@@ -747,19 +787,70 @@ namespace LumiSoft.Net.Media
             /// </summary>
             public static AudioOutDevice[] Devices
             {
-                get{
+                get
+                {
+                    devices = new List<DirectSoundDeviceInfo>();
+                    WavMethods.DirectSoundEnumerate(new WavMethods.DSEnumCallback(EnumCallback), IntPtr.Zero);
+
                     List<AudioOutDevice> retVal = new List<AudioOutDevice>();
                     // Get all available output devices and their info.
                     int devicesCount = WavMethods.waveOutGetNumDevs();
-                    for(int i=0;i<devicesCount;i++){
-                        WAVEOUTCAPS pwoc = new WAVEOUTCAPS();
-                        if(WavMethods.waveOutGetDevCaps((uint)i,ref pwoc,Marshal.SizeOf(pwoc)) == MMSYSERR.NOERROR){
-                            retVal.Add(new AudioOutDevice(i,pwoc.szPname,pwoc.wChannels));
+                    for (int i = 0; i < devicesCount; i++)
+                    {
+                        WAVEOUTCAPS2 pwoc = new WAVEOUTCAPS2();
+                        if (WavMethods.waveOutGetDevCaps((uint)i, ref pwoc, Marshal.SizeOf(pwoc)) == MMSYSERR.NOERROR)
+                        {
+                            string name = pwoc.szPname;
+                            foreach (DirectSoundDeviceInfo d in devices)
+                                if (d.Description.StartsWith(pwoc.szPname))
+                                {
+                                    name = d.Description;
+                                    break;
+                                }
+                            retVal.Add(new AudioOutDevice(i, name, pwoc.wChannels));
                         }
                     }
 
-                    return retVal.ToArray(); 
+                    return retVal.ToArray();
                 }
+            }
+
+            static List<DirectSoundDeviceInfo> devices;
+            public class DirectSoundDeviceInfo
+            {
+                /// <summary>
+                /// The device identifier
+                /// </summary>
+                public Guid Guid { get; set; }
+                /// <summary>
+                /// Device description
+                /// </summary>
+                public string Description { get; set; }
+                /// <summary>
+                /// Device module name
+                /// </summary>
+                public string ModuleName { get; set; }
+            }
+            private static bool EnumCallback(IntPtr lpGuid, IntPtr lpcstrDescription, IntPtr lpcstrModule, IntPtr lpContext)
+            {
+                var device = new DirectSoundDeviceInfo();
+                if (lpGuid == IntPtr.Zero)
+                {
+                    device.Guid = Guid.Empty;
+                }
+                else
+                {
+                    byte[] guidBytes = new byte[16];
+                    Marshal.Copy(lpGuid, guidBytes, 0, 16);
+                    device.Guid = new Guid(guidBytes);
+                }
+                device.Description = Marshal.PtrToStringAnsi(lpcstrDescription);
+                if (lpcstrModule != null)
+                {
+                    device.ModuleName = Marshal.PtrToStringAnsi(lpcstrModule);
+                }
+                devices.Add(device);
+                return true;
             }
 
             //[ComImport]

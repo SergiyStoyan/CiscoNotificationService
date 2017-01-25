@@ -16,6 +16,13 @@ using System.Net;
 using System.Threading;
 using System.Text.RegularExpressions;
 
+//TBD:
+//- long audio device names
+//- storing notifications to disk
+//- 
+//- 
+
+
 namespace Cliver.CisteraNotification
 {
     static class Program
@@ -31,10 +38,7 @@ namespace Cliver.CisteraNotification
                 Message.Error(e);
                 Application.Exit();
             };
-
-            //main_context = SynchronizationContext.Current;
         }
-        //private readonly static SynchronizationContext main_context;
 
         [STAThread]
         public static void Main(string[] args)
@@ -42,18 +46,6 @@ namespace Cliver.CisteraNotification
             try
             {
                 NotificationsWindow.Initialize();
-
-                //NotificationForm nf = NotificationForm.This;
-                //NotificationForm.AddNotification("title", "message", "test.png", "action", null);
-                // NotificationForm.Clear();
-                //for (int i = 0; i < 4; i++)
-                //    NotificationForm.AddNotification("title" + i, "message", "https://www.google.com/logos/doodles/2016/holidays-2016-day-1-5727116688621568.2-res.png", "action", () => { });
-                //NotificationForm.AddNotification("title" + i, "message", "test.png", "action", () => { Message.Inform("clicked"); });
-
-                //AlertForm a = AlertForm.AddAlert("dsgfsdg", "sdgfsdgsgfdsgdf", "test.png", "action", () => { Message.Inform("clicked"); });
-                //a.Close();
-                //BrowserForm bf = new BrowserForm();
-                //bf.Show();
 
                 Application.Run(SysTray.This);
             }

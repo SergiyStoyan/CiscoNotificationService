@@ -2934,6 +2934,24 @@
             This class provides windows wav methods.
             </summary>
         </member>
+        <member name="T:LumiSoft.Net.Media.AudioOut.WaveOut.WavMethods.DSEnumCallback">
+            <summary>
+            The DSEnumCallback function is an application-defined callback function that enumerates the DirectSound drivers. 
+            The system calls this function in response to the application's call to the DirectSoundEnumerate or DirectSoundCaptureEnumerate function.
+            </summary>
+            <param name="lpGuid">Address of the GUID that identifies the device being enumerated, or NULL for the primary device. This value can be passed to the DirectSoundCreate8 or DirectSoundCaptureCreate8 function to create a device object for that driver. </param>
+            <param name="lpcstrDescription">Address of a null-terminated string that provides a textual description of the DirectSound device. </param>
+            <param name="lpcstrModule">Address of a null-terminated string that specifies the module name of the DirectSound driver corresponding to this device. </param>
+            <param name="lpContext">Address of application-defined data. This is the pointer passed to DirectSoundEnumerate or DirectSoundCaptureEnumerate as the lpContext parameter. </param>
+            <returns>Returns TRUE to continue enumerating drivers, or FALSE to stop.</returns>
+        </member>
+        <member name="M:LumiSoft.Net.Media.AudioOut.WaveOut.WavMethods.DirectSoundEnumerate(LumiSoft.Net.Media.AudioOut.WaveOut.WavMethods.DSEnumCallback,System.IntPtr)">
+            <summary>
+            The DirectSoundEnumerate function enumerates the DirectSound drivers installed in the system.
+            </summary>
+            <param name="lpDSEnumCallback">callback function</param>
+            <param name="lpContext">User context</param>
+        </member>
         <member name="M:LumiSoft.Net.Media.AudioOut.WaveOut.WavMethods.waveOutClose(System.IntPtr)">
             <summary>
             Closes the specified waveform output device.
@@ -2941,7 +2959,7 @@
             <param name="hWaveOut">Handle to the waveform-audio output device. If the function succeeds, the handle is no longer valid after this call.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="M:LumiSoft.Net.Media.AudioOut.WaveOut.WavMethods.waveOutGetDevCaps(System.UInt32,LumiSoft.Net.Media.AudioOut.WaveOut.WAVEOUTCAPS@,System.Int32)">
+        <member name="M:LumiSoft.Net.Media.AudioOut.WaveOut.WavMethods.waveOutGetDevCaps(System.UInt32,LumiSoft.Net.Media.AudioOut.WaveOut.WAVEOUTCAPS2@,System.Int32)">
             <summary>
             Queries a specified waveform device to determine its capabilities.
             </summary>
@@ -3275,6 +3293,21 @@
         <member name="P:LumiSoft.Net.Media.AudioOut.WaveOut.Devices">
             <summary>
             Gets all available output audio devices.
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.Media.AudioOut.WaveOut.DirectSoundDeviceInfo.Guid">
+            <summary>
+            The device identifier
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.Media.AudioOut.WaveOut.DirectSoundDeviceInfo.Description">
+            <summary>
+            Device description
+            </summary>
+        </member>
+        <member name="P:LumiSoft.Net.Media.AudioOut.WaveOut.DirectSoundDeviceInfo.ModuleName">
+            <summary>
+            Device module name
             </summary>
         </member>
         <member name="P:LumiSoft.Net.Media.AudioOut.WaveOut.IsDisposed">
