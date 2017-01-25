@@ -17,7 +17,6 @@ using System.Threading;
 using System.Text.RegularExpressions;
 
 //TBD:
-//- long audio device names
 //- storing notifications to disk
 //- 
 //- 

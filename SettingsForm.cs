@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Management;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -82,17 +81,6 @@ namespace Cliver.CisteraNotification
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            string s = "";
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_SoundDevice");
-            foreach (ManagementObject sd in mos.Get())
-            {
-                foreach (PropertyData property in sd.Properties)
-                {
-                    s += "\r\n" + String.Format("{0}:{1}", property.Name, property.Value);
-                }
-                s += "\r\n";
-            }
-
             AudioDevices.DisplayMember = "Name";
             foreach (AudioOutDevice device in AudioOut.Devices)
             {
