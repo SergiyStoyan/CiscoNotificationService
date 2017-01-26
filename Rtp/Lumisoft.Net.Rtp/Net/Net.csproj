@@ -383,7 +383,7 @@
     <Compile Include="POP3\Client\POP3_ClientMessageCollection.cs" />
     <None Include="POP3\POP3_ExtendedCapabilities.cs" />
     <Compile Include="PortRange.cs" />
-    <Compile Include="RTP\Debug\wfrm_RTP_Debug.cs">
+    <Compile Include="RTP\!Debug\wfrm_RTP_Debug.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RTP\RTCP_Packet_Unknown.cs" />
