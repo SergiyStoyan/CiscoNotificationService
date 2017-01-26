@@ -558,7 +558,7 @@
     <Compile Include="IO\IncompleteDataException.cs" />
     <Compile Include="IO\LineSizeExceededException.cs" />
     <None Include="URI\TEL_Uri.cs" />
-    <Compile Include="_Debug\BitDebuger.cs" />
+    <Compile Include="Debug\BitDebuger.cs" />
     <Compile Include="Obsolete\ReadLine_EventArgs.cs" />
     <Compile Include="Obsolete\ReadToStream_EventArgs.cs" />
     <Compile Include="IO\SizeExceededAction.cs" />
@@ -683,7 +683,7 @@
     <Compile Include="STUN\Message\STUN_t_ErrorCode.cs" />
     <Compile Include="STUN\Client\STUN_NetType.cs" />
     <Compile Include="URI\UriSchemes.cs" />
-    <Compile Include="_AsyncResultState.cs" />
+    <Compile Include="AsyncResultState.cs" />
     <Compile Include="Obsolete\ReadException.cs">
       <SubType>Code</SubType>
     </Compile>
