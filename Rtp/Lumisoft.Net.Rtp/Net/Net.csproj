@@ -305,7 +305,7 @@
     <Compile Include="RTP\RTP_StreamMode.cs" />
     <Compile Include="SDP\SDP_MediaTypes.cs" />
     <Compile Include="SDP\SDP_Origin.cs" />
-    <Compile Include="SIP\Debug\wfrm_SIP_Debug.cs">
+    <Compile Include="SIP\!Debug\wfrm_SIP_Debug.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SIP\Proxy\SIP_ProxyHandler.cs" />
