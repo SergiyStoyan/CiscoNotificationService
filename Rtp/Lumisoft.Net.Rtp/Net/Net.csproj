@@ -116,7 +116,7 @@
     <Compile Include="UDP\UDP_DataReceiver.cs" />
     <Compile Include="UDP\UDP_e_PacketReceived.cs" />
     <Compile Include="UPnP\UPnP_Exception.cs" />
-    <Compile Include="_Obsolete\AuthHelper.cs">
+    <Compile Include="Obsolete\AuthHelper.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AUTH\AUTH_SASL_DigestMD5_Challenge.cs" />
@@ -330,7 +330,7 @@
     <Compile Include="WebDav\WebDav_p_ResourceType.cs" />
     <Compile Include="WebDav\WebDav_ResourceTypes.cs" />
     <Compile Include="WebDav\WebDav_Response.cs" />
-    <Compile Include="_Obsolete\SaslAuthTypes.cs">
+    <Compile Include="Obsolete\SaslAuthTypes.cs">
       <SubType>Code</SubType>
     </Compile>
     <None Include="HTTP\Server\HTTP_Server.cs">
@@ -540,14 +540,14 @@
     <Compile Include="IMAP\IMAP_ACL_Flags.cs">
       <SubType>Code</SubType>
     </Compile>
-    <None Include="_Obsolete\IMAP\IMAP_BODY.cs" />
+    <None Include="Obsolete\IMAP\IMAP_BODY.cs" />
     <Compile Include="IMAP\IMAP_MessageFlags.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IMAP\IMAP_SequenceSet.cs">
       <SubType>Code</SubType>
     </Compile>
-    <None Include="_Obsolete\IMAP\IMAP_BODY_Entity.cs" />
+    <None Include="Obsolete\IMAP\IMAP_BODY_Entity.cs" />
     <Compile Include="IMAP\IMAP_Flags_SetType.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -559,64 +559,64 @@
     <Compile Include="IO\LineSizeExceededException.cs" />
     <None Include="URI\TEL_Uri.cs" />
     <Compile Include="_Debug\BitDebuger.cs" />
-    <Compile Include="_Obsolete\ReadLine_EventArgs.cs" />
-    <Compile Include="_Obsolete\ReadToStream_EventArgs.cs" />
+    <Compile Include="Obsolete\ReadLine_EventArgs.cs" />
+    <Compile Include="Obsolete\ReadToStream_EventArgs.cs" />
     <Compile Include="IO\SizeExceededAction.cs" />
-    <Compile Include="_Obsolete\WriteStream_EventArgs.cs" />
-    <Compile Include="_Obsolete\Write_EventArgs.cs" />
+    <Compile Include="Obsolete\WriteStream_EventArgs.cs" />
+    <Compile Include="Obsolete\Write_EventArgs.cs" />
     <Compile Include="IO\JunkingStream.cs" />
     <Compile Include="Log\LogEntry.cs" />
     <Compile Include="Log\LogEntryType.cs" />
     <Compile Include="Log\Logger.cs" />
-    <Compile Include="_Obsolete\MIME\Address.cs">
+    <Compile Include="Obsolete\MIME\Address.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\AddressList.cs">
+    <Compile Include="Obsolete\MIME\AddressList.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\ContentDisposition_enum.cs">
+    <Compile Include="Obsolete\MIME\ContentDisposition_enum.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\ContentTransferEncoding_enum.cs">
+    <Compile Include="Obsolete\MIME\ContentTransferEncoding_enum.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\GroupAddress.cs">
+    <Compile Include="Obsolete\MIME\GroupAddress.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\HeaderField.cs">
+    <Compile Include="Obsolete\MIME\HeaderField.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\HeaderFieldCollection.cs">
+    <Compile Include="Obsolete\MIME\HeaderFieldCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\HeaderFieldParameter.cs">
+    <Compile Include="Obsolete\MIME\HeaderFieldParameter.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\HeaderFieldParameterCollection.cs">
+    <Compile Include="Obsolete\MIME\HeaderFieldParameterCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\MailboxAddress.cs">
+    <Compile Include="Obsolete\MIME\MailboxAddress.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\MailboxAddressCollection.cs">
+    <Compile Include="Obsolete\MIME\MailboxAddressCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\MediaType_enum.cs">
+    <Compile Include="Obsolete\MIME\MediaType_enum.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\Mime.cs">
+    <Compile Include="Obsolete\MIME\Mime.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\MimeEntity.cs">
+    <Compile Include="Obsolete\MIME\MimeEntity.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\MimeEntityCollection.cs">
+    <Compile Include="Obsolete\MIME\MimeEntityCollection.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\MimeUtils.cs">
+    <Compile Include="Obsolete\MIME\MimeUtils.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\MIME\ParametizedHeaderField.cs">
+    <Compile Include="Obsolete\MIME\ParametizedHeaderField.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="vCard\DeliveryAddress.cs" />
@@ -632,7 +632,7 @@
     <Compile Include="vCard\PhoneNumberCollection.cs" />
     <Compile Include="vCard\PhoneNumberType_enum.cs" />
     <Compile Include="vCard\vCard.cs" />
-    <Compile Include="_Obsolete\Net_Core.cs">
+    <Compile Include="Obsolete\Net_Core.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NNTP\Client\NNTP_Client.cs" />
@@ -684,36 +684,36 @@
     <Compile Include="STUN\Client\STUN_NetType.cs" />
     <Compile Include="URI\UriSchemes.cs" />
     <Compile Include="_AsyncResultState.cs" />
-    <Compile Include="_Obsolete\ReadException.cs">
+    <Compile Include="Obsolete\ReadException.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="IPBindInfo.cs" />
     <Compile Include="CircleCollection.cs" />
     <Compile Include="BindInfoProtocol.cs" />
-    <Compile Include="_Obsolete\ServersCore\commonDelegates.cs">
+    <Compile Include="Obsolete\ServersCore\commonDelegates.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\ServersCore\Error_EventArgs.cs">
+    <Compile Include="Obsolete\ServersCore\Error_EventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\Log_EventArgs.cs">
+    <Compile Include="Obsolete\Log_EventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\ServersCore\SocketBufferedWriter.cs" />
-    <Compile Include="_Obsolete\SocketCallBackResult.cs" />
-    <Compile Include="_Obsolete\SocketLogEntry.cs">
+    <Compile Include="Obsolete\ServersCore\SocketBufferedWriter.cs" />
+    <Compile Include="Obsolete\SocketCallBackResult.cs" />
+    <Compile Include="Obsolete\SocketLogEntry.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\SocketLogEntryType.cs">
+    <Compile Include="Obsolete\SocketLogEntryType.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\SocketLogger.cs">
+    <Compile Include="Obsolete\SocketLogger.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\SocketServer.cs">
+    <Compile Include="Obsolete\SocketServer.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="_Obsolete\ServersCore\ValidateIP_EventArgs.cs">
+    <Compile Include="Obsolete\ServersCore\ValidateIP_EventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SIP\Message\SIP_MVGroupHFCollection.cs" />
@@ -769,12 +769,12 @@
     <Compile Include="SIP\Stack\SIP_TransactionLayer.cs" />
     <Compile Include="SIP\Stack\SIP_TransportLayer.cs" />
     <Compile Include="URI\SIP_Uri.cs" />
-    <Compile Include="_Obsolete\SmtpClientEx.cs">
+    <Compile Include="Obsolete\SmtpClientEx.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Obsolete\SocketEx.cs" />
-    <None Include="_Obsolete\StreamHelper.cs" />
-    <Compile Include="_Obsolete\StreamLineReader.cs">
+    <Compile Include="Obsolete\SocketEx.cs" />
+    <None Include="Obsolete\StreamHelper.cs" />
+    <Compile Include="Obsolete\StreamLineReader.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StringReader.cs">
@@ -787,7 +787,7 @@
       <SubType>Code</SubType>
     </None>
     <None Include="FTP\Server\readme.txt" />
-    <Compile Include="_Obsolete\SocketServerSession.cs">
+    <Compile Include="Obsolete\SocketServerSession.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
