@@ -21,7 +21,7 @@ namespace LumiSoft.Net.Media
         private Dictionary<int,AudioCodec> m_pAudioCodecs   = null;
         private RTP_SendStream             m_pRTP_Stream    = null;
         private AudioCodec                 m_pActiveCodec   = null;
-        private _WaveIn                    m_pWaveIn        = null;
+        private WaveIn                    m_pWaveIn        = null;
         private uint                       m_RtpTimeStamp   = 0;
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace LumiSoft.Net.Media
                 // Calculate buffer size.
                 int bufferSize = (m_pActiveCodec.AudioFormat.SamplesPerSecond / (1000 / m_AudioFrameSize)) * (m_pActiveCodec.AudioFormat.BitsPerSample / 8);
 
-                m_pWaveIn = new _WaveIn(m_pAudioInDevice,m_pActiveCodec.AudioFormat.SamplesPerSecond,m_pActiveCodec.AudioFormat.BitsPerSample,1,bufferSize);
+                m_pWaveIn = new WaveIn(m_pAudioInDevice,m_pActiveCodec.AudioFormat.SamplesPerSecond,m_pActiveCodec.AudioFormat.BitsPerSample,1,bufferSize);
                 m_pWaveIn.AudioFrameReceived += new EventHandler<EventArgs<byte[]>>(m_pWaveIn_AudioFrameReceived);
                 m_pWaveIn.Start();
             }

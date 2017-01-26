@@ -1179,12 +1179,12 @@
             Gets text.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.Media._WaveIn">
+        <member name="T:LumiSoft.Net.Media.WaveIn">
             <summary>
             This class implements streaming microphone wav data receiver.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.Media._WaveIn.waveInProc">
+        <member name="T:LumiSoft.Net.Media.WaveIn.waveInProc">
             <summary>
             The waveInProc function is the callback function used with the waveform-audio input device.
             </summary>
@@ -1194,7 +1194,7 @@
             <param name="dwParam1">Message parameter.</param>
             <param name="dwParam2">Message parameter.</param>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInAddBuffer(System.IntPtr,System.IntPtr,System.Int32)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInAddBuffer(System.IntPtr,System.IntPtr,System.Int32)">
             <summary>
             The waveInAddBuffer function sends an input buffer to the given waveform-audio input device. When the buffer is filled, the application is notified.
             </summary>
@@ -1203,14 +1203,14 @@
             <param name="uSize">Size, in bytes, of the WAVEHDR structure.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInClose(System.IntPtr)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInClose(System.IntPtr)">
             <summary>
             Closes the specified waveform input device.
             </summary>
             <param name="hWaveOut">Handle to the waveform-audio input device. If the function succeeds, the handle is no longer valid after this call.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInGetDevCaps(System.UInt32,LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS@,System.Int32)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInGetDevCaps(System.UInt32,LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS@,System.Int32)">
             <summary>
             Queries a specified waveform device to determine its capabilities.
             </summary>
@@ -1219,14 +1219,14 @@
             <param name="cbwoc">Size, in bytes, of the WAVEOUTCAPS structure.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInGetNumDevs">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInGetNumDevs">
             <summary>
             Get the waveInGetNumDevs function returns the number of waveform-audio input devices present in the system.
             </summary>
             <returns>Returns the waveInGetNumDevs function returns the number of waveform-audio input devices present in the system.
             </returns>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInOpen(System.IntPtr@,System.Int32,LumiSoft.Net.Media._WaveIn.WAVEFORMATEX,LumiSoft.Net.Media._WaveIn.waveInProc,System.Int32,System.Int32)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInOpen(System.IntPtr@,System.Int32,LumiSoft.Net.Media.WaveIn.WAVEFORMATEX,LumiSoft.Net.Media.WaveIn.waveInProc,System.Int32,System.Int32)">
             <summary>
             The waveInOpen function opens the given waveform-audio input device for recording.
             </summary>
@@ -1241,7 +1241,7 @@
             <param name="dwFlags">Flags for opening the device.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInPrepareHeader(System.IntPtr,System.IntPtr,System.Int32)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInPrepareHeader(System.IntPtr,System.IntPtr,System.Int32)">
             <summary>
             Prepares a waveform data block for recording.
             </summary>
@@ -1251,28 +1251,28 @@
             <param name="uSize">Size, in bytes, of the WAVEHDR structure.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInReset(System.IntPtr)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInReset(System.IntPtr)">
             <summary>
             Stops input on a specified waveform output device and resets the current position to 0.
             </summary>
             <param name="hWaveOut">Handle to the waveform-audio input device.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInStart(System.IntPtr)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInStart(System.IntPtr)">
             <summary>
             Starts input on the given waveform-audio input device.
             </summary>
             <param name="hWaveOut">Handle to the waveform-audio input device.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInStop(System.IntPtr)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInStop(System.IntPtr)">
             <summary>
             Stops input on the given waveform-audio input device.
             </summary>
             <param name="hWaveOut">Handle to the waveform-audio input device.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.waveInUnprepareHeader(System.IntPtr,System.IntPtr,System.Int32)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.waveInUnprepareHeader(System.IntPtr,System.IntPtr,System.Int32)">
             <summary>
             Cleans up the preparation performed by waveInPrepareHeader.
             </summary>
@@ -1281,319 +1281,319 @@
             <param name="uSize">Size, in bytes, of the WAVEHDR structure.</param>
             <returns>Returns value of MMSYSERR.</returns>
         </member>
-        <member name="T:LumiSoft.Net.Media._WaveIn.MMSYSERR">
+        <member name="T:LumiSoft.Net.Media.WaveIn.MMSYSERR">
             <summary>
             This class holds MMSYSERR errors.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.NOERROR">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.NOERROR">
             <summary>
             Success.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.ERROR">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.ERROR">
             <summary>
             Unspecified error.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.BADDEVICEID">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.BADDEVICEID">
             <summary>
             Device ID out of range.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.NOTENABLED">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.NOTENABLED">
             <summary>
             Driver failed enable.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.ALLOCATED">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.ALLOCATED">
             <summary>
             Device already allocated.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.INVALHANDLE">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.INVALHANDLE">
             <summary>
             Device handle is invalid.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.NODRIVER">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.NODRIVER">
             <summary>
             No device driver present.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.NOMEM">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.NOMEM">
             <summary>
             Memory allocation error.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.NOTSUPPORTED">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.NOTSUPPORTED">
             <summary>
             Function isn't supported.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.BADERRNUM">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.BADERRNUM">
             <summary>
             Error value out of range.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.INVALFLAG">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.INVALFLAG">
             <summary>
             Invalid flag passed.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.INVALPARAM">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.INVALPARAM">
             <summary>
             Invalid parameter passed.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.HANDLEBUSY">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.HANDLEBUSY">
             <summary>
             Handle being used simultaneously on another thread (eg callback).
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.INVALIDALIAS">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.INVALIDALIAS">
             <summary>
             Specified alias not found.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.BADDB">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.BADDB">
             <summary>
             Bad registry database.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.KEYNOTFOUND">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.KEYNOTFOUND">
             <summary>
             Registry key not found.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.READERROR">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.READERROR">
             <summary>
             Registry read error.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.WRITEERROR">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.WRITEERROR">
             <summary>
             Registry write error.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.DELETEERROR">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.DELETEERROR">
             <summary>
             Eegistry delete error.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.VALNOTFOUND">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.VALNOTFOUND">
             <summary>
             Registry value not found. 
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.NODRIVERCB">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.NODRIVERCB">
             <summary>
             Driver does not call DriverCallback.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.MMSYSERR.LASTERROR">
+        <member name="F:LumiSoft.Net.Media.WaveIn.MMSYSERR.LASTERROR">
             <summary>
             Last error in range.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.Media._WaveIn.WavConstants">
+        <member name="T:LumiSoft.Net.Media.WaveIn.WavConstants">
             <summary>
             This class provides most used wav constants.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.Media._WaveIn.WAVEFORMATEX">
+        <member name="T:LumiSoft.Net.Media.WaveIn.WAVEFORMATEX">
             <summary>
             This class represents WAVEFORMATEX structure.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEFORMATEX.wFormatTag">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEFORMATEX.wFormatTag">
             <summary>
             Waveform-audio format type. Format tags are registered with Microsoft Corporation for many 
             compression algorithms. A complete list of format tags can be found in the Mmreg.h header file. 
             For one- or two-channel PCM data, this value should be WAVE_FORMAT_PCM. When this structure is 
             included in a WAVEFORMATEXTENSIBLE structure, this value must be WAVE_FORMAT_EXTENSIBLE.</summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEFORMATEX.nChannels">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEFORMATEX.nChannels">
             <summary>
             Number of channels in the waveform-audio data. Monaural data uses one channel and stereo data 
             uses two channels.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEFORMATEX.nSamplesPerSec">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEFORMATEX.nSamplesPerSec">
             <summary>
             Sample rate, in samples per second (hertz). If wFormatTag is WAVE_FORMAT_PCM, then common 
             values for nSamplesPerSec are 8.0 kHz, 11.025 kHz, 22.05 kHz, and 44.1 kHz.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEFORMATEX.nAvgBytesPerSec">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEFORMATEX.nAvgBytesPerSec">
             <summary>
             Required average data-transfer rate, in bytes per second, for the format tag. If wFormatTag 
             is WAVE_FORMAT_PCM, nAvgBytesPerSec should be equal to the product of nSamplesPerSec and nBlockAlign.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEFORMATEX.nBlockAlign">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEFORMATEX.nBlockAlign">
             <summary>
             Block alignment, in bytes. The block alignment is the minimum atomic unit of data for the wFormatTag 
             format type. If wFormatTag is WAVE_FORMAT_PCM or WAVE_FORMAT_EXTENSIBLE, nBlockAlign must be equal 
             to the product of nChannels and wBitsPerSample divided by 8 (bits per byte).
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEFORMATEX.wBitsPerSample">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEFORMATEX.wBitsPerSample">
             <summary>
             Bits per sample for the wFormatTag format type. If wFormatTag is WAVE_FORMAT_PCM, then 
             wBitsPerSample should be equal to 8 or 16.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEFORMATEX.cbSize">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEFORMATEX.cbSize">
             <summary>
             Size, in bytes, of extra format information appended to the end of the WAVEFORMATEX structure.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS">
+        <member name="T:LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS">
             <summary>
             This class represents WAVEOUTCAPS structure.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS.wMid">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS.wMid">
             <summary>
             Manufacturer identifier for the device driver for the device.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS.wPid">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS.wPid">
             <summary>
             Product identifier for the device.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS.vDriverVersion">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS.vDriverVersion">
             <summary>
             Version number of the device driver for the device.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS.szPname">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS.szPname">
             <summary>
             Product name in a null-terminated string.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS.dwFormats">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS.dwFormats">
             <summary>
             Standard formats that are supported.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS.wChannels">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS.wChannels">
             <summary>
             Number specifying whether the device supports mono (1) or stereo (2) output.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS.wReserved1">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS.wReserved1">
             <summary>
             Packing.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEOUTCAPS.dwSupport">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEOUTCAPS.dwSupport">
             <summary>
             Optional functionality supported by the device.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.Media._WaveIn.WAVEHDR">
+        <member name="T:LumiSoft.Net.Media.WaveIn.WAVEHDR">
             <summary>
             This class represents WAVEHDR structure.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEHDR.lpData">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEHDR.lpData">
             <summary>
             Long pointer to the address of the waveform buffer.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEHDR.dwBufferLength">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEHDR.dwBufferLength">
             <summary>
             Specifies the length, in bytes, of the buffer.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEHDR.dwBytesRecorded">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEHDR.dwBytesRecorded">
             <summary>
             When the header is used in input, this member specifies how much data is in the buffer. 
             When the header is used in output, this member specifies the number of bytes played from the buffer.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEHDR.dwUser">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEHDR.dwUser">
             <summary>
             Specifies user data.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEHDR.dwFlags">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEHDR.dwFlags">
             <summary>
             Specifies information about the buffer.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEHDR.dwLoops">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEHDR.dwLoops">
             <summary>
             Specifies the number of times to play the loop.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEHDR.lpNext">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEHDR.lpNext">
             <summary>
             Reserved. This member is used within the audio driver to maintain a first-in, first-out linked list of headers awaiting playback.
             </summary>
         </member>
-        <member name="F:LumiSoft.Net.Media._WaveIn.WAVEHDR.reserved">
+        <member name="F:LumiSoft.Net.Media.WaveIn.WAVEHDR.reserved">
             <summary>
             Reserved.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.Media._WaveIn.WavFormat">
+        <member name="T:LumiSoft.Net.Media.WaveIn.WavFormat">
             <summary>
             This class holds most known wav compression formats.
             </summary>
         </member>
-        <member name="T:LumiSoft.Net.Media._WaveIn.BufferItem">
+        <member name="T:LumiSoft.Net.Media.WaveIn.BufferItem">
             <summary>
             This class holds queued recording buffer.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.BufferItem.#ctor(System.IntPtr,System.Int32)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.BufferItem.#ctor(System.IntPtr,System.Int32)">
             <summary>
             Default constructor.
             </summary>
             <param name="wavDevHandle">Wave in device handle.</param>
             <param name="dataSize">Data buffer size in bytes.</param>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.BufferItem.Dispose">
+        <member name="M:LumiSoft.Net.Media.WaveIn.BufferItem.Dispose">
             <summary>
             Cleans up any resources being used.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.BufferItem.Queue(System.Boolean)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.BufferItem.Queue(System.Boolean)">
             <summary>
             Queues buffer for recording.
             </summary>
             <param name="unprepare">If true unprepares old header before adding to recording queue.</param>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.BufferItem.Header">
+        <member name="P:LumiSoft.Net.Media.WaveIn.BufferItem.Header">
             <summary>
             Gets wave header.
             </summary>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.BufferItem.HeaderHandle">
+        <member name="P:LumiSoft.Net.Media.WaveIn.BufferItem.HeaderHandle">
             <summary>
             Gets header handle.
             </summary>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.BufferItem.Data">
+        <member name="P:LumiSoft.Net.Media.WaveIn.BufferItem.Data">
             <summary>
             Gets wav header data.
             </summary>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.BufferItem.DataSize">
+        <member name="P:LumiSoft.Net.Media.WaveIn.BufferItem.DataSize">
             <summary>
             Gets wav header data size in bytes.
             </summary>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.BufferItem.EventArgs">
+        <member name="P:LumiSoft.Net.Media.WaveIn.BufferItem.EventArgs">
             <summary>
             Gets event args.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.#ctor(LumiSoft.Net.Media.AudioInDevice,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.#ctor(LumiSoft.Net.Media.AudioInDevice,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Default constructor.
             </summary>
@@ -1606,27 +1606,27 @@
             <exception cref="T:System.ArgumentNullException">Is raised when <b>outputDevice</b> is null.</exception>
             <exception cref="T:System.ArgumentException">Is raised when any of the aruments has invalid value.</exception>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.Finalize">
+        <member name="M:LumiSoft.Net.Media.WaveIn.Finalize">
             <summary>
             Default destructor.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.Dispose">
+        <member name="M:LumiSoft.Net.Media.WaveIn.Dispose">
             <summary>
             Cleans up any resources being used.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.Start">
+        <member name="M:LumiSoft.Net.Media.WaveIn.Start">
             <summary>
             Starts recording.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.Stop">
+        <member name="M:LumiSoft.Net.Media.WaveIn.Stop">
             <summary>
             Stops recording.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.OnWaveInProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr,System.IntPtr)">
+        <member name="M:LumiSoft.Net.Media.WaveIn.OnWaveInProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr,System.IntPtr)">
             <summary>
             This method is called when wav device generates some event.
             </summary>
@@ -1636,63 +1636,63 @@
             <param name="dwParam1">Message parameter.</param>
             <param name="dwParam2">Message parameter.</param>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.CreateBuffers">
+        <member name="M:LumiSoft.Net.Media.WaveIn.CreateBuffers">
             <summary>
             Fills recording buffers.
             </summary>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.Devices">
+        <member name="P:LumiSoft.Net.Media.WaveIn.Devices">
             <summary>
             Gets all available input audio devices.
             </summary>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.IsDisposed">
+        <member name="P:LumiSoft.Net.Media.WaveIn.IsDisposed">
             <summary>
             Gets if this object is disposed.
             </summary>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.InputDevice">
+        <member name="P:LumiSoft.Net.Media.WaveIn.InputDevice">
             <summary>
             Gets current input device.
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.SamplesPerSec">
+        <member name="P:LumiSoft.Net.Media.WaveIn.SamplesPerSec">
             <summary>
             Gets number of samples per second.
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.BitsPerSample">
+        <member name="P:LumiSoft.Net.Media.WaveIn.BitsPerSample">
             <summary>
             Gets number of buts per sample.
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.Channels">
+        <member name="P:LumiSoft.Net.Media.WaveIn.Channels">
             <summary>
             Gets number of channels.
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.BufferSize">
+        <member name="P:LumiSoft.Net.Media.WaveIn.BufferSize">
             <summary>
             Gets recording buffer size.
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
-        <member name="P:LumiSoft.Net.Media._WaveIn.BlockSize">
+        <member name="P:LumiSoft.Net.Media.WaveIn.BlockSize">
             <summary>
             Gets one sample block size in bytes.
             </summary>
             <exception cref="T:System.ObjectDisposedException">Is raised when this object is disposed and this property is accessed.</exception>
         </member>
-        <member name="E:LumiSoft.Net.Media._WaveIn.AudioFrameReceived">
+        <member name="E:LumiSoft.Net.Media.WaveIn.AudioFrameReceived">
             <summary>
             Is raised when wave-in device has received new audio frame.
             </summary>
         </member>
-        <member name="M:LumiSoft.Net.Media._WaveIn.OnAudioFrameReceived(LumiSoft.Net.EventArgs{System.Byte[]})">
+        <member name="M:LumiSoft.Net.Media.WaveIn.OnAudioFrameReceived(LumiSoft.Net.EventArgs{System.Byte[]})">
             <summary>
             Raises <b>AudioFrameReceived</b> event.
             </summary>

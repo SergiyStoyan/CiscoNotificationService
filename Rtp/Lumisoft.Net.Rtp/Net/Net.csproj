@@ -112,7 +112,7 @@
     <None Include="Media\Codec\Audio\ILBC.cs" />
     <Compile Include="DNS\Client\DNS_ClientTransaction.cs" />
     <Compile Include="DNS\Client\DNS_ClientTransactionState.cs" />
-    <Compile Include="Media\_WaveIn.cs" />
+    <Compile Include="Media\WaveIn.cs" />
     <Compile Include="UDP\UDP_DataReceiver.cs" />
     <Compile Include="UDP\UDP_e_PacketReceived.cs" />
     <Compile Include="UPnP\UPnP_Exception.cs" />
@@ -351,7 +351,7 @@
     <Compile Include="DNS\DNS_rr_AAAA.cs" />
     <Compile Include="DNS\DNS_rr_NAPTR.cs" />
     <Compile Include="DNS\DNS_rr_SRV.cs" />
-    <Compile Include="DNS\Client\_OPCODE.cs" />
+    <Compile Include="DNS\Client\OPCODE.cs" />
     <Compile Include="FTP\Client\FTP_ClientException.cs" />
     <Compile Include="FTP\FTP_ListItem.cs" />
     <Compile Include="FTP\FTP_TransferMode.cs" />
@@ -558,7 +558,7 @@
     <Compile Include="IO\IncompleteDataException.cs" />
     <Compile Include="IO\LineSizeExceededException.cs" />
     <None Include="URI\TEL_Uri.cs" />
-    <Compile Include="Debug\BitDebuger.cs" />
+    <Compile Include="!Debug\BitDebuger.cs" />
     <Compile Include="Obsolete\ReadLine_EventArgs.cs" />
     <Compile Include="Obsolete\ReadToStream_EventArgs.cs" />
     <Compile Include="IO\SizeExceededAction.cs" />
