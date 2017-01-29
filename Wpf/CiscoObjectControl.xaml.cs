@@ -33,21 +33,30 @@ namespace Cliver.CisteraNotification
 
             if (n is Info)
             {
-                type.Content = "Info:";
+                type.Content = "Info";
                 back_color = Colors.Beige;
-                control = new CiscoObjectInfoControl((Info)n);
+                Control = new CiscoObjectInfoControl((Info)n);
             }
             else if (n is Alert)
             {
-                type.Content = "Alert:";
+                type.Content = "Alert";
                 back_color = Colors.OrangeRed;
-                control = new CiscoObjectAlertControl((Alert)n);
+                Control = new CiscoObjectAlertControl((Alert)n);
             }
+            else if (n is Execute)
+            {
+                type.Content = "Execute";
+                back_color = Colors.LightCyan;
+                Control = new CiscoObjectExecuteControl((Execute)n);
+            }
+            else
+                throw new Exception("Unknown type: " + n.GetType());
+
             Background = new SolidColorBrush(back_color);
-            control.HorizontalAlignment = HorizontalAlignment.Stretch;
-            control.VerticalAlignment = VerticalAlignment.Top;
-            Grid.SetColumn(control, 1);
-            grid.Children.Add(control);
+            Control.HorizontalAlignment = HorizontalAlignment.Stretch;
+            Control.VerticalAlignment = VerticalAlignment.Top;
+            Grid.SetColumn(Control, 1);
+            grid.Children.Add(Control);
 
             delete.Click += (object sender, RoutedEventArgs e) =>
             {
@@ -63,14 +72,14 @@ namespace Cliver.CisteraNotification
             show_xml.Checked += (object sender, RoutedEventArgs e) =>
             {
                 e.Handled = true;
-                control.Visibility = Visibility.Collapsed;
+                Control.Visibility = Visibility.Collapsed;
                 xml.Visibility = Visibility.Visible;
             };
 
             show_xml.Unchecked += (object sender, RoutedEventArgs e) =>
             {
                 e.Handled = true;
-                control.Visibility = Visibility.Visible;
+                Control.Visibility = Visibility.Visible;
                 xml.Visibility = Visibility.Collapsed;
             };
 
@@ -96,7 +105,7 @@ namespace Cliver.CisteraNotification
 
             time.Content = n.CreateTime.ToString("yy-MM-dd HH:mm:ss");
         }
-        readonly Control control = null;
+        internal readonly Control Control = null;
         readonly Color back_color;
 
         internal readonly CiscoObject CiscoObject = null;

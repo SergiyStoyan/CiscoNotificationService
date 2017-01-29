@@ -24,22 +24,32 @@ namespace Cliver.CisteraNotification
     class Execute : CiscoObject
     {
         internal Execute(string xml) : base(xml)
-        {
-
+        {        
+            add2collection();
         }
 
-        internal void SetFile(string file)
+        internal string Record
         {
-            this.file = file;
+            set
+            {
+                if (record != null)
+                    throw new Exception("file is set already.");
+                record = value;
+                ((CiscoObjectExecuteControl)CiscoObjectsWindow.GetControl(this)).FileEnabled = true;
+            }
+            get
+            {
+                return record;
+            }
         }
-        string file = null;
+        string record = null;
 
         internal override void Activate()
         {
             try
             {
-                if (file != null)
-                    p = Process.Start(file);
+                if (record != null)
+                    p = Process.Start(record);
             }
             catch (Exception e)
             {
@@ -62,8 +72,8 @@ namespace Cliver.CisteraNotification
             catch { }
             p = null;
 
-            if (file != null)
-                File.Delete(file);
+            if (record != null)
+                File.Delete(record);
         }
     }
 }

@@ -142,6 +142,9 @@
     <Compile Include="Wpf\CiscoObjectAlertControl.xaml.cs">
       <DependentUpon>CiscoObjectAlertControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\CiscoObjectExecuteControl.xaml.cs">
+      <DependentUpon>CiscoObjectExecuteControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\InfoControl.xaml.cs">
       <DependentUpon>InfoControl.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Wpf\CiscoObjectAlertControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wpf\CiscoObjectExecuteControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

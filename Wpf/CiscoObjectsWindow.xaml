@@ -37,6 +37,7 @@
                 <CheckBox x:Name="show_infos" Content="Infos" IsChecked="True"/>
                 <CheckBox x:Name="show_alerts" Content="Alerts" IsChecked="True"/>
                 <CheckBox x:Name="show_executes" Content="Executes" IsChecked="True"/>
+                <Button x:Name="rtp_records" Content="Rtp Records" HorizontalAlignment="Right" VerticalAlignment="Top" Width="auto" />
             </StackPanel>
             <StackPanel Name="cisco_objects" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"  Orientation="Vertical" Grid.Row="1">
             </StackPanel>

@@ -67,7 +67,5 @@ namespace Cliver.CisteraNotification
                 e.Handled = true;
             };
         }
-
-        internal readonly CiscoObject CiscoObject = null;
     }
 }

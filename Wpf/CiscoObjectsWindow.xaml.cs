@@ -126,6 +126,23 @@ namespace Cliver.CisteraNotification
             {
                 set_visibility();
             };
+
+            rtp_records.Click += delegate
+            {
+                if (string.IsNullOrWhiteSpace(Settings.Default.RtpStreamStorageFolder))
+                {
+                    Message.Exclaim("Rtp Storage Folder is not set.");
+                    return;
+                }
+                Microsoft.Win32.OpenFileDialog d = new Microsoft.Win32.OpenFileDialog();
+                d.InitialDirectory = Settings.Default.RtpStreamStorageFolder;
+                d.Title = "Pick a wav file";
+                d.DefaultExt = ".wav";
+                d.Filter = "Filter WAVE files (*.wav)|*.wav|All files (*.*)|*.*";
+                Nullable<bool> result = d.ShowDialog();
+                if (d.ShowDialog() ?? true && !string.IsNullOrWhiteSpace(d.FileName))
+                    System.Diagnostics.Process.Start(d.FileName);
+            };
         }
         
         void set_visibility()
@@ -176,6 +193,22 @@ namespace Cliver.CisteraNotification
                         if (nc.CiscoObject == n)
                             This.cisco_objects.Children.RemoveAt(i);
                     }
+                }
+            });
+        }
+
+        static internal UserControl GetControl(CiscoObject co)
+        {
+            return (UserControl)This.Invoke(() =>
+            {
+                lock (This.cisco_objects.Children)
+                {
+                    foreach (CiscoObjectControl c in This.cisco_objects.Children)
+                    {
+                        if (c.CiscoObject == co)
+                            return c.Control;
+                    }
+                    throw new Exception("No CiscoObjectControl found.");
                 }
             });
         }
@@ -233,5 +266,6 @@ namespace Cliver.CisteraNotification
         }        
         Point position = new Point(-1, -1);
         double animation_duration = 500;
+
     }
 }

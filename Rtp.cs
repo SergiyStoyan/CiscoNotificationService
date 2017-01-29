@@ -97,11 +97,12 @@ namespace Cliver.CisteraNotification
                 {
                     string wav_file = PathRoutines.CreateDirectory(Settings.Default.RtpStreamStorageFolder) + "\\" + e.Stream.SSRC.RtpEP.Address.ToString() + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".wav";
                     acs2of[ac] = wav_file;
-                    execute?.SetFile(wav_file);
+                    if (execute != null)
+                        execute.Record = wav_file;
                 }
                 ao.Start(volume100, acs2of);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Message.Error(ex);
             }
