@@ -92,15 +92,17 @@ namespace Cliver.CisteraNotification
             MouseDown += (object sender, MouseButtonEventArgs e) =>
             {
                 checkBox.IsChecked = !checkBox.IsChecked;
-                if (checkBox.IsChecked ?? true)
-                {
-                    Color c = Color.FromArgb(255, (byte)(back_color.R * .6), (byte)(back_color.G * .6), (byte)(back_color.B * .6));
-                    Background = new SolidColorBrush(c);
-                }
-                else
-                {
-                    Background = new SolidColorBrush(back_color);
-                }
+            };
+
+            checkBox.Checked += (object sender, RoutedEventArgs e) =>
+            {
+                Color c = Color.FromArgb(255, (byte)(back_color.R * .6), (byte)(back_color.G * .6), (byte)(back_color.B * .6));
+                Background = new SolidColorBrush(c);
+            };
+
+            checkBox.Unchecked += (object sender, RoutedEventArgs e) =>
+            {
+                Background = new SolidColorBrush(back_color);
             };
 
             time.Content = n.CreateTime.ToString("yy-MM-dd HH:mm:ss");
