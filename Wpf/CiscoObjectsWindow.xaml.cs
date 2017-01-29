@@ -130,18 +130,8 @@ namespace Cliver.CisteraNotification
             rtp_records.Click += delegate
             {
                 if (string.IsNullOrWhiteSpace(Settings.Default.RtpStreamStorageFolder))
-                {
-                    Message.Exclaim("Rtp Storage Folder is not set.");
                     return;
-                }
-                Microsoft.Win32.OpenFileDialog d = new Microsoft.Win32.OpenFileDialog();
-                d.InitialDirectory = Settings.Default.RtpStreamStorageFolder;
-                d.Title = "Pick a wav file";
-                d.DefaultExt = ".wav";
-                d.Filter = "Filter WAVE files (*.wav)|*.wav|All files (*.*)|*.*";
-                Nullable<bool> result = d.ShowDialog();
-                if (d.ShowDialog() ?? true && !string.IsNullOrWhiteSpace(d.FileName))
-                    System.Diagnostics.Process.Start(d.FileName);
+                System.Diagnostics.Process.Start(Settings.Default.RtpStreamStorageFolder);
             };
         }
         

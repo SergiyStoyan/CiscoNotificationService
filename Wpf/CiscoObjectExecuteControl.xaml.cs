@@ -37,7 +37,7 @@ namespace Cliver.CisteraNotification
 
                 if (n.Record == null)
                     return;
-                System.Diagnostics.Process.Start("explorer.exe", " /select \"" + n.Record + "\"");
+                System.Diagnostics.Process.Start("explorer.exe", " /select, \"" + n.Record + "\"");
             };
         }
 
