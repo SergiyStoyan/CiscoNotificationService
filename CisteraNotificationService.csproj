@@ -112,7 +112,7 @@
     <Compile Include="Notifications\Alert.cs" />
     <Compile Include="Notifications\Execute.cs" />
     <Compile Include="Notifications\Info.cs" />
-    <Compile Include="Notifications\Notification.cs" />
+    <Compile Include="Notifications\CiscoObject.cs" />
     <Compile Include="Rtp.cs" />
     <Compile Include="CiscoHttp.cs" />
     <Compile Include="HttpService.cs" />
@@ -139,6 +139,9 @@
     <Compile Include="SysTrayForm.designer.cs">
       <DependentUpon>SysTrayForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Wpf\CiscoObjectAlertControl.xaml.cs">
+      <DependentUpon>CiscoObjectAlertControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Wpf\InfoControl.xaml.cs">
       <DependentUpon>InfoControl.xaml</DependentUpon>
     </Compile>
@@ -148,11 +151,14 @@
     <Compile Include="Wpf\InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wpf\NotificationControl.xaml.cs">
-      <DependentUpon>NotificationControl.xaml</DependentUpon>
+    <Compile Include="Wpf\CiscoObjectControl.xaml.cs">
+      <DependentUpon>CiscoObjectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Wpf\NotificationsWindow.xaml.cs">
-      <DependentUpon>NotificationsWindow.xaml</DependentUpon>
+    <Compile Include="Wpf\CiscoObjectInfoControl.xaml.cs">
+      <DependentUpon>CiscoObjectInfoControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Wpf\CiscoObjectsWindow.xaml.cs">
+      <DependentUpon>CiscoObjectsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Wpf\WpfControlRoutines.cs" />
     <EmbeddedResource Include="AboutForm.resx">
@@ -233,6 +239,10 @@
     <Content Include="Finger.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Wpf\CiscoObjectAlertControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Wpf\InfoControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -245,11 +255,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Wpf\NotificationControl.xaml">
+    <Page Include="Wpf\CiscoObjectControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Wpf\NotificationsWindow.xaml">
+    <Page Include="Wpf\CiscoObjectInfoControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Wpf\CiscoObjectsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -19,73 +19,62 @@ using System.Net;
 
 namespace Cliver.CisteraNotification
 {
-    abstract class Notification
+    abstract class CiscoObject
     {
-        //internal static Notification[] Notifications
+        //static void Add(string xml)
         //{
-        //    get
-        //    {
-        //        lock (notifications)
-        //            return notifications.Where(n => !n.Deleted).ToArray();
-        //    }
+
         //}
 
-        //static internal bool IsDeleted
+        //public static void Add(CiscoObject cisco_object)
         //{
-        //    get
-        //    {
-        //        return notifications.Where(x => x.Deleted).Count() > 0;
-        //    }
+        //    cisco_object.add();
         //}
 
-        readonly static List<Notification> notifications = new List<Notification>();
+        readonly static List<CiscoObject> cisco_objects = new List<CiscoObject>();
 
         //readonly static LiteDatabase db = new LiteDatabase(@"MyData.db");
         
-        protected Notification(string title, string text, string image_url, string action_name, Action action)
+        protected CiscoObject(string xml)
         {
-            Title = title;
-            Text = text;
-            ImageUrl = image_url;
-            ActionName = action_name;
-            Action = action;
+            Xml = xml;
             CreateTime = DateTime.Now;
             DeleteTime = DateTime.MinValue;
-            lock (notifications)
+        }
+
+        protected void add2collection()
+        {
+            lock (cisco_objects)
             {
-                notifications.Add(this);
+                cisco_objects.Add(this);
             }
-            NotificationsWindow.AddToTable(this);
-            Show();
+            CiscoObjectsWindow.AddToTable(this);
+            Activate();
 
             forget_old();
         }
 
-        ~Notification()
+        ~CiscoObject()
         {
         }
 
-        readonly public string Title;
-        readonly public string Text;
-        readonly public string ImageUrl;
-        readonly public string ActionName;
-        readonly public Action Action;
+        readonly public string Xml;
         readonly public DateTime CreateTime;
 
-        internal abstract void Show();
+        internal abstract void Activate();
 
         protected abstract void Deleting();
 
         internal void Delete()
         {
             Deleting();
-            NotificationsWindow.DeleteFromTable(this);
+            CiscoObjectsWindow.DeleteFromTable(this);
             //lock (notifications)
             //{
             //    notifications.Remove(this);
             //}
             DeleteTime = DateTime.Now;
-            NotificationsWindow.EnableRestore(true);
+            CiscoObjectsWindow.EnableRestore(true);
         }
 
         public bool Deleted
@@ -99,29 +88,29 @@ namespace Cliver.CisteraNotification
 
         static internal void RestoreLastDeleted()
         {
-            Notification n;
-            lock (notifications)
+            CiscoObject n;
+            lock (cisco_objects)
             {
-                n = notifications.Where(x => x.Deleted).OrderByDescending(x => x.DeleteTime).FirstOrDefault();
+                n = cisco_objects.Where(x => x.Deleted).OrderByDescending(x => x.DeleteTime).FirstOrDefault();
                 if (n == null)
                 {
-                    NotificationsWindow.EnableRestore(false);
+                    CiscoObjectsWindow.EnableRestore(false);
                     return;
                 }
             }
             n.DeleteTime = DateTime.MinValue;
-            NotificationsWindow.AddToTable(n);
-            NotificationsWindow.EnableRestore(notifications.Where(x => x.Deleted).Count() > 0);
+            CiscoObjectsWindow.AddToTable(n);
+            CiscoObjectsWindow.EnableRestore(cisco_objects.Where(x => x.Deleted).Count() > 0);
         }
 
         static void forget_old()
         {
-            lock (notifications)
+            lock (cisco_objects)
             {
                 DateTime forget_t = DateTime.Now.AddDays(-Settings.Default.ForgetNotificationsOlderThanDays);
-                var ns = notifications.Where(x => x.CreateTime < forget_t).ToList();
-                foreach (Notification n in ns)
-                    notifications.Remove(n);
+                var ns = cisco_objects.Where(x => x.CreateTime < forget_t).ToList();
+                foreach (CiscoObject n in ns)
+                    cisco_objects.Remove(n);
             }
         }
     }

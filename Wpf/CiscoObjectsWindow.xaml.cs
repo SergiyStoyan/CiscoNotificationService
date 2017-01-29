@@ -20,7 +20,7 @@ using System.Windows.Media.Animation;
 
 namespace Cliver.CisteraNotification
 {
-    public partial class NotificationsWindow : Window
+    public partial class CiscoObjectsWindow : Window
     {
         /// <summary>
         /// Must be called from the main UI thread to trigger the static constructor
@@ -29,11 +29,11 @@ namespace Cliver.CisteraNotification
         {
         }
 
-        static NotificationsWindow()
+        static CiscoObjectsWindow()
         {
             //System.Windows.Forms.Application.OpenForms[0].Invoke(() =>
             //{
-            This = new NotificationsWindow();
+            This = new CiscoObjectsWindow();
             ElementHost.EnableModelessKeyboardInterop(This);
             //});
         }
@@ -50,9 +50,9 @@ namespace Cliver.CisteraNotification
             This.WindowState = WindowState.Normal;
         }
 
-        static readonly NotificationsWindow This = null;
+        static readonly CiscoObjectsWindow This = null;
 
-        NotificationsWindow()
+        CiscoObjectsWindow()
         {
             InitializeComponent();
 
@@ -83,38 +83,38 @@ namespace Cliver.CisteraNotification
 
             select_all.Click += delegate
             {
-                lock (this.notifications.Children)
+                lock (this.cisco_objects.Children)
                 {
-                    foreach (NotificationControl nc in this.notifications.Children)
+                    foreach (CiscoObjectControl nc in this.cisco_objects.Children)
                         nc.checkBox.IsChecked = true;
                 }
             };
 
             clear_selection.Click += delegate
             {
-                lock (this.notifications.Children)
+                lock (this.cisco_objects.Children)
                 {
-                    foreach (NotificationControl nc in this.notifications.Children)
+                    foreach (CiscoObjectControl nc in this.cisco_objects.Children)
                         nc.checkBox.IsChecked = false;
                 }
             };
 
             delete_selected.Click += delegate
             {
-                List<Notification> ns = new List<Notification>();
-                lock (this.notifications.Children)
+                List<CiscoObject> ns = new List<CiscoObject>();
+                lock (this.cisco_objects.Children)
                 {
-                    foreach (NotificationControl nc in this.notifications.Children)
+                    foreach (CiscoObjectControl nc in this.cisco_objects.Children)
                         if (nc.checkBox.IsChecked ?? true)
-                            ns.Add(nc.Notification);
+                            ns.Add(nc.CiscoObject);
                 }
-                foreach (Notification n in ns)
+                foreach (CiscoObject n in ns)
                     n.Delete();
             };
 
             restore.Click += delegate
             {
-                Notification.RestoreLastDeleted();
+                CiscoObject.RestoreLastDeleted();
             };
 
             show_infos.Click += delegate
@@ -130,51 +130,51 @@ namespace Cliver.CisteraNotification
         
         void set_visibility()
         {
-            lock (this.notifications.Children)
+            lock (this.cisco_objects.Children)
             {
-                foreach (NotificationControl nc in this.notifications.Children)
+                foreach (CiscoObjectControl nc in this.cisco_objects.Children)
                     set_visibility(nc);
             }
         }
 
-        void set_visibility(NotificationControl nc)
+        void set_visibility(CiscoObjectControl nc)
         {
-            if (nc.Notification is Info)
+            if (nc.CiscoObject is Info)
                 nc.Visibility = (show_infos.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
-            else if (nc.Notification is Alert)
+            else if (nc.CiscoObject is Alert)
                 nc.Visibility = (show_alerts.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        static internal void AddToTable(Notification n)
+        static internal void AddToTable(CiscoObject n)
         {
             This.BeginInvoke(() =>
             {
-                NotificationControl nc = new NotificationControl(n);
-                lock (This.notifications.Children)
+                CiscoObjectControl nc = new CiscoObjectControl(n);
+                lock (This.cisco_objects.Children)
                 {
                     nc.HorizontalAlignment = HorizontalAlignment.Stretch;
                     This.set_visibility(nc);
 
                     int i = 0;
-                    for (; i < This.notifications.Children.Count; i++)
-                        if (((NotificationControl)This.notifications.Children[i]).Notification.CreateTime < n.CreateTime)
+                    for (; i < This.cisco_objects.Children.Count; i++)
+                        if (((CiscoObjectControl)This.cisco_objects.Children[i]).CiscoObject.CreateTime < n.CreateTime)
                             break;
-                    This.notifications.Children.Insert(i, nc);
+                    This.cisco_objects.Children.Insert(i, nc);
                 }
             });
         }
 
-        static internal void DeleteFromTable(Notification n)
+        static internal void DeleteFromTable(CiscoObject n)
         {
             This.BeginInvoke(() =>
             {
-                lock (This.notifications.Children)
+                lock (This.cisco_objects.Children)
                 {
-                    for (int i = This.notifications.Children.Count - 1; i >= 0; i--)
+                    for (int i = This.cisco_objects.Children.Count - 1; i >= 0; i--)
                     {
-                        NotificationControl nc = (NotificationControl)This.notifications.Children[i];
-                        if (nc.Notification == n)
-                            This.notifications.Children.RemoveAt(i);
+                        CiscoObjectControl nc = (CiscoObjectControl)This.cisco_objects.Children[i];
+                        if (nc.CiscoObject == n)
+                            This.cisco_objects.Children.RemoveAt(i);
                     }
                 }
             });

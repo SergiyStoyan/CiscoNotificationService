@@ -1,4 +1,4 @@
-﻿<Window x:Class="Cliver.CisteraNotification.NotificationsWindow"
+﻿<Window x:Class="Cliver.CisteraNotification.CiscoObjectsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -36,8 +36,9 @@
                 <Label x:Name="label" Content="Show:"/>
                 <CheckBox x:Name="show_infos" Content="Infos" IsChecked="True"/>
                 <CheckBox x:Name="show_alerts" Content="Alerts" IsChecked="True"/>
+                <CheckBox x:Name="show_executes" Content="Executes" IsChecked="True"/>
             </StackPanel>
-            <StackPanel Name="notifications" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"  Orientation="Vertical" Grid.Row="1">
+            <StackPanel Name="cisco_objects" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"  Orientation="Vertical" Grid.Row="1">
             </StackPanel>
         </Grid>
     </ScrollViewer>

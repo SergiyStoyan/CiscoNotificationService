@@ -44,7 +44,7 @@ namespace Cliver.CisteraNotification
         {
             try
             {
-                NotificationsWindow.Initialize();
+                CiscoObjectsWindow.Initialize();
 
                 Application.Run(SysTray.This);
             }

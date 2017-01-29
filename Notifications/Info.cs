@@ -19,15 +19,32 @@ using Bonjour;
 
 namespace Cliver.CisteraNotification
 {
-    class Info : Notification
+    class Info : CiscoObject
     {
-        internal Info(string title, string text, string image_url, string action_name, Action action) : base(title, text, image_url, action_name, action)
+        internal Info(string xml, string title, string text, string image_url, string action_name, Action action) : base(xml)
         {
-        }
+            Title = title;
+            Text = text;
+            ImageUrl = image_url;
+            ActionName = action_name;
+            Action = action;
 
-        internal override void Show()
+            add2collection();
+        }
+        readonly public string Title;
+        readonly public string Text;
+        readonly public string ImageUrl;
+        readonly public string ActionName;
+        readonly public Action Action;
+
+        internal override void Activate()
         {
-            InfoWindow w = InfoWindow.Create(Title, Text, ImageUrl, ActionName, Action);
+            try
+            {
+                w?.Close();
+            }
+            catch { }
+            w = InfoWindow.Create(Title, Text, ImageUrl, ActionName, Action);
         }
         InfoWindow w = null;
 

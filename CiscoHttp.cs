@@ -42,7 +42,8 @@ namespace Cliver.CisteraNotification
             if (!m.Success)
                 return get_CiscoIPPhoneError(Error.Parsing, "No Xml in request.");
             XmlDocument xd = new XmlDocument();
-            xd.LoadXml(HttpUtility.UrlDecode(m.Groups["Xml"].Value));
+            string xml = HttpUtility.UrlDecode(m.Groups["Xml"].Value);
+            xd.LoadXml(xml);
             switch(xd.DocumentElement.Name)
             {
                 case "CiscoIPPhoneText":
@@ -65,7 +66,7 @@ namespace Cliver.CisteraNotification
                             //    if (!string.IsNullOrWhiteSpace(url))
                             //        Process.Start(url);
                             //});
-                            new Alert(title, text, null, name, () =>
+                            new Alert(xml, title, text, null, name, () =>
                             {
                                 if (!string.IsNullOrWhiteSpace(url))
                                     Process.Start(url);
@@ -74,7 +75,7 @@ namespace Cliver.CisteraNotification
                         else
                         {
                             //NotificationForm.AddNotification(title, text, null, prompt, null);
-                            new Info(title, text, null, prompt, null);
+                            new Info(xml, title, text, null, prompt, null);
                         }
                     }
                     break;
@@ -102,7 +103,7 @@ namespace Cliver.CisteraNotification
                             //    if (!string.IsNullOrWhiteSpace(url))
                             //        Process.Start(url);
                             //});
-                            new Alert(title, null, image_url, name, () =>
+                            new Alert(xml, title, null, image_url, name, () =>
                             {
                                 if (!string.IsNullOrWhiteSpace(url))
                                     Process.Start(url);
@@ -111,7 +112,7 @@ namespace Cliver.CisteraNotification
                         else
                         {
                             //NotificationForm.AddNotification(title, null, image_url, prompt, null);
-                            new Info(title, null, image_url, prompt, null);
+                            new Info(xml, title, null, image_url, prompt, null);
                         }
                     }
                     break;
@@ -129,13 +130,14 @@ namespace Cliver.CisteraNotification
                             m = Regex.Match(url, @"(?'Type'RTPRx|RTPMRx)\:(?'Ip'.*?)\:(?'Port'.*?)(\:(?'Volume'.*?))?$");
                             if (m.Success)
                             {
-                                switch (Rtp.Play(m.Groups["Type"].Value == "RTPMRx", IPAddress.Parse(m.Groups["Ip"].Value), int.Parse(m.Groups["Port"].Value), uint.Parse(m.Groups["Volume"].Value)))
+                                Execute execute = new Execute(xml);
+                                switch (Rtp.Play(execute, m.Groups["Type"].Value == "RTPMRx", IPAddress.Parse(m.Groups["Ip"].Value), int.Parse(m.Groups["Port"].Value), uint.Parse(m.Groups["Volume"].Value)))
                                 {
                                     case Rtp.Status.ACCEPTED:
                                         break;
                                     case Rtp.Status.BUSY:
                                         //NotificationForm.AddNotification("Error!", "A stream is being received already.", null, null, null);
-                                        new Info("Error!", "A stream is being received already.", null, null, null);
+                                        new Info(null, "Error!", "A stream is being received already.", null, null, null);
                                         return get_CiscoIPPhoneError(Error.Parsing, "A stream is being received already.");
                                     default:
                                         throw new Exception("Unknown option.");
@@ -157,7 +159,7 @@ namespace Cliver.CisteraNotification
                                 continue;
                             }
                             //NotificationForm.AddNotification("Error", "URL is not supported: " + url, null, null, null);
-                            new Info("Error!", "URL is not supported: " + url, null, null, null);
+                            new Info(null, "Error!", "URL is not supported: " + url, null, null, null);
                         }
                     }
                     break;

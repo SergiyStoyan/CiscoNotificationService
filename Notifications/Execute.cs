@@ -14,33 +14,56 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Runtime.InteropServices;
-using System.Net;
-using Bonjour;
+using System.Diagnostics;
 
 namespace Cliver.CisteraNotification
 {
     /// <summary>
     /// CiscoIPPhoneExecute
     /// </summary>
-    class Execute : Notification
+    class Execute : CiscoObject
     {
-        internal Execute(string url) : base(null, null, null, null, null)
+        internal Execute(string xml) : base(xml)
         {
-            
+
         }
 
-        internal override void Show()
-        {//play
+        internal void SetFile(string file)
+        {
+            this.file = file;
         }
+        string file = null;
+
+        internal override void Activate()
+        {
+            try
+            {
+                if (file != null)
+                    p = Process.Start(file);
+            }
+            catch (Exception e)
+            {
+                Message.Error(e);
+            }
+        }
+        Process p = null;
 
         protected override void Deleting()
         {
-            //try
-            //{
-            //    w?.Close();
-            //}
-            //catch { }
-            //w = null;
+            try
+            {
+                p?.Kill();
+            }
+            catch { }
+            try
+            {
+                p?.Dispose();
+            }
+            catch { }
+            p = null;
+
+            if (file != null)
+                File.Delete(file);
         }
     }
 }

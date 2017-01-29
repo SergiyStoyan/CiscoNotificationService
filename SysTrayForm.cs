@@ -68,7 +68,7 @@ namespace Cliver.CisteraNotification
 
         private void Notifications_Click(object sender, EventArgs e)
         {
-            NotificationsWindow.Display();
+            CiscoObjectsWindow.Display();
         }
 
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)

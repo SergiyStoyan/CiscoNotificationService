@@ -15,29 +15,16 @@ using System.Windows.Shapes;
 
 namespace Cliver.CisteraNotification
 {
-    public partial class NotificationControl : UserControl
+    public partial class CiscoObjectInfoControl : UserControl
     {
-        public NotificationControl()
+        public CiscoObjectInfoControl()
         {
             InitializeComponent();
         }
 
-        internal NotificationControl(Notification n)
+        internal CiscoObjectInfoControl(Info n)
         {
             InitializeComponent();
-
-            Notification = n;
-
-            if (n is Info)
-            {
-                type.Content = "Info:";
-                grid.Background = Brushes.Beige;
-            }
-            else if (n is Alert)
-            {
-                type.Content = "Alert:";
-                grid.Background = Brushes.OrangeRed;
-            }
 
             if (string.IsNullOrWhiteSpace(n.Text))
                 this.title.Text = n.Title;
@@ -79,31 +66,8 @@ namespace Cliver.CisteraNotification
                 n.Action?.Invoke();
                 e.Handled = true;
             };
-
-            delete.Click += (object sender, RoutedEventArgs e) =>
-            {
-                n.Delete();
-                e.Handled = true;
-            };
-
-            show.Click += (object sender, RoutedEventArgs e) =>
-            {
-                n.Show();
-                e.Handled = true;
-            };
-
-            grid.PreviewMouseDown += (object sender, MouseButtonEventArgs e) =>
-            {
-                checkBox.IsChecked = !checkBox.IsChecked;
-                if (checkBox.IsChecked??true)
-                    box.Background = Brushes.LightGray;
-                else
-                    box.Background = Brushes.White;
-            };
-
-            time.Content = n.CreateTime.ToString("yy-MM-dd HH:mm:ss");
         }
 
-        internal readonly Notification Notification = null;
+        internal readonly CiscoObject CiscoObject = null;
     }
 }

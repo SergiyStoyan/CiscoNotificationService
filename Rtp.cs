@@ -39,7 +39,7 @@ namespace Cliver.CisteraNotification
         /// <param name="port"></param>
         /// <param name="volume">The supplied value is a percentage of the maximum volume level of the device and must be in the range 0-100.</param>
         /// <returns></returns>
-        static public Status Play(bool multicast, IPAddress source_ip, int port, uint? volume100 = null)
+        static public Status Play(Execute execute, bool multicast, IPAddress source_ip, int port, uint? volume100 = null)
         {
             if (session != null)
             {
@@ -49,6 +49,7 @@ namespace Cliver.CisteraNotification
                 session.Dispose();
             }
 
+            Rtp.execute = execute;
             Rtp.source_ip = source_ip;
             Rtp.volume100 = volume100;
             Rtp.multicast = multicast;
@@ -57,7 +58,7 @@ namespace Cliver.CisteraNotification
                 session.CreateMulticastSession(null, new RTP_Clock(0, 8000), new RTP_Address(source_ip, port, port + 1));
             else
                 session.CreateSession(new RTP_Address(IPAddress.Any, port, port + 1), new RTP_Clock(0, 8000));
-            session.Sessions[0].NewReceiveStream += new EventHandler<RTP_ReceiveStreamEventArgs>(m_pRtpSession_NewReceiveStream);
+            session.Sessions[0].NewReceiveStream += NewReceiveStream;
             session.Sessions[0].Payload = payload;
             session.Sessions[0].Start();
 
@@ -68,6 +69,8 @@ namespace Cliver.CisteraNotification
         static IPAddress source_ip = null;
         static uint? volume100 = null;
         static bool multicast = false;
+        static Execute execute = null;
+        static EventHandler<RTP_ReceiveStreamEventArgs> NewReceiveStream = new EventHandler<RTP_ReceiveStreamEventArgs>(m_pRtpSession_NewReceiveStream);
 
         static private void m_pRtpSession_NewReceiveStream(object sender, RTP_ReceiveStreamEventArgs e)
         {
@@ -76,6 +79,7 @@ namespace Cliver.CisteraNotification
                 //for unicast make sure that the stream is from the expected source ip 
                 if (!multicast && !e.Stream.SSRC.RtpEP.Address.Equals(source_ip))
                     return;
+                session.Sessions[0].NewReceiveStream -= NewReceiveStream;
                 AudioOutDevice device = AudioOut.Devices.Where(d => d.Name == Settings.Default.AudioDeviceName).FirstOrDefault();
                 if (device == null)
                 {
@@ -90,7 +94,11 @@ namespace Cliver.CisteraNotification
                     );
                 Dictionary<AudioCodec, string> acs2of = new Dictionary<AudioCodec, string>();
                 if (Settings.Default.RecordIncomingRtpStreams)
-                    acs2of[ac] = PathRoutines.CreateDirectory(Settings.Default.RtpStreamStorageFolder) + "\\" + e.Stream.SSRC.RtpEP.Address.ToString() + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".wav";
+                {
+                    string wav_file = PathRoutines.CreateDirectory(Settings.Default.RtpStreamStorageFolder) + "\\" + e.Stream.SSRC.RtpEP.Address.ToString() + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".wav";
+                    acs2of[ac] = wav_file;
+                    execute?.SetFile(wav_file);
+                }
                 ao.Start(volume100, acs2of);
             }
             catch(Exception ex)
@@ -110,6 +118,7 @@ namespace Cliver.CisteraNotification
                 session.Close("Closed.");
                 session.Dispose();
                 session = null;
+                execute = null;
             }
         }
 
