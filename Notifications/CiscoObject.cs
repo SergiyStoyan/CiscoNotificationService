@@ -103,6 +103,10 @@ namespace Cliver.CisteraNotification
             CiscoObjectsWindow.EnableRestore(cisco_objects.Where(x => x.Deleted).Count() > 0);
         }
 
+        virtual protected void Clean()
+        {
+        }
+
         static void forget_old()
         {
             lock (cisco_objects)
@@ -110,7 +114,10 @@ namespace Cliver.CisteraNotification
                 DateTime forget_t = DateTime.Now.AddDays(-Settings.Default.ForgetNotificationsOlderThanDays);
                 var ns = cisco_objects.Where(x => x.CreateTime < forget_t).ToList();
                 foreach (CiscoObject n in ns)
+                {
                     cisco_objects.Remove(n);
+                    n.Clean();
+                }
             }
         }
     }

@@ -127,6 +127,11 @@ namespace Cliver.CisteraNotification
                 set_visibility();
             };
 
+            show_executes.Click += delegate
+            {
+                set_visibility();
+            };
+
             rtp_records.Click += delegate
             {
                 if (string.IsNullOrWhiteSpace(Settings.Default.RtpStreamStorageFolder))
@@ -150,6 +155,8 @@ namespace Cliver.CisteraNotification
                 nc.Visibility = (show_infos.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
             else if (nc.CiscoObject is Alert)
                 nc.Visibility = (show_alerts.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
+            else if (nc.CiscoObject is Execute)
+                nc.Visibility = (show_executes.IsChecked ?? true) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         static internal void AddToTable(CiscoObject n)

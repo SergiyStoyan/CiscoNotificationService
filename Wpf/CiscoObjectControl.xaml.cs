@@ -46,7 +46,7 @@ namespace Cliver.CisteraNotification
             else if (n is Execute)
             {
                 type.Content = "Execute";
-                back_color = Colors.LightCyan;
+                back_color = Colors.LightGreen;
                 Control = new CiscoObjectExecuteControl((Execute)n);
             }
             else
@@ -94,7 +94,7 @@ namespace Cliver.CisteraNotification
                 checkBox.IsChecked = !checkBox.IsChecked;
                 if (checkBox.IsChecked ?? true)
                 {
-                    Color c = Color.FromArgb(255, (byte)(back_color.R - 30), (byte)(back_color.R - 30), (byte)(back_color.R - 30));
+                    Color c = Color.FromArgb(255, (byte)(back_color.R * .6), (byte)(back_color.G * .6), (byte)(back_color.B * .6));
                     Background = new SolidColorBrush(c);
                 }
                 else

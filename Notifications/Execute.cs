@@ -71,8 +71,11 @@ namespace Cliver.CisteraNotification
             }
             catch { }
             p = null;
+        }
 
-            if (record != null)
+        override protected void Clean()
+        {
+            if (record != null && File.Exists(record))
                 File.Delete(record);
         }
     }

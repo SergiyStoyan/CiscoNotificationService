@@ -61,11 +61,16 @@ namespace Cliver.CisteraNotification
             }
             if (n.ActionName != null)
                 this.button.Content = n.ActionName;
-            this.button.Click += (object sender, RoutedEventArgs e) =>
+            if (n.Action != null)
             {
-                n.Action?.Invoke();
-                e.Handled = true;
-            };
+                this.button.Click += (object sender, RoutedEventArgs e) =>
+                {
+                    n.Action?.Invoke();
+                    e.Handled = true;
+                };
+            }
+            else
+                button.Visibility = Visibility.Collapsed;
         }
     }
 }
