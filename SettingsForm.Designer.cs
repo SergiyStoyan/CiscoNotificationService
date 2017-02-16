@@ -61,6 +61,8 @@
             this.InfoWindowBottom = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.AlertTakeFocus = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.AlertToastRight = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -68,8 +70,6 @@
             this.AlertSound = new System.Windows.Forms.TextBox();
             this.bSelectPlayOnAlert = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.AlertTakeFocus = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -335,9 +335,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(15, 21);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 13);
+            this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 11;
-            this.label2.Text = "Play When Appears:";
+            this.label2.Text = "Play When Display:";
             // 
             // InfoWindowLifeTimeInSecs
             // 
@@ -400,6 +400,25 @@
             this.groupBox3.TabIndex = 27;
             this.groupBox3.TabStop = false;
             // 
+            // AlertTakeFocus
+            // 
+            this.AlertTakeFocus.AutoSize = true;
+            this.AlertTakeFocus.Location = new System.Drawing.Point(18, 157);
+            this.AlertTakeFocus.Name = "AlertTakeFocus";
+            this.AlertTakeFocus.Size = new System.Drawing.Size(194, 17);
+            this.AlertTakeFocus.TabIndex = 33;
+            this.AlertTakeFocus.Text = "(not allow access to other windows)";
+            this.AlertTakeFocus.UseVisualStyleBackColor = true;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 141);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 13);
+            this.label7.TabIndex = 32;
+            this.label7.Text = "Take Focus:";
+            // 
             // AlertToastRight
             // 
             this.AlertToastRight.Location = new System.Drawing.Point(18, 76);
@@ -454,28 +473,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(15, 21);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(104, 13);
+            this.label10.Size = new System.Drawing.Size(99, 13);
             this.label10.TabIndex = 19;
-            this.label10.Text = "Play When Appears:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 141);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(67, 13);
-            this.label7.TabIndex = 32;
-            this.label7.Text = "Take Focus:";
-            // 
-            // AlertTakeFocus
-            // 
-            this.AlertTakeFocus.AutoSize = true;
-            this.AlertTakeFocus.Location = new System.Drawing.Point(18, 157);
-            this.AlertTakeFocus.Name = "AlertTakeFocus";
-            this.AlertTakeFocus.Size = new System.Drawing.Size(194, 17);
-            this.AlertTakeFocus.TabIndex = 33;
-            this.AlertTakeFocus.Text = "(not allow access to other windows)";
-            this.AlertTakeFocus.UseVisualStyleBackColor = true;
+            this.label10.Text = "Play When Display:";
             // 
             // SettingsForm
             // 
