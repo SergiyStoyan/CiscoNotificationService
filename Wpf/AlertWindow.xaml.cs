@@ -128,7 +128,7 @@ namespace Cliver.CisteraNotification
 
             Closing += Window_Closing;
 
-            Closed += (s, _) =>
+            Closed += delegate
             {
                 if (globalHook != null)
                     globalHook.Dispose();
@@ -227,9 +227,12 @@ namespace Cliver.CisteraNotification
             //HwndSource hs = HwndSource.FromHwnd(handle);
             //hs.AddHook(WndProc);
 
-            globalHook = Hook.GlobalEvents();
-            globalHook.MouseDownExt += GlobalHook_MouseDownExt;
-            globalHook.KeyPress += GlobalHook_KeyPress;
+            if (Settings.Default.AlertTakeFocus)
+            {
+                globalHook = Hook.GlobalEvents();
+                globalHook.MouseDownExt += GlobalHook_MouseDownExt;
+                globalHook.KeyPress += GlobalHook_KeyPress;
+            }
         }
         double animation_duration = 500;
 

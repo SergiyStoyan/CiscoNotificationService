@@ -53,6 +53,7 @@ namespace Cliver.CisteraNotification
                 Settings.Default.AlertSoundFile = AlertSound.Text;
                 Settings.Default.AlertToastRight = int.Parse(AlertToastRight.Text);
                 Settings.Default.AlertToastTop = int.Parse(AlertToastTop.Text);
+                Settings.Default.AlertTakeFocus = AlertTakeFocus.Checked;
                 Settings.Default.InfoSoundFile = InformSound.Text;
                 Settings.Default.InfoToastRight = int.Parse(InfoWindowRight.Text);
                 Settings.Default.InfoToastBottom = int.Parse(InfoWindowBottom.Text);
@@ -97,6 +98,7 @@ namespace Cliver.CisteraNotification
             AlertSound.Text = Settings.Default.AlertSoundFile;
             AlertToastRight.Text = Settings.Default.AlertToastRight.ToString();
             AlertToastTop.Text = Settings.Default.AlertToastTop.ToString();
+            AlertTakeFocus.Checked = Settings.Default.AlertTakeFocus;
             InformSound.Text = Settings.Default.InfoSoundFile;
             InfoWindowRight.Text = Settings.Default.InfoToastRight.ToString();
             InfoWindowBottom.Text = Settings.Default.InfoToastBottom.ToString();

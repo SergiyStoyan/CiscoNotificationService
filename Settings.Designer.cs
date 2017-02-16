@@ -202,5 +202,17 @@ namespace Cliver.CisteraNotification {
                 this["RecordIncomingRtpStreams"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AlertTakeFocus {
+            get {
+                return ((bool)(this["AlertTakeFocus"]));
+            }
+            set {
+                this["AlertTakeFocus"] = value;
+            }
+        }
     }
 }

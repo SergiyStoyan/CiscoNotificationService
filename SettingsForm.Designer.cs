@@ -68,6 +68,8 @@
             this.AlertSound = new System.Windows.Forms.TextBox();
             this.bSelectPlayOnAlert = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.AlertTakeFocus = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -382,6 +384,8 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.AlertTakeFocus);
+            this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.AlertToastRight);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label9);
@@ -453,6 +457,25 @@
             this.label10.Size = new System.Drawing.Size(104, 13);
             this.label10.TabIndex = 19;
             this.label10.Text = "Play When Appears:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(15, 141);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(67, 13);
+            this.label7.TabIndex = 32;
+            this.label7.Text = "Take Focus:";
+            // 
+            // AlertTakeFocus
+            // 
+            this.AlertTakeFocus.AutoSize = true;
+            this.AlertTakeFocus.Location = new System.Drawing.Point(18, 157);
+            this.AlertTakeFocus.Name = "AlertTakeFocus";
+            this.AlertTakeFocus.Size = new System.Drawing.Size(194, 17);
+            this.AlertTakeFocus.TabIndex = 33;
+            this.AlertTakeFocus.Text = "(not allow access to other windows)";
+            this.AlertTakeFocus.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -527,5 +550,7 @@
         private System.Windows.Forms.Button bRtpStreamStorageFolder;
         private System.Windows.Forms.TextBox ForgetNotificationsOlderThanDays;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox AlertTakeFocus;
+        private System.Windows.Forms.Label label7;
     }
 }

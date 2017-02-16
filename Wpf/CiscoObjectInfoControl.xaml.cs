@@ -29,7 +29,7 @@ namespace Cliver.CisteraNotification
             if (string.IsNullOrWhiteSpace(n.Text))
                 this.title.Text = n.Title;
             else
-                this.title.Text = n.Title + new LineBreak();
+                this.title.Text = n.Title + "\r\n";// new LineBreak();
             this.text.Text = n.Text;
             //var request = System.Net.WebRequest.Create(image_url);
             //request.BeginGetResponse((r) =>
