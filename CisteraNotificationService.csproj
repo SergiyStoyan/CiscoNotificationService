@@ -218,9 +218,9 @@
       <Project>{aca94788-bed1-4b8e-94ef-e54293e8d139}</Project>
       <Name>CliverRoutines</Name>
     </ProjectReference>
-    <ProjectReference Include="Rtp\Lumisoft.Net.Rtp\Net\Net.csproj">
+    <ProjectReference Include="Rtp\Lumisoft.Net.Rtp\Net\LumiSoft.Net.csproj">
       <Project>{7ab36ccf-5ffd-4780-a54e-a102eca028b5}</Project>
-      <Name>Net</Name>
+      <Name>LumiSoft.Net</Name>
     </ProjectReference>
     <ProjectReference Include="Tftp\Tftp.Net.csproj">
       <Project>{a3f0de15-ac97-428d-830c-4f9721ee3627}</Project>
